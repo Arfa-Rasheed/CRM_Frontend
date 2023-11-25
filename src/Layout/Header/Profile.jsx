@@ -11,7 +11,7 @@ const Profile = () => {
                 spacing={2}
             >
                 <Avatar />
-                <Stack spacing={12} direction={'row'}>
+                <Stack spacing={10} direction={'row'}>
                     <Stack>
                         <Typography>Arfa</Typography>
                         <Typography>Associate</Typography>
