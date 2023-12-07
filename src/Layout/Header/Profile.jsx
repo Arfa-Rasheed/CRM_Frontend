@@ -11,9 +11,9 @@ const Profile = () => {
                 spacing={2}
             >
                 <Avatar />
-                <Stack spacing={12} direction={'row'}>
+                <Stack spacing={10} direction={'row'}>
                     <Stack>
-                        <Typography>Arfa</Typography>
+                        <Typography>Mike</Typography>
                         <Typography>Associate</Typography>
                     </Stack>
                     <KeyboardArrowDownIcon sx={{fontSize:'35px' ,marginTop:'10px'}}/>
