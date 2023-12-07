@@ -13,7 +13,7 @@ import LogoutIcon from '../../assets/Logout.png'
 import rightArrow from '../../assets/right-arrow.png'
 const SideBar = () => {
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', width: '18%', height: '91.6vh', backgroundColor: '#EDEDED' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', width: '18%', height: '92vh', backgroundColor: '#EDEDED' }}>
             <Stack
                 justifyContent={'center'} 
                 sx={{
