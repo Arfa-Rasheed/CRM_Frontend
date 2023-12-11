@@ -22,10 +22,10 @@ const CRMDropdown = (props) => {
                 onClick={handleClick}
                 endIcon={<ArrowDropDownIcon />}
                 sx={{
-                    backgroundColor: "#003478",
-                    color: "white",
+                    backgroundColor:props.title === "Previous Months" ? "white" : "#ED7D31",
+                    color:props.title === "Previous Months" ? "black" : "white",
                     height: "39px",
-                    width:"297px",
+                    width:"305px",
                     fontSize: "12px",
                     padding: "3px",
                     borderTopLeftRadius: "0",
@@ -39,7 +39,7 @@ const CRMDropdown = (props) => {
                     },
                 }}
             >
-                Sales Matrix
+                {props.title}
             </Button>
             <Menu
                 id="dropdown-menu"

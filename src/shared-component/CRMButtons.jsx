@@ -3,7 +3,7 @@ import React from 'react'
 
 const CRMButtons = (props) => {
   return (
-    <Button sx={{width:'100%',backgroundColor:'#F08613',color:'white'}}>{props.title}</Button>
+    <Button sx={{width:'100%',backgroundColor: props.title === "Agents Matrix" ? "#003478" :'#F08613',color:'white'}}>{props.title}</Button>
   )
 }
 

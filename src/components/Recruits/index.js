@@ -8,8 +8,6 @@ import AllAgentsIcon from '../../assets/AllAgentsIcon.png'
 import { Button } from '@mui/material'
 import { MagnifyingGlass, Plus } from 'phosphor-react'
 import CRMGrid from '../../shared-component/CRM-Grid.jsx'
-// import { faker } from "@faker-js/faker";
-// import faker from "faker";
 import "./style.scss"
 import profilePhoto from '../../assets/profilePhotoCRM.png'
 

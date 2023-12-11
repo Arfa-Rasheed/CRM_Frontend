@@ -8,6 +8,7 @@ import Policies from '../components/Policies'
 import Statements from '../components/Statements'
 import Commissions from '../components/Commissions'
 import Recruits from '../components/Recruits'
+import AccountDetail from '../components/Account'
 
 const AppRouter = () => {
   return (
@@ -15,6 +16,7 @@ const AppRouter = () => {
      <Router>
         <Routes>
             <Route path='/' element={<Dashboard/>}></Route>
+            <Route path='/accountDetails' element={<AccountDetail/>}></Route>
             <Route path='/dashboard' element={<Dashboard/>}></Route>
             <Route path='/administration' element={<Administration/>}></Route>
             <Route path='/carriers' element={<Carriers/>}></Route>

@@ -36,7 +36,7 @@ const SideBar = () => {
                         </ListItemButton>
                     </ListItem>
 
-                    <ListItem className='listItem' disablePadding>
+                    {/* <ListItem className='listItem' disablePadding>
                         <ListItemButton href="/administration" sx={{ backgroundColor: '#DADADA' }}>
                             <ListItemIcon>
                                 <img src={AdminstrationIcon} />
@@ -49,7 +49,7 @@ const SideBar = () => {
                             </ListItemIcon>
                         </ListItemButton>
 
-                    </ListItem>
+                    </ListItem> */}
 
                     <ListItem className='listItem' disablePadding>
                         <ListItemButton href="/carriers" sx={{ backgroundColor: '#DADADA' }}>

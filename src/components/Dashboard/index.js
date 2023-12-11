@@ -49,7 +49,7 @@ const Dashboard = () => {
                         {/* 1st Container */}
                         <Grid container style={{ backgroundColor: "#EDEDED", height: '19vh', width: '95%', justifyContent: 'space-around', alignItems: 'center', margin: '0 auto', borderRadius: '15px' }}>
                             <Grid item md='3'>
-                                <CRMDropdown menuItems={['Revenue Matrix', 'Sales Matrix']} />
+                                <CRMDropdown menuItems={['Revenue Matrix', 'Sales Matrix']} title="Sales Matrix"/>
                                 <Grid container sx={{ justifyContent: 'center' }} className='grid-inner-container'>
                                     <Grid items md='10' >
                                         <List>
@@ -83,7 +83,7 @@ const Dashboard = () => {
 
                             </Grid>
                             <Grid item md='3'>
-                                <CRMDropdown menuItems={['Revenue Matrix', 'Sales Matrix']} />
+                                <CRMDropdown menuItems={['Revenue Matrix', 'Sales Matrix']} title='Previous Months'/>
                                 <Grid container sx={{ justifyContent: 'center' }} className='grid-inner-container'>
                                     <Grid items md='10' >
                                         <List>
@@ -104,9 +104,9 @@ const Dashboard = () => {
                         {/* 2nd Container */}
                         <Grid container style={{height: '47vh', width: '95%', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', margin: '0 auto', borderRadius: '15px' }}>
                             <Grid container style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
-                                <Grid item md="3"> <CRMDropdown menuItems={['Revenue Matrix', 'Sales Matrix']} /></Grid>
-                                <Grid item md="3" sx={{marginTop:'-14px'}}><CRMButtons title='Sales Statistics' /></Grid>
-                                <Grid item md="3"> <CRMDropdown menuItems={['Previous Year', 'Sales Matrix']} /></Grid>
+                                <Grid item md="3"> <CRMDropdown menuItems={['Revenue Matrix', 'Sales Matrix']} title='Sales Statistics'/></Grid>
+                                <Grid item md="3" sx={{marginTop:'-14px'}}><CRMButtons title='Sales Statistics 2023' /></Grid>
+                                <Grid item md="3"> <CRMDropdown menuItems={['Previous Year', 'Sales Matrix']} title="Previous Years"/></Grid>
                             </Grid>
                             <Grid container style={{height: '37vh', width: '91%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', margin: '0 auto', borderRadius: '15px' }}>
                                 <Grid item md="6" sx={{height: '30vh', flexDirection: 'column', alignContent: 'space-between' }}>
@@ -135,8 +135,8 @@ const Dashboard = () => {
                         {/* 3rd container */}
                         <Grid container style={{ backgroundColor: "#EDEDED", height: '19vh', width: '95%', justifyContent: 'space-around', alignItems: 'center', margin: '0 auto', borderRadius: '15px' }}>
                             <Grid item md='3'>
-                                <CRMDropdown menuItems={['Revenue Matrix', 'Sales Matrix']} />
-                                <Grid container sx={{ justifyContent: 'center' }} className='grid-inner-container'>
+                            <CRMButtons title='Agents Matrix' />
+                                <Grid container sx={{ justifyContent: 'center' ,marginTop: '9px'}} className='grid-inner-container'>
                                     <Grid items md='10' >
                                         <List>
                                             <ListItem className='list-items' >
@@ -169,7 +169,7 @@ const Dashboard = () => {
 
                             </Grid>
                             <Grid item md='3'>
-                                <CRMDropdown menuItems={['Revenue Matrix', 'Sales Matrix']} />
+                                <CRMDropdown menuItems={['Revenue Matrix', 'Sales Matrix']} title='Previous Months' />
                                 <Grid container sx={{ justifyContent: 'center' }} className='grid-inner-container'>
                                     <Grid items md='10' >
                                         <List>
