@@ -33,13 +33,13 @@ const AccountDetail = () => {
                             <Stack alignItems={'center'} justifyContent={'center'} flexDirection={'row'} sx={{ width: '100%', height: '14vh' }}>
                                 <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{ width: '44%' }}>
                                     <Button sx={{
-                                        width: '47%', backgroundColor: isMyAccountClicked ? "#F08613" : 'white', color: isMyAccountClicked ? 'white' : '#F08613', border: '2px solid #F2F2F2', fontSize: '12px', borderRadius: '7px', 'hover': {
+                                        width: '47%', backgroundColor: isMyAccountClicked ? "#F08613" : 'white', color: isMyAccountClicked ? 'white' : '#F08613', fontSize: '12px', borderRadius: '7px', 'hover': {
                                             backgroundColor: "#F08613",
                                             color: 'white'
                                         }
                                     }} onClick={myAccountHandler}>My Account</Button>
                                     <Button sx={{
-                                        width: '47%', backgroundColor: isUpdateAccountClicked ? "#F08613" : 'white', color: isUpdateAccountClicked ? 'white' : '#F08613', border: '2px solid #F2F2F2', fontSize: '12px', borderRadius: '7px', 'hover': {
+                                        width: '47%', backgroundColor: isUpdateAccountClicked ? "#F08613" : 'white', color: isUpdateAccountClicked ? 'white' : '#F08613',  fontSize: '12px', borderRadius: '7px', 'hover': {
                                             backgroundColor: "#F08613",
                                             color: 'white'
                                         }
@@ -48,7 +48,7 @@ const AccountDetail = () => {
                             </Stack>
 
                             <Stack alignItems={'center'} sx={{ width: '100%', height: '100%' }}>
-                                <Stack flexDirection={'row'} justifyContent={'center'} sx={{ width: "97%", height: '56%', border: '2px solid red' }}>
+                                <Stack flexDirection={'row'} justifyContent={'center'} sx={{ width: "97%", height: '56%'}}>
                                     <Stack alignItems={'center'} sx={{ width: '58%', height: '42vh', backgroundColor: 'white', borderRadius: '20px' }}>
                                         <Box sx={{ width: '22%', height: '12vh' }}>
                                             <img src={profilePhoto} style={{ width: '100%', height: '100%' }} />
@@ -66,8 +66,6 @@ const AccountDetail = () => {
                                     </Stack>
 
                                     <Stack alignItems={'center'} sx={{ width: '100%', height: "45vh", marginLeft: '23px' }}>
-                                        {/* <Stack alignItems={'center'} sx={{ width: '96%', height: '94%', backgroundColor: '#F2F2F2', borderRadius: '20px',border:'2px solid green' }}> */}
-                                        {/* <Stack alignItems={'center'} sx={{ width: '81%', height: '100%',border:'2px solid red' }}> */}
                                         <Stack flexDirection={'row'} flexWrap={'wrap'} sx={{ width: '100%', height: '79%' }}>
                                             <TextField className='Account-Textfield' label="Recruitment Date:" variant="filled" sx={{ width: '30%', height: "10vh", marginLeft: '23px' }} />
                                             <TextField label="No of Recruites:" variant="filled" sx={{ width: '30%', marginLeft: '23px' }} />
@@ -88,15 +86,15 @@ const AccountDetail = () => {
                                 {
                                     isUpdateAccountClicked && (
                                         <>
-                                            <Stack justifyContent={'space-around'} sx={{ width: '88%', height: '24vh', border: '2px solid red' }}>
+                                            <Stack justifyContent={'space-around'} sx={{ width: '88%', height: '24vh' }}>
                                                 <TextField id="outlined-basic" placeholder="Password Reset" variant="outlined" className='reset-account-textfield' />
                                                 <TextField id="outlined-basic" placeholder="Email" variant="outlined" className='reset-account-textfield' />
                                                 <TextField id="outlined-basic" placeholder="Phone Number" variant="outlined" className='reset-account-textfield' />
                                             </Stack>
-                                            <Stack flexDirection={'row'} justifyContent={'space-between'}alignItems={'flex-end'} sx={{ width: "92%",height:'6vh' ,border:'2px solid black'}}>
+                                            <Stack flexDirection={'row'} justifyContent={'space-between'}alignItems={'flex-end'} sx={{ width: "92%",height:'6vh' ,}}>
                                                 <Button sx={{
                                                     width: '15%',height:'5vh', backgroundColor: "#003478",
-                                                    color: "white", border: '2px solid #F2F2F2', fontSize: '12px',  'hover': {
+                                                    color: "white",fontSize: '12px',  'hover': {
                                                         backgroundColor: "#003478",
                                                         color: "white",
                                                     }
