@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import { Box, Stack } from '@mui/system'
@@ -11,11 +11,10 @@ import CRMGrid from '../../shared-component/CRM-Grid.jsx'
 import "./style.scss"
 import profilePhoto from '../../assets/profilePhotoCRM.png'
 import { useNavigate } from 'react-router-dom'
-import httpClient from '../../_util/api.jsx'
 
-const Recruits = () => {
+const Agents = () => {
   const navigate = useNavigate()
-  const [gridData,setGridData] = useState([])
+  
   const gridHeader=[
     {
       field:'profilePhoto',
@@ -30,7 +29,7 @@ const Recruits = () => {
       headerName: "Level:",
     },
     {
-      field: 'recruitingAgentCode',
+      field: 'agentCode',
       headerName: "Agent Code:",
     },
     {
@@ -55,19 +54,54 @@ const Recruits = () => {
     },
   ]
 
-
-  const LoadgridData=async()=>{
-    const res =await httpClient.get('/recruits/getAllAgents')
-
-    if(res?.status === 200)
-    {
-      setGridData(res.data)
-    }
-  }
-
-  useEffect(()=>{
-    LoadgridData()
-  },[])
+  const grid_data=[
+     {
+      img:'../../assets/profilePhotoCRM.png',
+      name:'Mia Quan',
+      level:0.7,
+      agentCode:'M79790',
+      agentTitle:'',
+      agentRole:"",
+      recruitmentDate:"23/3/2023",
+      recruits:5,
+      commisionEarned:"$3,46,357" 
+     },
+     {
+      img:'../../assets/profilePhotoCRM.png',
+      name:'Mia Quan',
+      level:0.7,
+      agentCode:'M79790',
+      agentTitle:'',
+      agentRole:"",
+      recruitmentDate:"23/3/2023",
+      recruits:5,
+      commisionEarned:"$3,46,357" 
+     },
+     {
+      img:'../../assets/profilePhotoCRM.png',
+      name:'Mia Quan',
+      level:0.7,
+      agentCode:'M79790',
+      agentTitle:'',
+      agentRole:"",
+      recruitmentDate:"23/3/2023",
+      recruits:5,
+      commisionEarned:"$3,46,357" 
+     },
+     {
+      img:'../../assets/profilePhotoCRM.png',
+      name:'Mia Quan',
+      level:0.7,
+      agentCode:'M79790',
+      agentTitle:'',
+      agentRole:"",
+      recruitmentDate:"23/3/2023",
+      recruits:5,
+      commisionEarned:"$3,46,357" 
+     },
+     
+     
+  ]
   
   return (
     <>
@@ -129,13 +163,13 @@ const Recruits = () => {
                         backgroundColor: '#F08613',
                       },
                     }}
-                  onClick={() => {navigate('/addRecruit')}}
+                  onClick={()=>{navigate('/addAgent')}}
                   >
                     <Grid container
                       alignItems={'center'}
                       sx={{ width: '100%' }}
                     >
-                      <Grid item md="9">Add new</Grid>
+                      <Grid item md="9">Add Agent</Grid>
                       <Grid item md="3"><Plus size={20} weight="light" /></Grid>
                     </Grid>
                   </Button>
@@ -146,7 +180,7 @@ const Recruits = () => {
             <div className='recruitsGrid'>
             <CRMGrid
               gridHeader={gridHeader}
-              gridData={gridData}
+              gridData={grid_data}
               sx={{width:'100%' }}
             />
             </div>
@@ -159,4 +193,4 @@ const Recruits = () => {
   )
 }
 
-export default Recruits
+export default Agents

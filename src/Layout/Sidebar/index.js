@@ -11,11 +11,26 @@ import CommssionsIcon from '../../assets/CommisionsIcon.png'
 import RecruitsIcon from '../../assets/Recruits.png'
 import LogoutIcon from '../../assets/Logout.png'
 import rightArrow from '../../assets/right-arrow.png'
+import agentIcon from '../../assets/Agent.png' 
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 const SideBar = () => {
+    // const isAdmin = useSelector((state)=>state.user.isAdmin)
+    const navigate = useNavigate()
+    const isAdmin = localStorage.getItem("isAdmin")
+
+    const logoutHandler=()=>{
+        localStorage.removeItem("authToken")
+        localStorage.removeItem("isAdmin")
+        setTimeout(()=>{
+            navigate('/')
+        },3000)
+    }
+
     return (
         <div style={{ display: 'flex', justifyContent: 'center', width: '18%', height: '92vh', backgroundColor: '#EDEDED' }}>
             <Stack
-                justifyContent={'center'} 
+                justifyContent={'center'}
                 sx={{
                     width: '80%',
                     height: '84%',
@@ -30,13 +45,13 @@ const SideBar = () => {
                                 Dashboard
                             </ListItemText>
                             <ListItemIcon className='listIcon'>
-                                <img src={rightArrow} 
+                                <img src={rightArrow}
                                 />
                             </ListItemIcon>
                         </ListItemButton>
                     </ListItem>
 
-                    {/* <ListItem className='listItem' disablePadding>
+                    <ListItem className='listItem' disablePadding style={{ display: isAdmin ? 'block' : 'none' }}>
                         <ListItemButton href="/administration" sx={{ backgroundColor: '#DADADA' }}>
                             <ListItemIcon>
                                 <img src={AdminstrationIcon} />
@@ -49,7 +64,7 @@ const SideBar = () => {
                             </ListItemIcon>
                         </ListItemButton>
 
-                    </ListItem> */}
+                    </ListItem>
 
                     <ListItem className='listItem' disablePadding>
                         <ListItemButton href="/carriers" sx={{ backgroundColor: '#DADADA' }}>
@@ -137,8 +152,24 @@ const SideBar = () => {
                         </ListItemButton>
 
                     </ListItem>
+
+                    <ListItem className='listItem' disablePadding style={{ display: isAdmin ? 'block' : 'none' }}>
+                        <ListItemButton href="/agent" sx={{ backgroundColor: '#DADADA' }}>
+                            <ListItemIcon>
+                                <img src={agentIcon} />
+                            </ListItemIcon>
+                            <ListItemText>
+                                Agents
+                            </ListItemText>
+                            <ListItemIcon className='listIcon'>
+                                <img src={rightArrow} />
+                            </ListItemIcon>
+                        </ListItemButton>
+
+                    </ListItem>
+
                     <ListItem className='listItem' disablePadding>
-                        <ListItemButton sx={{ backgroundColor: '#DADADA' }}>
+                        <ListItemButton sx={{ backgroundColor: '#DADADA' }} onClick={logoutHandler}>
                             <ListItemIcon>
                                 <img src={LogoutIcon} />
                             </ListItemIcon>
@@ -149,7 +180,6 @@ const SideBar = () => {
                                 <img src={rightArrow} />
                             </ListItemIcon>
                         </ListItemButton>
-
                     </ListItem>
                 </List>
 
