@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const httpClient = axios.create({
-    baseURL: "http://localhost:5000/api/",
+    // baseURL: "http://localhost:5000/api/",
+    baseURL:"crm-backend-7vj1.vercel.app"
 });
 
 httpClient.interceptors.request.use(function (config) {
