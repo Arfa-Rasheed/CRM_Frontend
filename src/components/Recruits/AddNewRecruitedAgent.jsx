@@ -12,12 +12,16 @@ const AddNewRecruit = () => {
     const [agentData,setAgentData] = useState({
         name:"",
         level:0,
-        agentCode:"",
+        recruitingAgentCode:"",
         agentTitle:"",
         agentRole:"",
         recruitmentDate:"",
         recruits:0,
-        commisionEarned:0
+        commissionEarned:0,
+        licensed:"",
+        residenceState:"",
+        address:"",
+        email:""
     })
 
     const handleInputChange = (data, field) => {
@@ -27,8 +31,8 @@ const AddNewRecruit = () => {
     const submitHandler =async()=>{
 
         const res= await httpClient.post('/recruits/addNewRecruits',agentData).catch((error) => { console.log("error: ",error) })
-
-        if(res.status === 200){
+        console.log("res",res)
+        if(res?.status === 200){
             console.log("Add new recruit res",res);
             navigate('/recruits')
         }
@@ -66,9 +70,9 @@ const AddNewRecruit = () => {
                                     </Stack>
 
                                     <Stack alignItems={'center'} sx={{ width: '100%', height: "45vh", marginLeft: '23px' }}>
-                                        <Stack flexDirection={'row'} flexWrap={'wrap'} sx={{ width: '100%', height: '79%' }}>
+                                        <Stack flexDirection={'row'} flexWrap={'wrap'} sx={{ width: '100%', height: '100%' }}>
                                             <TextField className='Account-Textfield' label="Name:" variant="filled" 
-                                            sx={{ width: '30%', height: "10vh", marginLeft: '23px' }} 
+                                            sx={{ width: '30%', marginLeft: '23px' }} 
                                             value={agentData.name}
                                             onChange={(e)=>{handleInputChange(e.target.value,"name")}}
                                             />
@@ -81,8 +85,8 @@ const AddNewRecruit = () => {
 
                                             <TextField label="Agent Code:" variant="filled" 
                                             sx={{ width: '30%', marginLeft: '23px' }}
-                                            value={agentData.agentCode}
-                                            onChange={(e)=>{handleInputChange(e.target.value,"agentCode")}}
+                                            value={agentData.recruitingAgentCode}
+                                            onChange={(e)=>{handleInputChange(e.target.value,"recruitingAgentCode")}}
                                             />
 
                                             <TextField label="Agent Title:" variant="filled" 
@@ -111,8 +115,28 @@ const AddNewRecruit = () => {
 
                                             <TextField label="Commission Earned:" variant="filled" 
                                             sx={{ width: '30%', marginLeft: '23px' }} 
-                                            value={agentData.commisionEarned}
-                                            onChange={(e)=>{handleInputChange(e.target.value,"commisionEarned")}}
+                                            value={agentData.commissionEarned}
+                                            onChange={(e)=>{handleInputChange(e.target.value,"commissionEarned")}}
+                                            />
+                                            <TextField label="Licensed:" variant="filled" 
+                                            sx={{ width: '30%', marginLeft: '23px' }} 
+                                            value={agentData.licensed}
+                                            onChange={(e)=>{handleInputChange(e.target.value,"licensed")}}
+                                            />
+                                            <TextField label="Residence State:" variant="filled" 
+                                            sx={{ width: '30%', marginLeft: '23px' }} 
+                                            value={agentData.residenceState}
+                                            onChange={(e)=>{handleInputChange(e.target.value,"residenceState")}}
+                                            />
+                                            <TextField label="Address:" variant="filled" 
+                                            sx={{ width: '30%', marginLeft: '23px' }} 
+                                            value={agentData.address}
+                                            onChange={(e)=>{handleInputChange(e.target.value,"address")}}
+                                            />
+                                            <TextField label="Email:" variant="filled" 
+                                            sx={{ width: '30%', marginLeft: '23px' }} 
+                                            value={agentData.email}
+                                            onChange={(e)=>{handleInputChange(e.target.value,"email")}}
                                             />
 
                                         </Stack>

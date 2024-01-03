@@ -4,25 +4,36 @@ import SideBar from '../../Layout/Sidebar'
 import { Box, Stack, TextField, Typography, Button } from '@mui/material'
 import profilePhoto from '../../assets/profilePhotoCRM.png'
 import './style.scss'
+import httpClient from '../../_util/api'
+import { useNavigate } from 'react-router-dom'
 
 const AddNewAgent = () => {
+    const navigate = useNavigate()
      const [agentData,setAgentData] = useState({
         name:"",
         level:0,
-        agentCode:"",
+        recruitingAgentCode:"",
         agentTitle:"",
         agentRole:"",
         recruitmentDate:"",
         recruits:0,
-        commisionEarned:0
+        commissionEarned:0,
+        email:""
     })
 
     const handleInputChange = (data, field) => {
+        
         setAgentData((prevFormData) => ({ ...prevFormData, [field]: data }));
     };
 
-    const submitHandler =()=>{
-
+    const submitHandler =async()=>{
+        console.log("agentData",agentData);
+        const res =await httpClient.post('/agents/addNewAgent').catch((error) => { console.log("error: ",error) })
+        console.log("res",res)
+        if(res?.status === 200){
+            console.log("Add new agent res",res);
+            navigate('/agent')
+        }
     }
 
     return (
@@ -71,8 +82,8 @@ const AddNewAgent = () => {
 
                                             <TextField label="Agent Code:" variant="filled" 
                                             sx={{ width: '30%', marginLeft: '23px' }}
-                                            value={agentData.agentCode}
-                                            onChange={(e)=>{handleInputChange(e.target.value,"agentCode")}}
+                                            value={agentData.recruitingAgentCode}
+                                            onChange={(e)=>{handleInputChange(e.target.value,"recruitingAgentCode")}}
                                             />
 
                                             <TextField label="Agent Title:" variant="filled" 
@@ -101,8 +112,14 @@ const AddNewAgent = () => {
 
                                             <TextField label="Commission Earned:" variant="filled" 
                                             sx={{ width: '30%', marginLeft: '23px' }} 
-                                            value={agentData.commisionEarned}
-                                            onChange={(e)=>{handleInputChange(e.target.value,"commisionEarned")}}
+                                            value={agentData.commissionEarned}
+                                            onChange={(e)=>{handleInputChange(e.target.value,"commissionEarned")}}
+                                            />
+
+                                            <TextField label="Email:" variant="filled" 
+                                            sx={{ width: '30%', marginLeft: '23px' }} 
+                                            value={agentData.email}
+                                            onChange={(e)=>{handleInputChange(e.target.value,"email")}}
                                             />
 
                                         </Stack>
