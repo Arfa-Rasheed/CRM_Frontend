@@ -2,6 +2,8 @@
    .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
       border-radius: 0px !important;
       width: 97% !important;
+      height:64vh;
+      scroll-behavior: none;
 
       .css-15wwp11-MuiTableHead-root {
          height: 0px !important;
@@ -23,5 +25,9 @@
       .profilePicCell {
          background-color: white !important;
       }
+   }
+
+   .css-apqrd9-MuiTableBody-root {
+       border:2px solid red !important;
    }
 }

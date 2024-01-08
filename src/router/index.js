@@ -13,6 +13,7 @@ import Login from '../components/Login'
 import Agents from '../components/Agents'
 import AddNewAgent from '../components/Agents/addNewAgent'
 import AddNewRecruit from '../components/Recruits/AddNewRecruitedAgent'
+import AgentDetail from '../components/Agents/detail'
 
 const AppRouter = () => {
   return (
@@ -33,6 +34,7 @@ const AppRouter = () => {
           <Route path='/addRecruit' element={<AddNewRecruit/>}></Route>
           <Route path='/agent' element={<Agents/>}></Route>
           <Route path='/addAgent' element={<AddNewAgent/>}></Route>
+          <Route path='/agentDetail' element={<AgentDetail/>}></Route>
           
         </Routes>
       </Router>

@@ -15,15 +15,15 @@ import httpClient from '../../_util/api.jsx'
 
 const Agents = () => {
   const navigate = useNavigate()
-  const [gridData,setGridData] = useState([])
-  
-  const gridHeader=[
+  const [gridData, setGridData] = useState([])
+
+  const gridHeader = [
     {
-      field:'profilePhoto',
-      headerName:""
+      field: 'profilePhoto',
+      headerName: ""
     },
     {
-      field: 'name',
+      field: 'firstName',
       headerName: "Name:",
     },
     {
@@ -58,19 +58,18 @@ const Agents = () => {
 
 
 
-  const LoadgridData=async()=>{
-    const res =await httpClient.get('/agents/getAllAgents')
+  const LoadgridData = async () => {
+    const res = await httpClient.get('/agents/getAllAgents')
 
-    if(res?.status === 200)
-    {
+    if (res?.status === 200) {
       setGridData(res.data)
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     LoadgridData()
-  },[])
-  
+  }, [gridData])
+
   return (
     <>
       <Header />
@@ -80,9 +79,9 @@ const Agents = () => {
           height: '92vh',
         }}>
           <SideBar />
-          <Stack sx={{ width: '81.7%'}}>
+          <Stack sx={{ width: '81.7%' }}>
             <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-              <Box sx={{ width: '60%', height: '100%' , display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+              <Box sx={{ width: '60%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                 <Box sx={{ height: '12vh' }}>
                   <Button
                     variant="contained"
@@ -131,7 +130,7 @@ const Agents = () => {
                         backgroundColor: '#F08613',
                       },
                     }}
-                  onClick={()=>{navigate('/addAgent')}}
+                    onClick={() => { navigate('/addAgent') }}
                   >
                     <Grid container
                       alignItems={'center'}
@@ -146,11 +145,11 @@ const Agents = () => {
               </Box>
             </Box>
             <div className='recruitsGrid'>
-            <CRMGrid
-              gridHeader={gridHeader}
-              gridData={gridData}
-              sx={{width:'100%' }}
-            />
+              <CRMGrid
+                gridHeader={gridHeader}
+                gridData={gridData}
+                sx={{ width: '100%' }}
+              />
             </div>
 
           </Stack>

@@ -17,7 +17,7 @@ const AddNewAgent = () => {
         agentRole:"",
         recruitmentDate:"",
         recruits:0,
-        commissionEarned:0,
+        commissionEarned:"",
         email:""
     })
 
@@ -28,7 +28,7 @@ const AddNewAgent = () => {
 
     const submitHandler =async()=>{
         console.log("agentData",agentData);
-        const res =await httpClient.post('/agents/addNewAgent').catch((error) => { console.log("error: ",error) })
+        const res =await httpClient.post('/agents/addNewAgent',agentData).catch((error) => { console.log("error: ",error) })
         console.log("res",res)
         if(res?.status === 200){
             console.log("Add new agent res",res);
