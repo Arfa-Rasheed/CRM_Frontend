@@ -36,7 +36,7 @@ const AppRouter = () => {
           <Route path='/addRecruit' element={<AddNewRecruit/>}></Route>
           <Route path='/agent' element={<Agents/>}></Route>
           <Route path='/addAgent' element={<AddNewAgent/>}></Route>
-          <Route path='/agentDetail' element={<AgentDetail/>}></Route>
+          <Route path='/agentDetail/:id' element={<AgentDetail/>}></Route>
           <Route path='/addNewPolicy_agent' element={<AddNewPolicy_Agent/>}></Route>
           <Route path='/addNewPolicy_admin' element={<AddNewPolicy_Admin/>}></Route>
           

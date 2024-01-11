@@ -19,39 +19,48 @@ const Agents = () => {
   const gridHeader = [
     {
       field: 'img',
-      headerName: ""
+      headerName: "",
+      isLink: true,
     },
     {
       field: 'firstName',
       headerName: "Name:",
+      isLink:true
     },
     {
       field: 'level',
       headerName: "Level:",
+      isLink: true,
     },
     {
       field: 'agentCode',
       headerName: "Agent Code:",
+      isLink: true,
     },
     {
       field: 'agentTitle',
       headerName: "Agent Title:",
+      isLink: true,
     },
     {
       field: 'agentRole',
       headerName: "Agent Role:",
+      isLink: true,
     },
     {
       field: 'recruitmentDate',
       headerName: "Recruitment Date:",
+      isLink: true,
     },
     {
       field: 'recruits',
       headerName: "Recruits:",
+      isLink: true,
     },
     {
       field: 'commissionEarned',
       headerName: "Commision Earned:",
+      isLink: true,
     },
   ]
 
@@ -151,6 +160,7 @@ const Agents = () => {
                 gridHeader={gridHeader}
                 gridData={gridData}
                 sx={{ width: '100%' }}
+                baseURL={'/agentDetail/'}
               />
             </div>
 

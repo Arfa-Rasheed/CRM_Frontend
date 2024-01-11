@@ -7,11 +7,25 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Avatar } from '@mui/material';
-
+import { Link } from "react-router-dom";
 
 const CRMGrid = (props) => {
   const [hoveredRowIndex, setHoveredRowIndex] = useState(null);
 
+  const linkTemplate = (data, col) => {
+    if (col.to) {
+      return (
+        <Link  to={col?.appendID ? col.to + data["id"] : col.to}>
+          {data[col.field]}
+        </Link>
+      );
+    }
+    return (
+      <Link to={props.baseURL + data["id"]} style={{textDecoration:'none',color: 'inherit'}}>
+        {data[col.field]}
+      </Link>
+    );
+  };
   return (
     <TableContainer
       component={Paper}
@@ -57,13 +71,15 @@ const CRMGrid = (props) => {
                         checked={props.selectedAgentIds.includes(row.id)}
                         onChange={() => props.handleCheckboxChange(row.id)}
                       />
-                    ) :
-                      headerObj.field === 'img' ? (
+                    ) : headerObj.field === 'img' ? (
                         <Avatar src={row[headerObj.field]} shape="circle" size="large" />
+                      ): headerObj.isLink ? (
+                        linkTemplate(row, headerObj)
                       )
                         : (
                           row[headerObj.field]
-                        )}
+                        )
+                  }
                 </TableCell>
               ))}
             </TableRow>

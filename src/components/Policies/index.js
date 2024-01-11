@@ -79,6 +79,7 @@ const Policies = () => {
       field: 'policySubmissionDate',
       headerName: "Policy Submission Date:",
       width: '20%',
+      isLink:true
     },
     {
       field: 'policyCarrier',
@@ -265,9 +266,11 @@ const Policies = () => {
             </Stack>
             ) : ( */}
             <CRMGrid
+            sx={{ marginTop: '10px', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
               gridHeader={isAdmin ? adminGridHeader : gridHeader}
               gridData={gridData}
-              sx={{ marginTop: '10px', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
+              baseURL={'/'}
+              
             />
             {/* )
             } */}

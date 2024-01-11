@@ -15,23 +15,27 @@ import httpClient from '../../_util/api.jsx'
 
 const Recruits = () => {
   const navigate = useNavigate()
-  const [gridData,setGridData] = useState([])
-  const gridHeader=[
+  const [gridData, setGridData] = useState([])
+  const gridHeader = [
     {
-      field:'img',
-      headerName:""
+      field: 'img',
+      headerName: "",
+      isLink: true,
     },
     {
       field: 'firstName',
       headerName: "Name:",
+      isLink: true,
     },
     {
       field: 'level',
       headerName: "Level:",
+      isLink: true,
     },
     {
       field: 'recruitingAgentCode',
       headerName: "Agent Code:",
+      isLink: true,
     },
     {
       field: 'agentTitle',
@@ -40,18 +44,22 @@ const Recruits = () => {
     {
       field: 'agentRole',
       headerName: "Agent Role:",
+      isLink: true,
     },
     {
       field: 'recruitmentDate',
       headerName: "Recruitment Date:",
+      isLink: true,
     },
     {
       field: 'recruits',
       headerName: "Recruits:",
+      isLink: true,
     },
     {
       field: 'commissionEarned',
       headerName: "Commision Earned:",
+      isLink: true,
     },
   ]
 
@@ -70,15 +78,15 @@ const Recruits = () => {
     if (res?.status === 200) {
       setGridData(res?.data)
     }
-    else{
-      console.log("error: ") 
+    else {
+      console.log("error: ")
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     LoadgridData()
-  },[])
-  
+  }, [])
+
   return (
     <>
       <Header />
@@ -86,12 +94,12 @@ const Recruits = () => {
         <div style={{
           display: 'flex',
           height: '92vh',
-          overflowY:'hidden'
+          overflowY: 'hidden'
         }}>
           <SideBar />
-          <Stack sx={{ width: '81.7%'}}>
+          <Stack sx={{ width: '81.7%' }}>
             <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-              <Box sx={{ width: '60%', height: '100%' , display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+              <Box sx={{ width: '60%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                 <Box sx={{ height: '12vh' }}>
                   <Button
                     variant="contained"
@@ -140,7 +148,7 @@ const Recruits = () => {
                         backgroundColor: '#F08613',
                       },
                     }}
-                  onClick={() => {navigate('/addRecruit')}}
+                    onClick={() => { navigate('/addRecruit') }}
                   >
                     <Grid container
                       alignItems={'center'}
@@ -155,11 +163,13 @@ const Recruits = () => {
               </Box>
             </Box>
             <div className='recruitsGrid'>
-            <CRMGrid
-              gridHeader={gridHeader}
-              gridData={gridData}
-              sx={{width:'100%' }}
-            />
+              <CRMGrid
+                sx={{ width: '100%' }}
+                gridHeader={gridHeader}
+                gridData={gridData}
+                baseURL={'/agentDetail/'}
+
+              />
             </div>
 
           </Stack>
