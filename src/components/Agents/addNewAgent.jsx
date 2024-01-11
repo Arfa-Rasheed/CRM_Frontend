@@ -12,7 +12,7 @@ const AddNewAgent = () => {
      const [agentData,setAgentData] = useState({
         name:"",
         level:0,
-        recruitingAgentCode:"",
+        agentCode:"",
         agentTitle:"",
         agentRole:"",
         recruitmentDate:"",
@@ -83,8 +83,8 @@ const AddNewAgent = () => {
 
                                             <TextField label="Agent Code:" variant="filled" 
                                             sx={{ width: '30%', marginLeft: '23px' }}
-                                            value={agentData.recruitingAgentCode}
-                                            onChange={(e)=>{handleInputChange(e.target.value,"recruitingAgentCode")}}
+                                            value={agentData.agentCode}
+                                            onChange={(e)=>{handleInputChange(e.target.value,"agentCode")}}
                                             />
 
                                             <TextField label="Agent Title:" variant="filled" 
