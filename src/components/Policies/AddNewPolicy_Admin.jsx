@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Box, Button, Grid, InputAdornment, TextField, Stack, Typography } from '@mui/material'
-import { MagnifyingGlass, Plus } from 'phosphor-react'
+import { MagnifyingGlass, Notepad, Plus } from 'phosphor-react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import httpClient from '../../_util/api'
@@ -139,7 +139,7 @@ const AddNewPolicy_Admin = () => {
                                     alignItems={'center'}
                                     sx={{ width: '100%' }}
                                 >
-                                    {/* <Grid item md="3"><img src={AllAgentsIcon} /></Grid> */}
+                                    <Grid item md="3"><Notepad size={20} weight="light" /></Grid>
                                     <Grid item md="9">New Policy</Grid>
 
                                 </Grid>

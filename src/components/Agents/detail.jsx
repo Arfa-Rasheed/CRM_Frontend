@@ -1,4 +1,4 @@
-import { MagnifyingGlass } from 'phosphor-react'
+import { MagnifyingGlass, Notepad } from 'phosphor-react'
 import React, { useEffect, useState } from 'react'
 import SideBar from '../../Layout/Sidebar'
 import Header from '../../Layout/Header'
@@ -126,7 +126,7 @@ const AgentDetail = () => {
                     overflowY:'hidden'
                 }}>
                     <SideBar />
-                    <Stack sx={{ width: '81.7%', }}>
+                    <Stack sx={{ width: '81.7%',backgroundColor:'#F2F2F2' }}>
                         <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
                             <Box sx={{ width: '60%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                                 <Box sx={{ height: '12vh' }}>
@@ -254,6 +254,30 @@ const AgentDetail = () => {
                             </Stack>
                         </Stack>
 
+                        <Stack justifyContent={'center'} alignItems={'center'}>
+                        <Button
+                                        variant="contained"
+                                        sx={{
+                                            backgroundColor: '#F08613',
+                                            color: 'white',
+                                            width: '245px',
+                                            height: "5vh",
+                                            fontSize: '12px',
+                                            "&:hover": {
+                                                backgroundColor: '#F08613',
+                                            },
+                                        }}
+                                    >
+                                        <Grid container
+                                            alignItems={'center'}
+                                            sx={{ width: '100%' }}
+                                        >
+                                            <Grid item md="3"><Notepad size={20} weight="light" /></Grid>
+                                            <Grid item md="9">Policies Submitted</Grid>
+
+                                        </Grid>
+                                    </Button>
+                        </Stack>
                         <div className='policiesDataGrid'>
                             <CRMGrid
                                 gridHeader={gridHeader}
