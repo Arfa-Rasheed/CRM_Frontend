@@ -18,3 +18,28 @@
     }
 }
 
+// .input-label{
+//     display:block;
+// }
+// .text-field{
+//     width:30%;
+//     height:30px;
+// }
+.details-heading{
+    text-align:left;
+    font-size:14px !important;
+    color:#003478;
+    font-weight: 600 !important;
+    margin-top: 8px !important;
+}
+
+.Policy-textfield{
+    .input-label{
+        font-size: 14px;
+    }
+    .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
+        width:194px;
+        background-color:white
+    }
+}
+

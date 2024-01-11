@@ -28,12 +28,12 @@ const SideBar = () => {
     }
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', width: '18%', height: '92vh', backgroundColor: '#EDEDED' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', width: '18%', height: '124%', backgroundColor: '#EDEDED' }}>
             <Stack
                 justifyContent={'center'}
                 sx={{
                     width: '80%',
-                    height: '84%',
+                    height: '81%',
                 }}>
                 <List>
                     <ListItem className='listItem' disablePadding>

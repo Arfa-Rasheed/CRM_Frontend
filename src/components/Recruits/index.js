@@ -18,11 +18,11 @@ const Recruits = () => {
   const [gridData,setGridData] = useState([])
   const gridHeader=[
     {
-      field:'profilePhoto',
+      field:'img',
       headerName:""
     },
     {
-      field: 'name',
+      field: 'firstName',
       headerName: "Name:",
     },
     {
@@ -50,18 +50,28 @@ const Recruits = () => {
       headerName: "Recruits:",
     },
     {
-      field: 'commisionEarned',
+      field: 'commissionEarned',
       headerName: "Commision Earned:",
     },
   ]
 
 
-  const LoadgridData=async()=>{
-    const res =await httpClient.get('/recruits/getAllAgents')
+  // const LoadgridData=async()=>{
+  //   const res =await httpClient.get('/recruits/getAllAgents')
 
-    if(res?.status === 200)
-    {
-      setGridData(res.data)
+  //   if(res?.status === 200)
+  //   {
+  //     setGridData(res.data)
+  //   }
+  // }
+  const LoadgridData = async () => {
+    const res = await httpClient.get('/agents/getAllAgents').catch((error) => { console.log("error: ", error) })
+
+    if (res?.status === 200) {
+      setGridData(res?.data)
+    }
+    else{
+      console.log("error: ") 
     }
   }
 
@@ -76,6 +86,7 @@ const Recruits = () => {
         <div style={{
           display: 'flex',
           height: '92vh',
+          overflowY:'hidden'
         }}>
           <SideBar />
           <Stack sx={{ width: '81.7%'}}>

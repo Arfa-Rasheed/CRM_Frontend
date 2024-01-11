@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import { Box, Button, Grid, InputAdornment, TextField } from '@mui/material'
@@ -7,26 +7,18 @@ import './style.scss'
 import { MagnifyingGlass, Plus } from 'phosphor-react'
 import CRMGrid from '../../shared-component/CRM-Grid.jsx'
 import { Stack } from '@mui/system'
+import httpClient from '../../_util/api.jsx'
+import AddNewPolicy_Admin from './AddNewPolicy_Admin.jsx'
+import { useNavigate } from 'react-router-dom'
 // import CRMGrid from '../../shared-component'
 
 
 const Policies = () => {
   const [newPolicyClicked, setNewPolicyClicked] = useState(false);
+  const isAdmin = localStorage.getItem("isAdmin")
+  const navigate = useNavigate()
+  const [gridData, setGridData] = useState([])
 
-  const [gridData, setGridData] = useState(
-    {
-      policySubmissionDate: "",
-      policyCarrier: "",
-      policyType: "",
-      policyNumber: "",
-      agentCarrierNumber: "",
-      agentFirstName: "",
-      agentLastName: "",
-      agentCode: "",
-      contractLevel: "",
-      policyPremium: ""
-    }
-  )
 
   const gridHeader = [
     {
@@ -82,132 +74,92 @@ const Policies = () => {
     },
   ]
 
-  const grid_data = [
+  const adminGridHeader = [
     {
-      policySubmissionDate: "04/05/2022",
-      policyCarrier: "TransAmerica",
-      policyType: "Life Insurance",
-      policyNumber: "C-87587090",
-      agentCarrierNumber: "B-3534645756",
-      agentFirstName: "Joe",
-      agentLastName: "Buhi",
-      agentCode: "B0436545",
-      contractLevel: "0.50",
-      policyPremium: "$2,700,00"
+      field: 'policySubmissionDate',
+      headerName: "Policy Submission Date:",
+      width: '20%',
     },
     {
-      policySubmissionDate: "04/05/2022",
-      policyCarrier: "TransAmerica",
-      policyType: "Life Insurance",
-      policyNumber: "C-87587090",
-      agentCarrierNumber: "B-3534645756",
-      agentFirstName: "Joe",
-      agentLastName: "Buhi",
-      agentCode: "B0436545",
-      contractLevel: "0.50",
-      policyPremium: "$2,700,00"
+      field: 'policyCarrier',
+      headerName: "Policy Carrier:",
+      width: '20%',
     },
     {
-      policySubmissionDate: "04/05/2022",
-      policyCarrier: "TransAmerica",
-      policyType: "Life Insurance",
-      policyNumber: "C-87587090",
-      agentCarrierNumber: "B-3534645756",
-      agentFirstName: "Joe",
-      agentLastName: "Buhi",
-      agentCode: "B0436545",
-      contractLevel: "0.50",
-      policyPremium: "$2,700,00"
+      field: 'policyType',
+      headerName: "Policy Type:",
+      width: '20%',
     },
     {
-      policySubmissionDate: "04/05/2022",
-      policyCarrier: "TransAmerica",
-      policyType: "Life Insurance",
-      policyNumber: "C-87587090",
-      agentCarrierNumber: "B-3534645756",
-      agentFirstName: "Joe",
-      agentLastName: "Buhi",
-      agentCode: "B0436545",
-      contractLevel: "0.50",
-      policyPremium: "$2,700,00"
+      field: 'policyNumber',
+      headerName: "Policy Number:",
+      width: '20%',
     },
     {
-      policySubmissionDate: "04/05/2022",
-      policyCarrier: "TransAmerica",
-      policyType: "Life Insurance",
-      policyNumber: "C-87587090",
-      agentCarrierNumber: "B-3534645756",
-      agentFirstName: "Joe",
-      agentLastName: "Buhi",
-      agentCode: "B0436545",
-      contractLevel: "0.50",
-      policyPremium: "$2,700,00"
+      field: 'agentCarrierNumber',
+      headerName: "Agent Carrier Number",
+      width: '20%',
     },
     {
-      policySubmissionDate: "04/05/2022",
-      policyCarrier: "TransAmerica",
-      policyType: "Life Insurance",
-      policyNumber: "C-87587090",
-      agentCarrierNumber: "B-3534645756",
-      agentFirstName: "Joe",
-      agentLastName: "Buhi",
-      agentCode: "B0436545",
-      contractLevel: "0.50",
-      policyPremium: "$2,700,00"
+      field: 'writtingAgentName',
+      headerName: "Writting Agent Name",
+      width: '20%',
     },
     {
-      policySubmissionDate: "04/05/2022",
-      policyCarrier: "TransAmerica",
-      policyType: "Life Insurance",
-      policyNumber: "C-87587090",
-      agentCarrierNumber: "B-3534645756",
-      agentFirstName: "Joe",
-      agentLastName: "Buhi",
-      agentCode: "B0436545",
-      contractLevel: "0.50",
-      policyPremium: "$2,700,00"
+      field: 'agentCode',
+      headerName: "Agent Code",
+      width: '20%',
     },
-
     {
-      policySubmissionDate: "04/05/2022",
-      policyCarrier: "TransAmerica",
-      policyType: "Life Insurance",
-      policyNumber: "C-87587090",
-      agentCarrierNumber: "B-3534645756",
-      agentFirstName: "Joe",
-      agentLastName: "Buhi",
-      agentCode: "B0436545",
-      contractLevel: "0.50",
-      policyPremium: "$2,700,00"
+      field: 'contractLevel',
+      headerName: "P.Contract Level",
+      width: '20%',
     },
-
     {
-      policySubmissionDate: "04/05/2022",
-      policyCarrier: "TransAmerica",
-      policyType: "Life Insurance",
-      policyNumber: "C-87587090",
-      agentCarrierNumber: "B-3534645756",
-      agentFirstName: "Joe",
-      agentLastName: "Buhi",
-      agentCode: "B0436545",
-      contractLevel: "0.50",
-      policyPremium: "$2,700,00"
+      field: 'policyValue',
+      headerName: "Policy Value",
+      width: '20%',
     },
-
     {
-      policySubmissionDate: "04/05/2022",
-      policyCarrier: "TransAmerica",
-      policyType: "Life Insurance",
-      policyNumber: "C-87587090",
-      agentCarrierNumber: "B-3534645756",
-      agentFirstName: "Joe",
-      agentLastName: "Buhi",
-      agentCode: "B0436545",
-      contractLevel: "0.50",
-      policyPremium: "$2,700,00"
+      field: 'advPayment',
+      headerName: "Adv. Payment",
+      width: '20%',
     },
-
+    {
+      field: 'balance',
+      headerName: "Balance",
+      width: '20%',
+    },
+    {
+      field: 'agencyCommission',
+      headerName: "Agency Commission",
+      width: '20%',
+    },
   ]
+
+  const addNewPolicyHandler =()=>{
+    if(isAdmin){
+      navigate('/addNewPolicy_admin')
+    }
+    else{
+      navigate("/addNewPolicy_agent")
+    }
+  }
+
+  const LoadGridData = async () => {
+    const res = await httpClient.get('policies/getAllPolicies').catch((error) => { })
+
+    if (res?.status === 200) {
+      console.log("Res", res);
+      setGridData(res.data)
+    }
+  }
+
+
+  useEffect(() => {
+    LoadGridData()
+  }, [])
+
   return (
     <div>
       <Header />
@@ -215,10 +167,11 @@ const Policies = () => {
         <div style={{
           display: 'flex',
           height: '91.6vh',
+          overflowY:'hidden'
         }}>
           <SideBar />
           <Stack sx={{ width: '81.8%' }}>
-            <Box sx={{ width: '100%', height: '17vh', marginTop: '20px', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <Box sx={{ width: '100%', height: '12vh', marginTop: '20px', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
               <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
                 InputProps={{
                   startAdornment: (
@@ -240,7 +193,8 @@ const Policies = () => {
                     backgroundColor: '#F08613',
                   },
                 }}
-                onClick={() => setNewPolicyClicked(true)}
+                // onClick={() => setNewPolicyClicked(true)}
+                onClick={addNewPolicyHandler}
               >
                 <Grid container
                   alignItems={'center'}
@@ -251,69 +205,72 @@ const Policies = () => {
                 </Grid>
               </Button>
             </Box>
-            {
-              newPolicyClicked ? (
-                <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "105vh", marginTop: '10px' }}>
-                  <Stack alignItems={'center'} sx={{ width: '96%', height: '94%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
-                    <Stack alignItems={'center'} justifyContent={'center'} sx={{width:'81%', height: '100%'}}>
-                      <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '59%' }}>
-                        <TextField label="Policy Submission Date:" variant="filled" sx={{ width: '30%' }} />
-                        <TextField label="Policy Carrier:" variant="filled" sx={{ width: '30%' }} />
-                        <TextField label="Policy Type:" variant="filled" sx={{ width: '30%' }} />
-                        <TextField label="Policy Number:" variant="filled" sx={{ width: '30%' }} />
-                        <TextField label="Agaent Carrier Number:" variant="filled" sx={{ width: '30%' }} />
-                        <TextField label="Writting Agent First Name:" variant="filled" sx={{ width: '30%' }} />
-                        <TextField label="Writing Agent Last Name" variant="filled" sx={{ width: '30%' }} />
-                        <TextField label="Agent Code:" variant="filled" sx={{ width: '30%' }} />
-                        <TextField label="Contract Level:" variant="filled" sx={{ width: '30%' }} />
-                        <TextField label="Policy Premium:" variant="filled" sx={{ width: '30%' }} />
-                      </Stack>
-                      <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '90%', height: '13vh' }}>
-                        <Button
-                          variant="contained"
-                          sx={{
-                            backgroundColor: "#F08613",
-                            color: 'white',
-                            width: '186px',
-                            height: "5vh",
-                            fontSize: '12px',
-                            "&:hover": {
-                              backgroundColor: '#F08613',
-                            },
-                          }}
-                        // onClick={() => setNewPolicyClicked(true)}
-                        >
-                          Save
-                        </Button>
+            {/* {
+              // isAdmin && newPolicyClicked ? (
+              //     <AddNewPolicy_Admin/>
+              // ):
+                newPolicyClicked ? (
+            <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "105vh", marginTop: '10px' }}>
+              <Stack alignItems={'center'} sx={{ width: '96%', height: '94%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
+                <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '100%' }}>
+                  <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '59%' }}>
+                    <TextField label="Policy Submission Date:" variant="filled" sx={{ width: '30%' }} />
+                    <TextField label="Policy Carrier:" variant="filled" sx={{ width: '30%' }} />
+                    <TextField label="Policy Type:" variant="filled" sx={{ width: '30%' }} />
+                    <TextField label="Policy Number:" variant="filled" sx={{ width: '30%' }} />
+                    <TextField label="Agaent Carrier Number:" variant="filled" sx={{ width: '30%' }} />
+                    <TextField label="Writting Agent First Name:" variant="filled" sx={{ width: '30%' }} />
+                    <TextField label="Writing Agent Last Name" variant="filled" sx={{ width: '30%' }} />
+                    <TextField label="Agent Code:" variant="filled" sx={{ width: '30%' }} />
+                    <TextField label="Contract Level:" variant="filled" sx={{ width: '30%' }} />
+                    <TextField label="Policy Premium:" variant="filled" sx={{ width: '30%' }} />
+                  </Stack>
+                  <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '90%', height: '13vh' }}>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        backgroundColor: "#F08613",
+                        color: 'white',
+                        width: '186px',
+                        height: "5vh",
+                        fontSize: '12px',
+                        "&:hover": {
+                          backgroundColor: '#F08613',
+                        },
+                      }}
+                    // onClick={() => setNewPolicyClicked(true)}
+                    >
+                      Save
+                    </Button>
 
-                        <Button
-                          variant="contained"
-                          sx={{
-                            backgroundColor: "#003478",
-                            color: 'white',
-                            width: '186px',
-                            height: "5vh",
-                            fontSize: '12px',
-                            "&:hover": {
-                              backgroundColor: '#003478',
-                            },
-                          }}
-                        // onClick={() => setNewPolicyClicked(true)}
-                        >
-                          Close
-                        </Button>
-                      </Stack>
-                    </Stack>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        backgroundColor: "#003478",
+                        color: 'white',
+                        width: '186px',
+                        height: "5vh",
+                        fontSize: '12px',
+                        "&:hover": {
+                          backgroundColor: '#003478',
+                        },
+                      }}
+                    // onClick={() => setNewPolicyClicked(true)}
+                    >
+                      Close
+                    </Button>
                   </Stack>
                 </Stack>
-              ) : (
-                <CRMGrid
-                  gridHeader={gridHeader}
-                  gridData={grid_data}
-                  sx={{ marginTop: '10px', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
-                />
-              )
-            }
+              </Stack>
+            </Stack>
+            ) : ( */}
+            <CRMGrid
+              gridHeader={isAdmin ? adminGridHeader : gridHeader}
+              gridData={gridData}
+              sx={{ marginTop: '10px', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
+            />
+            {/* )
+            } */}
           </Stack>
         </div>
       </div>

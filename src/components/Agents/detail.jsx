@@ -16,6 +16,7 @@ const AgentDetail = () => {
                 <div style={{
                     display: 'flex',
                     height: '92vh',
+                    // overflowY:'hidden'
                 }}>
                     <SideBar />
                     <Stack sx={{ width: '81.7%' , }}>

@@ -98,6 +98,7 @@ const Commissions = () => {
         <div style={{
           display: 'flex',
           height: '91.6vh',
+          overflowY:'hidden'
         }}>
           <SideBar />
           <Stack  sx={{ width: '80.8%' }}>

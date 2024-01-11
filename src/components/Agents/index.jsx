@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import { Box, Stack } from '@mui/system'
-// import { Button } from '@mui/base'
 import { Grid, InputAdornment, TextField } from '@mui/material'
 import AllAgentsIcon from '../../assets/AllAgentsIcon.png'
 import { Button } from '@mui/material'
@@ -19,7 +18,7 @@ const Agents = () => {
 
   const gridHeader = [
     {
-      field: 'profilePhoto',
+      field: 'img',
       headerName: ""
     },
     {
@@ -51,7 +50,7 @@ const Agents = () => {
       headerName: "Recruits:",
     },
     {
-      field: 'commisionEarned',
+      field: 'commissionEarned',
       headerName: "Commision Earned:",
     },
   ]
@@ -59,16 +58,18 @@ const Agents = () => {
 
 
   const LoadgridData = async () => {
-    const res = await httpClient.get('/agents/getAllAgents')
-
+    const res = await httpClient.get('/agents/getAllAgents').catch((error) => { console.log("error: ", error) })
     if (res?.status === 200) {
-      setGridData(res.data)
+      setGridData(res?.data)
+    }
+    else{
+      console.log("error: ") 
     }
   }
 
   useEffect(() => {
     LoadgridData()
-  }, [gridData])
+  }, [])
 
   return (
     <>
@@ -77,6 +78,7 @@ const Agents = () => {
         <div style={{
           display: 'flex',
           height: '92vh',
+          overflowY:'hidden'
         }}>
           <SideBar />
           <Stack sx={{ width: '81.7%' }}>
@@ -127,7 +129,7 @@ const Agents = () => {
                       height: "5vh",
                       fontSize: '12px',
                       "&:hover": {
-                        backgroundColor: '#F08613',
+                        backgroundColor: '#003478',
                       },
                     }}
                     onClick={() => { navigate('/addAgent') }}

@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Avatar } from '@mui/material';
-// import { Avatar } from 'primereact/avatar';
+
 
 const CRMGrid = (props) => {
   const [hoveredRowIndex, setHoveredRowIndex] = useState(null);
@@ -41,20 +41,29 @@ const CRMGrid = (props) => {
               onMouseLeave={() => setHoveredRowIndex(null)}
               style={{ backgroundColor: index === hoveredRowIndex ? '#F08613' : 'white', height: '5vh' }}
             >
-              {Object.entries(row).map(([key, cell], cellIndex) => (
-                <TableCell className= {key === 'img' ? "profilePicCell" : ""}
-                  key={cellIndex}
+              {props.gridHeader.map((headerObj) => (
+                <TableCell
+                  key={headerObj.field}
                   style={{
                     paddingTop: '8px',
                     paddingBottom: '8px',
                     borderBottom: '6px solid rgba(224, 224, 224, 1)',
                   }}
                 >
-                  {key === 'img' ? (
-                      <Avatar src={cell} shape="circle" size="large" />
-                  ) : (
-                    cell
-                  )}
+                  {
+                    headerObj.field === 'checkbox' ? (
+                      <input
+                        type="checkbox"
+                        checked={props.selectedAgentIds.includes(row.id)}
+                        onChange={() => props.handleCheckboxChange(row.id)}
+                      />
+                    ) :
+                      headerObj.field === 'img' ? (
+                        <Avatar src={row[headerObj.field]} shape="circle" size="large" />
+                      )
+                        : (
+                          row[headerObj.field]
+                        )}
                 </TableCell>
               ))}
             </TableRow>
@@ -66,3 +75,6 @@ const CRMGrid = (props) => {
 };
 
 export default CRMGrid;
+
+
+// export default CRMGrid;

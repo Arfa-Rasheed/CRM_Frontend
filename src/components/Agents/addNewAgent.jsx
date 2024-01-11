@@ -43,6 +43,7 @@ const AddNewAgent = () => {
                 <div style={{
                     display: 'flex',
                     height: '92vh',
+                    overflowY:'hidden'
                 }}>
                     <SideBar />
                     <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: '92vh' }}>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import { Box, Stack } from '@mui/system'
@@ -12,17 +12,42 @@ import "./style.scss"
 import profilePhoto from '../../assets/profilePhotoCRM.png'
 import { useNavigate } from 'react-router-dom'
 import httpClient from '../../_util/api.jsx'
+import { useDispatch } from 'react-redux'
+import { hideLoader, showLoader } from '../../Store/mainSlice.js'
+import PageLoader from '../../Layout/FullPageLoader/FullPageLoader.jsx'
+import CRM_Toast from '../../Layout/Snackbar/SnackBar.jsx'
+import CustomSnackbar from '../../Layout/Snackbar/SnackBar.jsx'
 
 const Administration = () => {
   const navigate = useNavigate()
-  const [gridData,setGridData] = useState([])
-  const gridHeader=[
+  const dispatch = useDispatch()
+  const toast_Ref = useRef(null);
+  const [gridData, setGridData] = useState([])
+  const [selectedAgentIds, setSelectedAgentIds] = useState([]);
+  const gridHeader = [
     {
-      field:'profilePhoto',
-      headerName:""
+      field: 'checkbox',
+      headerName: (
+        <input
+          type="checkbox"
+          onChange={(e) => {
+            // Handle checkbox click for all rows
+            if (e.target.checked) {
+              const allAgentIds = gridData.map((agent) => agent.id);
+              setSelectedAgentIds(allAgentIds);
+            } else {
+              setSelectedAgentIds([]);
+            }
+          }}
+        />
+      ),
     },
     {
-      field: 'name',
+      field: 'img',
+      headerName: ""
+    },
+    {
+      field: 'firstName',
       headerName: "Name:",
     },
     {
@@ -50,36 +75,70 @@ const Administration = () => {
       headerName: "Recruits:",
     },
     {
-      field: 'commisionEarned',
+      field: 'commissionEarned',
       headerName: "Commision Earned:",
     },
   ]
 
+  const handleCheckboxChange = (agentId) => {
+    // Handle checkbox change and update selectedAgentIds
+    console.log("agentId", agentId)
+    setSelectedAgentIds((prevIds) =>
+      prevIds.includes(agentId)
+        ? prevIds.filter((id) => id !== agentId)
+        : [...prevIds, agentId]
+    );
+  }
 
-  const LoadgridData=async()=>{
-    const res =await httpClient.get('/recruits/getAllAgents')
-    if(res?.status === 200)
-    {
-      setGridData(res.data)
+  const removeAgentHandler = async () => {
+    if (selectedAgentIds.length > 0) {
+      const agentIdsString = selectedAgentIds.join(',');
+      const res = await httpClient.delete(`/agents/deleteAgent/${agentIdsString}`).catch((error) => { console.log("error: ", error) })
+      if(res?.status === 200){
+        LoadgridData()
+        console.log(" delted res" ,res);
+        toast_Ref.current.showMessage("success", res?.data.message, "", "i-notify");
+      }
+      else{
+        console.log("error: ") 
+      }
     }
   }
 
-  useEffect(()=>{
+  const LoadgridData = async () => {
+    const res = await httpClient.get("/agents/getAllAgents")
+    .catch((error) => { 
+      toast_Ref.current.showMessage("error", error?.message, "", "i-notify");
+      // console.log("error: ", error)
+   })
+    if (res?.status === 200) {
+      dispatch(hideLoader())
+      // toast_Ref.current.showMessage("error", "Data extracted", "", "i-notify");
+      setGridData(res.data)
+      dispatch(hideLoader())
+    }
+  }
+
+  useEffect(() => {
     LoadgridData()
-  },[])
-  
+  }, [])
+
   return (
     <>
+      <PageLoader/>
+      {/* <CRM_Toast ref={toast_Ref}/> */}
+      <CustomSnackbar ref={toast_Ref}/>
       <Header />
       <div style={{ marginTop: '56px' }}>
         <div style={{
           display: 'flex',
           height: '92vh',
+          overflowY:'hidden'
         }}>
           <SideBar />
-          <Stack sx={{ width: '81.7%'}}>
+          <Stack sx={{ width: '81.7%' }}>
             <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-              <Box sx={{ width: '60%', height: '100%' , display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+              <Box sx={{ width: '60%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                 <Box sx={{ height: '12vh' }}>
                   <Button
                     variant="contained"
@@ -106,7 +165,7 @@ const Administration = () => {
                   </Button>
                 </Box>
 
-                <Box sx={{ width: '56%', height: '12vh', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <Box sx={{ width: '56%', height: '17vh', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
                     InputProps={{
                       startAdornment: (
@@ -125,10 +184,10 @@ const Administration = () => {
                       height: "5vh",
                       fontSize: '12px',
                       "&:hover": {
-                        backgroundColor: '#F08613',
+                        backgroundColor: '#003478',
                       },
                     }}
-                  // onClick={() => {navigate('/addRecruit')}}
+                    onClick={() => { navigate('/addRecruit') }}
                   >
                     <Grid container
                       alignItems={'center'}
@@ -138,8 +197,9 @@ const Administration = () => {
                       <Grid item md="3"><Plus size={20} weight="light" /></Grid>
                     </Grid>
                   </Button>
-                  {/* <Button
+                  <Button
                     variant="contained"
+                    disabled={selectedAgentIds.length < 1 ? true : false}
                     sx={{
                       backgroundColor: "#003478",
                       color: 'white',
@@ -147,10 +207,10 @@ const Administration = () => {
                       height: "5vh",
                       fontSize: '12px',
                       "&:hover": {
-                        backgroundColor: '#F08613',
+                        backgroundColor: '#003478',
                       },
                     }}
-                  // onClick={() => {navigate('/addRecruit')}}
+                    onClick={removeAgentHandler}
                   >
                     <Grid container
                       alignItems={'center'}
@@ -159,17 +219,19 @@ const Administration = () => {
                       <Grid item md="9">Remove Agent</Grid>
                       <Grid item md="3"><Minus size={20} weight="light" /></Grid>
                     </Grid>
-                  </Button> */}
+                  </Button>
                 </Box>
 
               </Box>
             </Box>
             <div className='recruitsGrid'>
-            <CRMGrid
-              gridHeader={gridHeader}
-              gridData={gridData}
-              sx={{width:'100%' }}
-            />
+              <CRMGrid
+                gridHeader={gridHeader}
+                gridData={gridData}
+                selectedAgentIds={selectedAgentIds}
+                handleCheckboxChange={handleCheckboxChange}
+                sx={{ width: '100%' }}
+              />
             </div>
 
           </Stack>
