@@ -6,11 +6,14 @@ import SideBar from '../../Layout/Sidebar'
 import httpClient from '../../_util/api'
 import './style.scss'
 import { Navigate, useNavigate } from 'react-router-dom'
+import Calendar from '../../shared-component/Calender'
 
 const AddNewPolicy_Admin = () => {
     const navigate = useNavigate()
+    const [commissionSplit, setCommisionSplit] = useState("No")
     const [policyData, setPolicyData] = useState({
         date: "",
+        policyRegistrationID: "",
         policyValue: 0,
         agencyCommission: 0,
         agentCommission: 0,
@@ -80,7 +83,7 @@ const AddNewPolicy_Admin = () => {
     return (
         <div>
             <Header />
-            <div style={{ marginTop: '59px',height:'114vh' }}>
+            <div style={{ marginTop: '59px', height: '114vh' }}>
                 <div style={{
                     display: 'flex',
                     height: '91.6vh',
@@ -147,26 +150,27 @@ const AddNewPolicy_Admin = () => {
                         </Box>
                         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "112vh", marginTop: '10px' }}>
                             <Stack alignItems={'center'} sx={{ width: '96%', height: '100%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
-                                <Stack sx={{ width: '89%', height: '100%' }}>
+                                <Stack  sx={{ width: '89%' }}>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '59%' }}>
                                         <Stack className='Policy-textfield'>
                                             <Typography className='input-label' >Date:</Typography>
                                             <TextField
                                                 className='text-field'
                                                 variant="outlined"
-                                                value={policyData.policySubmissionDate}
+                                                value={policyData.date}
                                                 sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "policySubmissionDate") }}
+                                                onChange={(e) => { handleInputChange(e.target.value, "date") }}
                                             />
+                                            {/* <Calendar/> */}
                                         </Stack>
                                         <Stack className='Policy-textfield'>
                                             <Typography className='input-label'>Policy Registration Id:</Typography>
                                             <TextField
                                                 className='text-field'
                                                 variant="outlined"
-                                                value={policyData.policySubmissionDate}
+                                                value={policyData.policyRegistrationID}
                                                 sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "policySubmissionDate") }}
+                                                onChange={(e) => { handleInputChange(e.target.value, "policyRegistrationID") }}
                                             />
                                         </Stack>
                                         <Stack className='Policy-textfield'>
@@ -360,119 +364,129 @@ const AddNewPolicy_Admin = () => {
 
                                     </Stack>
 
-                                    <Typography className='details-heading'>SPLIT DETAILS:</Typography>
-                                    <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%' }}>
-                                        <Stack className='Policy-textfield'>
-                                            <Typography className='input-label' >Agent First Name:</Typography>
-                                            <TextField
-                                                className='text-field'
-                                                variant="outlined"
-                                                value={policyData.split1_AgentFirstName}
-                                                sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "split1_AgentFirstName") }}
-                                            />
-                                        </Stack>
-                                        <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Agent Last Name:</Typography>
-                                            <TextField
-                                                className='text-field'
-                                                variant="outlined"
-                                                value={policyData.split1_AgentLastName}
-                                                sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "split1_AgentLastName") }}
-                                            />
-                                        </Stack>
-                                        <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Agent Code:</Typography>
-                                            <TextField
-                                                variant="outlined"
-                                                value={policyData.split1_AgentCode}
-                                                sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "split1_AgentCode") }}
-                                            />
-                                        </Stack>
-                                        <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Contract Level:</Typography>
-                                            <TextField
-                                                variant="outlined"
-                                                value={policyData.split1_ContractLevel}
-                                                sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "split1_ContractLevel") }}
-                                            />
-                                        </Stack>
-                                        <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Agent Carrier Number</Typography>
-                                            <TextField
-                                                // label="Policy Submission Date:" 
-                                                className='text-field'
-                                                variant="outlined"
-                                                value={policyData.split1_AgentCarrierNumber}
-                                                sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "split1_AgentCarrierNumber") }}
-                                            />
-                                        </Stack>
+                                    {
+                                        commissionSplit === 'Yes' ? (
+                                            <>
+                                                 {/* Split1 details */}
+                                                <Typography className='details-heading'>SPLIT DETAILS:</Typography>
+                                                <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%' }}>
+                                                    <Stack className='Policy-textfield'>
+                                                        <Typography className='input-label' >Agent First Name:</Typography>
+                                                        <TextField
+                                                            className='text-field'
+                                                            variant="outlined"
+                                                            value={policyData.split1_AgentFirstName}
+                                                            sx={{ width: '20%' }}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split1_AgentFirstName") }}
+                                                        />
+                                                    </Stack>
+                                                    <Stack className='Policy-textfield'>
+                                                        <Typography className='input-label'>Agent Last Name:</Typography>
+                                                        <TextField
+                                                            className='text-field'
+                                                            variant="outlined"
+                                                            value={policyData.split1_AgentLastName}
+                                                            sx={{ width: '20%' }}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split1_AgentLastName") }}
+                                                        />
+                                                    </Stack>
+                                                    <Stack className='Policy-textfield'>
+                                                        <Typography className='input-label'>Agent Code:</Typography>
+                                                        <TextField
+                                                            variant="outlined"
+                                                            value={policyData.split1_AgentCode}
+                                                            sx={{ width: '20%' }}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split1_AgentCode") }}
+                                                        />
+                                                    </Stack>
+                                                    <Stack className='Policy-textfield'>
+                                                        <Typography className='input-label'>Contract Level:</Typography>
+                                                        <TextField
+                                                            variant="outlined"
+                                                            value={policyData.split1_ContractLevel}
+                                                            sx={{ width: '20%' }}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split1_ContractLevel") }}
+                                                        />
+                                                    </Stack>
+                                                    <Stack className='Policy-textfield'>
+                                                        <Typography className='input-label'>Agent Carrier Number</Typography>
+                                                        <TextField
+                                                            // label="Policy Submission Date:" 
+                                                            className='text-field'
+                                                            variant="outlined"
+                                                            value={policyData.split1_AgentCarrierNumber}
+                                                            sx={{ width: '20%' }}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split1_AgentCarrierNumber") }}
+                                                        />
+                                                    </Stack>
 
 
 
-                                    </Stack>
+                                                </Stack>
 
-                                    {/* Split 2 Details */}
-                                    <Typography className='details-heading'>SPLIT 2 DETAILS:</Typography>
-                                    <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%' }}>
-                                        <Stack className='Policy-textfield'>
-                                            <Typography className='input-label' >Agent First Name:</Typography>
-                                            <TextField
-                                                className='text-field'
-                                                variant="outlined"
-                                                value={policyData.split2_AgentFirstName}
-                                                sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "split2_AgentFirstName") }}
-                                            />
-                                        </Stack>
-                                        <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Agent Last Name:</Typography>
-                                            <TextField
-                                                className='text-field'
-                                                variant="outlined"
-                                                value={policyData.split2_AgentLastName}
-                                                sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "split2_AgentLastName") }}
-                                            />
-                                        </Stack>
-                                        <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Agent Code:</Typography>
-                                            <TextField
-                                                variant="outlined"
-                                                value={policyData.split2_AgentCode}
-                                                sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "split2_AgentCode") }}
-                                            />
-                                        </Stack>
-                                        <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Contract Level:</Typography>
-                                            <TextField
-                                                variant="outlined"
-                                                value={policyData.split2_ContractLevel}
-                                                sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "split2_ContractLevel") }}
-                                            />
-                                        </Stack>
-                                        <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Agent Carrier Number</Typography>
-                                            <TextField
-                                                // label="Policy Submission Date:" 
-                                                className='text-field'
-                                                variant="outlined"
-                                                value={policyData.split2_AgentCarrierNumber}
-                                                sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "split2_AgentCarrierNumber") }}
-                                            />
-                                        </Stack>
+                                                 {/* Split2 Details */}
+                                                <Typography className='details-heading'>SPLIT 2 DETAILS:</Typography>
+                                                <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%' }}>
+                                                    <Stack className='Policy-textfield'>
+                                                        <Typography className='input-label' >Agent First Name:</Typography>
+                                                        <TextField
+                                                            className='text-field'
+                                                            variant="outlined"
+                                                            value={policyData.split2_AgentFirstName}
+                                                            sx={{ width: '20%' }}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split2_AgentFirstName") }}
+                                                        />
+                                                    </Stack>
+                                                    <Stack className='Policy-textfield'>
+                                                        <Typography className='input-label'>Agent Last Name:</Typography>
+                                                        <TextField
+                                                            className='text-field'
+                                                            variant="outlined"
+                                                            value={policyData.split2_AgentLastName}
+                                                            sx={{ width: '20%' }}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split2_AgentLastName") }}
+                                                        />
+                                                    </Stack>
+                                                    <Stack className='Policy-textfield'>
+                                                        <Typography className='input-label'>Agent Code:</Typography>
+                                                        <TextField
+                                                            variant="outlined"
+                                                            value={policyData.split2_AgentCode}
+                                                            sx={{ width: '20%' }}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split2_AgentCode") }}
+                                                        />
+                                                    </Stack>
+                                                    <Stack className='Policy-textfield'>
+                                                        <Typography className='input-label'>Contract Level:</Typography>
+                                                        <TextField
+                                                            variant="outlined"
+                                                            value={policyData.split2_ContractLevel}
+                                                            sx={{ width: '20%' }}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split2_ContractLevel") }}
+                                                        />
+                                                    </Stack>
+                                                    <Stack className='Policy-textfield'>
+                                                        <Typography className='input-label'>Agent Carrier Number</Typography>
+                                                        <TextField
+                                                            // label="Policy Submission Date:" 
+                                                            className='text-field'
+                                                            variant="outlined"
+                                                            value={policyData.split2_AgentCarrierNumber}
+                                                            sx={{ width: '20%' }}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split2_AgentCarrierNumber") }}
+                                                        />
+                                                    </Stack>
 
 
 
-                                    </Stack>
-
+                                                </Stack>
+                                            </>
+                                        ) :
+                                            (
+                                                <></>
+                                            )
+                                    }
+            
                                     {/* Overwrite details */}
                                     <Typography className='details-heading'>OVERWRITE DETAILS:</Typography>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%' }}>
@@ -531,7 +545,9 @@ const AddNewPolicy_Admin = () => {
                                     </Stack>
 
 
-                                    <Typography className='details-heading'>POLICY CANCELLATION DETAILS:</Typography>
+
+
+                                    {/* <Typography className='details-heading'>POLICY CANCELLATION DETAILS:</Typography>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '79.5%', marginTop: '0px' }}>
                                         <Stack className='Policy-textfield'>
                                             <Typography className='input-label' >Cancellation Date:</Typography>
@@ -627,7 +643,7 @@ const AddNewPolicy_Admin = () => {
 
 
 
-                                    </Stack>
+                                    </Stack> */}
 
                                     <Stack alignItems={'center'} sx={{ width: '100%' }}>
                                         <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '90%', height: '13vh' }}>

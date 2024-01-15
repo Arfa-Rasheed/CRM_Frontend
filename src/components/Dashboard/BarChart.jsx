@@ -1,26 +1,69 @@
-import React from 'react'
-import { Bar } from 'react-chartjs-2'
-import { Chart as ChartJS } from 'chart.js/auto'
-import './style.scss'
-const BarChart = ({ chartData }) => {
+import React from 'react';
+import { Bar } from 'react-chartjs-2';
+import { Chart, CategoryScale } from 'chart.js/auto';
+
+import './style.scss';
+
+const BarChart = ({ barChartData , selectedOption }) => {
   const options = {
-    // responsive: true,
-    // maintainAspectRatio: false, // Set to false to customize width and height
-    width: 400, // Set the desired width
-    height: 200, // Set the desired height
+    width: "4000px", 
+    height: "273px", 
   };
+
+  const months = Object.keys(barChartData);
+  const monthNames = [
+    "Jan", "Feb", "Mar", "Apr", "May", "June",
+    "July", "Aug", "Sep", "Oct", "Nov", "Dec"
+  ];
+  const data = {
+    // labels: months.map(month => {
+    //   const [year, monthNumber] = month.split('-');
+    //   return `${year}-0${parseInt(monthNumber, 10)}`;
+    // }),
+
+    
+
+    
+    
+     labels : months.map(month => {
+      const [year, monthNumber] = month.split('-');
+      const monthName = monthNames[parseInt(monthNumber, 10) - 1];
+      return `${monthName}`;
+     }),
+    
+    datasets: [
+      {
+        label:selectedOption === "Policy Matrix" ? "Policies" : 'Sales',
+        // backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
+        borderWidth: 1,
+        hoverBackgroundColor: 'rgba(75,192,192,0.6)',
+        hoverBorderColor: 'rgba(75,192,192,1)',
+        data: selectedOption === "Policy Matrix" 
+              ? months.map(month => barChartData[month].totalSoldPolicies) 
+              : months.map(month => barChartData[month].totalSalesCost),
+        backgroundColor: [
+          '#4dc9f6',
+          '#f67019',
+          '#f53794',
+          '#537bc4',
+          '#acc236',
+          '#166a8f',
+          '#00a950',
+          '#58595b',
+          '#8549ba'
+      ],
+      },
+    ],
+  };
+
+  
+
   return (
-    <div 
-    // style={{width:'635px',height:'268px',border:'2px solid red',}}
-    >
-      <Bar
-        data={chartData}
-        style={{width:'100%'}}
-        // chartOptions={options}
-      />
+    <div>
+      <Bar data={data} options={options} plugins={[CategoryScale]} style={{width:'100%'}}/>
     </div>
+  );
+};
 
-  )
-}
-
-export default BarChart
+export default BarChart;

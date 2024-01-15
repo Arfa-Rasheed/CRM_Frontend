@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import { Box, Stack, TextField, Typography, Button } from '@mui/material'
 import profilePhoto from '../../assets/profilePhotoCRM.png'
 import './style.scss'
 import httpClient from '../../_util/api'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const AddNewAgent = () => {
     const navigate = useNavigate()
-     const [agentData,setAgentData] = useState({
+    const {id} = useParams()
+    const [agentData,setAgentData] = useState({
         name:"",
         level:0,
         agentCode:"",
@@ -28,6 +29,16 @@ const AddNewAgent = () => {
 
     const submitHandler =async()=>{
         console.log("agentData",agentData);
+        console.log("Agent id",id);
+        if(id){
+            const res = httpClient.put(`/agents/updateAgent/${id}`,agentData).catch((error) => { console.log("error: ",error) })
+            console.log("res",res)
+            if(res?.status === 200){
+                console.log("Add new agent res",res);
+                navigate('/agent')
+            }
+        }
+
         const res =await httpClient.post('/agents/addNewAgent',agentData).catch((error) => { console.log("error: ",error) })
         console.log("res",res)
         if(res?.status === 200){
@@ -35,6 +46,22 @@ const AddNewAgent = () => {
             navigate('/agent')
         }
     }
+
+    const LoadAgentData = async () => {
+        const res = await httpClient.get(`/agents/getAgentByID/${id}`).catch((error) => { console.log("error", error); })
+
+        if (res?.status === 200) {
+            console.log("Detail res", res)
+            setAgentData(res.data)
+        }
+    }
+   
+
+   useEffect(()=>{
+       if(id){
+        LoadAgentData()
+       }
+   },[])
 
     return (
         <>

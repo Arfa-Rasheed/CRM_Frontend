@@ -15,6 +15,7 @@ const AgentDetail = () => {
     const { id } = useParams()
     // const [gridData,setGridData] = useState()
     const [agentData, setAgentData] = useState({
+        id:"",
         firstName: "",
         lastName: "",
         level: 0,
@@ -175,7 +176,7 @@ const AgentDetail = () => {
                                                 backgroundColor: '#F08613',
                                             },
                                         }}
-                                        onClick={() => { navigate('/addRecruit') }}
+                                        onClick={() => { navigate(`/addAgent/${agentData.id}`) }}
                                     >
                                         <Grid container
                                             alignItems={'center'}

@@ -3,7 +3,7 @@
     height:80%;
     border-radius: 10px;
     height: 10vh;
-    margin-top: -8px;
+    margin-top: 10px;
     .list-items{
         padding-top: 0px;
     }
@@ -11,4 +11,25 @@
 // .BarChart{
 //     width:833px;
 //     height:100px;
+// }
+
+.canvas{
+    width:4000px;
+    height:294px;
+}
+
+// .CRM_dropdown{
+    .MuiAutocomplete-hasPopupIcon.css-1wuilmg-MuiAutocomplete-root .MuiOutlinedInput-root{
+        height:36px;
+        // margin:-10px;
+        margin-left: 1px;
+        background-color: #003478;
+        color: white;
+        text-align: center;
+        margin-bottom: 5px;
+      }
+
+      .css-1glvl0p-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-clearIndicator {
+         display: none;
+      }
 // }

@@ -187,7 +187,7 @@ const Administration = () => {
                         backgroundColor: '#003478',
                       },
                     }}
-                    onClick={() => { navigate('/addRecruit') }}
+                    onClick={() => { navigate('/addAgent') }}
                   >
                     <Grid container
                       alignItems={'center'}
