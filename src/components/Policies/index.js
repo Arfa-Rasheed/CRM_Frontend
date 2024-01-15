@@ -85,58 +85,70 @@ const Policies = () => {
       field: 'policyCarrier',
       headerName: "Policy Carrier:",
       width: '20%',
+      isLink:true
     },
     {
       field: 'policyType',
       headerName: "Policy Type:",
       width: '20%',
+      isLink:true
     },
     {
       field: 'policyNumber',
       headerName: "Policy Number:",
       width: '20%',
+      isLink:true
     },
     {
       field: 'agentCarrierNumber',
       headerName: "Agent Carrier Number",
       width: '20%',
+      isLink:true
     },
     {
-      field: 'writtingAgentName',
+      field: 'overwrittingAgentFirstName',
       headerName: "Writting Agent Name",
       width: '20%',
+      isLink:true
     },
     {
       field: 'agentCode',
       headerName: "Agent Code",
       width: '20%',
+      isLink:true
     },
     {
       field: 'contractLevel',
       headerName: "P.Contract Level",
       width: '20%',
+      isLink:true
     },
     {
       field: 'policyValue',
       headerName: "Policy Value",
       width: '20%',
+      isLink:true
     },
     {
       field: 'advPayment',
       headerName: "Adv. Payment",
       width: '20%',
+      isLink:true
     },
     {
       field: 'balance',
       headerName: "Balance",
       width: '20%',
+      isLink:true
     },
     {
       field: 'agencyCommission',
       headerName: "Agency Commission",
       width: '20%',
+      isLink:true
     },
   ]
+
 
   const addNewPolicyHandler =()=>{
     if(isAdmin){
@@ -156,6 +168,7 @@ const Policies = () => {
     }
   }
 
+  
 
   useEffect(() => {
     LoadGridData()
@@ -206,74 +219,12 @@ const Policies = () => {
                 </Grid>
               </Button>
             </Box>
-            {/* {
-              // isAdmin && newPolicyClicked ? (
-              //     <AddNewPolicy_Admin/>
-              // ):
-                newPolicyClicked ? (
-            <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "105vh", marginTop: '10px' }}>
-              <Stack alignItems={'center'} sx={{ width: '96%', height: '94%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
-                <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '100%' }}>
-                  <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '59%' }}>
-                    <TextField label="Policy Submission Date:" variant="filled" sx={{ width: '30%' }} />
-                    <TextField label="Policy Carrier:" variant="filled" sx={{ width: '30%' }} />
-                    <TextField label="Policy Type:" variant="filled" sx={{ width: '30%' }} />
-                    <TextField label="Policy Number:" variant="filled" sx={{ width: '30%' }} />
-                    <TextField label="Agaent Carrier Number:" variant="filled" sx={{ width: '30%' }} />
-                    <TextField label="Writting Agent First Name:" variant="filled" sx={{ width: '30%' }} />
-                    <TextField label="Writing Agent Last Name" variant="filled" sx={{ width: '30%' }} />
-                    <TextField label="Agent Code:" variant="filled" sx={{ width: '30%' }} />
-                    <TextField label="Contract Level:" variant="filled" sx={{ width: '30%' }} />
-                    <TextField label="Policy Premium:" variant="filled" sx={{ width: '30%' }} />
-                  </Stack>
-                  <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '90%', height: '13vh' }}>
-                    <Button
-                      variant="contained"
-                      sx={{
-                        backgroundColor: "#F08613",
-                        color: 'white',
-                        width: '186px',
-                        height: "5vh",
-                        fontSize: '12px',
-                        "&:hover": {
-                          backgroundColor: '#F08613',
-                        },
-                      }}
-                    // onClick={() => setNewPolicyClicked(true)}
-                    >
-                      Save
-                    </Button>
-
-                    <Button
-                      variant="contained"
-                      sx={{
-                        backgroundColor: "#003478",
-                        color: 'white',
-                        width: '186px',
-                        height: "5vh",
-                        fontSize: '12px',
-                        "&:hover": {
-                          backgroundColor: '#003478',
-                        },
-                      }}
-                    // onClick={() => setNewPolicyClicked(true)}
-                    >
-                      Close
-                    </Button>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Stack>
-            ) : ( */}
             <CRMGrid
             sx={{ marginTop: '10px', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
               gridHeader={isAdmin ? adminGridHeader : gridHeader}
               gridData={gridData}
-              baseURL={'/'}
-              
+              baseURL={isAdmin ? '/addNewPolicy_admin/' : '/addNewPolicy_agent'}
             />
-            {/* )
-            } */}
           </Stack>
         </div>
       </div>
