@@ -13,7 +13,7 @@ import CRMGrid from '../../shared-component/CRM-Grid.jsx'
 const AgentDetail = () => {
     const navigate = useNavigate()
     const { id } = useParams()
-    // const [gridData,setGridData] = useState()
+    const [policyData,setPolicyData] = useState([])
     const [agentData, setAgentData] = useState({
         id:"",
         firstName: "",
@@ -53,13 +53,13 @@ const AgentDetail = () => {
             width: '20%',
         },
         {
-            field: 'agentFirstName',
-            headerName: "Writing Agent First Name:",
+            field: 'overwrittingAgentFirstName1',
+            headerName: "OW Agent1:",
             width: '20%',
         },
         {
-            field: 'agentLastName',
-            headerName: "Writing Agent Last Name:",
+            field: 'overwrittingAgentFirstName2',
+            headerName: "OW Agent2:",
             width: '20%',
         },
         {
@@ -79,39 +79,23 @@ const AgentDetail = () => {
             width: '20%',
         },
         {
-            field: 'policyPremium',
+            field: 'policyValue',
             headerName: "Policy Premium:",
             width: '20%',
         },
     ]
 
-    const griddata = [
-        {
-            policySubmissionDate: "12/12/2023",
-            policyCarrier: "TransAmerica",
-            policyType: "Health",
-            policyNumber: "134325",
-            agentFirstName: "afsfwr",
-            agentLastName: "wtert",
-            agentCarrierNumber: "3235346",
-            agentCode: "3524",
-            contractLevel: 0.5,
-            policyPremium: "325346"
-
-        }
-
-    ]
+   
 
     const LoadAgentData = async () => {
         const res = await httpClient.get(`/agents/getAgentByID/${id}`).catch((error) => { console.log("error", error); })
 
         if (res?.status === 200) {
-            console.log("Detail res", res)
-            setAgentData(res.data)
+            console.log("Detail res", res.data)
+            setAgentData(res?.data.agentDetails)
+            setPolicyData(res?.data.policyDetailsArray)
         }
     }
-
-
 
     useEffect(() => {
         LoadAgentData()
@@ -282,7 +266,7 @@ const AgentDetail = () => {
                         <div className='policiesDataGrid'>
                             <CRMGrid
                                 gridHeader={gridHeader}
-                                gridData={griddata}
+                                gridData={policyData}
                             />
                         </div>
 

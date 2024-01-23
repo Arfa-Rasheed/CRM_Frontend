@@ -15,7 +15,7 @@ import AddNewAgent from '../components/Agents/addNewAgent'
 import AddNewRecruit from '../components/Recruits/AddNewRecruitedAgent'
 import AgentDetail from '../components/Agents/detail'
 import AddNewPolicy_Agent from '../components/Policies/AddNewPolicy_Agent'
-import AddNewPolicy_Admin from '../components/Policies/AddNewPolicy_Admin'
+import ApprovePolicy from '../components/Policies/ApprovePolicy'
 
 
 const AppRouter = () => {
@@ -40,9 +40,9 @@ const AppRouter = () => {
           <Route path='/addAgent/:id' element={<AddNewAgent/>}></Route>
           <Route path='/agentDetail/:id' element={<AgentDetail/>}></Route>
           <Route path='/addNewPolicy_agent' element={<AddNewPolicy_Agent/>}></Route>
-          <Route path='/addNewPolicy_admin' element={<AddNewPolicy_Admin/>}></Route>
+          <Route path='/approvePolicy' element={<ApprovePolicy/>}></Route>
           <Route path='/addNewPolicy_agent/:id' element={<AddNewPolicy_Agent/>}></Route>
-          <Route path='/addNewPolicy_admin/:id' element={<AddNewPolicy_Admin/>}></Route>
+          <Route path='/approvePolicy/:id' element={<ApprovePolicy/>}></Route>
         </Routes>
       </Router>
 

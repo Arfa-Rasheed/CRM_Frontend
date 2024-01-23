@@ -1,15 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import { Button, Stack, TextField, Typography } from '@mui/material'
 import CRMGrid from '../../shared-component/CRM-Grid.jsx'
 import './style.scss'
+import httpClient from '../../_util/api.jsx'
 
 const Commissions = () => {
-  const gridHeader = [
+  const isAdmin = localStorage.getItem("isAdmin")
+  const [gridData,setGridData] = useState([]);
+  const currentDate = new Date();
+  const [dates,setDates]=useState({
+    startDate:"",
+    endDate:""
+  })
+  const adminGridHeader = [
     {
-      field: 'dateOfPayment',
-      headerName: "Date of Payment:",
+      field: 'policySubmissionDate',
+      headerName: "Policy Date",
       width: '20%',
     },
     {
@@ -27,40 +35,72 @@ const Commissions = () => {
       headerName: "Agent Carrier Number",
       width: '20%',
     },
-
     {
-      field: 'agentCode',
-      headerName: "Agent Code:",
-      width: '30%',
-    },
-    {
-      field: 'comissionPremium',
-      headerName: "Comission Premium:",
+      field: 'policyValue',
+      headerName: "Policy Value:",
       width: '20%',
     },
     {
-      field: 'split',
-      headerName: "Split%:",
+      field: 'balance',
+      headerName: "Policy Balance:",
+      width: '20%',
+    },
+    {
+      field: 'agencyCommission',
+      headerName: "Agency Commission",
+      width: '20%',
+    },
+    {
+      field: 'agentCommission',
+      headerName: "Agent Commission:",
+      width: '20%',
+    },
+  ]
+
+  const gridHeader = [
+    {
+      field: 'policySubmissionDate',
+      headerName: "Policy Date",
+      width: '20%',
+    },
+    {
+      field: 'policyCarrier',
+      headerName: "Policy Carrier:",
+      width: '20%',
+    },
+    {
+      field: 'policyNumber',
+      headerName: "Policy Number:",
+      width: '20%',
+    },
+    {
+      field: 'agentCarrierNumber',
+      headerName: "Agent Carrier Number",
+      width: '20%',
+    },
+    {
+      field: 'policyValue',
+      headerName: "Commission Premium:",
+      width: '20%',
+    },
+    {
+      field: 'splitPercentage',
+      headerName: "Split %",
       width: '20%',
     },
     {
       field: 'contractLevel',
-      headerName: "Contract Level:",
+      headerName: "Contract Level",
       width: '20%',
     },
     {
-      field: 'overwrite%',
-      headerName: "Overwrite%:",
+      field: 'advPaymentPercentage',
+      headerName: "Advance Payment%:",
       width: '20%',
     },
     {
-      field: 'earnedAdv%',
-      headerName: "Earned Adv %:",
-      width: '20%',
-    },
-    {
-      field: 'earnedAdvAmount',
-      headerName: "Earned Adv Amount:",
+      field: 'advPayment',
+      headerName: "Advance Payment",
       width: '20%',
     },
   ]
@@ -81,6 +121,28 @@ const Commissions = () => {
     },
 
   ]
+
+  const handleInputChange = (data,field) => {
+    setDates((prevFormData) => ({ ...prevFormData, [field]: data }));
+};
+
+  const LoadGridData=async()=>{
+    const res = await httpClient.post('/policies/statement',dates).catch((error) => { console.log("error: ", error) })
+
+    if (res?.status === 200) {
+      setGridData(res?.data.policies)
+    }
+  }
+
+  useEffect(()=>{
+    if(dates){
+      LoadGridData()
+    }
+    else{
+
+    }
+    
+  },[dates])
   return (
     <div>
       <Header />
@@ -125,13 +187,23 @@ const Commissions = () => {
                     <Stack>
                       <Typography>Start Date:</Typography>
                       <div className='DateField'>
-                        <TextField id="outlined-basic" variant="outlined" sx={{ height: '4vh', backgroundColor: 'white', borderRadius: '4px' }} />
+                        <TextField id="outlined-basic" variant="outlined" 
+                        sx={{ height: '4vh', backgroundColor: 'white', borderRadius: '4px' }}
+                         value={dates.startDate}
+                         onChange={(e) => { handleInputChange(e.target.value, "startDate") }}
+                          />
                       </div>
 
                     </Stack>
                     <Stack>
                       <Typography>End Date:</Typography>
-                      <TextField className='DateField' sx={{ height: '4vh', backgroundColor: 'white', borderRadius: '4px' }} />
+                      <TextField 
+                      className='DateField' 
+                      sx={{ height: '4vh', backgroundColor: 'white', borderRadius: '4px' }}
+                      value={dates.endDate}
+                      onChange={(e) => { handleInputChange(e.target.value,  "endDate") }}
+                      
+                      />
                     </Stack>
                   </Stack>
                 </Stack>
@@ -140,8 +212,8 @@ const Commissions = () => {
             </Stack>
             <CRMGrid
               gridName='comissionGrid'
-              gridHeader={gridHeader}
-              gridData={grid_data}
+              gridHeader={isAdmin===true ? adminGridHeader :gridHeader}
+              gridData={gridData}
               sx={{ borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
             />
           </Stack>

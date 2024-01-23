@@ -1,73 +1,108 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import { Button, Stack, Tab, Tabs } from '@mui/material'
 import CRMGrid from '../../shared-component/CRM-Grid.jsx'
 // import CRMGrid from '../../shared-component/CRM-Grid.jsx'
+import httpClient from '../../_util/api'
 
 const Commissions = () => {
   const [transactionClicked,setTransactionClicked] = useState(false)
   const [selectedTransactionClicked,setSelectedTransactionClicked] = useState(false)
   const [transactionDetailsClicked,setTransactionDetailsClicked] = useState(false)
+  const [gridData,setGridData] = useState([])
 
   const gridHeader = [
     {
-      field: 'dateOfPayment',
-      headerName: "Date of Payment:",
-      width: '20%',
+      field: 'policySubmissionDate',
+      headerName: "Policy Submission Date:",
+      
     },
     {
       field: 'policyCarrier',
       headerName: "Policy Carrier:",
-      width: '20%',
+      
     },
     {
       field: 'policyNumber',
       headerName: "Policy Number:",
-      width: '20%',
+      
     },
     {
       field: 'agentCarrierNumber',
       headerName: "Agent Carrier Number",
-      width: '20%',
+      
     },
-
     {
       field: 'agentCode',
       headerName: "Agent Code:",
-      width: '20%',
+      
     },
     {
-      field: 'comissionPremium',
+      field: 'policyValue',
       headerName: "Comission Premium:",
-      width: '20%',
+      
     },
     {
-      field: 'split',
+      field: 'splitPercentage',
       headerName: "Split%:",
-      width: '20%',
+      
     },
     {
       field: 'contractLevel',
       headerName: "Contract Level:",
-      width: '20%',
+      
     },
     {
-      field: 'overwrite%',
-      headerName: "Overwrite%:",
-      width: '20%',
+      field:'agencyCommissionPercentage',
+      headerName:'Agency Commission %'
     },
     {
-      field: 'earnedAdv%',
+      field:'agencyCommission',
+      headerName:'Agency Commission'
+    },
+    {
+      field:'agentCommission',
+      headerName:'Agent Commission',
+    },
+    {
+      field: 'advPaymentPercentage',
       headerName: "Earned Adv %:",
-      width: '20%',
     },
     {
-      field: 'earnedAdvAmount',
+      field: 'advPayment',
       headerName: "Earned Adv Amount:",
-      width: '20%',
     },
+    {
+      field: 'overwrittingAgentContractLevel1',
+      headerName: "OW Agent1 %:",
+    },
+    {
+      field: 'overwrittingAgentCommission1',
+      headerName: "OW1 Agent Commission:",
+    },
+    {
+      field: 'overwrittingAgentContractLevel2',
+      headerName: "OW Agent2 %:",
+    },
+    {
+      field: 'overwrittingAgentCommission2',
+      headerName: "OW2 Agent Commission:",
+    },
+    {
+      field:'split2_splitRatio',
+      headerName: "Split2 %"
+    },
+    {
+      field:'split_2_OWAgent1_Commission',
+      headerName:'Split2 OW1 commission'
+    },
+    {
+      field:'split_2_OWAgent2_Commission',
+      headerName:'Split2 OW2 commission'
+    }
   ]
+
 
   const grid_data = [
     {
@@ -91,6 +126,21 @@ const Commissions = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const LoadGridData = async () => {
+    const res = await httpClient.get('policies/getAllApprovedPolicies').catch((error) => { })
+
+    if (res?.status === 200) {
+      console.log("Res", res);
+        setGridData(res.data)
+      
+    }
+  }
+
+  useEffect(()=>{ 
+    LoadGridData()
+  },[])
+
   return (
     <div>
       <Header />
@@ -164,7 +214,7 @@ const Commissions = () => {
             <CRMGrid
               gridName='comissionGrid'
               gridHeader={gridHeader}
-              gridData={grid_data}
+              gridData={gridData}
               sx={{ borderTopLeftRadius: '64px', borderTopRightRadius: '64px'}}
             />
           </Stack>

@@ -8,7 +8,7 @@ import { MagnifyingGlass, Plus } from 'phosphor-react'
 import CRMGrid from '../../shared-component/CRM-Grid.jsx'
 import { Stack } from '@mui/system'
 import httpClient from '../../_util/api.jsx'
-import AddNewPolicy_Admin from './AddNewPolicy_Admin.jsx'
+import AddNewPolicy_Admin from './ApprovePolicy.jsx'
 import { useNavigate } from 'react-router-dom'
 // import CRMGrid from '../../shared-component'
 
@@ -22,8 +22,8 @@ const Policies = () => {
 
   const gridHeader = [
     {
-      field: 'policySubmissionDate',
-      headerName: "Policy Submission Date:",
+      field: 'date',
+      headerName: "Date:",
       width: '20%',
     },
     {
@@ -76,8 +76,8 @@ const Policies = () => {
 
   const adminGridHeader = [
     {
-      field: 'policySubmissionDate',
-      headerName: "Policy Submission Date:",
+      field:'date',
+      headerName: "Date:",
       width: '20%',
       isLink:true
     },
@@ -106,7 +106,7 @@ const Policies = () => {
       isLink:true
     },
     {
-      field: 'overwrittingAgentFirstName',
+      field: 'overwrittingAgentFirstName1',
       headerName: "Writting Agent Name",
       width: '20%',
       isLink:true
@@ -151,12 +151,7 @@ const Policies = () => {
 
 
   const addNewPolicyHandler =()=>{
-    if(isAdmin){
-      navigate('/addNewPolicy_admin')
-    }
-    else{
-      navigate("/addNewPolicy_agent")
-    }
+      navigate("/approvePolicy")
   }
 
   const LoadGridData = async () => {
@@ -171,6 +166,7 @@ const Policies = () => {
   
 
   useEffect(() => {
+    console.log("isAdmin",isAdmin);
     LoadGridData()
   }, [])
 
@@ -198,6 +194,7 @@ const Policies = () => {
               <Button
                 variant="contained"
                 sx={{
+                  display:isAdmin === true ? "none" : "block",
                   backgroundColor: newPolicyClicked ? '#F08613' : "#003478",
                   color: 'white',
                   width: '245px',
@@ -223,7 +220,7 @@ const Policies = () => {
             sx={{ marginTop: '10px', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
               gridHeader={isAdmin ? adminGridHeader : gridHeader}
               gridData={gridData}
-              baseURL={isAdmin ? '/addNewPolicy_admin/' : '/addNewPolicy_agent'}
+              baseURL={isAdmin ? '/approvePolicy/' : '/addNewPolicy_agent'}
             />
           </Stack>
         </div>

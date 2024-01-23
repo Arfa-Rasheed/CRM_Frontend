@@ -55,7 +55,7 @@ const Administration = () => {
       headerName: "Level:",
     },
     {
-      field: 'recruitingAgentCode',
+      field: 'agentCode',
       headerName: "Agent Code:",
     },
     {

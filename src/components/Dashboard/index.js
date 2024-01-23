@@ -43,17 +43,17 @@ const Dashboard = () => {
         if (res.status === 200) {
             // console.log("Policy Matrix REs", res)
             // console.log("dash res" , res.data[year].totalSoldPolicies);
-            setTotalSoldPolicies(res.data.yearlyPolicyData[year].totalSoldPolicies)
-            setTotalHealthInsurance(res.data.yearlyPolicyData[year].Health.count)
-            setTotalLifeInsurance(res.data.yearlyPolicyData[year].Life.count)
-            setTotalAnnuities(res.data.yearlyPolicyData[year].Annuities.count)
+            setTotalSoldPolicies(res?.data.yearlyPolicyData[year].totalSoldPolicies)
+            setTotalHealthInsurance(res?.data.yearlyPolicyData[year].Health.count)
+            setTotalLifeInsurance(res?.data.yearlyPolicyData[year].Life.count)
+            setTotalAnnuities(res?.data.yearlyPolicyData[year].Annuities.count)
             setBarChartData(res?.data.barChartData[year])
 
             //Sales Matrix
-            setTotalSalesCost(res.data.yearlyPolicyData[year].totalSalesCost)
-            setTotalHealthInsuranceCost(res.data.yearlyPolicyData[year].Health.totalSale)
-            setTotalLifeInsuranceCost(res.data.yearlyPolicyData[year].Life.totalSale)
-            setTotalAnnuitiesCost(res.data.yearlyPolicyData[year].Annuities.totalSale)
+            setTotalSalesCost(res?.data.yearlyPolicyData[year].totalSalesCost)
+            setTotalHealthInsuranceCost(res?.data.yearlyPolicyData[year].Health.totalSale)
+            setTotalLifeInsuranceCost(res?.data.yearlyPolicyData[year].Life.totalSale)
+            setTotalAnnuitiesCost(res?.data.yearlyPolicyData[year].Annuities.totalSale)
 
 
             console.log("bar chart data:", res?.data.barChartData[year])

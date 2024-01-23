@@ -10,7 +10,7 @@ const AddNewPolicy_Agent = () => {
     const { id } = useParams()
 
     const [policyData, setPolicyData] = useState({
-        policySubmissionDate: "",
+        date: "",
         policyCarrier: "",
         policyType: "",
         policyNumber: 0,
@@ -19,7 +19,8 @@ const AddNewPolicy_Agent = () => {
         overwrittingAgentLastName: "",
         agentCode: "",
         contractLevel: 0,
-        policyValue: 0
+        policyValue: 0,
+        advPayment:0
     })
 
     const handleInputChange = (data, field) => {
@@ -45,39 +46,6 @@ const AddNewPolicy_Agent = () => {
                 }}>
                     <SideBar />
                     <Stack sx={{ width: '81.8%' }}>
-                        {/* <Box sx={{ width: '100%', height: '17vh', marginTop: '20px', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
-                            <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <MagnifyingGlass size={16} weight="light" />
-
-                                        </InputAdornment>
-                                    ),
-                                }} />
-                            <Button
-                                variant="contained"
-                                sx={{
-                                    backgroundColor: '#F08613' ,
-                                    color: 'white',
-                                    width: '245px',
-                                    height: "5vh",
-                                    fontSize: '12px',
-                                    "&:hover": {
-                                        backgroundColor: '#F08613',
-                                    },
-                                }}
-                                // onClick={() => setNewPolicyClicked(true)}
-                            >
-                                <Grid container
-                                    alignItems={'center'}
-                                    sx={{ width: '100%' }}
-                                >
-                                    <Grid item md="9"> New Policy</Grid>
-                                    <Grid item md="3"><Plus size={20} weight="light" /></Grid>
-                                </Grid>
-                            </Button>
-                        </Box> */}
                         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "105vh", marginTop: '10px' }}>
                             <Stack alignItems={'center'} sx={{ width: '96%', height: '94%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
                                 <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '100%' }}>
@@ -86,9 +54,9 @@ const AddNewPolicy_Agent = () => {
                                             disabled={id ? true : false}
                                             label="Policy Submission Date:"
                                             variant="filled"
-                                            value={policyData.policySubmissionDate}
+                                            value={policyData.date}
                                             sx={{ width: '30%' }}
-                                            onChange={(e) => { handleInputChange(e.target.value, "policySubmissionDate") }}
+                                            onChange={(e) => { handleInputChange(e.target.value, "date") }}
                                         />
                                         <TextField
                                             disabled={id ? true : false}
@@ -161,8 +129,16 @@ const AddNewPolicy_Agent = () => {
                                             label="Policy Premium:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
-                                            value={policyData.policyPremium}
-                                            onChange={(e) => { handleInputChange(e.target.value, "policyPremium") }}
+                                            value={policyData.policyValue}
+                                            onChange={(e) => { handleInputChange(e.target.value, "policyValue") }}
+                                        />
+                                        <TextField
+                                            disabled={id ? true : false}
+                                            label="Adv Payment:"
+                                            variant="filled"
+                                            sx={{ width: '30%' }}
+                                            value={policyData.advPayment}
+                                            onChange={(e) => { handleInputChange(e.target.value, "advPayment") }}
                                         />
                                     </Stack>
                                     <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '90%', height: '13vh', display: id ? "none" : "" }}>

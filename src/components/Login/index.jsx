@@ -28,8 +28,10 @@ const Login = () => {
       if(res?.status === 200){
         const authToken = res.data.token
         const isAdmin = res.data.isAdmin
+        const agentCode = res.data.agentCode ? res.data.agentCode : null;
         localStorage.setItem('authToken', authToken);
         localStorage.setItem('isAdmin', isAdmin);
+        localStorage.setItem('agentCode',agentCode)
         console.log("login api res",res)
         dispatch(setIsAdmin(res.data.isAdmin))
         navigate('/dashboard');    
