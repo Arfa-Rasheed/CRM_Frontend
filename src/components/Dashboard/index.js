@@ -9,7 +9,7 @@ import BarChart from './BarChart'
 import { Box } from '@mui/system'
 import httpClient from '../../_util/api'
 const Dashboard = () => {
-    const [year, setYear] = useState('2023')
+    const [year, setYear] = useState('2024')
     const [totalSoldPolicies, setTotalSoldPolicies] = useState(0)
     const [totalHealthInsurance, setTotalHealthInsurance] = useState(0)
     const [totalLifeInsurance, setTotalLifeInsurance] = useState(0)
@@ -41,8 +41,7 @@ const Dashboard = () => {
         const res = await httpClient.get("/dashboard/getPolicyMatrix")
 
         if (res.status === 200) {
-            // console.log("Policy Matrix REs", res)
-            // console.log("dash res" , res.data[year].totalSoldPolicies);
+            console.log("dash res" , res?.data);
             setTotalSoldPolicies(res?.data.yearlyPolicyData[year].totalSoldPolicies)
             setTotalHealthInsurance(res?.data.yearlyPolicyData[year].Health.count)
             setTotalLifeInsurance(res?.data.yearlyPolicyData[year].Life.count)
