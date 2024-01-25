@@ -10,7 +10,7 @@ const CarriersItems = (props) => {
         <Stack sx={{ width: '27%', height: '24vh' }}>
             <img src={props.carrierPic} />
             <div className='CarrierItemDropdown'>
-                <CRMDropdown />
+                {/* <CRMDropdown /> */}
             </div>
 
         </Stack>
