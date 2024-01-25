@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom'
 
 const Policies = () => {
   const [newPolicyClicked, setNewPolicyClicked] = useState(false);
-  const isAdmin = localStorage.getItem("isAdmin")
+  const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
   const navigate = useNavigate()
   const [gridData, setGridData] = useState([])
 
@@ -25,133 +25,145 @@ const Policies = () => {
       field: 'date',
       headerName: "Date:",
       width: '20%',
+      isLink: true,
+
     },
     {
       field: 'policyCarrier',
       headerName: "Policy Carrier:",
       width: '20%',
+      isLink: true,
     },
     {
       field: 'policyType',
       headerName: "Policy Type:",
       width: '20%',
+      isLink: true,
     },
     {
       field: 'policyNumber',
       headerName: "Policy Number:",
       width: '20%',
+      isLink: true,
     },
     {
       field: 'agentFirstName',
       headerName: "Writing Agent First Name:",
       width: '20%',
+      isLink: true,
     },
     {
       field: 'agentLastName',
       headerName: "Writing Agent Last Name:",
       width: '20%',
+      isLink: true,
     },
     {
       field: 'agentCarrierNumber',
       headerName: "Agent Carrier Number",
       width: '20%',
+      isLink: true,
     },
 
     {
       field: 'agentCode',
       headerName: "Agent Code:",
       width: '20%',
+      isLink: true,
     },
     {
       field: 'contractLevel',
       headerName: "Contract Level:",
       width: '20%',
+      isLink: true,
     },
     {
       field: 'policyPremium',
       headerName: "Policy Premium:",
       width: '20%',
+      isLink: true,
     },
+    
   ]
 
   const adminGridHeader = [
     {
-      field:'date',
+      field: 'date',
       headerName: "Date:",
       width: '20%',
-      isLink:true
+      isLink: true
     },
     {
       field: 'policyCarrier',
       headerName: "Policy Carrier:",
       width: '20%',
-      isLink:true
+      isLink: true
     },
     {
       field: 'policyType',
       headerName: "Policy Type:",
       width: '20%',
-      isLink:true
+      isLink: true
     },
     {
       field: 'policyNumber',
       headerName: "Policy Number:",
       width: '20%',
-      isLink:true
+      isLink: true
     },
     {
       field: 'agentCarrierNumber',
       headerName: "Agent Carrier Number",
       width: '20%',
-      isLink:true
+      isLink: true
     },
     {
       field: 'overwrittingAgentFirstName1',
       headerName: "Writting Agent Name",
       width: '20%',
-      isLink:true
+      isLink: true
     },
     {
       field: 'agentCode',
       headerName: "Agent Code",
       width: '20%',
-      isLink:true
+      isLink: true
     },
     {
       field: 'contractLevel',
       headerName: "P.Contract Level",
       width: '20%',
-      isLink:true
+      isLink: true
     },
     {
       field: 'policyValue',
       headerName: "Policy Value",
       width: '20%',
-      isLink:true
+      isLink: true
     },
     {
       field: 'advPayment',
       headerName: "Adv. Payment",
       width: '20%',
-      isLink:true
+      isLink: true
     },
     {
       field: 'balance',
       headerName: "Balance",
       width: '20%',
-      isLink:true
+      isLink: true
     },
     {
       field: 'agencyCommission',
       headerName: "Agency Commission",
       width: '20%',
-      isLink:true
+      isLink: true
     },
   ]
 
 
-  const addNewPolicyHandler =()=>{
-      navigate("/approvePolicy")
+  const addNewPolicyHandler = () => {
+    navigate("/addNewPolicy_agent")
   }
 
   const LoadGridData = async () => {
@@ -163,10 +175,12 @@ const Policies = () => {
     }
   }
 
-  
+
 
   useEffect(() => {
-    console.log("isAdmin",isAdmin);
+    console.log("isAdmin", isAdmin);
+    console.log("baseURL:", isAdmin ? "/approvePolicy/" : "/addNewPolicy_agent");
+    console.log("display:", isAdmin ? "none" : "flex");
     LoadGridData()
   }, [])
 
@@ -177,7 +191,7 @@ const Policies = () => {
         <div style={{
           display: 'flex',
           height: '91.6vh',
-          overflowY:'hidden'
+          overflowY: 'hidden'
         }}>
           <SideBar />
           <Stack sx={{ width: '81.8%' }}>
@@ -194,7 +208,7 @@ const Policies = () => {
               <Button
                 variant="contained"
                 sx={{
-                  display:isAdmin === true ? "none" : "block",
+                  display: isAdmin ? "none" : "flex",
                   backgroundColor: newPolicyClicked ? '#F08613' : "#003478",
                   color: 'white',
                   width: '245px',
@@ -217,10 +231,10 @@ const Policies = () => {
               </Button>
             </Box>
             <CRMGrid
-            sx={{ marginTop: '10px', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
+              sx={{ marginTop: '10px', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
               gridHeader={isAdmin ? adminGridHeader : gridHeader}
               gridData={gridData}
-              baseURL={isAdmin ? '/approvePolicy/' : '/addNewPolicy_agent'}
+              baseURL={isAdmin ? "/approvePolicy/" : "/addNewPolicy_agent/"}
             />
           </Stack>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Button, Grid, InputAdornment, TextField, Stack } from '@mui/material'
 import { MagnifyingGlass, Plus } from 'phosphor-react'
 import Header from '../../Layout/Header'
@@ -20,7 +20,7 @@ const AddNewPolicy_Agent = () => {
         agentCode: "",
         contractLevel: 0,
         policyValue: 0,
-        advPayment:0
+        advPayment: 0
     })
 
     const handleInputChange = (data, field) => {
@@ -34,6 +34,20 @@ const AddNewPolicy_Agent = () => {
             console.log("res", res)
         }
     }
+
+    const getPolicyDetail = async () => {
+        const res = await httpClient.get(`/policies/getPolicyByID/${id}`).catch((error) => { console.log(error) })
+        console.log("Policy DEtail res", res);
+        if (res.status === 200) {
+            setPolicyData(res?.data)
+        }
+    }
+
+    useEffect(() => {
+        if (id) {
+            getPolicyDetail()
+        }
+    }, [])
 
     return (
         <div>
@@ -52,7 +66,7 @@ const AddNewPolicy_Agent = () => {
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '59%' }}>
                                         <TextField
                                             disabled={id ? true : false}
-                                            label="Policy Submission Date:"
+                                            label="Date:"
                                             variant="filled"
                                             value={policyData.date}
                                             sx={{ width: '30%' }}
@@ -91,7 +105,7 @@ const AddNewPolicy_Agent = () => {
                                             value={policyData.agentCarrierNumber}
                                             onChange={(e) => { handleInputChange(e.target.value, "agentCarrierNumber") }}
                                         />
-                                        <TextField
+                                        {/* <TextField
                                             disabled={id ? true : false}
                                             label="Writting Agent First Name:"
                                             variant="filled"
@@ -105,7 +119,7 @@ const AddNewPolicy_Agent = () => {
                                             variant="filled"
                                             sx={{ width: '30%' }}
                                             value={policyData.overwrittingAgentLastName}
-                                            onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentLastName") }} />
+                                            onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentLastName") }} /> */}
 
                                         <TextField
                                             disabled={id ? true : false}

@@ -1,0 +1,35 @@
+#dropdown-menu-{
+    // position: absolute;
+    // background-color: red;
+    // width: 304px;
+    // z-index: 5;
+    top: 55px;
+    left: 320px;
+
+    .menu-item{
+        margin: 2px;
+        border: 2px solid #EDEDED;
+    }
+   
+}
+
+#dropdown-menu-previous-months{
+    top:55px;
+    left:1120px;
+}
+
+
+#dropdown-menu-previuos-year{
+    top:1000px;
+    left:1120px;
+}
+
+.menu-item-text-{
+    text-align: center;
+    width: 260px;
+}
+
+.menu-item-text-previous-months{
+    text-align: center;
+    width: 270px;
+}

@@ -3,13 +3,14 @@ import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import { Grid, List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import './style.scss'
-import CRMDropdown from '../../shared-component/CRMDropdown'
+import CRMDropdown from '../../shared-component/CRM-Dropdown/index'
 import CRMButtons from '../../shared-component/CRMButtons'
 import BarChart from './BarChart'
 import { Box } from '@mui/system'
 import httpClient from '../../_util/api'
 const Dashboard = () => {
     const [year, setYear] = useState('2024')
+    const [month ,setMonth] = useState('February')
     const [totalSoldPolicies, setTotalSoldPolicies] = useState(0)
     const [totalHealthInsurance, setTotalHealthInsurance] = useState(0)
     const [totalLifeInsurance, setTotalLifeInsurance] = useState(0)
@@ -18,49 +19,93 @@ const Dashboard = () => {
     const [totalSalesCost, setTotalSalesCost] = useState(0)
     const [totalHealthInsuranceCost, setTotalHealthInsuranceCost] = useState(0)
     const [totaLifeInsuranceCost, setTotalLifeInsuranceCost] = useState(0)
-    const [totalAnnuitiesCost, setTotalAnnuitiesCost] = useState(0)
+    const [totalAnnuitiesCost, setTotalAnnuitiesCost] = useState(0);
+    const [totalRevenue,setTotalRevenue] = useState(0);
+    const [totalHealthRevenue,setTotalHealthRevenue] = useState(0);
+    const [totalLifeRevenue,setTotalLifeRevenue] = useState(0);
+    const [totalAnnuitiesRevenue,setTotalAnnuitiesRevenue] = useState(0);
 
 
-    const [selectedOption, setSelectedOption] = useState({ label: "Sales Matrix", id: "Sales Matrix" },)
-    const [adminDropdownOptions, setAdminDropdownOptions] = useState(
-        [
-            { label: "Sales Matrix", id: "Sales Matrix" },
-            { label: "Policy Matrix", id: "Policy Matrix" },
-            { label: "Revenue Matrix", id: "Revenue Matrix" }
-        ]
-    )
+    const [selectedOption, setSelectedOption] = useState('Sales Matrix')
+    // const [adminDropdownOptions, setAdminDropdownOptions] = useState(
+    //     [
+    //         { label: "Sales Matrix", id: "Sales Matrix" },
+    //         { label: "Policy Matrix", id: "Policy Matrix" },
+    //         { label: "Revenue Matrix", id: "Revenue Matrix" }
+    //     ]
+    // )
+
+    const adminDropdownOptions = [
+        "Sales Matrix" ,
+        "Policy Matrix",
+        "Revenue Matrix"
+      ];
+
+    const previousMonths=[
+        "February"
+    ]
+
+    const previousYears =[
+        2024,
+        2023,
+        2022,
+        2021,
+        2020,
+
+    ]  
 
 
     const handleDropdownChange = (selectedOption) => {
         console.log('Selected Option:', selectedOption);
         setSelectedOption(selectedOption)
-        // Do something with the selected option in the parent component
     };
 
-    const LoadDashboarData = async () => {
-        const res = await httpClient.get("/dashboard/getPolicyMatrix")
+    const handleMonthChange =(selectedOption)=>{
+        setMonth(selectedOption)
+    }
+
+    const handleYearChange =(selectedOption)=>{
+        setYear(selectedOption)
+    }
+
+    const LoadMonthlyPolicyData = async () => {
+        const res = await httpClient.get(`/dashboard/getMonthlyPolicyData/${month}`)
 
         if (res.status === 200) {
-            console.log("dash res" , res?.data);
-            setTotalSoldPolicies(res?.data.yearlyPolicyData[year].totalSoldPolicies)
-            setTotalHealthInsurance(res?.data.yearlyPolicyData[year].Health.count)
-            setTotalLifeInsurance(res?.data.yearlyPolicyData[year].Life.count)
-            setTotalAnnuities(res?.data.yearlyPolicyData[year].Annuities.count)
-            setBarChartData(res?.data.barChartData[year])
+            console.log("dash res" , res?.data[month]);
+            setTotalHealthInsurance(res?.data[month].Health.count)
+            setTotalLifeInsurance(res?.data[month].Life.count)
+            setTotalAnnuities(res?.data[month].Annuities.count)
 
-            //Sales Matrix
-            setTotalSalesCost(res?.data.yearlyPolicyData[year].totalSalesCost)
-            setTotalHealthInsuranceCost(res?.data.yearlyPolicyData[year].Health.totalSale)
-            setTotalLifeInsuranceCost(res?.data.yearlyPolicyData[year].Life.totalSale)
-            setTotalAnnuitiesCost(res?.data.yearlyPolicyData[year].Annuities.totalSale)
+            // Sales Matrix
+            setTotalHealthInsuranceCost(res?.data[month].Health.totalSale)
+            setTotalLifeInsuranceCost(res?.data[month].Life.totalSale)
+            setTotalAnnuitiesCost(res?.data[month].Annuities.totalSale)
 
+            // //Revenue Matrix
+            setTotalHealthRevenue(res?.data[month].Health.totalRevenue)
+            setTotalLifeRevenue(res?.data[month].Life.totalRevenue)
+            setTotalAnnuitiesRevenue(res?.data[month].Annuities.totalRevenue)
 
-            console.log("bar chart data:", res?.data.barChartData[year])
         }
     }
 
+    const yearlyPolicyData =async()=>{
+        const res = await httpClient.get(`/dashboard/getMatrixData/${year}`)
+
+        if(res.status === 200){
+            setBarChartData(res?.data.barChartData)
+            console.log("res?.data.totalSoldPolicies",res?.data.totalSoldPolicies);
+            setTotalSoldPolicies(res?.data.overallTotalSoldPolicies)
+            setTotalSalesCost(res?.data.overallTotalSalesCost)
+            setTotalRevenue(res?.data.overallTotalRevenue)
+        }
+
+    }
+
     useEffect(() => {
-        LoadDashboarData()
+        LoadMonthlyPolicyData()
+        yearlyPolicyData()
     }, [])
     return (
         <div>
@@ -83,21 +128,21 @@ const Dashboard = () => {
                         {/* 1st Container */}
                         <Grid container style={{ backgroundColor: "#EDEDED", height: '19vh', width: '95%', justifyContent: 'space-around', alignItems: 'center', margin: '0 auto', borderRadius: '15px' }}>
                             <Grid item md='3'>
-                                <CRMDropdown options={adminDropdownOptions} onOptionChange={handleDropdownChange} />
+                                <CRMDropdown title={selectedOption} options={adminDropdownOptions} onOptionChange={handleDropdownChange} />
                                 <Grid container sx={{ justifyContent: 'center' ,marginBottom:'5px' }} className='grid-inner-container'>
                                     <Grid items md='10' >
                                         <List>
                                             <ListItem className='list-items' >
                                                 {
-                                                    selectedOption.label === 'Policy Matrix' ?
+                                                    selectedOption === 'Policy Matrix' ?
                                                         (
                                                             <>
                                                                 <b>Total Policies:</b> {totalHealthInsurance}
                                                             </>
-                                                        ) : selectedOption.label === 'Revenue Matrix' ?
+                                                        ) : selectedOption === 'Revenue Matrix' ?
                                                             (
                                                                 <>
-                                                                    <b>Total Revenue: </b> { }
+                                                                    <b>Total Revenue: </b> {totalHealthRevenue}
                                                                 </>
                                                             ) :
                                                             (
@@ -123,15 +168,15 @@ const Dashboard = () => {
                                         <List>
                                             <ListItem className='list-items'>
                                                 {
-                                                    selectedOption.label === 'Policy Matrix' ?
+                                                    selectedOption === 'Policy Matrix' ?
                                                         (
                                                             <>
                                                                 <b>Total Policies:</b> {totalLifeInsurance}
                                                             </>
-                                                        ) : selectedOption.label === 'Revenue Matrix' ?
+                                                        ) : selectedOption === 'Revenue Matrix' ?
                                                             (
                                                                 <>
-                                                                    <b>Total Revenue: </b> { }
+                                                                    <b>Total Revenue: </b> {totalLifeRevenue}
                                                                 </>
                                                             ) :
                                                             (
@@ -151,26 +196,27 @@ const Dashboard = () => {
 
                             </Grid>
                             <Grid item md='3'>
-                               <CRMButtons title='Previuos Months'/>
+                            <CRMDropdown title='Previous Months' options={previousMonths} onOptionChange={handleMonthChange} />
+                               {/* <CRMButtons title='Previus Months'/> */}
                                 <Grid container sx={{ justifyContent: 'center' }} className='grid-inner-container'>
                                     <Grid items md='10' >
                                         <List>
                                             <ListItem className='list-items'>
                                                 {
-                                                    selectedOption.label === 'Policy Matrix' ?
+                                                    selectedOption === 'Policy Matrix' ?
                                                         (
                                                             <>
                                                                 <b>Total Policies:</b> {totalAnnuities}
                                                             </>
-                                                        ) : selectedOption.label === 'Revenue Matrix' ?
+                                                        ) : selectedOption === 'Revenue Matrix' ?
                                                             (
                                                                 <>
-                                                                    <b>Total Revenue: </b> { }
+                                                                    <b>Total Revenue: </b> {totalAnnuitiesRevenue}
                                                                 </>
                                                             ) :
                                                             (
                                                                 <>
-                                                                    <b>Total sales:</b> ${totalAnnuities}
+                                                                    <b>Total sales:</b> ${totalAnnuitiesCost}
                                                                 </>
                                                             )
                                                 }
@@ -191,7 +237,7 @@ const Dashboard = () => {
                             <Grid container style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
                                 <Grid item md="3"> <CRMButtons title='Sales Matrix' /></Grid>
                                 <Grid item md="3" sx={{ marginTop: '-14px' }}><CRMButtons title='Sales Statistics 2023' /></Grid>
-                                <Grid item md="3"><CRMButtons title='Previous Years' /> </Grid>
+                                <Grid item md="3"><CRMDropdown title='Previous Years' options={previousYears} onOptionChange={handleYearChange}/> </Grid>
                             </Grid>
                             <Grid container style={{ height: '37vh', width: '91%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', margin: '0 auto', borderRadius: '15px' }}>
                                 <Grid item md="6" sx={{ height: '30vh', flexDirection: 'column', alignContent: 'space-between' }}>
@@ -199,10 +245,10 @@ const Dashboard = () => {
                                         <div style={{ border: '3px solid #F08613', marginTop: '0px', display: 'inline', height: '20px' }}></div>
                                         <Box sx={{ borderLeft: '4px solid #003478', borderBottom: '4px solid #003478', display: 'inline', width: '135px', paddingLeft: '38px' }}>
                                             {
-                                                selectedOption.label === 'Policy Matrix' ?
+                                                selectedOption === 'Policy Matrix' ?
                                                     (
                                                         <b>Total Policies:</b>
-                                                    ) : selectedOption.label === 'Revenue Matrix' ?
+                                                    ) : selectedOption === 'Revenue Matrix' ?
                                                         (
                                                             <b>Total Revenue: </b>
                                                         ) :
@@ -214,12 +260,12 @@ const Dashboard = () => {
                                     </div>
                                     <p style={{ paddingLeft: '38px', marginTop: '0px' }}>
                                         {
-                                            selectedOption.label === 'Policy Matrix' ?
+                                            selectedOption === 'Policy Matrix' ?
                                                 (
                                                     <>{totalSoldPolicies}</>
-                                                ) : selectedOption.label === 'Revenue Matrix' ?
+                                                ) : selectedOption === 'Revenue Matrix' ?
                                                     (
-                                                        <>${}</>
+                                                        <>${totalRevenue}</>
                                                     ) :
                                                     (
                                                         <>${totalSalesCost}</>
@@ -242,7 +288,7 @@ const Dashboard = () => {
 
                                 {barChartData ? (
                                     <Grid item md="6" sx={{}}>
-                                        <BarChart barChartData={barChartData} selectedOption={selectedOption.label}/>
+                                        <BarChart barChartData={barChartData} selectedOption={selectedOption}/>
                                     </Grid>
                                 ) : (
                                     <div>Loading bar chart data...</div>

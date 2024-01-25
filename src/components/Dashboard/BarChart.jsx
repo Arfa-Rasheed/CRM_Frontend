@@ -16,31 +16,21 @@ const BarChart = ({ barChartData , selectedOption }) => {
     "July", "Aug", "Sep", "Oct", "Nov", "Dec"
   ];
   const data = {
-    // labels: months.map(month => {
-    //   const [year, monthNumber] = month.split('-');
-    //   return `${year}-0${parseInt(monthNumber, 10)}`;
-    // }),
-
-    
-
-    
-    
      labels : months.map(month => {
-      const [year, monthNumber] = month.split('-');
-      const monthName = monthNames[parseInt(monthNumber, 10) - 1];
+      const [year, monthName] = month.split('-');
       return `${monthName}`;
      }),
     
     datasets: [
       {
-        label:selectedOption === "Policy Matrix" ? "Policies" : 'Sales',
-        // backgroundColor: 'rgba(75,192,192,0.4)',
+        label:selectedOption === "Policy Matrix" ? "Policies" :selectedOption === 'Revenue Matrix' ? "Revenue" : 'Sales',
         borderColor: 'rgba(75,192,192,1)',
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(75,192,192,0.6)',
         hoverBorderColor: 'rgba(75,192,192,1)',
         data: selectedOption === "Policy Matrix" 
               ? months.map(month => barChartData[month].totalSoldPolicies) 
+              :selectedOption === "Revenue Matrix" ? months.map(month => barChartData[month].totalRevenue)
               : months.map(month => barChartData[month].totalSalesCost),
         backgroundColor: [
           '#4dc9f6',

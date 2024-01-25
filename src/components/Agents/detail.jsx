@@ -25,6 +25,7 @@ const AgentDetail = () => {
         agentCode: "",
         agentTitle: "",
         agentRole: "",
+        recruitingAgentCode:"",
         recruitmentDate: "",
         recruits: 0,
         commissionEarned: 0,
@@ -204,7 +205,7 @@ const AgentDetail = () => {
                                     </Stack>
                                     <Stack sx={{ width: '30%', height: '30%', backgroundColor: '#F08613' }}>
                                         <Typography className='agentDetail-text'>Recruite Name | Code:</Typography>
-                                        <Typography className='agentDetail-text'>{ }</Typography>
+                                        <Typography className='agentDetail-text'>{agentData.recruitingAgentCode }</Typography>
                                     </Stack>
 
 

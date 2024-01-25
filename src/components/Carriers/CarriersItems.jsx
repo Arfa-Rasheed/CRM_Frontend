@@ -1,5 +1,5 @@
 import React from 'react'
-import CRMDropdown from '../../shared-component/CRMDropdown'
+import CRMDropdown from '../../shared-component/CRM-Dropdown/index'
 import { Stack } from '@mui/material'
 // import Carrier1 from '../../assets/Carrier1.png'
 import './style.scss'
