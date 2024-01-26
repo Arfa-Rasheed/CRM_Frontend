@@ -21,7 +21,7 @@ const CRMDropdown = (props) => {
   };
 
   const handleOptionChange = (selectedOption) => {
-    console.log("selectedOption child",selectedOption);
+    console.log("selectedOption child", selectedOption);
     setAnchorEl(null);
     if (props.onOptionChange) {
       props.onOptionChange(selectedOption);
@@ -35,8 +35,8 @@ const CRMDropdown = (props) => {
         onClick={handleClick}
         endIcon={<ArrowDropDownIcon />}
         sx={{
-          backgroundColor: props.title === "Previous Months" ? "white" : props.title === 'Previuos Year' ? "white" : "#ED7D31",
-          color: props.title === "Previous Months" ? "black" : props.title === 'Previuos Year' ? "black" :"white",
+          backgroundColor: props.title === "Previous Months" ? "white" : props.title === 'Previous Years' ? "white" : "#ED7D31",
+          color: props.title === "Previous Months" ? "black" : props.title === 'Previous Years' ? "black" : "white",
           height: "39px",
           width: "300px",
           fontSize: "12px",
@@ -48,14 +48,14 @@ const CRMDropdown = (props) => {
             // border: "2px solid red",
           },
           "&:hover": {
-            backgroundColor:props.title === "Previous Months" ? "white" : '#F08613',
+            backgroundColor: props.title === "Previous Months" ? "white" : '#F08613',
           },
         }}
       >
         {props.title}
       </Button>
       <Popover
-        id={`dropdown-menu-${props.title === 'Previous Months' ? 'previous-months' : props.title === 'Previuos Year' ? 'previuos-year' : ""}`}
+        id={`dropdown-menu-${props.title === 'Previous Months' ? 'previous-months' : props.title === 'Previous Years' ? 'previous-year' : ''}`}
         // id="dropdown-menu"
         // id={props.title === 'Previuos Months' ? "previous-months" : props.title === 'Previuos Year' ? "previuos-year" : "dropdown-menu"}
         anchorEl={anchorEl}
@@ -66,7 +66,7 @@ const CRMDropdown = (props) => {
         {props.options.map((items) => {
           return (
             <MenuItem className='menu-item' key={items} onClick={() => handleOptionChange(items)}>
-              <Typography className={`menu-item-text-${props.title === 'Previous Months' ? 'previous-months' : props.title === 'Previuos Year' ? 'previuos-year' : ""}`} sx={{ fontSize: '14px'}}>{items}</Typography>
+              <Typography className={`menu-item-text-${props.title === 'Previous Months' ? 'previous-months' : props.title === 'Previuos Year' ? 'previuos-year' : ""}`} sx={{ fontSize: '14px' }}>{items}</Typography>
             </MenuItem>
           );
         })}
@@ -102,7 +102,7 @@ export default CRMDropdown
 //       options={props.options}
 //       sx={{ width: 300}}
 //       onChange={handleOptionChange}
-//       renderInput={(params) =><TextField 
+//       renderInput={(params) =><TextField
 //         {...params}
 //       value={params?.inputProps?.value || 'Default Text'}
 //       placeholder='Sales Matrix'

@@ -16,32 +16,33 @@ const Commissions = () => {
     {
       field: 'policySubmissionDate',
       headerName: "Policy Submission Date:",
+      isLink:true,
       
     },
     {
       field: 'policyCarrier',
       headerName: "Policy Carrier:",
-      
+      isLink:true,
     },
     {
       field: 'policyNumber',
       headerName: "Policy Number:",
-      
+      isLink:true,
     },
     {
       field: 'agentCarrierNumber',
       headerName: "Agent Carrier Number",
-      
+      isLink:true,
     },
     {
       field: 'agentCode',
       headerName: "Agent Code:",
-      
+      isLink:true,
     },
     {
       field: 'policyValue',
       headerName: "Comission Premium:",
-      
+      isLink:true,
     },
     {
       field: 'splitPercentage',
@@ -51,55 +52,67 @@ const Commissions = () => {
     {
       field: 'contractLevel',
       headerName: "Contract Level:",
-      
+      isLink:true,
     },
     {
       field:'agencyCommissionPercentage',
-      headerName:'Agency Commission %'
+      headerName:'Agency Commission %',
+      isLink:true,
     },
     {
       field:'agencyCommission',
-      headerName:'Agency Commission'
+      headerName:'Agency Commission',
+      isLink:true,
     },
     {
       field:'agentCommission',
       headerName:'Agent Commission',
+      isLink:true,
     },
     {
       field: 'advPaymentPercentage',
       headerName: "Earned Adv %:",
+      isLink:true,
     },
     {
       field: 'advPayment',
       headerName: "Earned Adv Amount:",
+      isLink:true,
     },
     {
       field: 'overwrittingAgentContractLevel1',
       headerName: "OW Agent1 %:",
+      isLink:true,
     },
     {
       field: 'overwrittingAgentCommission1',
       headerName: "OW1 Agent Commission:",
+      isLink:true,
     },
     {
       field: 'overwrittingAgentContractLevel2',
       headerName: "OW Agent2 %:",
+      isLink:true,
     },
     {
       field: 'overwrittingAgentCommission2',
       headerName: "OW2 Agent Commission:",
+      isLink:true,
     },
     {
       field:'split2_splitRatio',
-      headerName: "Split2 %"
+      headerName: "Split2 %",
+      isLink:true,
     },
     {
       field:'split_2_OWAgent1_Commission',
-      headerName:'Split2 OW1 commission'
+      headerName:'Split2 OW1 commission',
+      isLink:true,
     },
     {
       field:'split_2_OWAgent2_Commission',
-      headerName:'Split2 OW2 commission'
+      headerName:'Split2 OW2 commission',
+      isLink:true,
     }
   ]
 
@@ -216,6 +229,7 @@ const Commissions = () => {
               gridHeader={gridHeader}
               gridData={gridData}
               sx={{ borderTopLeftRadius: '64px', borderTopRightRadius: '64px'}}
+              baseURL={'/commissionDetail/'}
             />
           </Stack>
         </div>
