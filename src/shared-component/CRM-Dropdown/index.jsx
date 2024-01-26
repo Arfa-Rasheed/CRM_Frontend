@@ -43,12 +43,13 @@ const CRMDropdown = (props) => {
           padding: "3px",
           borderTopLeftRadius: "0",
           borderBottomLeftRadius: "0",
+          border:props.title === 'Previous Years' ? "2px solid #EDEDED" : "",
           "@media screen and (max-width:899px)": {
             width: "168px",
             // border: "2px solid red",
           },
           "&:hover": {
-            backgroundColor: props.title === "Previous Months" ? "white" : '#F08613',
+            backgroundColor: props.title === "Previous Months" ? "white" :props.title === 'Previous Years' ? "white" : '#F08613',
           },
         }}
       >
