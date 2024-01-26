@@ -47,13 +47,13 @@ const Policies = () => {
       isLink: true,
     },
     {
-      field: 'agentFirstName',
+      field: 'overwrittingAgentFirstName1',
       headerName: "Writing Agent First Name:",
       width: '20%',
       isLink: true,
     },
     {
-      field: 'agentLastName',
+      field: 'overwrittingAgentFirstName1',
       headerName: "Writing Agent Last Name:",
       width: '20%',
       isLink: true,
@@ -78,7 +78,7 @@ const Policies = () => {
       isLink: true,
     },
     {
-      field: 'policyPremium',
+      field: 'policyValue',
       headerName: "Policy Premium:",
       width: '20%',
       isLink: true,

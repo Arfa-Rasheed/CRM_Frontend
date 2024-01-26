@@ -20,6 +20,7 @@ const AddNewPolicy_Agent = () => {
         agentCode: "",
         contractLevel: 0,
         policyValue: 0,
+        advPaymentPercentage:0,
         advPayment: 0
     })
 
@@ -148,12 +149,20 @@ const AddNewPolicy_Agent = () => {
                                         />
                                         <TextField
                                             disabled={id ? true : false}
+                                            label="Adv Payment %:"
+                                            variant="filled"
+                                            sx={{ width: '30%' }}
+                                            value={policyData.advPaymentPercentage}
+                                            onChange={(e) => { handleInputChange(e.target.value, "advPaymentPercentage") }}
+                                        />
+                                        {/* <TextField
+                                            disabled={id ? true : false}
                                             label="Adv Payment:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
                                             value={policyData.advPayment}
                                             onChange={(e) => { handleInputChange(e.target.value, "advPayment") }}
-                                        />
+                                        /> */}
                                     </Stack>
                                     <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '90%', height: '13vh', display: id ? "none" : "" }}>
                                         <Button
