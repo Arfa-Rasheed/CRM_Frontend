@@ -23,14 +23,14 @@ const BarChart = ({ barChartData , selectedOption }) => {
     
     datasets: [
       {
-        label:selectedOption === "Policy Matrix" ? "Policies" :selectedOption === 'Revenue Matrix' ? "Revenue" : 'Sales',
+        label:selectedOption === "Policy Matrix" ? "Policies" :selectedOption === 'CashFlow Matrix' ? "Cash Flow" : 'Sales',
         borderColor: 'rgba(75,192,192,1)',
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(75,192,192,0.6)',
         hoverBorderColor: 'rgba(75,192,192,1)',
         data: selectedOption === "Policy Matrix" 
               ? months.map(month => barChartData[month].totalSoldPolicies) 
-              :selectedOption === "Revenue Matrix" ? months.map(month => barChartData[month].totalRevenue)
+              :selectedOption === "CashFlow Matrix" ? months.map(month => barChartData[month].totalRevenue)
               : months.map(month => barChartData[month].totalSalesCost),
         backgroundColor: [
           '#4dc9f6',
