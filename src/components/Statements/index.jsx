@@ -7,7 +7,7 @@ import './style.scss'
 import httpClient from '../../_util/api.jsx'
 
 const Commissions = () => {
-  const isAdmin = localStorage.getItem("isAdmin")
+  const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
   const [gridData,setGridData] = useState([]);
   const currentDate = new Date();
   const [dates,setDates]=useState({
@@ -19,31 +19,37 @@ const Commissions = () => {
       field: 'policySubmissionDate',
       headerName: "Policy Date",
       width: '20%',
+      isLink:true,
     },
     {
       field: 'policyCarrier',
       headerName: "Policy Carrier:",
       width: '20%',
+      isLink:true,
     },
     {
       field: 'policyNumber',
       headerName: "Policy Number:",
       width: '20%',
+      isLink:true,
     },
     {
       field: 'agentCarrierNumber',
       headerName: "Agent Carrier Number",
       width: '20%',
+      isLink:true,
     },
     {
       field: 'policyValue',
       headerName: "Policy Value:",
       width: '20%',
+      isLink:true,
     },
     {
       field: 'balance',
       headerName: "Policy Balance:",
       width: '20%',
+      isLink:true,
     },
     {
       field: 'agencyCommission',
@@ -54,6 +60,7 @@ const Commissions = () => {
       field: 'agentCommission',
       headerName: "Agent Commission:",
       width: '20%',
+      isLink:true,
     },
   ]
 
@@ -62,46 +69,55 @@ const Commissions = () => {
       field: 'policySubmissionDate',
       headerName: "Policy Date",
       width: '20%',
+      isLink:true,
     },
     {
       field: 'policyCarrier',
       headerName: "Policy Carrier:",
       width: '20%',
+      isLink:true,
     },
     {
       field: 'policyNumber',
       headerName: "Policy Number:",
       width: '20%',
+      isLink:true,
     },
     {
       field: 'agentCarrierNumber',
       headerName: "Agent Carrier Number",
       width: '20%',
+      isLink:true,
     },
     {
       field: 'policyValue',
       headerName: "Commission Premium:",
       width: '20%',
+      isLink:true,
     },
     {
       field: 'splitPercentage',
       headerName: "Split %",
       width: '20%',
+      isLink:true,
     },
     {
       field: 'contractLevel',
       headerName: "Contract Level",
       width: '20%',
+      isLink:true,
     },
     {
       field: 'advPaymentPercentage',
       headerName: "Advance Payment%:",
       width: '20%',
+      isLink:true,
     },
     {
       field: 'advPayment',
       headerName: "Advance Payment",
       width: '20%',
+      isLink:true,
     },
   ]
 
@@ -211,10 +227,12 @@ const Commissions = () => {
               </Stack>
             </Stack>
             <CRMGrid
+             sx={{ borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
               gridName='comissionGrid'
-              gridHeader={isAdmin===true ? adminGridHeader :gridHeader}
+              gridHeader={isAdmin===true ? adminGridHeader : gridHeader}
               gridData={gridData}
-              sx={{ borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
+              // baseURL={'/commissionDetail/'}
+              baseURL={'/statementDetail/'}
             />
           </Stack>
         </div>

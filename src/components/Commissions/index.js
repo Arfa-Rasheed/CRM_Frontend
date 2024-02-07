@@ -119,6 +119,7 @@ const Commissions = () => {
 
   const grid_data = [
     {
+      isChargedBack:true,
       dateOfPayment: '02/12/2022',
       policyCarrier: "TransAmerica",
       policyNumber: "KPT904704456",

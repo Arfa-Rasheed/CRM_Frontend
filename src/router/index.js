@@ -17,6 +17,7 @@ import AgentDetail from '../components/Agents/detail'
 import AddNewPolicy_Agent from '../components/Policies/AddNewPolicy_Agent'
 import ApprovePolicy from '../components/Policies/ApprovePolicy'
 import CommissionDetail from '../components/Commissions/CommissionDetail'
+import StatementDetail from '../components/Statements/detail'
 
 
 const AppRouter = () => {
@@ -33,14 +34,15 @@ const AppRouter = () => {
           <Route path='/tools' element={<Tools />}></Route>
           <Route path='/policies' element={<Policies />}></Route>
           <Route path='/statements' element={<Statements />}></Route>
+          <Route path ='/statementDetail/:_id' element={<StatementDetail/>}></Route>
           <Route path='/commissions' element={<Commissions />}></Route>
-          <Route path='/commissionDetail/:id' element={<CommissionDetail/>}></Route>
+          <Route path='/commissionDetail/:_id' element={<CommissionDetail/>}></Route>
           <Route path='/recruits' element={<Recruits />}></Route>
           <Route path='/addRecruit' element={<AddNewRecruit/>}></Route>
           <Route path='/agent' element={<Agents/>}></Route>
           <Route path='/addAgent' element={<AddNewAgent/>}></Route>
           <Route path='/addAgent/:id' element={<AddNewAgent/>}></Route>
-          <Route path='/agentDetail/:id' element={<AgentDetail/>}></Route>
+          <Route path='/agentDetail/:_id' element={<AgentDetail/>}></Route>
           <Route path='/addNewPolicy_agent' element={<AddNewPolicy_Agent/>}></Route>
           <Route path='/approvePolicy' element={<ApprovePolicy/>}></Route>
           <Route path='/addNewPolicy_agent/:id' element={<AddNewPolicy_Agent/>}></Route>

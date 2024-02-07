@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import { Box, Button, Grid, InputAdornment, TextField, Stack } from '@mui/material'
 import { MagnifyingGlass, Plus } from 'phosphor-react'
@@ -7,7 +6,7 @@ import SideBar from '../../Layout/Sidebar'
 import httpClient from '../../_util/api'
 import { useNavigate, useParams } from 'react-router-dom'
 
-const CommissionDetail = () => {
+const StatementDetail = () => {
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
     const { _id } = useParams()
     const navigate = useNavigate()
@@ -26,21 +25,19 @@ const CommissionDetail = () => {
         agentCommission: 0,
         advPaymentPercentage: 0,
         advPayment: 0,
-        overwrittingAgentCode1: "",
+        overwrittingAgentCode1:"",
         overwrittingAgentContractLevel1: 0,
         overwrittingAgentCommission1: 0,
-        overwrittingAgentCode2: "",
+        overwrittingAgentCode2:"",
         overwrittingAgentContractLevel2: 0,
         overwrittingAgentCommission2: 0,
-        split2_AgentCode: "",
-        split2_agentCommission: 0,
+        split2_AgentCode:"",
+        split2_agentCommission:0,
         split2_splitRatio: 0,
-        split_2_OWAgent1_AgentCode: "",
+        split_2_OWAgent1_AgentCode:"",
         split_2_OWAgent1_Commission: 0,
-        split_2_OWAgent2_AgentCode: "",
+        split_2_OWAgent2_AgentCode:"",
         split_2_OWAgent2_Commission: 0,
-
-
     })
 
     const handleInputChange = (data, field) => {
@@ -51,13 +48,14 @@ const CommissionDetail = () => {
     const getPolicyDetail = async () => {
         const res = await httpClient.get(`/policies/getPolicyByID/${_id}`).catch((error) => { console.log(error) })
         console.log("Policy DEtail res", res);
-        if (res?.status === 200) {
+        if (res.status === 200) {
             setPolicyData(res?.data)
         }
     }
 
-    const paidOutHandler = async () => {
-        const res = await httpClient.post(`/policies/isPaid/${_id}`, policyData).catch((error) => { console.log(error) })
+
+    const chargedBackHandler = async ()=>{
+        const res = await httpClient.post(`/policies/chargedBack/${_id}`,policyData).catch((error) => { console.log(error) })
         if (res.status === 200) {
             navigate('/statements');
         }
@@ -243,10 +241,26 @@ const CommissionDetail = () => {
                                             onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent2_Commission") }} />
                                     </Stack>
 
-                                    <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'flex-end'} sx={{ width: '100%', height: '13vh', }}>
+                                    <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '100%', height: '13vh', }}>
                                         <Button
                                             variant="contained"
-                                            disabled={isAdmin ? (policyData.isPaid ? true : false) : false}
+                                            sx={{
+                                                display:isAdmin ? 'block' :'none',
+                                                backgroundColor: "#F08613",
+                                                color: 'white',
+                                                width: '186px',
+                                                height: "5vh",
+                                                fontSize: '12px',
+                                                "&:hover": {
+                                                    backgroundColor: '#F08613',
+                                                },
+                                            }}
+                                            onClick={chargedBackHandler}
+                                            >
+                                            Charge Back
+                                        </Button>
+                                        <Button
+                                            variant="contained"
                                             sx={{
                                                 backgroundColor: "#003478",
                                                 color: 'white',
@@ -256,14 +270,10 @@ const CommissionDetail = () => {
                                                 "&:hover": {
                                                     backgroundColor: '#003478',
                                                 },
-                                                "&:disabled": {
-                                                    backgroundColor: '#406391',
-                                                    color: 'white',
-                                                },
                                             }}
-                                            onClick={isAdmin ? paidOutHandler : () => navigate('/commissions')}
+                                            onClick={() => navigate('/statements')}
                                         >
-                                            {isAdmin ? <>Paid Out</> : <>Close</>}
+                                            Close
                                         </Button>
                                     </Stack>
                                 </Stack>
@@ -276,4 +286,4 @@ const CommissionDetail = () => {
     )
 }
 
-export default CommissionDetail
+export default StatementDetail

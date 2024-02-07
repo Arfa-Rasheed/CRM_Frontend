@@ -15,13 +15,13 @@ const CRMGrid = (props) => {
   const linkTemplate = (data, col) => {
     if (col.to) {
       return (
-        <Link  to={col?.appendID ? col.to + data["id"] : col.to}>
+        <Link to={col?.appendID ? col.to + data["_id"] : col.to}>
           {data[col.field]}
         </Link>
       );
     }
     return (
-      <Link to={props.baseURL + data["id"]} style={{textDecoration:'none',color: 'inherit'}}>
+      <Link to={props.baseURL + data["_id"]} style={{ textDecoration: 'none', color: 'inherit' }}>
         {data[col.field]}
       </Link>
     );
@@ -62,6 +62,13 @@ const CRMGrid = (props) => {
                     paddingTop: '8px',
                     paddingBottom: '8px',
                     borderBottom: '6px solid rgba(224, 224, 224, 1)',
+                    color: row.isApproved
+                      ? (row.isChargedBack
+                        ? "red"
+                        : "#008000"
+                      )
+                      : 'black'
+                    // color: row.isApproved ? "green" :"black"
                   }}
                 >
                   {
@@ -72,13 +79,13 @@ const CRMGrid = (props) => {
                         onChange={() => props.handleCheckboxChange(row.id)}
                       />
                     ) : headerObj.field === 'img' ? (
-                        <Avatar src={row[headerObj.field]} shape="circle" size="large" />
-                      ): headerObj.isLink ? (
-                        linkTemplate(row, headerObj)
+                      <Avatar src={row[headerObj.field]} shape="circle" size="large" />
+                    ) : headerObj.isLink ? (
+                      linkTemplate(row, headerObj)
+                    )
+                      : (
+                        row[headerObj.field]
                       )
-                        : (
-                          row[headerObj.field]
-                        )
                   }
                 </TableCell>
               ))}

@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom'
 const SideBar = () => {
     // const isAdmin = useSelector((state)=>state.user.isAdmin)
     const navigate = useNavigate()
-    const isAdmin = localStorage.getItem("isAdmin")
+    const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
 
     const logoutHandler=()=>{
         localStorage.removeItem("authToken")

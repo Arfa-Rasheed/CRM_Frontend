@@ -82,7 +82,6 @@ const ApprovePolicy = () => {
 
 
     const approveHandler = async () => {
-
         if (id) {
             const res = await httpClient.post(`/policies/approvePolicy/${id}`, policyData).catch((error) => { console.log(error) })
             if (res?.status === 200) {
