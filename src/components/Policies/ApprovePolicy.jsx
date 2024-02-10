@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button, Grid, InputAdornment, TextField, Stack, Typography } from '@mui/material'
+import { Box, Button, Grid, InputAdornment, TextField, Stack, Typography, Switch } from '@mui/material'
 import { MagnifyingGlass, Notepad, Plus } from 'phosphor-react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
@@ -11,6 +11,7 @@ import Calendar from '../../shared-component/Calender'
 const ApprovePolicy = () => {
     const navigate = useNavigate()
     const [commissionSplit, setCommisionSplit] = useState("Yes")
+    const [isChecked,setIsChecked] = useState(false)
     const isAdmin = localStorage.getItem("isAdmin")
     const { id } = useParams()
     const [policyData, setPolicyData] = useState({
@@ -89,13 +90,17 @@ const ApprovePolicy = () => {
                 navigate('/policies')
             }
         }
-        else{
+        else {
             const res = httpClient.post('/policies/addNewPolicy', policyData).catch((error) => { console.log("error", error) })
             if (res?.status === 200) {
                 console.log("res", res)
             }
         }
     }
+
+    const handleToggle = () => {
+        setIsChecked((prev) => !prev);
+      };
 
     useEffect(() => {
         if (id) {
@@ -378,8 +383,17 @@ const ApprovePolicy = () => {
 
                                     </Stack>
 
+                                    <Stack direction={'row'}>
+                                        <Typography>Is Split</Typography>
+                                        <Switch
+                                            checked={isChecked}
+                                            onChange={handleToggle}
+                                            // color="primary" // You can customize the color if needed
+                                            sx={{marginTop:'-8px',color:'#003478'}}
+                                        />
+                                    </Stack>
                                     {
-                                        commissionSplit === 'Yes' ? (
+                                        isChecked ? (
                                             <>
                                                 {/* Split1 details */}
                                                 <Typography className='details-heading'>SPLIT DETAILS:</Typography>

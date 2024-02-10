@@ -59,7 +59,7 @@ const CommissionDetail = () => {
     const paidOutHandler = async () => {
         const res = await httpClient.post(`/policies/isPaid/${_id}`, policyData).catch((error) => { console.log(error) })
         if (res.status === 200) {
-            // navigate('/statements');
+            navigate('/statements');
         }
     }
 
