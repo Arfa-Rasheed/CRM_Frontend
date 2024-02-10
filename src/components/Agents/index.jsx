@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom'
 import httpClient from '../../_util/api.jsx'
 
 const Agents = () => {
+  const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
   const navigate = useNavigate()
   const [gridData, setGridData] = useState([])
 
@@ -67,7 +68,8 @@ const Agents = () => {
 
 
   const LoadgridData = async () => {
-    const res = await httpClient.get('/agents/getAllAgents').catch((error) => { console.log("error: ", error) })
+    console.log("isAdmin",isAdmin);
+    const res = await httpClient.get(isAdmin ? '/agents/getAllAgents' : '/agents/getAllAgentsAgentView').catch((error) => { console.log("error: ", error) })
     if (res?.status === 200) {
       setGridData(res?.data)
     }
@@ -129,7 +131,7 @@ const Agents = () => {
                         </InputAdornment>
                       ),
                     }} />
-                  <Button
+                  {/* <Button
                     variant="contained"
                     sx={{
                       backgroundColor: "#003478",
@@ -150,7 +152,7 @@ const Agents = () => {
                       <Grid item md="9">Add Agent</Grid>
                       <Grid item md="3"><Plus size={20} weight="light" /></Grid>
                     </Grid>
-                  </Button>
+                  </Button> */}
                 </Box>
 
               </Box>

@@ -48,13 +48,13 @@ const Policies = () => {
     },
     {
       field: 'overwrittingAgentFirstName1',
-      headerName: "Writing Agent First Name:",
+      headerName: "OW1 Name:",
       width: '20%',
       isLink: true,
     },
     {
-      field: 'overwrittingAgentFirstName1',
-      headerName: "Writing Agent Last Name:",
+      field: 'overwrittingAgentFirstName2',
+      headerName: "OW2 Name:",
       width: '20%',
       isLink: true,
     },
@@ -167,7 +167,7 @@ const Policies = () => {
   }
 
   const LoadGridData = async () => {
-    const res = await httpClient.get('policies/getAllPolicies').catch((error) => { })
+    const res = await httpClient.get(isAdmin ? 'policies/getAllPolicies' : 'policies/getAllPoliciesAgentView').catch((error) => { })
 
     if (res?.status === 200) {
       console.log("Res", res);

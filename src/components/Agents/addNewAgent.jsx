@@ -11,12 +11,12 @@ const AddNewAgent = () => {
     const navigate = useNavigate()
     const { id } = useParams()
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
-    const recruitingAgentCode = localStorage.getItem("agentCode")
+    const recruitingAgentCode = localStorage.getItem("userId")
     const [agentData, setAgentData] = useState({
         firstName: "",
         lastName:"",
         level: 0,
-        agentCode: "",
+        agentCarrierNumber:"",
         agentTitle: "",
         agentRole: "",
         recruitmentDate: "",
@@ -101,12 +101,12 @@ const AddNewAgent = () => {
 
                                     <Stack alignItems={'center'} sx={{ width: '100%', height: "45vh", marginLeft: '23px' }}>
                                         <Stack flexDirection={'row'} flexWrap={'wrap'} sx={{ width: '100%', height: '98%' }}>
-                                            <TextField className='Account-Textfield' label="Name:" variant="filled"
+                                            <TextField className='Account-Textfield' label="First Name:" variant="filled"
                                                 sx={{ width: '30%', height: "10vh", marginLeft: '23px' }}
                                                 value={agentData.firstName}
                                                 onChange={(e) => { handleInputChange(e.target.value, "firstName") }}
                                             />
-                                            <TextField className='Account-Textfield' label="Name:" variant="filled"
+                                            <TextField className='Account-Textfield' label="Last Name:" variant="filled"
                                                 sx={{ width: '30%', height: "10vh", marginLeft: '23px' }}
                                                 value={agentData.lastName}
                                                 onChange={(e) => { handleInputChange(e.target.value, "lastName") }}
@@ -118,10 +118,10 @@ const AddNewAgent = () => {
                                                 onChange={(e) => { handleInputChange(e.target.value, "level") }}
                                             />
 
-                                            <TextField label="Agent Code:" variant="filled"
+                                            <TextField label="Agent Carrier Number:" variant="filled"
                                                 sx={{ width: '30%', marginLeft: '23px' }}
-                                                value={agentData.agentCode}
-                                                onChange={(e) => { handleInputChange(e.target.value, "agentCode") }}
+                                                value={agentData.agentCarrierNumber}
+                                                onChange={(e) => { handleInputChange(e.target.value, "agentCarrierNumber") }}
                                             />
 
                                             <TextField label="Agent Title:" variant="filled"

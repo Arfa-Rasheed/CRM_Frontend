@@ -9,6 +9,7 @@ import BarChart from './BarChart'
 import { Box } from '@mui/system'
 import httpClient from '../../_util/api'
 const Dashboard = () => {
+    const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
     const [year, setYear] = useState('2024')
     const [month, setMonth] = useState('February')
     const [currentMonth, setCurrentMonth] = useState('')
@@ -86,7 +87,7 @@ const Dashboard = () => {
     }
 
     const LoadMonthlyPolicyData = async () => {
-        const res = await httpClient.get(`/dashboard/getMonthlyPolicyData/${month}`)
+        const res = await httpClient.get(isAdmin ? `/dashboard/getMonthlyPolicyData/${month}` :`/dashboard/getMonthlyPolicyDataAgentView/${month}`)
 
         if (res.status === 200) {
             console.log("dash res", res?.data[month]);
@@ -108,7 +109,7 @@ const Dashboard = () => {
     }
 
     const yearlyPolicyData = async () => {
-        const res = await httpClient.get(`/dashboard/getMatrixData/${year}`)
+        const res = await httpClient.get(isAdmin ? `/dashboard/getMatrixData/${year}` : `/dashboard/getMatrixDataAgentView/${year}`)
 
         if (res.status === 200) {
             setBarChartData(res?.data.barChartData)

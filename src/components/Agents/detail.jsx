@@ -12,7 +12,7 @@ import CRMGrid from '../../shared-component/CRM-Grid.jsx'
 
 const AgentDetail = () => {
     const navigate = useNavigate()
-    const { id } = useParams()
+    const { _id } = useParams()
     const [policyData,setPolicyData] = useState([])
     const [agentData, setAgentData] = useState({
         id:"",
@@ -89,7 +89,7 @@ const AgentDetail = () => {
    
 
     const LoadAgentData = async () => {
-        const res = await httpClient.get(`/agents/getAgentByID/${id}`).catch((error) => { console.log("error", error); })
+        const res = await httpClient.get(`/agents/getAgentByID/${_id}`).catch((error) => { console.log("error", error); })
 
         if (res?.status === 200) {
             console.log("Detail res", res.data)

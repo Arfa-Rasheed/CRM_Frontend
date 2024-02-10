@@ -59,7 +59,7 @@ const CommissionDetail = () => {
     const paidOutHandler = async () => {
         const res = await httpClient.post(`/policies/isPaid/${_id}`, policyData).catch((error) => { console.log(error) })
         if (res.status === 200) {
-            navigate('/statements');
+            // navigate('/statements');
         }
     }
 
@@ -246,7 +246,7 @@ const CommissionDetail = () => {
                                     <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'flex-end'} sx={{ width: '100%', height: '13vh', }}>
                                         <Button
                                             variant="contained"
-                                            disabled={isAdmin ? (policyData.isPaid ? true : false) : false}
+                                            // disabled={isAdmin ? (policyData.isPaid ? true : false) : false}
                                             sx={{
                                                 backgroundColor: "#003478",
                                                 color: 'white',

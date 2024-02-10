@@ -7,6 +7,7 @@ import CRMGrid from '../../shared-component/CRM-Grid.jsx'
 import httpClient from '../../_util/api'
 
 const Commissions = () => {
+  const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
   const [transactionClicked,setTransactionClicked] = useState(false)
   const [selectedTransactionClicked,setSelectedTransactionClicked] = useState(false)
   const [transactionDetailsClicked,setTransactionDetailsClicked] = useState(false)
@@ -142,7 +143,7 @@ const Commissions = () => {
   };
 
   const LoadGridData = async () => {
-    const res = await httpClient.get('policies/getAllApprovedPolicies').catch((error) => { })
+    const res = await httpClient.get(isAdmin ? 'policies/getAllApprovedPolicies' : 'policies/getAllApprovedPoliciesAgentView' ).catch((error) => { })
 
     if (res?.status === 200) {
       console.log("Res", res);

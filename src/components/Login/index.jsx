@@ -29,11 +29,17 @@ const Login = () => {
         const authToken = res.data.token
         const isAdmin = res.data.isAdmin
         const agentCode = res.data.agentCode ? res.data.agentCode : null;
+        const userId = res.data._id ? res.data._id : null;
+        const agentCarrierNumber = res.data.agentCarrierNumber ? res.data.agentCarrierNumber : ""
+        const contractLevel = res.data.contractLevel ? res.data.contractLevel : null
         localStorage.setItem('authToken', authToken);
         localStorage.setItem('isAdmin', isAdmin);
-        localStorage.setItem('agentCode',agentCode)
-        console.log("login api res",res)
-        dispatch(setIsAdmin(res.data.isAdmin))
+        localStorage.setItem('agentCode',agentCode);
+        localStorage.setItem('userId',userId);
+        localStorage.setItem('agentCarrierNumber',agentCarrierNumber);
+        localStorage.setItem('contractLevel',contractLevel);
+        dispatch(setIsAdmin(res.data.isAdmin));
+        console.log("res",res);
         navigate('/dashboard');    
       }
     }

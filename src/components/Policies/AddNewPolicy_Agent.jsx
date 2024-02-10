@@ -4,23 +4,26 @@ import { MagnifyingGlass, Plus } from 'phosphor-react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import httpClient from '../../_util/api'
-import { useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 const AddNewPolicy_Agent = () => {
     const { id } = useParams()
-
+    const navigate = useNavigate()
+    // const agentCode = localStorage.getItem('agentCode')
+    // const agentCarrierNumber = localStorage.getItem('agentCarrierNumber')
+    // const contractLevel = localStorage.getItem('contractLevel')
     const [policyData, setPolicyData] = useState({
         date: "",
         policyCarrier: "",
         policyType: "",
         policyNumber: 0,
-        agentCarrierNumber: 0,
+        agentCode : localStorage.getItem('agentCode'),
+        agentCarrierNumber : localStorage.getItem('agentCarrierNumber'),
+        contractLevel : localStorage.getItem('contractLevel'),
         overwrittingAgentFirstName: "",
         overwrittingAgentLastName: "",
-        agentCode: "",
-        contractLevel: 0,
         policyValue: 0,
-        advPaymentPercentage:0,
+        advPaymentPercentage: 0,
         advPayment: 0
     })
 
@@ -33,6 +36,7 @@ const AddNewPolicy_Agent = () => {
 
         if (res?.status === 200) {
             console.log("res", res)
+            navigate('/policies')
         }
     }
 
@@ -106,21 +110,6 @@ const AddNewPolicy_Agent = () => {
                                             value={policyData.agentCarrierNumber}
                                             onChange={(e) => { handleInputChange(e.target.value, "agentCarrierNumber") }}
                                         />
-                                        {/* <TextField
-                                            disabled={id ? true : false}
-                                            label="Writting Agent First Name:"
-                                            variant="filled"
-                                            sx={{ width: '30%' }}
-                                            value={policyData.overwrittingAgentFirstName}
-                                            onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentFirstName") }}
-                                        />
-                                        <TextField
-                                            disabled={id ? true : false}
-                                            label="Writing Agent Last Name"
-                                            variant="filled"
-                                            sx={{ width: '30%' }}
-                                            value={policyData.overwrittingAgentLastName}
-                                            onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentLastName") }} /> */}
 
                                         <TextField
                                             disabled={id ? true : false}

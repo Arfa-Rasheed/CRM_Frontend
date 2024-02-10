@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom'
 import httpClient from '../../_util/api.jsx'
 
 const Recruits = () => {
+  const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
   const navigate = useNavigate()
   const [gridData, setGridData] = useState([])
   const gridHeader = [
@@ -33,7 +34,7 @@ const Recruits = () => {
       isLink: true,
     },
     {
-      field: 'recruitingAgentCode',
+      field: 'agentCode',
       headerName: "Agent Code:",
       isLink: true,
     },
@@ -63,23 +64,26 @@ const Recruits = () => {
     },
   ]
 
+  
+  // const LoadgridData = async () => {
+  //   const res = await httpClient.get('/agents/getAllAgents').catch((error) => { console.log("error: ", error) })
 
-  // const LoadgridData=async()=>{
-  //   const res =await httpClient.get('/recruits/getAllAgents')
-
-  //   if(res?.status === 200)
-  //   {
-  //     setGridData(res.data)
+  //   if (res?.status === 200) {
+  //     setGridData(res?.data)
+  //   }
+  //   else {
+  //     console.log("error: ")
   //   }
   // }
-  const LoadgridData = async () => {
-    const res = await httpClient.get('/agents/getAllAgents').catch((error) => { console.log("error: ", error) })
 
+  const LoadgridData = async () => {
+    console.log("isAdmin",isAdmin);
+    const res = await httpClient.get(isAdmin ? '/agents/getAllAgents' : '/agents/getAllAgentsAgentView').catch((error) => { console.log("error: ", error) })
     if (res?.status === 200) {
       setGridData(res?.data)
     }
-    else {
-      console.log("error: ")
+    else{
+      console.log("error: ") 
     }
   }
 
@@ -148,7 +152,7 @@ const Recruits = () => {
                         backgroundColor: '#F08613',
                       },
                     }}
-                    onClick={() => { navigate('/addRecruit') }}
+                    onClick={() => { navigate('/addAgent') }}
                   >
                     <Grid container
                       alignItems={'center'}

@@ -143,7 +143,7 @@ const Commissions = () => {
 };
 
   const LoadGridData=async()=>{
-    const res = await httpClient.post('/policies/statement',dates).catch((error) => { console.log("error: ", error) })
+    const res = await httpClient.post(isAdmin ? '/policies/statement' : '/policies/statementAgentView',dates).catch((error) => { console.log("error: ", error) })
 
     if (res?.status === 200) {
       setGridData(res?.data.policies)
