@@ -17,14 +17,16 @@ const AddNewPolicy_Agent = () => {
         policyCarrier: "",
         policyType: "",
         policyNumber: 0,
-        agentCode : localStorage.getItem('agentCode'),
-        agentCarrierNumber : localStorage.getItem('agentCarrierNumber'),
-        contractLevel : localStorage.getItem('contractLevel'),
+        agentCode: localStorage.getItem('agentCode'),
+        agentCarrierNumber: localStorage.getItem('agentCarrierNumber'),
+        contractLevel: localStorage.getItem('contractLevel'),
         overwrittingAgentFirstName: "",
         overwrittingAgentLastName: "",
         policyValue: 0,
-        advPaymentPercentage: 0,
-        advPayment: 0
+        // advPaymentPercentage: 0,
+        // advPayment: 0
+        insuredFirstName:"",
+        insuredLastName:"",
     })
 
     const handleInputChange = (data, field) => {
@@ -105,14 +107,14 @@ const AddNewPolicy_Agent = () => {
                                         <TextField
                                             disabled={id ? true : false}
                                             sx={{ width: '30%' }}
-                                            label="Agaent Carrier Number:"
+                                            label="Agent Carrier Number:"
                                             variant="filled"
                                             value={policyData.agentCarrierNumber}
                                             onChange={(e) => { handleInputChange(e.target.value, "agentCarrierNumber") }}
                                         />
 
                                         <TextField
-                                            disabled={id ? true : false}
+                                            disabled={true}
                                             label="Agent Code:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
@@ -121,7 +123,7 @@ const AddNewPolicy_Agent = () => {
                                         />
 
                                         <TextField
-                                            disabled={id ? true : false}
+                                            disabled={ true }
                                             label="Contract Level:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
@@ -136,22 +138,30 @@ const AddNewPolicy_Agent = () => {
                                             value={policyData.policyValue}
                                             onChange={(e) => { handleInputChange(e.target.value, "policyValue") }}
                                         />
-                                        <TextField
+                                        {/* <TextField
                                             disabled={id ? true : false}
                                             label="Adv Payment %:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
                                             value={policyData.advPaymentPercentage}
                                             onChange={(e) => { handleInputChange(e.target.value, "advPaymentPercentage") }}
-                                        />
-                                        {/* <TextField
+                                        /> */}
+                                        <TextField
                                             disabled={id ? true : false}
-                                            label="Adv Payment:"
+                                            label="Insured First Name:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
-                                            value={policyData.advPayment}
-                                            onChange={(e) => { handleInputChange(e.target.value, "advPayment") }}
-                                        /> */}
+                                            value={policyData.insuredFirstName}
+                                            onChange={(e) => { handleInputChange(e.target.value, "insuredFirstName") }}
+                                        />
+                                        <TextField
+                                            disabled={id ? true : false}
+                                            label="Insured Last Name:"
+                                            variant="filled"
+                                            sx={{ width: '30%' }}
+                                            value={policyData.insuredLastName}
+                                            onChange={(e) => { handleInputChange(e.target.value, "insuredLastName") }}
+                                        />
                                     </Stack>
                                     <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '90%', height: '13vh', display: id ? "none" : "" }}>
                                         <Button
