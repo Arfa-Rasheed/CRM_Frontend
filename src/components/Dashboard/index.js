@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
-import { Grid, List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
+import { Avatar, Grid, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material'
 import './style.scss'
 import CRMDropdown from '../../shared-component/CRM-Dropdown/index'
 import CRMButtons from '../../shared-component/CRMButtons'
@@ -29,12 +29,20 @@ const Dashboard = () => {
     const [currentMonthTotalPolicies, setCurrentMonthTotalPolicies] = useState(0);
     const [currentMonthTotalSalesCost, setCurrentMonthTotalSalesCost] = useState(0);
     const [currentMonthTotalRevenue, setCurrentMonthTotalRevenue] = useState(0);
-    const [yearlyTotalSoldHealthInsurancePolicies,setYearlyTotalSoldHealthInsurancePolicies] =useState(0);
-    const [yearlyTotalSoldLifeInsurancePolicies,setYearlyTotalSoldLifeInsurancePolicies] =useState(0);
-    const [yearlyTotalSoldAnnuitiesPolicies,setYearlyTotalSoldAnnuitiesPolicies] =useState(0);
+    const [yearlyTotalSoldHealthInsurancePolicies, setYearlyTotalSoldHealthInsurancePolicies] = useState(0);
+    const [yearlyTotalSoldLifeInsurancePolicies, setYearlyTotalSoldLifeInsurancePolicies] = useState(0);
+    const [yearlyTotalSoldAnnuitiesPolicies, setYearlyTotalSoldAnnuitiesPolicies] = useState(0);
     const [selectedOption, setSelectedOption] = useState('Sales Matrix')
     const [yearlyPolicySelectedOption, setYearlyPolicySelectedOption] = useState('Sales Matrix')
 
+    const [highestCommissionedAgentData, setHighestCommissionedAgentData] = useState({
+        agentFirstName:"",
+        agentLastName:"",
+        agentCode:"",
+        agentRole:"",
+        totalSales:"",
+
+    })
 
 
     const DropdownOptions1 = [
@@ -87,7 +95,7 @@ const Dashboard = () => {
     }
 
     const LoadMonthlyPolicyData = async () => {
-        const res = await httpClient.get(isAdmin ? `/dashboard/getMonthlyPolicyData/${month}` :`/dashboard/getMonthlyPolicyDataAgentView/${month}`)
+        const res = await httpClient.get(isAdmin ? `/dashboard/getMonthlyPolicyData/${month}` : `/dashboard/getMonthlyPolicyDataAgentView/${month}`)
 
         if (res.status === 200) {
             console.log("dash res", res?.data[month]);
@@ -129,6 +137,15 @@ const Dashboard = () => {
 
     }
 
+    const getDetailsOfHighestCommissionedAgent = async () => {
+        const res = await httpClient.get(`/dashboard/getDetailsOfHighestCommissionedAgent/${month}`)
+
+        if (res?.status === 200) {
+            console.log("highestcommision agent", res);
+            setHighestCommissionedAgentData(res.data)
+        }
+    }
+
     useEffect(() => {
         // LoadMonthlyPolicyData()
         yearlyPolicyData()
@@ -137,7 +154,12 @@ const Dashboard = () => {
     useEffect(() => {
         LoadMonthlyPolicyData()
     }, [month])
+
+    useEffect(() => {
+        getDetailsOfHighestCommissionedAgent()
+    }, [])
     return (
+
         <div>
             <Header />
             <div style={{ marginTop: '65px' }}>
@@ -312,21 +334,21 @@ const Dashboard = () => {
                                                         <>${totalRevenue}</>
                                                     ) :
                                                     yearlyPolicySelectedOption === 'Health Insurance' ?
-                                                    (
-                                                        <>${yearlyTotalSoldHealthInsurancePolicies}</>
-                                                    ):
-                                                    yearlyPolicySelectedOption === 'Life Insurance' ?
-                                                    (
-                                                        <>${yearlyTotalSoldLifeInsurancePolicies}</>
-                                                    ):
-                                                    yearlyPolicySelectedOption === 'Annuities' ?
-                                                    (
-                                                        <>${yearlyTotalSoldAnnuitiesPolicies}</>
-                                                    ):
+                                                        (
+                                                            <>${yearlyTotalSoldHealthInsurancePolicies}</>
+                                                        ) :
+                                                        yearlyPolicySelectedOption === 'Life Insurance' ?
+                                                            (
+                                                                <>${yearlyTotalSoldLifeInsurancePolicies}</>
+                                                            ) :
+                                                            yearlyPolicySelectedOption === 'Annuities' ?
+                                                                (
+                                                                    <>${yearlyTotalSoldAnnuitiesPolicies}</>
+                                                                ) :
 
-                                                    (
-                                                        <>${totalSalesCost}</>
-                                                    )
+                                                                (
+                                                                    <>${totalSalesCost}</>
+                                                                )
                                         }
                                     </p>
 
@@ -335,12 +357,12 @@ const Dashboard = () => {
                                     <div style={{ display: 'flex' }}>
                                         <div style={{ border: '3px solid #003478', marginTop: '0px', display: 'inline', height: '20px' }}></div>
                                         <Box sx={{ borderLeft: '4px solid #F08613', borderBottom: '4px solid #F08613', display: 'inline', width: '185px', paddingLeft: '38px' }}>
-                                            <b>{currentMonth} {yearlyPolicySelectedOption === "Policy Matrix" ? "Policies:" : yearlyPolicySelectedOption === "Cash Flow Matrix" ? "Cash Flow:": yearlyPolicySelectedOption === "Health Insurance" ? "Health Policies:" : yearlyPolicySelectedOption === "Life Insurance" ? "Life Policies:" :yearlyPolicySelectedOption === "Annuities" ? "Annuities:" : "Sales:"}</b>
+                                            <b>{currentMonth} {yearlyPolicySelectedOption === "Policy Matrix" ? "Policies:" : yearlyPolicySelectedOption === "Cash Flow Matrix" ? "Cash Flow:" : yearlyPolicySelectedOption === "Health Insurance" ? "Health Policies:" : yearlyPolicySelectedOption === "Life Insurance" ? "Life Policies:" : yearlyPolicySelectedOption === "Annuities" ? "Annuities:" : "Sales:"}</b>
                                         </Box>
                                     </div>
 
                                     <p style={{ paddingLeft: '38px', marginTop: '0px' }}>
-                                    {
+                                        {
                                             yearlyPolicySelectedOption === 'Policy Matrix' ?
                                                 (
                                                     <>{currentMonthTotalPolicies}</>
@@ -349,21 +371,21 @@ const Dashboard = () => {
                                                         <>${currentMonthTotalRevenue}</>
                                                     ) :
                                                     yearlyPolicySelectedOption === 'Health Insurance' ?
-                                                    (
-                                                        <>${yearlyTotalSoldHealthInsurancePolicies}</>
-                                                    ):
-                                                    yearlyPolicySelectedOption === 'Life Insurance' ?
-                                                    (
-                                                        <>${yearlyTotalSoldLifeInsurancePolicies}</>
-                                                    ):
-                                                    yearlyPolicySelectedOption === 'Annuities' ?
-                                                    (
-                                                        <>${yearlyTotalSoldAnnuitiesPolicies}</>
-                                                    ):
+                                                        (
+                                                            <>${yearlyTotalSoldHealthInsurancePolicies}</>
+                                                        ) :
+                                                        yearlyPolicySelectedOption === 'Life Insurance' ?
+                                                            (
+                                                                <>${yearlyTotalSoldLifeInsurancePolicies}</>
+                                                            ) :
+                                                            yearlyPolicySelectedOption === 'Annuities' ?
+                                                                (
+                                                                    <>${yearlyTotalSoldAnnuitiesPolicies}</>
+                                                                ) :
 
-                                                    (
-                                                        <>${currentMonthTotalSalesCost}</>
-                                                    )
+                                                                (
+                                                                    <>${currentMonthTotalSalesCost}</>
+                                                                )
                                         }
                                     </p>
                                 </Grid>
@@ -382,54 +404,39 @@ const Dashboard = () => {
                         </Grid>
 
                         {/* 3rd container */}
-                        <Grid container style={{ backgroundColor: "#EDEDED", height: '19vh', width: '95%', justifyContent: 'space-around', alignItems: 'center', margin: '0 auto', borderRadius: '15px' }}>
+                        <Grid container style={{ backgroundColor: "#EDEDED", height: '23vh', width: '95%', justifyContent: 'space-around', alignItems: 'center', margin: '0 auto', borderRadius: '15px' }}>
                             <Grid item md='3'>
                                 <CRMButtons title='Agents Matrix' />
-                                <Grid container sx={{ justifyContent: 'center', marginTop: '9px' }} className='grid-inner-container'>
-                                    <Grid items md='10' >
-                                        <List>
-                                            <ListItem className='list-items' >
-                                                Sales:$214,345.80
-                                            </ListItem>
-                                            <ListItem className='list-items'>
-                                                <ListItemText sx={{ color: '#003478' }}>Health Insurance</ListItemText>
-                                                {/* <ListItemIcon><img src={}></img></ListItemIcon> */}
-                                            </ListItem>
-                                        </List>
+                                <Grid container sx={{ justifyContent: 'center', marginTop: '9px', height: '16vh' }} className='grid-inner-container'>
+                                    {/* <Grid item md="12"><Avatar></Avatar>   </Grid> */}
+                                    <Grid item md='10' >
+                                        <Typography sx={{fontSize:'13px'}}>Highest Sales</Typography>
+                                        <Typography sx={{fontSize:'13px'}}>Agent Name:{highestCommissionedAgentData.agentFirstName} {highestCommissionedAgentData.agentLastName}</Typography>
+                                        <Typography sx={{fontSize:'13px'}}>Agent Code:{highestCommissionedAgentData.agentCode}</Typography>
+                                        <Typography sx={{fontSize:'13px'}}>Agent Role:</Typography>
+                                        <Typography sx={{fontSize:'13px'}}>Agent Sales:{highestCommissionedAgentData.agentCommission}</Typography>
                                     </Grid>
                                 </Grid>
 
                             </Grid>
                             <Grid item md='3'>
                                 <CRMButtons title='Sales Statistics' />
-                                <Grid container sx={{ justifyContent: 'center', marginTop: '9px' }} className='grid-inner-container'>
+                                <Grid container className='grid-inner-container' sx={{ justifyContent: 'center', marginTop: '9px' ,height: '14vh'}} >
                                     <Grid items md='10' >
-                                        <List>
-                                            <ListItem className='list-items'>
-                                                Sales:$214,345.80
-                                            </ListItem>
-                                            <ListItem className='list-items'>
-                                                <ListItemText sx={{ color: '#003478' }}>Life Insurance</ListItemText>
-                                                {/* <ListItemIcon><img src={}></img></ListItemIcon> */}
-                                            </ListItem>
-                                        </List>
+                                    <Typography sx={{fontSize:'13px'}}>Highest Recruits:</Typography>
+                                        <Typography sx={{fontSize:'13px'}}>Agent Name:{highestCommissionedAgentData.agentFirstName} {highestCommissionedAgentData.agentLastName}</Typography>
+                                        <Typography sx={{fontSize:'13px'}}>Agent Code:{highestCommissionedAgentData.agentCode}</Typography>
+                                        <Typography sx={{fontSize:'13px'}}>Agent Role:</Typography>
+                                        <Typography sx={{fontSize:'13px'}}>Agent Sales:{highestCommissionedAgentData.agentCommission}</Typography>
                                     </Grid>
                                 </Grid>
 
                             </Grid>
                             <Grid item md='3'>
                                 <CRMButtons title='Previous Months' />
-                                <Grid container sx={{ justifyContent: 'center' }} className='grid-inner-container'>
+                                <Grid container sx={{ justifyContent: 'center',height: '14vh' }} className='grid-inner-container'>
                                     <Grid items md='10' >
-                                        <List>
-                                            <ListItem className='list-items'>
-                                                Sales:$214,345.80
-                                            </ListItem>
-                                            <ListItem className='list-items'>
-                                                <ListItemText sx={{ color: '#003478' }}>Annuities</ListItemText>
-                                                {/* <ListItemIcon><img src={}></img></ListItemIcon> */}
-                                            </ListItem>
-                                        </List>
+                                       <Typography>Total Recruits:</Typography>
                                     </Grid>
                                 </Grid>
 

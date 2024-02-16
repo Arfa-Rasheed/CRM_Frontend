@@ -118,11 +118,11 @@ const AddNewAgent = () => {
                                                 onChange={(e) => { handleInputChange(e.target.value, "level") }}
                                             />
 
-                                            <TextField label="Agent Carrier Number:" variant="filled"
+                                            {/* <TextField label="Agent Carrier Number:" variant="filled"
                                                 sx={{ width: '30%', marginLeft: '23px' }}
                                                 value={agentData.agentCarrierNumber}
                                                 onChange={(e) => { handleInputChange(e.target.value, "agentCarrierNumber") }}
-                                            />
+                                            /> */}
 
                                             <TextField label="Agent Title:" variant="filled"
                                                 sx={{ width: '30%', marginLeft: '23px' }}
