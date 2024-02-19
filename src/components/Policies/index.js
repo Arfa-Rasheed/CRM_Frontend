@@ -131,7 +131,7 @@ const Policies = () => {
     },
     {
       field: 'contractLevel',
-      headerName: "P.Contract Level",
+      headerName: "Contract Level",
       width: '20%',
       isLink: true
     },
@@ -159,6 +159,11 @@ const Policies = () => {
       width: '20%',
       isLink: true
     },
+    {
+      field: 'paidAgencyCommission',
+      headerName: 'Paid Agency Commission',
+      isProgressBar:true,
+    }
   ]
 
 

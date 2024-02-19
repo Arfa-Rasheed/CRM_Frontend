@@ -6,6 +6,7 @@ import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import httpClient from '../../_util/api'
 import { useNavigate, useParams } from 'react-router-dom'
+import LinearProgressWithLabel from '../../shared-component/ProgressBar'
 
 const CommissionDetail = () => {
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
@@ -82,7 +83,22 @@ const CommissionDetail = () => {
                     <Stack sx={{ width: '81.8%' }}>
                         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "105vh", marginTop: '10px' }}>
                             <Stack alignItems={'center'} sx={{ width: '96%', height: '94%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
-                                <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '100%' }}>
+                                {
+                                    isAdmin
+                                        ? (
+                                            <Stack alignItems={'flex-end'} sx={{ width: '95%' }} >
+                                                <Stack justifyContent='flex-end' sx={{ width: '18%' }}>
+                                                    Paid Agency Commision:
+                                                    <LinearProgressWithLabel value={policyData.paidAgencyCommission} />
+                                                </Stack>
+                                            </Stack>
+                                        )
+                                        : (
+                                            <></>
+                                        )
+                                }
+                              
+                                <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '100%',marginTop:'20px' }}>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '100%' }}>
                                         <TextField
                                             disabled={_id ? true : false}

@@ -18,6 +18,7 @@ import AddNewPolicy_Agent from '../components/Policies/AddNewPolicy_Agent'
 import ApprovePolicy from '../components/Policies/ApprovePolicy'
 import CommissionDetail from '../components/Commissions/CommissionDetail'
 import StatementDetail from '../components/Statements/detail'
+import LinearProgressWithLabel from '../shared-component/ProgressBar'
 
 
 const AppRouter = () => {
@@ -47,6 +48,7 @@ const AppRouter = () => {
           <Route path='/approvePolicy' element={<ApprovePolicy/>}></Route>
           <Route path='/addNewPolicy_agent/:id' element={<AddNewPolicy_Agent/>}></Route>
           <Route path='/approvePolicy/:id' element={<ApprovePolicy/>}></Route>
+          <Route path='/progress' element={<LinearProgressWithLabel/>}></Route>
         </Routes>
       </Router>
 

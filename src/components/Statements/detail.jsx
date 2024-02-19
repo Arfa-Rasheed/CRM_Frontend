@@ -5,6 +5,7 @@ import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import httpClient from '../../_util/api'
 import { useNavigate, useParams } from 'react-router-dom'
+import LinearProgressWithLabel from '../../shared-component/ProgressBar'
 
 const StatementDetail = () => {
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
@@ -25,18 +26,18 @@ const StatementDetail = () => {
         agentCommission: 0,
         advPaymentPercentage: 0,
         advPayment: 0,
-        overwrittingAgentCode1:"",
+        overwrittingAgentCode1: "",
         overwrittingAgentContractLevel1: 0,
         overwrittingAgentCommission1: 0,
-        overwrittingAgentCode2:"",
+        overwrittingAgentCode2: "",
         overwrittingAgentContractLevel2: 0,
         overwrittingAgentCommission2: 0,
-        split2_AgentCode:"",
-        split2_agentCommission:0,
+        split2_AgentCode: "",
+        split2_agentCommission: 0,
         split2_splitRatio: 0,
-        split_2_OWAgent1_AgentCode:"",
+        split_2_OWAgent1_AgentCode: "",
         split_2_OWAgent1_Commission: 0,
-        split_2_OWAgent2_AgentCode:"",
+        split_2_OWAgent2_AgentCode: "",
         split_2_OWAgent2_Commission: 0,
     })
 
@@ -54,8 +55,8 @@ const StatementDetail = () => {
     }
 
 
-    const chargedBackHandler = async ()=>{
-        const res = await httpClient.post(`/policies/chargedBack/${_id}`,policyData).catch((error) => { console.log(error) })
+    const chargedBackHandler = async () => {
+        const res = await httpClient.post(`/policies/chargedBack/${_id}`, policyData).catch((error) => { console.log(error) })
         if (res.status === 200) {
             navigate('/statements');
         }
@@ -78,7 +79,13 @@ const StatementDetail = () => {
                 }}>
                     <SideBar />
                     <Stack sx={{ width: '81.8%' }}>
-                        <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "105vh", marginTop: '10px' }}>
+                        <Stack alignItems={'center'} justifyContent={'space-between'} sx={{ width: '100%', height: "105vh", marginTop: '10px' }}>
+                            <Stack alignItems={'flex-end'} sx={{ width: '95%' }} >
+                                <Stack justifyContent='flex-end' sx={{ width: '18%' }}>
+                                    Paid Agency Commision:
+                                    <LinearProgressWithLabel value={50} />
+                                </Stack>
+                            </Stack>
                             <Stack alignItems={'center'} sx={{ width: '96%', height: '94%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
                                 <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '100%' }}>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '100%' }}>
@@ -245,7 +252,7 @@ const StatementDetail = () => {
                                         <Button
                                             variant="contained"
                                             sx={{
-                                                display:isAdmin ? 'block' :'none',
+                                                display: isAdmin ? 'block' : 'none',
                                                 backgroundColor: "#F08613",
                                                 color: 'white',
                                                 width: '186px',
@@ -256,7 +263,7 @@ const StatementDetail = () => {
                                                 },
                                             }}
                                             onClick={chargedBackHandler}
-                                            >
+                                        >
                                             Charge Back
                                         </Button>
                                         <Button

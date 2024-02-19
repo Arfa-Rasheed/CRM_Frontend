@@ -6,8 +6,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Avatar } from '@mui/material';
+import { Avatar, LinearProgress } from '@mui/material';
 import { Link } from "react-router-dom";
+import LinearProgressWithLabel from '../ProgressBar';
 
 const CRMGrid = (props) => {
   const [hoveredRowIndex, setHoveredRowIndex] = useState(null);
@@ -26,6 +27,10 @@ const CRMGrid = (props) => {
       </Link>
     );
   };
+
+  // const progressBarTempelate =(value)=>{
+  //   <LinearProgress color="secondary" variant="indeterminate" />
+  // }
   return (
     <TableContainer
       component={Paper}
@@ -83,6 +88,9 @@ const CRMGrid = (props) => {
                     ) : headerObj.isLink ? (
                       linkTemplate(row, headerObj)
                     )
+                      : headerObj.isProgressBar ? (
+                        <LinearProgressWithLabel value={row[headerObj.field]} />
+                      )
                       : (
                         row[headerObj.field]
                       )

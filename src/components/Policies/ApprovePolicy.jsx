@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button, Grid, InputAdornment, TextField, Stack, Typography, Switch } from '@mui/material'
+import { Box, Button, Grid, InputAdornment, TextField, Stack, Typography, Switch, LinearProgress } from '@mui/material'
 import { MagnifyingGlass, Notepad, Plus } from 'phosphor-react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
@@ -7,28 +7,31 @@ import httpClient from '../../_util/api'
 import './style.scss'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import Calendar from '../../shared-component/Calender'
+import LinearProgressWithLabel from '../../shared-component/ProgressBar'
+// import LinearProgressWithLabel from '../../shared-component/ProgressBar '
 
 const ApprovePolicy = () => {
     const navigate = useNavigate()
     const [commissionSplit, setCommisionSplit] = useState("Yes")
-    const [isChecked,setIsChecked] = useState(false)
+    const [isChecked, setIsChecked] = useState(false)
     const isAdmin = localStorage.getItem("isAdmin")
     const { id } = useParams()
     const [policyData, setPolicyData] = useState({
-        id:"",
+        id: "",
         date: "",
-        isApproved:false,
+        isApproved: false,
         policyRegistrationID: "",
         policyValue: 0,
         agentCommission: 0,
         agencyCommissionPercentage: 0,
+        paidAgencyCommission:0,
 
         policySubmissionDate: "",
         policyCarrier: "",
         policyType: "",
         policyNumber: "",
         advPaymentPercentage: 0,
-        remainingPaymentPercentage:0,
+        remainingPaymentPercentage: 0,
 
         insuredFirstName: "",
         insuredLastName: "",
@@ -90,7 +93,7 @@ const ApprovePolicy = () => {
             const res = await httpClient.post(`/policies/approvePolicy/${id}`, policyData).catch((error) => { console.log(error) })
             if (res?.status === 200) {
                 console.log(res?.message);
-                navigate('/policies')
+                // navigate('/policies')
             }
         }
         else {
@@ -103,7 +106,7 @@ const ApprovePolicy = () => {
 
     const handleToggle = () => {
         setIsChecked((prev) => !prev);
-      };
+    };
 
     useEffect(() => {
         if (id) {
@@ -147,7 +150,15 @@ const ApprovePolicy = () => {
                                 </Grid>
                             </Button>
                         </Box>
+                        <Stack alignItems={'flex-end'} sx={{ width: '95%'}} >
+                            <Stack justifyContent='flex-end' sx={{ width: '18%' }}>
+                                Paid Agency Commision:
+                                <LinearProgressWithLabel value={policyData.paidAgencyCommission} />
+                            </Stack>
+                        </Stack>
+
                         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "112vh", marginTop: '10px' }}>
+
                             <Stack alignItems={'center'} sx={{ width: '96%', height: '100%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
                                 <Stack sx={{ width: '89%' }}>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '79%', height: '59%' }}>
@@ -270,20 +281,20 @@ const ApprovePolicy = () => {
                                                 onChange={(e) => { handleInputChange(e.target.value, "advPaymentPercentage", "number") }}
                                             />
                                         </Stack>
-                
-                                        <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{ width:policyData.isApproved ? "100%" : "79%" }}>
-                                        <Stack className='Policy-textfield' sx={{display:policyData.isApproved ? "block" : "none"}}>
-                                            <Typography className='input-label'>Remaining Payment %</Typography>
-                                            <TextField
-                                                type='number'
-                                                // label="Policy Submission Date:" 
-                                                className='text-field'
-                                                variant="outlined"
-                                                value={policyData.remainingPaymentPercentage}
-                                                sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "remainingPaymentPercentage") }}
-                                            />
-                                        </Stack>
+
+                                        <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{ width: policyData.isApproved ? "100%" : "79%" }}>
+                                            <Stack className='Policy-textfield' sx={{ display: policyData.isApproved ? "block" : "none" }}>
+                                                <Typography className='input-label'>Remaining Payment %</Typography>
+                                                <TextField
+                                                    type='number'
+                                                    // label="Policy Submission Date:" 
+                                                    className='text-field'
+                                                    variant="outlined"
+                                                    value={policyData.remainingPaymentPercentage}
+                                                    sx={{ width: '20%' }}
+                                                    onChange={(e) => { handleInputChange(e.target.value, "remainingPaymentPercentage") }}
+                                                />
+                                            </Stack>
                                             <Stack className='Policy-textfield'>
                                                 <Typography className='input-label'>Insured First Name</Typography>
                                                 <TextField
@@ -405,7 +416,7 @@ const ApprovePolicy = () => {
                                             checked={isChecked}
                                             onChange={handleToggle}
                                             // color="primary" // You can customize the color if needed
-                                            sx={{marginTop:'-8px',color:'#003478'}}
+                                            sx={{ marginTop: '-8px', color: '#003478' }}
                                         />
                                     </Stack>
                                     {
@@ -413,7 +424,7 @@ const ApprovePolicy = () => {
                                             <>
                                                 {/* Split1 details */}
                                                 <Typography className='details-heading'>SPLIT DETAILS:</Typography>
-                                                <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '79%'}}>
+                                                <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '79%' }}>
                                                     <Stack className='Policy-textfield'>
                                                         <Typography className='input-label' >Agent First Name:</Typography>
                                                         <TextField
@@ -456,7 +467,7 @@ const ApprovePolicy = () => {
                                                             onChange={(e) => { handleInputChange(e.target.value, "split1_ContractLevel") }}
                                                         />
                                                     </Stack>
-                                                   
+
 
 
 

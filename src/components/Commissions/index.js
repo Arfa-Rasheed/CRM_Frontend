@@ -71,6 +71,11 @@ const Commissions = () => {
       isLink:true,
     },
     {
+      field: 'paidAgencyCommission',
+      headerName: 'Paid Agency Commission',
+      isProgressBar:true,
+    },
+    {
       field: 'advPaymentPercentage',
       headerName: "Earned Adv %:",
       isLink:true,
