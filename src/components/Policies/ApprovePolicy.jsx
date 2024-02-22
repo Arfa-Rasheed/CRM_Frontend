@@ -91,6 +91,7 @@ const ApprovePolicy = () => {
     const approveHandler = async () => {
         if (id) {
             const res = await httpClient.post(`/policies/approvePolicy/${id}`, policyData).catch((error) => { console.log(error) })
+            console.log("policy data",policyData)
             if (res?.status === 200) {
                 console.log(res?.message);
                 // navigate('/policies')
@@ -292,7 +293,7 @@ const ApprovePolicy = () => {
                                                     variant="outlined"
                                                     value={policyData.remainingPaymentPercentage}
                                                     sx={{ width: '20%' }}
-                                                    onChange={(e) => { handleInputChange(e.target.value, "remainingPaymentPercentage") }}
+                                                    onChange={(e) => { handleInputChange(e.target.value, "remainingPaymentPercentage","number") }}
                                                 />
                                             </Stack>
                                             <Stack className='Policy-textfield'>
