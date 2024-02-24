@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import { Box, Stack, TextField, Typography, Button } from '@mui/material'
@@ -6,17 +6,22 @@ import profilePhoto from '../../assets/profilePhotoCRM.png'
 import './style.scss'
 import httpClient from '../../_util/api'
 import { useNavigate, useParams } from 'react-router-dom'
+import CustomSnackbar from '../../shared-component/Snackbar/SnackBar'
+import { hideLoader, showLoader } from '../../Store/mainSlice'
+import { useDispatch } from 'react-redux'
 
 const AddNewAgent = () => {
     const navigate = useNavigate()
     const { id } = useParams()
+    const snackbar_Ref = useRef(null)
+    const dispatch = useDispatch()
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
     const recruitingAgentCode = localStorage.getItem("userId")
     const [agentData, setAgentData] = useState({
         firstName: "",
-        lastName:"",
+        lastName: "",
         level: 0,
-        agentCarrierNumber:"",
+        agentCarrierNumber: "",
         agentTitle: "",
         agentRole: "",
         recruitmentDate: "",
@@ -31,31 +36,61 @@ const AddNewAgent = () => {
     };
 
     const submitHandler = async () => {
+        dispatch(showLoader())
         if (id) {
-            const res = httpClient.put(`/agents/updateAgent/${id}`, agentData).catch((error) => { console.log("error: ", error) })
+            const res = httpClient.put(`/agents/updateAgent/${id}`, agentData)
+                .catch((error) => {
+                    dispatch(hideLoader())
+                    snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+                })
             if (res?.status === 200) {
+                dispatch(hideLoader())
                 console.log("Add new agent res", res);
                 navigate(`/agent/${id}`)
             }
         }
         else if (isAdmin === true) {
-            const res = await httpClient.post('/agents/addNewAgent', agentData).catch((error) => { console.log("error: ", error) })
+            const res = await httpClient.post('/agents/addNewAgent', agentData)
+                .catch((error) => {
+                    dispatch(hideLoader())
+                    snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+                })
+
             if (res?.status === 200) {
-                navigate('/agent')
+                dispatch(hideLoader())
+                snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
+                setTimeout(() => {
+                    navigate('/recruits')
+                }, 6000);
             }
         }
         else {
-            const res = await httpClient.post(`/agents/addNewAgent/${recruitingAgentCode}`, agentData).catch((error) => { console.log("error: ", error) })
+            const res = await httpClient.post(`/agents/addNewAgent/${recruitingAgentCode}`, agentData)
+                .catch((error) => {
+                    dispatch(hideLoader())
+                    snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+                })
             if (res?.status === 200) {
-                navigate('/agent')
+                dispatch(hideLoader())
+                snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
+                setTimeout(() => {
+                    navigate('/recruits')
+                }, 6000);
+
             }
         }
     }
 
     const LoadAgentData = async () => {
-        const res = await httpClient.get(`/agents/getAgentByID/${id}`).catch((error) => { console.log("error", error); })
+        dispatch(showLoader())
+        const res = await httpClient.get(`/agents/getAgentByID/${id}`)
+            .catch((error) => {
+                dispatch(hideLoader())
+                snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+            })
 
         if (res?.status === 200) {
+            dispatch(hideLoader())
             console.log("Detail res", res)
             setAgentData(res.data.agentDetails)
         }
@@ -78,9 +113,9 @@ const AddNewAgent = () => {
                     overflowY: 'hidden'
                 }}>
                     <SideBar />
+                    <CustomSnackbar ref={snackbar_Ref} />
                     <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: '92vh' }}>
                         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '98%', height: '95%', backgroundColor: '#F2F2F2', borderRadius: '15px' }}>
-
                             <Stack alignItems={'center'} sx={{ width: '100%', height: '73%' }}>
                                 <Stack flexDirection={'row'} justifyContent={'center'} sx={{ width: "97%", height: '68%' }}>
                                     <Stack alignItems={'center'} sx={{ width: '58%', height: '42vh', backgroundColor: 'white', borderRadius: '20px' }}>

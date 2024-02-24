@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Box, Button, Grid, InputAdornment, TextField, Stack } from '@mui/material'
 import { MagnifyingGlass, Plus } from 'phosphor-react'
 import Header from '../../Layout/Header'
@@ -7,11 +7,16 @@ import SideBar from '../../Layout/Sidebar'
 import httpClient from '../../_util/api'
 import { useNavigate, useParams } from 'react-router-dom'
 import LinearProgressWithLabel from '../../shared-component/ProgressBar'
+import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar'
+import { useDispatch } from 'react-redux'
+import { hideLoader, showLoader } from '../../Store/mainSlice.js'
 
 const CommissionDetail = () => {
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
+    const snackbar_Ref = useRef(null);
     const { _id } = useParams()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [policyData, setPolicyData] = useState({
         isPaid: false,
         policySubmissionDate: "",
@@ -50,7 +55,11 @@ const CommissionDetail = () => {
 
 
     const getPolicyDetail = async () => {
-        const res = await httpClient.get(`/policies/getPolicyByID/${_id}`).catch((error) => { console.log(error) })
+        const res = await httpClient.get(`/policies/getPolicyByID/${_id}`)
+            .catch((error) => {
+                snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+            })
+
         console.log("Policy DEtail res", res);
         if (res?.status === 200) {
             setPolicyData(res?.data)
@@ -58,9 +67,19 @@ const CommissionDetail = () => {
     }
 
     const paidOutHandler = async () => {
-        const res = await httpClient.post(`/policies/isPaid/${_id}`, policyData).catch((error) => { console.log(error) })
+        dispatch(showLoader())
+        const res = await httpClient.post(`/policies/isPaid/${_id}`, policyData)
+            .catch((error) => {
+                dispatch(hideLoader())
+                snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+            })
+
         if (res.status === 200) {
-            navigate('/statements');
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("error", res?.data.message, "", "i-chk-circle");
+            setTimeout(() => {
+                navigate('/statements');
+            }, 4000);
         }
     }
 
@@ -80,6 +99,7 @@ const CommissionDetail = () => {
                     overflowY: 'hidden'
                 }}>
                     <SideBar />
+                    <CustomizedSnackbars ref={snackbar_Ref}/>
                     <Stack sx={{ width: '81.8%' }}>
                         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "105vh", marginTop: '10px' }}>
                             <Stack alignItems={'center'} sx={{ width: '96%', height: '94%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
@@ -97,8 +117,8 @@ const CommissionDetail = () => {
                                             <></>
                                         )
                                 }
-                              
-                                <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '100%',marginTop:'20px' }}>
+
+                                <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '100%', marginTop: '20px' }}>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '100%' }}>
                                         <TextField
                                             disabled={_id ? true : false}

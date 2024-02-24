@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import { Box, Stack } from '@mui/system'
@@ -11,10 +11,15 @@ import "./style.scss"
 import profilePhoto from '../../assets/profilePhotoCRM.png'
 import { useNavigate } from 'react-router-dom'
 import httpClient from '../../_util/api.jsx'
+import { useDispatch } from 'react-redux'
+import { hideLoader, showLoader } from '../../Store/mainSlice.js'
+import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar.jsx'
 
 const Agents = () => {
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const snackbar_Ref = useRef(null)
   const [gridData, setGridData] = useState([])
 
   const gridHeader = [
@@ -68,13 +73,15 @@ const Agents = () => {
 
 
   const LoadgridData = async () => {
+    dispatch(showLoader())
     console.log("isAdmin",isAdmin);
-    const res = await httpClient.get(isAdmin ? '/agents/getAllAgents' : '/agents/getAllAgentsAgentView').catch((error) => { console.log("error: ", error) })
+    const res = await httpClient.get(isAdmin ? '/agents/getAllAgents' : '/agents/getAllAgentsAgentView').catch((error) => {
+      dispatch(hideLoader()) 
+      snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+    })
     if (res?.status === 200) {
+      dispatch(hideLoader())
       setGridData(res?.data)
-    }
-    else{
-      console.log("error: ") 
     }
   }
 
@@ -92,6 +99,7 @@ const Agents = () => {
           overflowY:'hidden'
         }}>
           <SideBar />
+          <CustomizedSnackbars ref={snackbar_Ref}/>
           <Stack sx={{ width: '81.7%' }}>
             <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
               <Box sx={{ width: '60%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
@@ -131,28 +139,6 @@ const Agents = () => {
                         </InputAdornment>
                       ),
                     }} />
-                  {/* <Button
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "#003478",
-                      color: 'white',
-                      width: '245px',
-                      height: "5vh",
-                      fontSize: '12px',
-                      "&:hover": {
-                        backgroundColor: '#003478',
-                      },
-                    }}
-                    onClick={() => { navigate('/addAgent') }}
-                  >
-                    <Grid container
-                      alignItems={'center'}
-                      sx={{ width: '100%' }}
-                    >
-                      <Grid item md="9">Add Agent</Grid>
-                      <Grid item md="3"><Plus size={20} weight="light" /></Grid>
-                    </Grid>
-                  </Button> */}
                 </Box>
 
               </Box>

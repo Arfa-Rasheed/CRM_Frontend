@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Box, Button, Grid, InputAdornment, TextField, Stack, Typography, Switch, LinearProgress } from '@mui/material'
 import { MagnifyingGlass, Notepad, Plus } from 'phosphor-react'
 import Header from '../../Layout/Header'
@@ -8,10 +8,15 @@ import './style.scss'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import Calendar from '../../shared-component/Calender'
 import LinearProgressWithLabel from '../../shared-component/ProgressBar'
+import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar'
+import { useDispatch } from 'react-redux'
+import { hideLoader, showLoader } from '../../Store/mainSlice'
 // import LinearProgressWithLabel from '../../shared-component/ProgressBar '
 
 const ApprovePolicy = () => {
     const navigate = useNavigate()
+    const snackbar_Ref = useRef()
+    const dispatch = useDispatch()
     const [commissionSplit, setCommisionSplit] = useState("Yes")
     const [isChecked, setIsChecked] = useState(false)
     const isAdmin = localStorage.getItem("isAdmin")
@@ -24,7 +29,7 @@ const ApprovePolicy = () => {
         policyValue: 0,
         agentCommission: 0,
         agencyCommissionPercentage: 0,
-        paidAgencyCommission:0,
+        paidAgencyCommission: 0,
 
         policySubmissionDate: "",
         policyCarrier: "",
@@ -80,27 +85,48 @@ const ApprovePolicy = () => {
 
 
     const getPolicyDetail = async () => {
-        const res = await httpClient.get(`/policies/getPolicyByID/${id}`).catch((error) => { console.log(error) })
-        console.log("Policy DEtail res", res);
+        dispatch(showLoader())
+        const res = await httpClient.get(`/policies/getPolicyByID/${id}`).catch((error) => {
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+        })
+
         if (res.status === 200) {
+            dispatch(hideLoader())
             setPolicyData(res?.data)
         }
     }
 
 
     const approveHandler = async () => {
+        dispatch(showLoader())
         if (id) {
-            const res = await httpClient.post(`/policies/approvePolicy/${id}`, policyData).catch((error) => { console.log(error) })
-            console.log("policy data",policyData)
+            const res = await httpClient.post(`/policies/approvePolicy/${id}`, policyData)
+                .catch((error) => {
+                    dispatch(hideLoader())
+                    snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+                })
+
             if (res?.status === 200) {
-                console.log(res?.message);
-                // navigate('/policies')
+                dispatch(hideLoader())
+                snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
+                setTimeout(() => {
+                    navigate('/policies')
+                }, 6000);
             }
         }
         else {
-            const res = httpClient.post('/policies/addNewPolicy', policyData).catch((error) => { console.log("error", error) })
+            const res = httpClient.post('/policies/addNewPolicy', policyData)
+                .catch((error) => {
+                    dispatch(hideLoader())
+                    snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+                })
             if (res?.status === 200) {
-                console.log("res", res)
+                dispatch(hideLoader())
+                snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
+                setTimeout(() => {
+                    navigate('/policies')
+                }, 6000);
             }
         }
     }
@@ -125,6 +151,7 @@ const ApprovePolicy = () => {
                     height: '91.6vh',
                 }}>
                     <SideBar />
+                    <CustomizedSnackbars ref={snackbar_Ref} />
                     <Stack alignItems={'center'} sx={{ width: '81.8%' }}>
                         <Box sx={{ height: '12vh' }}>
                             <Button
@@ -151,7 +178,7 @@ const ApprovePolicy = () => {
                                 </Grid>
                             </Button>
                         </Box>
-                        <Stack alignItems={'flex-end'} sx={{ width: '95%'}} >
+                        <Stack alignItems={'flex-end'} sx={{ width: '95%' }} >
                             <Stack justifyContent='flex-end' sx={{ width: '18%' }}>
                                 Paid Agency Commision:
                                 <LinearProgressWithLabel value={policyData.paidAgencyCommission} />
@@ -293,7 +320,7 @@ const ApprovePolicy = () => {
                                                     variant="outlined"
                                                     value={policyData.remainingPaymentPercentage}
                                                     sx={{ width: '20%' }}
-                                                    onChange={(e) => { handleInputChange(e.target.value, "remainingPaymentPercentage","number") }}
+                                                    onChange={(e) => { handleInputChange(e.target.value, "remainingPaymentPercentage", "number") }}
                                                 />
                                             </Stack>
                                             <Stack className='Policy-textfield'>

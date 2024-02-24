@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import { Box, Stack } from '@mui/system'
@@ -12,10 +12,16 @@ import "./style.scss"
 import profilePhoto from '../../assets/profilePhotoCRM.png'
 import { useNavigate } from 'react-router-dom'
 import httpClient from '../../_util/api.jsx'
+import CustomSnackBars from "../../shared-component/Snackbar/SnackBar.jsx"
+import { hideLoader, showLoader } from '../../Store/mainSlice.js'
+import { useDispatch } from 'react-redux'
+
 
 const Recruits = () => {
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
   const navigate = useNavigate()
+  const snackbar_Ref = useRef()
+  const dispatch = useDispatch()
   const [gridData, setGridData] = useState([])
   const gridHeader = [
     {
@@ -64,22 +70,17 @@ const Recruits = () => {
     },
   ]
 
-  
-  // const LoadgridData = async () => {
-  //   const res = await httpClient.get('/agents/getAllAgents').catch((error) => { console.log("error: ", error) })
 
-  //   if (res?.status === 200) {
-  //     setGridData(res?.data)
-  //   }
-  //   else {
-  //     console.log("error: ")
-  //   }
-  // }
 
   const LoadgridData = async () => {
-    console.log("isAdmin",isAdmin);
-    const res = await httpClient.get(isAdmin ? '/agents/getAllAgents' : '/agents/getAllAgentsAgentView').catch((error) => { console.log("error: ", error) })
+    dispatch(showLoader())
+    const res = await httpClient.get(isAdmin ? '/agents/getAllAgents' : '/agents/getAllAgentsAgentView')
+    .catch((error) => { 
+      dispatch(hideLoader())
+      snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");  
+    })
     if (res?.status === 200) {
+      dispatch(hideLoader())
       setGridData(res?.data)
     }
     else{
@@ -101,6 +102,7 @@ const Recruits = () => {
           overflowY: 'hidden'
         }}>
           <SideBar />
+          <CustomSnackBars ref={snackbar_Ref}/>
           <Stack sx={{ width: '81.7%' }}>
             <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
               <Box sx={{ width: '60%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>

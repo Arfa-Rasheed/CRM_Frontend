@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import { Avatar, Grid, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material'
@@ -8,8 +8,13 @@ import CRMButtons from '../../shared-component/CRMButtons'
 import BarChart from './BarChart'
 import { Box } from '@mui/system'
 import httpClient from '../../_util/api'
+import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar'
+import { hideLoader, showLoader } from '../../Store/mainSlice'
+import { useDispatch } from 'react-redux'
 const Dashboard = () => {
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
+    const snackbar_Ref = useRef(null)
+    const dispatch = useDispatch()
     const [year, setYear] = useState('2024')
     const [month, setMonth] = useState('February')
     const [currentMonth, setCurrentMonth] = useState('')
@@ -36,11 +41,11 @@ const Dashboard = () => {
     const [yearlyPolicySelectedOption, setYearlyPolicySelectedOption] = useState('Sales Matrix')
 
     const [highestCommissionedAgentData, setHighestCommissionedAgentData] = useState({
-        agentFirstName:"",
-        agentLastName:"",
-        agentCode:"",
-        agentRole:"",
-        totalSales:"",
+        agentFirstName: "",
+        agentLastName: "",
+        agentCode: "",
+        agentRole: "",
+        totalSales: "",
 
     })
 
@@ -95,9 +100,15 @@ const Dashboard = () => {
     }
 
     const LoadMonthlyPolicyData = async () => {
+        dispatch(showLoader())
         const res = await httpClient.get(isAdmin ? `/dashboard/getMonthlyPolicyData/${month}` : `/dashboard/getMonthlyPolicyDataAgentView/${month}`)
+            .catch((error) => {
+                dispatch(hideLoader())
+                snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+            })
 
         if (res.status === 200) {
+            dispatch(hideLoader())
             console.log("dash res", res?.data[month]);
             setTotalHealthInsurance(res?.data[month].Health.count)
             setTotalLifeInsurance(res?.data[month].Life.count)
@@ -108,7 +119,7 @@ const Dashboard = () => {
             setTotalLifeInsuranceCost(res?.data[month].Life.totalSale)
             setTotalAnnuitiesCost(res?.data[month].Annuities.totalSale)
 
-            // //CashFlow Matrix
+            // CashFlow Matrix
             setTotalHealthRevenue(res?.data[month].Health.totalRevenue)
             setTotalLifeRevenue(res?.data[month].Life.totalRevenue)
             setTotalAnnuitiesRevenue(res?.data[month].Annuities.totalRevenue)
@@ -117,9 +128,15 @@ const Dashboard = () => {
     }
 
     const yearlyPolicyData = async () => {
+        dispatch(showLoader())
         const res = await httpClient.get(isAdmin ? `/dashboard/getMatrixData/${year}` : `/dashboard/getMatrixDataAgentView/${year}`)
+            .catch((error) => {
+                dispatch(hideLoader())
+                snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+            })
 
         if (res.status === 200) {
+            dispatch(hideLoader())
             setBarChartData(res?.data.barChartData)
             console.log("res?.data.totalSoldPolicies", res?.data.totalSoldPolicies);
             setTotalSoldPolicies(res?.data.overallTotalSoldPolicies)
@@ -138,9 +155,14 @@ const Dashboard = () => {
     }
 
     const getDetailsOfHighestCommissionedAgent = async () => {
+        dispatch(showLoader())
         const res = await httpClient.get(`/dashboard/getDetailsOfHighestCommissionedAgent/${month}`)
-
+            .catch((error) => {
+                dispatch(hideLoader())
+                snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+            })
         if (res?.status === 200) {
+            dispatch(hideLoader())
             console.log("highestcommision agent", res);
             setHighestCommissionedAgentData(res.data)
         }
@@ -169,6 +191,7 @@ const Dashboard = () => {
                     overflowY: 'hidden'
                 }}>
                     <SideBar />
+                    <CustomizedSnackbars ref={snackbar_Ref} />
                     <Grid container direction={'column'}
                         justifyContent="space-around"
                         spacing={3}
@@ -410,33 +433,33 @@ const Dashboard = () => {
                                 <Grid container sx={{ justifyContent: 'center', marginTop: '9px', height: '16vh' }} className='grid-inner-container'>
                                     {/* <Grid item md="12"><Avatar></Avatar>   </Grid> */}
                                     <Grid item md='10' >
-                                        <Typography sx={{fontSize:'13px'}}>Highest Sales</Typography>
-                                        <Typography sx={{fontSize:'13px'}}>Agent Name:{highestCommissionedAgentData.agentFirstName} {highestCommissionedAgentData.agentLastName}</Typography>
-                                        <Typography sx={{fontSize:'13px'}}>Agent Code:{highestCommissionedAgentData.agentCode}</Typography>
-                                        <Typography sx={{fontSize:'13px'}}>Agent Role:</Typography>
-                                        <Typography sx={{fontSize:'13px'}}>Agent Sales:{highestCommissionedAgentData.agentCommission}</Typography>
+                                        <Typography sx={{ fontSize: '13px' }}>Highest Sales</Typography>
+                                        <Typography sx={{ fontSize: '13px' }}>Agent Name:{highestCommissionedAgentData.agentFirstName} {highestCommissionedAgentData.agentLastName}</Typography>
+                                        <Typography sx={{ fontSize: '13px' }}>Agent Code:{highestCommissionedAgentData.agentCode}</Typography>
+                                        <Typography sx={{ fontSize: '13px' }}>Agent Role:</Typography>
+                                        <Typography sx={{ fontSize: '13px' }}>Agent Sales:{highestCommissionedAgentData.agentCommission}</Typography>
                                     </Grid>
                                 </Grid>
 
                             </Grid>
                             <Grid item md='3'>
                                 <CRMButtons title='Sales Statistics' />
-                                <Grid container className='grid-inner-container' sx={{ justifyContent: 'center', marginTop: '9px' ,height: '14vh'}} >
+                                <Grid container className='grid-inner-container' sx={{ justifyContent: 'center', marginTop: '9px', height: '14vh' }} >
                                     <Grid items md='10' >
-                                    <Typography sx={{fontSize:'13px'}}>Highest Recruits:</Typography>
-                                        <Typography sx={{fontSize:'13px'}}>Agent Name:{highestCommissionedAgentData.agentFirstName} {highestCommissionedAgentData.agentLastName}</Typography>
-                                        <Typography sx={{fontSize:'13px'}}>Agent Code:{highestCommissionedAgentData.agentCode}</Typography>
-                                        <Typography sx={{fontSize:'13px'}}>Agent Role:</Typography>
-                                        <Typography sx={{fontSize:'13px'}}>Agent Sales:{highestCommissionedAgentData.agentCommission}</Typography>
+                                        <Typography sx={{ fontSize: '13px' }}>Highest Recruits:</Typography>
+                                        <Typography sx={{ fontSize: '13px' }}>Agent Name:{highestCommissionedAgentData.agentFirstName} {highestCommissionedAgentData.agentLastName}</Typography>
+                                        <Typography sx={{ fontSize: '13px' }}>Agent Code:{highestCommissionedAgentData.agentCode}</Typography>
+                                        <Typography sx={{ fontSize: '13px' }}>Agent Role:</Typography>
+                                        <Typography sx={{ fontSize: '13px' }}>Agent Sales:{highestCommissionedAgentData.agentCommission}</Typography>
                                     </Grid>
                                 </Grid>
 
                             </Grid>
                             <Grid item md='3'>
                                 <CRMButtons title='Previous Months' />
-                                <Grid container sx={{ justifyContent: 'center',height: '14vh' }} className='grid-inner-container'>
+                                <Grid container sx={{ justifyContent: 'center', height: '14vh' }} className='grid-inner-container'>
                                     <Grid items md='10' >
-                                       <Typography>Total Recruits:</Typography>
+                                        <Typography>Total Recruits:</Typography>
                                     </Grid>
                                 </Grid>
 

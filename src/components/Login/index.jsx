@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Header from '../../Layout/Header'
 import { Button, Stack, TextField, Typography } from '@mui/material'
 import './style.scss'
@@ -6,11 +6,16 @@ import httpClient from '../../_util/api'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setIsAdmin } from '../../Store/userReducer'
+import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar'
+import { hideLoader, setIsLoggedIn, setUserDetail, showLoader } from '../../Store/mainSlice'
 
 const Login = () => {
+    const snackbar_Ref = useRef(null)
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const isAdmin = useSelector((state)=>state.user.isAdmin)
+    const userDetails = useSelector((state) => state.mainSlice.userdetail)
+    // const userId = useSelector((state)=>state.mainSlice.userdetail.userId)
+    const isAdmin = useSelector((state) => state.user.isAdmin)
     const [userCredentials, setUserCredentials] = useState(
         {
             email: '',
@@ -22,26 +27,36 @@ const Login = () => {
         setUserCredentials((prevFormData) => ({ ...prevFormData, [field]: data }));
     };
 
-    const loginHandler = async () => { 
-      const res =await httpClient.post('/user/login',userCredentials).catch((error) => { console.log("error: ",error) })
+    const loginHandler = async () => {
+        dispatch(showLoader());
+        const res = await httpClient.post('/user/login', userCredentials).catch((error) => {
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+        })
 
-      if(res?.status === 200){
-        const authToken = res.data.token
-        const isAdmin = res.data.isAdmin
-        const agentCode = res.data.agentCode ? res.data.agentCode : null;
-        const userId = res.data._id ? res.data._id : null;
-        const agentCarrierNumber = res.data.agentCarrierNumber ? res.data.agentCarrierNumber : ""
-        const contractLevel = res.data.contractLevel ? res.data.contractLevel : null
-        localStorage.setItem('authToken', authToken);
-        localStorage.setItem('isAdmin', isAdmin);
-        localStorage.setItem('agentCode',agentCode);
-        localStorage.setItem('userId',userId);
-        localStorage.setItem('agentCarrierNumber',agentCarrierNumber);
-        localStorage.setItem('contractLevel',contractLevel);
-        dispatch(setIsAdmin(res.data.isAdmin));
-        console.log("res",res);
-        navigate('/dashboard');    
-      }
+        if (res?.status === 200) {
+            dispatch(hideLoader())
+            const authToken = res.data.token
+            const isAdmin = res.data.isAdmin
+            const userId = res.data.userId
+            const adminFirstName = res.data.firstName
+            localStorage.setItem('authToken', authToken);
+            localStorage.setItem('isAdmin', isAdmin);
+            localStorage.setItem("userId", userId)
+            localStorage.setItem("adminFirstName", adminFirstName)
+            dispatch(setIsLoggedIn(true))
+            dispatch(setUserDetail(res.data))
+            console.log("userDetails", userDetails);
+            console.log("userId", userId);
+            // console.log("res", res);
+            snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
+            setTimeout(() => {
+                navigate('/dashboard');
+            }, 3000);
+
+
+
+        }
     }
 
     return (
@@ -55,6 +70,7 @@ const Login = () => {
                         justifyContent: 'center',
                         height: '90vh',
                     }}>
+                        <CustomizedSnackbars ref={snackbar_Ref} />
                         <Stack className='Login-container' alignItems={'center'} justifyContent={'space-around'} style={{ width: '50%', height: '70vh' }}>
                             <Button
                                 variant="contained"

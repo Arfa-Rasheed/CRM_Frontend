@@ -12,18 +12,23 @@ import RecruitsIcon from '../../assets/Recruits.png'
 import LogoutIcon from '../../assets/Logout.png'
 import rightArrow from '../../assets/right-arrow.png'
 import agentIcon from '../../assets/Agent.png' 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { hideLoader, showLoader } from '../../Store/mainSlice'
 const SideBar = () => {
     // const isAdmin = useSelector((state)=>state.user.isAdmin)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
 
     const logoutHandler=()=>{
+        dispatch(showLoader())
         localStorage.removeItem("authToken")
         localStorage.removeItem("isAdmin")
         setTimeout(()=>{
+            dispatch(hideLoader())
             navigate('/')
+            dispatch(hideLoader())
         },3000)
     }
 

@@ -1,5 +1,5 @@
 import { MagnifyingGlass, Notepad } from 'phosphor-react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import SideBar from '../../Layout/Sidebar'
 import Header from '../../Layout/Header'
 import { Box, Button, Grid, InputAdornment, Stack, TextField, Typography } from '@mui/material'
@@ -9,9 +9,14 @@ import profilePhoto from '../../assets/profilePhotoCRM.png'
 import './style.scss'
 import httpClient from '../../_util/api'
 import CRMGrid from '../../shared-component/CRM-Grid.jsx'
+import { useDispatch } from 'react-redux'
+import { hideLoader, showLoader } from '../../Store/mainSlice.js'
+import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar.jsx'
 
 const AgentDetail = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const snackbar_Ref = useRef(null)
     const { _id } = useParams()
     const [policyData,setPolicyData] = useState([])
     const [agentData, setAgentData] = useState({
@@ -89,9 +94,13 @@ const AgentDetail = () => {
    
 
     const LoadAgentData = async () => {
-        const res = await httpClient.get(`/agents/getAgentByID/${_id}`).catch((error) => { console.log("error", error); })
+        dispatch(showLoader())
+        const res = await httpClient.get(`/agents/getAgentByID/${_id}`).catch((error) => { 
+            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+        })
 
         if (res?.status === 200) {
+            dispatch(hideLoader())
             console.log("Detail res", res.data)
             setAgentData(res?.data.agentDetails)
             setPolicyData(res?.data.policyDetailsArray)
@@ -112,6 +121,7 @@ const AgentDetail = () => {
                     overflowY:'hidden'
                 }}>
                     <SideBar />
+                    <CustomizedSnackbars ref={snackbar_Ref} />
                     <Stack sx={{ width: '81.7%',backgroundColor:'#F2F2F2' }}>
                         <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
                             <Box sx={{ width: '60%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>

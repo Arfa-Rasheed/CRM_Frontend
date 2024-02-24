@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Box, Button, Grid, InputAdornment, TextField, Stack } from '@mui/material'
 import { MagnifyingGlass, Plus } from 'phosphor-react'
 import Header from '../../Layout/Header'
@@ -6,11 +6,16 @@ import SideBar from '../../Layout/Sidebar'
 import httpClient from '../../_util/api'
 import { useNavigate, useParams } from 'react-router-dom'
 import LinearProgressWithLabel from '../../shared-component/ProgressBar'
+import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar'
+import { useDispatch } from 'react-redux'
+import { hideLoader, showLoader } from '../../Store/mainSlice'
 
 const StatementDetail = () => {
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
     const { _id } = useParams()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const snackbar_Ref = useRef()
     const [policyData, setPolicyData] = useState({
         isPaid: false,
         policySubmissionDate: "",
@@ -47,18 +52,31 @@ const StatementDetail = () => {
 
 
     const getPolicyDetail = async () => {
-        const res = await httpClient.get(`/policies/getPolicyByID/${_id}`).catch((error) => { console.log(error) })
-        console.log("Policy DEtail res", res);
+        dispatch(showLoader())
+        const res = await httpClient.get(`/policies/getPolicyByID/${_id}`).catch((error) => { 
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+         })
+
         if (res.status === 200) {
+            dispatch(hideLoader())
             setPolicyData(res?.data)
         }
     }
 
 
     const chargedBackHandler = async () => {
-        const res = await httpClient.post(`/policies/chargedBack/${_id}`, policyData).catch((error) => { console.log(error) })
+        dispatch(showLoader())
+        const res = await httpClient.post(`/policies/chargedBack/${_id}`, policyData).catch((error) => { 
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+         })
         if (res.status === 200) {
-            navigate('/statements');
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
+            setTimeout(() => {
+                navigate('/statements');    
+            }, 4000);
         }
     }
 
@@ -78,6 +96,7 @@ const StatementDetail = () => {
                     overflowY: 'hidden'
                 }}>
                     <SideBar />
+                    <CustomizedSnackbars ref={snackbar_Ref}/>
                     <Stack sx={{ width: '81.8%' }}>
                         <Stack alignItems={'center'} justifyContent={'space-between'} sx={{ width: '100%', height: "105vh", marginTop: '10px' }}>
                             <Stack alignItems={'flex-end'} sx={{ width: '95%' }} >

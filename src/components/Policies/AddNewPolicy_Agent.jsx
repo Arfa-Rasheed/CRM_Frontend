@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Box, Button, Grid, InputAdornment, TextField, Stack } from '@mui/material'
 import { MagnifyingGlass, Plus } from 'phosphor-react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import httpClient from '../../_util/api'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar'
+import { useDispatch } from 'react-redux'
+import { hideLoader, showLoader } from '../../Store/mainSlice'
 
 const AddNewPolicy_Agent = () => {
     const { id } = useParams()
     const navigate = useNavigate()
+    const snackbar_Ref = useRef(null)
+    const dispatch = useDispatch()
     // const agentCode = localStorage.getItem('agentCode')
     // const agentCarrierNumber = localStorage.getItem('agentCarrierNumber')
     // const contractLevel = localStorage.getItem('contractLevel')
@@ -25,27 +30,42 @@ const AddNewPolicy_Agent = () => {
         policyValue: 0,
         // advPaymentPercentage: 0,
         // advPayment: 0
-        insuredFirstName:"",
-        insuredLastName:"",
+        insuredFirstName: "",
+        insuredLastName: "",
     })
 
     const handleInputChange = (data, field) => {
         setPolicyData((prevFormData) => ({ ...prevFormData, [field]: data }));
     };
 
-    const addNewPolicyHandler = () => {
-        const res = httpClient.post('/policies/addNewPolicy', policyData).catch((error) => { console.log("error", error) })
+    const addNewPolicyHandler =async () => {
+        dispatch(showLoader())
+        const res =await httpClient.post('/policies/addNewPolicy', policyData)
+            .catch((error) => {
+                dispatch(hideLoader())
+                console.log("error", error)
+                snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+            })
 
         if (res?.status === 200) {
-            console.log("res", res)
-            navigate('/policies')
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
+            setTimeout(() => {
+                navigate('/policies')
+            }, 6000);
+
         }
     }
 
     const getPolicyDetail = async () => {
-        const res = await httpClient.get(`/policies/getPolicyByID/${id}`).catch((error) => { console.log(error) })
-        console.log("Policy DEtail res", res);
+        dispatch(showLoader())
+        const res = await httpClient.get(`/policies/getPolicyByID/${id}`).catch((error) => {
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+         })
+    
         if (res.status === 200) {
+            dispatch(hideLoader())
             setPolicyData(res?.data)
         }
     }
@@ -66,6 +86,7 @@ const AddNewPolicy_Agent = () => {
                     overflowY: 'hidden'
                 }}>
                     <SideBar />
+                    <CustomizedSnackbars ref={snackbar_Ref}/>
                     <Stack sx={{ width: '81.8%' }}>
                         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "105vh", marginTop: '10px' }}>
                             <Stack alignItems={'center'} sx={{ width: '96%', height: '94%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
@@ -123,7 +144,7 @@ const AddNewPolicy_Agent = () => {
                                         />
 
                                         <TextField
-                                            disabled={ true }
+                                            disabled={true}
                                             label="Contract Level:"
                                             variant="filled"
                                             sx={{ width: '30%' }}

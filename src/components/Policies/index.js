@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import { Box, Button, Grid, InputAdornment, TextField } from '@mui/material'
@@ -10,6 +10,9 @@ import { Stack } from '@mui/system'
 import httpClient from '../../_util/api.jsx'
 import AddNewPolicy_Admin from './ApprovePolicy.jsx'
 import { useNavigate } from 'react-router-dom'
+import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar.jsx'
+import { useDispatch } from 'react-redux'
+import { hideLoader, showLoader } from '../../Store/mainSlice.js'
 // import CRMGrid from '../../shared-component'
 
 
@@ -17,7 +20,9 @@ const Policies = () => {
   const [newPolicyClicked, setNewPolicyClicked] = useState(false);
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [gridData, setGridData] = useState([])
+  const snackbar_Ref = useRef(null);
 
 
   const gridHeader = [
@@ -83,7 +88,7 @@ const Policies = () => {
       width: '20%',
       isLink: true,
     },
-    
+
   ]
 
   const adminGridHeader = [
@@ -162,7 +167,7 @@ const Policies = () => {
     {
       field: 'paidAgencyCommission',
       headerName: 'Paid Agency Commission',
-      isProgressBar:true,
+      isProgressBar: true,
     }
   ]
 
@@ -172,10 +177,15 @@ const Policies = () => {
   }
 
   const LoadGridData = async () => {
-    const res = await httpClient.get(isAdmin ? 'policies/getAllPolicies' : 'policies/getAllPoliciesAgentView').catch((error) => { })
+    dispatch(showLoader())
+    const res = await httpClient.get(isAdmin ? 'policies/getAllPolicies' : 'policies/getAllPoliciesAgentView')
+      .catch((error) => {
+        dispatch(hideLoader())
+        snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+      })
 
     if (res?.status === 200) {
-      console.log("Res", res);
+      dispatch(hideLoader())
       setGridData(res.data)
     }
   }
@@ -199,6 +209,7 @@ const Policies = () => {
           overflowY: 'hidden'
         }}>
           <SideBar />
+          <CustomizedSnackbars ref={snackbar_Ref}/>
           <Stack sx={{ width: '81.8%' }}>
             <Box sx={{ width: '100%', height: '12vh', marginTop: '20px', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
               <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
@@ -223,7 +234,6 @@ const Policies = () => {
                     backgroundColor: '#F08613',
                   },
                 }}
-                // onClick={() => setNewPolicyClicked(true)}
                 onClick={addNewPolicyHandler}
               >
                 <Grid container

@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import { Button, Stack, TextField, Typography } from '@mui/material'
 import CRMGrid from '../../shared-component/CRM-Grid.jsx'
 import './style.scss'
 import httpClient from '../../_util/api.jsx'
+import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar.jsx'
+import { useDispatch } from 'react-redux'
+import { hideLoader, showLoader } from '../../Store/mainSlice.js'
 
 const Commissions = () => {
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
   const [gridData,setGridData] = useState([]);
+  const dispatch = useDispatch()
   const currentDate = new Date();
+  const snackbar_Ref = useRef(null);
   const [dates,setDates]=useState({
     startDate:"",
     endDate:""
@@ -143,9 +148,14 @@ const Commissions = () => {
 };
 
   const LoadGridData=async()=>{
-    const res = await httpClient.post(isAdmin ? '/policies/statement' : '/policies/statementAgentView',dates).catch((error) => { console.log("error: ", error) })
+    dispatch(showLoader())
+    const res = await httpClient.post(isAdmin ? '/policies/statement' : '/policies/statementAgentView',dates).catch((error) => { 
+      dispatch(hideLoader())
+      snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle")
+     })
 
     if (res?.status === 200) {
+      dispatch(hideLoader())
       setGridData(res?.data.policies)
     }
   }
@@ -169,6 +179,7 @@ const Commissions = () => {
           overflowY:'hidden'
         }}>
           <SideBar />
+          <CustomizedSnackbars ref={snackbar_Ref}/>
           <Stack sx={{ width: '80.8%' }}>
             <Stack sx={{ width: '99.9%', height: '24vh', marginLeft: '10px', marginTop: '17px', marginBottom: '-74px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
               {/* <h3 style={{ color: '#003478', marginLeft: '40px' }}>September 2023</h3> */}

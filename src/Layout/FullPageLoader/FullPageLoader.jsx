@@ -8,7 +8,7 @@ const PageLoader = () => {
 
     return (
         <>
-            {ShowLoader && <div stayle={{ position: "absolute", height: "100vh", width: "100vw", zIndex: "9999", backgroundColor: "#f4f4f48a", bottom: 0 }} className="align-items-center flex fullpage-loader justify-content-center">
+            {ShowLoader && <div style={{ position: "absolute", height: "100vh", width: "100vw", zIndex: "9999", backgroundColor: "#f4f4f48a", bottom: 0 , display:'flex', alignItems:'center',justifyContent:'center' }} className="align-items-center flex fullpage-loader justify-content-center">
                 <ThreeCircles
                     height="60"
                     width="60"
@@ -17,9 +17,9 @@ const PageLoader = () => {
                     wrapperClass=""
                     visible={true}
                     ariaLabel="three-circles-rotating"
-                    outerCircleColor="#2054D9"
-                    innerCircleColor="#0097FE"
-                    middleCircleColor=""
+                    outerCircleColor="#003478"
+                    innerCircleColor="#F08613"
+                    middleCircleColor="#003478"
                 />
             </div>}
         </>

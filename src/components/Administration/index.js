@@ -15,13 +15,13 @@ import httpClient from '../../_util/api.jsx'
 import { useDispatch } from 'react-redux'
 import { hideLoader, showLoader } from '../../Store/mainSlice.js'
 import PageLoader from '../../Layout/FullPageLoader/FullPageLoader.jsx'
-import CRM_Toast from '../../Layout/Snackbar/SnackBar.jsx'
-import CustomSnackbar from '../../Layout/Snackbar/SnackBar.jsx'
+import CustomSnackbar from '../../shared-component/Snackbar/SnackBar.jsx'
+
 
 const Administration = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const toast_Ref = useRef(null);
+  const snackbar_Ref = useRef(null);
   const [gridData, setGridData] = useState([])
   const [selectedAgentIds, setSelectedAgentIds] = useState([]);
   const gridHeader = [
@@ -91,31 +91,36 @@ const Administration = () => {
   }
 
   const removeAgentHandler = async () => {
+    dispatch(showLoader())
     if (selectedAgentIds.length > 0) {
       const agentIdsString = selectedAgentIds.join(',');
-      const res = await httpClient.delete(`/agents/deleteAgent/${agentIdsString}`).catch((error) => { console.log("error: ", error) })
-      if(res?.status === 200){
+      const res = await httpClient.delete(`/agents/deleteAgent/${agentIdsString}`).catch((error) => {
+        dispatch(hideLoader())
+        console.log("error: ", error)
+        snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle")
+      })
+
+      if (res?.status === 200) {
+        dispatch(hideLoader())
         LoadgridData()
-        console.log(" delted res" ,res);
-        toast_Ref.current.showMessage("success", res?.data.message, "", "i-notify");
+        console.log(" delted res", res);
+        snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle")
       }
-      else{
-        console.log("error: ") 
-      }
+
     }
   }
 
   const LoadgridData = async () => {
+    dispatch(showLoader())
     const res = await httpClient.get("/agents/getAllAgents")
-    .catch((error) => { 
-      toast_Ref.current.showMessage("error", error?.message, "", "i-notify");
-      // console.log("error: ", error)
-   })
+      .catch((error) => {
+        dispatch(hideLoader())
+        snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle")
+      })
     if (res?.status === 200) {
       dispatch(hideLoader())
-      // toast_Ref.current.showMessage("error", "Data extracted", "", "i-notify");
       setGridData(res.data)
-      dispatch(hideLoader())
+     
     }
   }
 
@@ -125,17 +130,16 @@ const Administration = () => {
 
   return (
     <>
-      <PageLoader/>
-      {/* <CRM_Toast ref={toast_Ref}/> */}
-      <CustomSnackbar ref={toast_Ref}/>
+      <PageLoader />
       <Header />
       <div style={{ marginTop: '56px' }}>
         <div style={{
           display: 'flex',
           height: '92vh',
-          overflowY:'hidden'
+          overflowY: 'hidden'
         }}>
           <SideBar />
+          <CustomSnackbar ref={snackbar_Ref} />
           <Stack sx={{ width: '81.7%' }}>
             <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
               <Box sx={{ width: '60%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
@@ -152,7 +156,6 @@ const Administration = () => {
                         backgroundColor: '#F08613',
                       },
                     }}
-                  // onClick={() => setNewPolicyClicked(true)}
                   >
                     <Grid container
                       alignItems={'center'}
