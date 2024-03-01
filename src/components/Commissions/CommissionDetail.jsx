@@ -29,9 +29,11 @@ const CommissionDetail = () => {
         contractLevel: 0,
         agencyCommissionPercentage: 0,
         agencyCommission: 0,
+        commissionableAmountPercentage:0,
         agentCommission: 0,
         advPaymentPercentage: 0,
         advPayment: 0,
+        remainingPaymentPercentage: 0,
         overwrittingAgentCode1: "",
         overwrittingAgentContractLevel1: 0,
         overwrittingAgentCommission1: 0,
@@ -102,7 +104,7 @@ const CommissionDetail = () => {
                     <CustomizedSnackbars ref={snackbar_Ref}/>
                     <Stack sx={{ width: '81.8%',marginLeft:'18%'  }}>
                         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "105vh", marginTop: '10px' }}>
-                            <Stack alignItems={'center'} sx={{ width: '96%', height: '94%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
+                            <Stack alignItems={'center'} sx={{ width: '96%', height: '98%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
                                 {
                                     isAdmin
                                         ? (
@@ -202,6 +204,15 @@ const CommissionDetail = () => {
                                             value={policyData.agencyCommission}
                                             onChange={(e) => { handleInputChange(e.target.value, "agencyCommission") }}
                                         />
+
+                                        <TextField
+                                            disabled={_id ? true : false}
+                                            label="Commissionable Amount%:"
+                                            variant="filled"
+                                            sx={{ width: '30%' }}
+                                            value={policyData.commissionableAmountPercentage}
+                                            onChange={(e) => { handleInputChange(e.target.value, "commissionableAmountPercentage") }}
+                                        />
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="Agent Commission:"
@@ -218,6 +229,8 @@ const CommissionDetail = () => {
                                             value={policyData.advPaymentPercentage}
                                             onChange={(e) => { handleInputChange(e.target.value, "advPaymentPercentage") }}
                                         />
+
+
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="Adv Payment:"
@@ -225,6 +238,14 @@ const CommissionDetail = () => {
                                             sx={{ width: '30%' }}
                                             value={policyData.advPayment}
                                             onChange={(e) => { handleInputChange(e.target.value, "advPayment") }}
+                                        />
+                                        <TextField
+                                            disabled={_id ? true : false}
+                                            label="Remaning Payment %:"
+                                            variant="filled"
+                                            sx={{ width: '30%' }}
+                                            value={policyData.remainingPaymentPercentage}
+                                            onChange={(e) => { handleInputChange(e.target.value, "remainingPaymentPercentage") }}
                                         />
                                         <TextField
                                             disabled={_id ? true : false}
