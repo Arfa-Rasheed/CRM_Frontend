@@ -18,6 +18,7 @@ import ApprovePolicy from '../components/Policies/ApprovePolicy'
 import CommissionDetail from '../components/Commissions/CommissionDetail'
 import StatementDetail from '../components/Statements/detail'
 import LinearProgressWithLabel from '../shared-component/ProgressBar'
+import AddNewRecruit from '../components/Recruits/AddNewRecruit'
 
 
 const AppRouter = () => {
@@ -39,6 +40,8 @@ const AppRouter = () => {
           <Route path='/commissionDetail/:_id' element={<CommissionDetail/>}></Route>
           <Route path='/recruits' element={<Recruits />}></Route>
           <Route path='/agent' element={<Agents/>}></Route>
+          <Route path='/addNewRecruit' element={<AddNewRecruit/>}></Route>
+          <Route path='/addNewRecruit/:_id' element={<AddNewRecruit/>}></Route>
           <Route path='/addAgent' element={<AddNewAgent/>}></Route>
           <Route path='/addAgent/:id' element={<AddNewAgent/>}></Route>
           <Route path='/agentDetail/:_id' element={<AgentDetail/>}></Route>

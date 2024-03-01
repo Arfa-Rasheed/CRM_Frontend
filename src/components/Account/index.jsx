@@ -84,7 +84,7 @@ const AccountDetail = () => {
                 }}>
                     <SideBar />
                     <CustomizedSnackbars ref={snackbar_Ref} />
-                    <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: '92vh' }}>
+                    <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: '92vh' ,marginLeft:'18%' }}>
                         <Stack sx={{ width: '98%', height: '95%', backgroundColor: '#F2F2F2', borderRadius: '15px' }}>
                             <Stack alignItems={'center'} justifyContent={'center'} flexDirection={'row'} sx={{ width: '100%', height: '14vh' }}>
                                 <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{ width: '44%' }}>

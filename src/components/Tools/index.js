@@ -14,7 +14,7 @@ const Tools = () => {
           overflowY:'hidden'
         }}>
           <SideBar />
-          <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: '92vh' }}>
+          <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: '92vh' ,marginLeft:'18%'}}>
             <Stack sx={{ width: '98%', height: '95%', backgroundColor: '#F2F2F2', borderRadius: '15px' }}>
               <Stack alignItems={'center'} justifyContent={'space-around'} sx={{ width: '27%', height: '29vh', backgroundColor: 'white', borderRadius: '12px', marginLeft: '25px', marginTop: '121px' }}>
                 <Box sx={{ width: '95%',height:'4vh',borderRadius:'4px' , backgroundColor: '#8FAADC',textAlign:'center' }}>Tools</Box>

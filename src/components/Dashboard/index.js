@@ -197,7 +197,7 @@ const Dashboard = () => {
                         spacing={3}
                         sx={{
                             marginTop: '0px',
-                            marginLeft: '0px'
+                            marginLeft: '277px'
                         }}>
 
                         {/* 1st Container */}

@@ -103,7 +103,7 @@ const Recruits = () => {
         }}>
           <SideBar />
           <CustomSnackBars ref={snackbar_Ref}/>
-          <Stack sx={{ width: '81.7%' }}>
+          <Stack sx={{ width: '81.7%' ,marginLeft:'20%'}}>
             <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
               <Box sx={{ width: '60%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                 <Box sx={{ height: '12vh' }}>
@@ -154,7 +154,7 @@ const Recruits = () => {
                         backgroundColor: '#F08613',
                       },
                     }}
-                    onClick={() => { navigate('/addAgent') }}
+                    onClick={() => { navigate('/addNewRecruit') }}
                   >
                     <Grid container
                       alignItems={'center'}
@@ -173,7 +173,7 @@ const Recruits = () => {
                 sx={{ width: '100%' }}
                 gridHeader={gridHeader}
                 gridData={gridData}
-                baseURL={'/agentDetail/'}
+                baseURL={'/addNewRecruit/'}
 
               />
             </div>

@@ -210,7 +210,7 @@ const Policies = () => {
         }}>
           <SideBar />
           <CustomizedSnackbars ref={snackbar_Ref}/>
-          <Stack sx={{ width: '81.8%' }}>
+          <Stack sx={{ width: '81.8%',marginLeft:'17.5%' }}>
             <Box sx={{ width: '100%', height: '12vh', marginTop: '20px', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
               <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
                 InputProps={{

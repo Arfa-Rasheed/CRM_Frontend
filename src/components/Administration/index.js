@@ -140,7 +140,7 @@ const Administration = () => {
         }}>
           <SideBar />
           <CustomSnackbar ref={snackbar_Ref} />
-          <Stack sx={{ width: '81.7%' }}>
+          <Stack sx={{ width: '81.7%',marginLeft:'18%'  }}>
             <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
               <Box sx={{ width: '60%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                 <Box sx={{ height: '12vh' }}>

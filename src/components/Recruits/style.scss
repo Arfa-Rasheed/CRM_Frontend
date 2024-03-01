@@ -25,3 +25,32 @@
       }
    }
 }
+
+.form-questions{
+   font-size: 17px !important;
+   font-weight: bold !important;
+   color: rgb(0 0 0 / 67%);
+}
+
+.text-field-container{
+   justify-content:space-between ;
+   width:65%;
+   .text-field{
+   
+      .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
+         height:45px;
+         width:345px;
+      }
+
+      .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon.css-srn6bb-MuiAutocomplete-root .MuiOutlinedInput-root{
+         height: 44px;
+      }
+   }
+}
+// .text-field{
+   
+//    .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
+//       height:45px;
+//       width:345px;
+//    }
+// }

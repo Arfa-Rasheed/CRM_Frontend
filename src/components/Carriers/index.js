@@ -24,7 +24,7 @@ const Carriers = () => {
           overflowY:'hidden'
         }}>
           <SideBar />
-          <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: '92vh' }}>
+          <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: '92vh',marginLeft:'18%'  }}>
             {/* <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '98%', height: '95%', backgroundColor: '#F2F2F2', borderRadius: '15px' }}> */}
               <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '90%', height: '90%'}}>
                 <CarriersItems carrierPic={Carrier1}/>

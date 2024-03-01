@@ -114,7 +114,7 @@ const AddNewAgent = () => {
                 }}>
                     <SideBar />
                     <CustomSnackbar ref={snackbar_Ref} />
-                    <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: '92vh' }}>
+                    <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: '92vh',marginLeft:'18%' }}>
                         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '98%', height: '95%', backgroundColor: '#F2F2F2', borderRadius: '15px' }}>
                             <Stack alignItems={'center'} sx={{ width: '100%', height: '73%' }}>
                                 <Stack flexDirection={'row'} justifyContent={'center'} sx={{ width: "97%", height: '68%' }}>

@@ -152,7 +152,7 @@ const ApprovePolicy = () => {
                 }}>
                     <SideBar />
                     <CustomizedSnackbars ref={snackbar_Ref} />
-                    <Stack alignItems={'center'} sx={{ width: '81.8%' }}>
+                    <Stack alignItems={'center'} sx={{ width: '81.8%' ,marginLeft:'18%'}}>
                         <Box sx={{ height: '12vh' }}>
                             <Button
                                 variant="contained"

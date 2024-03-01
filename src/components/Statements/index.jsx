@@ -180,7 +180,7 @@ const Commissions = () => {
         }}>
           <SideBar />
           <CustomizedSnackbars ref={snackbar_Ref}/>
-          <Stack sx={{ width: '80.8%' }}>
+          <Stack sx={{ width: '80.8%',marginLeft:'18%' }}>
             <Stack sx={{ width: '99.9%', height: '24vh', marginLeft: '10px', marginTop: '17px', marginBottom: '-74px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
               {/* <h3 style={{ color: '#003478', marginLeft: '40px' }}>September 2023</h3> */}
               <Stack alignItems={'center'} sx={{ width: '100%', marginTop: '20px' }}>

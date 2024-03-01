@@ -75,7 +75,7 @@ const Agents = () => {
   const LoadgridData = async () => {
     dispatch(showLoader())
     console.log("isAdmin",isAdmin);
-    const res = await httpClient.get(isAdmin ? '/agents/getAllAgents' : '/agents/getAllAgentsAgentView').catch((error) => {
+    const res = await httpClient.get(isAdmin ? '/agents/getApprovedAgents' : '/agents/getAllAgentsAgentView').catch((error) => {
       dispatch(hideLoader()) 
       snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
     })
@@ -100,7 +100,7 @@ const Agents = () => {
         }}>
           <SideBar />
           <CustomizedSnackbars ref={snackbar_Ref}/>
-          <Stack sx={{ width: '81.7%' }}>
+          <Stack sx={{ width: '81.7%',marginLeft:'18%'  }}>
             <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
               <Box sx={{ width: '60%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                 <Box sx={{ height: '12vh' }}>

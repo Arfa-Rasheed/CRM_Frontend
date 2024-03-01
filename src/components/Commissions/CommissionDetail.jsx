@@ -100,7 +100,7 @@ const CommissionDetail = () => {
                 }}>
                     <SideBar />
                     <CustomizedSnackbars ref={snackbar_Ref}/>
-                    <Stack sx={{ width: '81.8%' }}>
+                    <Stack sx={{ width: '81.8%',marginLeft:'18%'  }}>
                         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "105vh", marginTop: '10px' }}>
                             <Stack alignItems={'center'} sx={{ width: '96%', height: '94%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
                                 {

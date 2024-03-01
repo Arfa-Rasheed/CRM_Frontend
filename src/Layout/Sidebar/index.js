@@ -11,7 +11,7 @@ import CommssionsIcon from '../../assets/CommisionsIcon.png'
 import RecruitsIcon from '../../assets/Recruits.png'
 import LogoutIcon from '../../assets/Logout.png'
 import rightArrow from '../../assets/right-arrow.png'
-import agentIcon from '../../assets/Agent.png' 
+import agentIcon from '../../assets/Agent.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { hideLoader, showLoader } from '../../Store/mainSlice'
@@ -21,19 +21,28 @@ const SideBar = () => {
     const dispatch = useDispatch()
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
 
-    const logoutHandler=()=>{
+    const logoutHandler = () => {
         dispatch(showLoader())
         localStorage.removeItem("authToken")
         localStorage.removeItem("isAdmin")
-        setTimeout(()=>{
+        setTimeout(() => {
             dispatch(hideLoader())
             navigate('/')
             dispatch(hideLoader())
-        },3000)
+        }, 3000)
     }
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', width: '18%', height: '124%', backgroundColor: '#EDEDED' }}>
+        <div style={{
+            position: 'fixed', // Set position to fixed
+            top: 33, // Set top position to 0
+            left: 0, // Set left position to 0
+            display: 'flex',
+            justifyContent: 'center',
+            width: '18%',
+            height: '124%',
+            backgroundColor: '#EDEDED'
+        }}>
             <Stack
                 justifyContent={'center'}
                 sx={{

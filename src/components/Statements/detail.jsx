@@ -97,7 +97,7 @@ const StatementDetail = () => {
                 }}>
                     <SideBar />
                     <CustomizedSnackbars ref={snackbar_Ref}/>
-                    <Stack sx={{ width: '81.8%' }}>
+                    <Stack sx={{ width: '81.8%' ,marginLeft:'18%'}}>
                         <Stack alignItems={'center'} justifyContent={'space-between'} sx={{ width: '100%', height: "105vh", marginTop: '10px' }}>
                             <Stack alignItems={'flex-end'} sx={{ width: '95%' }} >
                                 <Stack justifyContent='flex-end' sx={{ width: '18%' }}>
