@@ -71,6 +71,7 @@ const AddNewPolicy_Agent = () => {
     }
 
     useEffect(() => {
+        console.log("agentCode",policyData.agentCode);
         if (id) {
             getPolicyDetail()
         }
