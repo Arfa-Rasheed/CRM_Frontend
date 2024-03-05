@@ -14,9 +14,6 @@ const AddNewPolicy_Agent = () => {
     const navigate = useNavigate()
     const snackbar_Ref = useRef(null)
     const dispatch = useDispatch()
-    // const agentCode = localStorage.getItem('agentCode')
-    // const agentCarrierNumber = localStorage.getItem('agentCarrierNumber')
-    // const contractLevel = localStorage.getItem('contractLevel')
     const [policyData, setPolicyData] = useState({
         date: "",
         policyCarrier: "",
@@ -77,6 +74,7 @@ const AddNewPolicy_Agent = () => {
         }
     }, [])
 
+
     return (
         <div>
             <Header />
@@ -136,7 +134,7 @@ const AddNewPolicy_Agent = () => {
                                         />
 
                                         <TextField
-                                            disabled={true}
+                                            // disabled={true}
                                             label="Agent Code:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
@@ -145,7 +143,7 @@ const AddNewPolicy_Agent = () => {
                                         />
 
                                         <TextField
-                                            disabled={true}
+                                            // disabled={true}
                                             label="Contract Level:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
