@@ -39,16 +39,17 @@ const Login = () => {
             const authToken = res.data.token
             const isAdmin = res.data.isAdmin
             const userId = res.data.userId
-            const adminFirstName = res.data.firstName
+            const firstName =  res.data.firstName
+            const agentTitle = res.data.isAdmin ? "" : res.data.agentTitle
             localStorage.setItem('authToken', authToken);
             localStorage.setItem('isAdmin', isAdmin);
             localStorage.setItem("userId", userId)
-            localStorage.setItem("adminFirstName", adminFirstName)
+            localStorage.setItem("firstName", firstName)
+            localStorage.setItem("agentTitle", agentTitle)
             dispatch(setIsLoggedIn(true))
             dispatch(setUserDetail(res.data))
             console.log("userDetails", userDetails);
             console.log("userId", userId);
-            // console.log("res", res);
             snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
             setTimeout(() => {
                 navigate('/dashboard');
