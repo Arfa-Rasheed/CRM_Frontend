@@ -207,7 +207,7 @@ const CommissionDetail = () => {
 
                                         <TextField
                                             disabled={_id ? true : false}
-                                            label="Commissionable Amount%:"
+                                            label="Commissionable Amount:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
                                             value={policyData.commissionableAmountPercentage}
