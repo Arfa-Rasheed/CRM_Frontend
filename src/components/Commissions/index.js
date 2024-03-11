@@ -48,7 +48,7 @@ const Commissions = () => {
     },
     {
       field: 'policyValue',
-      headerName: "Comission Premium:",
+      headerName: "Premium:",
       isLink: true,
     },
     {
@@ -70,6 +70,11 @@ const Commissions = () => {
       field: 'agencyCommission',
       headerName: 'Agency Commission',
       isLink: true,
+    },
+    {
+      field:'commissionableAmountPercentage',
+      headerName:'Commissionable Amount',
+      isLink:true,
     },
     {
       field: 'agentCommission',
@@ -132,25 +137,65 @@ const Commissions = () => {
     }
   ]
 
-
-  const grid_data = [
+  const gridHeaderAgent = [
     {
-      isChargedBack: true,
-      dateOfPayment: '02/12/2022',
-      policyCarrier: "TransAmerica",
-      policyNumber: "KPT904704456",
-      agentCarrierNumber: "C-46786",
-      agentCode: "B-6769898768",
-      comissionPremium: "$20,000,00",
-      split: "",
-      contractLevel: "",
-      overwrite: "",
-      earnedAdv: "",
-      earnedAdvAmount: "$27,000,00"
+      field: 'policySubmissionDate',
+      headerName: "Policy Submission Date:",
+      isLink: true,
+
+    },
+    {
+      field: 'policyCarrier',
+      headerName: "Policy Carrier:",
+      isLink: true,
+    },
+    {
+      field: 'policyNumber',
+      headerName: "Policy Number:",
+      isLink: true,
+    },
+    {
+      field: 'agentCarrierNumber',
+      headerName: "Agent Carrier Number",
+      isLink: true,
+    },
+    {
+      field: 'agentCode',
+      headerName: "Agent Code:",
+      isLink: true,
+    },
+    {
+      field: 'policyValue',
+      headerName: "Premium:",
+      isLink: true,
+    },
+    {
+      field: 'splitPercentage',
+      headerName: "Split%:",
+
+    },
+    {
+      field: 'contractLevel',
+      headerName: "Contract Level:",
+      isLink: true,
+    },
+    {
+      field:'commissionableAmountPercentage',
+      headerName:'Commissionable Amount',
+      isLink:true,
     },
 
+    
+    {
+      field: 'agentCommission',
+      headerName: 'Agent Commission',
+      isLink: true,
+    },
+    
   ]
 
+
+  
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -188,10 +233,11 @@ const Commissions = () => {
           <SideBar />
           <CustomizedSnackbars ref={snackbar_Ref}/>
           <Stack sx={{ width: '80.8%',marginLeft:'18%' }}>
-            <Stack sx={{ width: '99.9%', height: '22vh', marginLeft: '10px', marginTop: '17px', marginBottom: '-71px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
-              <h3 style={{ color: '#003478', marginLeft: '40px' }}>September 2023</h3>
+            <Stack sx={{ width: '99.9%', height: '19vh', marginLeft: '10px', marginTop: '17px', marginBottom: '-71px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
+              <h2 style={{ color: 'black', textAlign:'center' }}>Commission</h2>
+              <h3 style={{ color: '#003478',marginLeft:'40px'}}> March 2024</h3>
               <Stack alignItems={'center'} sx={{ width: '100%' }}>
-                <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{ width: '65%', }}>
+                {/* <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{ width: '65%', }}>
                   <Button
                     variant="contained"
                     sx={{
@@ -244,12 +290,12 @@ const Commissions = () => {
                   >
                     Transaction Detail
                   </Button>
-                </Stack>
+                </Stack> */}
               </Stack>
             </Stack>
             <CRMGrid
               gridName='comissionGrid'
-              gridHeader={gridHeader}
+              gridHeader={isAdmin ? gridHeader : gridHeaderAgent}
               gridData={gridData}
               sx={{ borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
               baseURL={'/commissionDetail/'}

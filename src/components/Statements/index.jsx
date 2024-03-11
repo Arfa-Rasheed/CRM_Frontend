@@ -119,8 +119,8 @@ const Commissions = () => {
       isLink:true,
     },
     {
-      field: 'advPayment',
-      headerName: "Advance Payment",
+      field: 'agentCommission',
+      headerName: "Agent Commission",
       width: '20%',
       isLink:true,
     },
@@ -181,33 +181,18 @@ const Commissions = () => {
           <SideBar />
           <CustomizedSnackbars ref={snackbar_Ref}/>
           <Stack sx={{ width: '80.8%',marginLeft:'18%' }}>
-            <Stack sx={{ width: '99.9%', height: '24vh', marginLeft: '10px', marginTop: '17px', marginBottom: '-74px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
+            <Stack sx={{ width: '99.9%', height: '30vh', marginLeft: '10px', marginTop: '17px', marginBottom: '-74px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
               {/* <h3 style={{ color: '#003478', marginLeft: '40px' }}>September 2023</h3> */}
-              <Stack alignItems={'center'} sx={{ width: '100%', marginTop: '20px' }}>
-                <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{ width: '50%', }}>
-                  <Button
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "#F08613",
-                      color: 'white',
-                      width: '251px',
-                      height: "5vh",
-                      fontSize: '12px',
-                      "&:hover": {
-                        backgroundColor: "#F08613",
-                        color: 'white'
-                      },
-                    }}
-                  >
-                    Commision Statement
-                  </Button>
-                  <span><b>Date:04/03/2023</b></span>
+              <Stack alignItems={'center'} sx={{ width: '100%',height:'64px', marginTop: '20px' }}>
+                <Stack flexDirection={'row'}alignItems={'center'} justifyContent={'space-between'} sx={{ width: '50%', }}>
+                <h2 style={{ color: 'black' }}>Commission Statement</h2>
+                  <p><b>Date:03/12/2024</b></p>
 
 
                 </Stack>
               </Stack>
               <Stack flexDirection={'row'} justifyContent={'space-around'} sx={{ width: '100%' }}>
-                <h3 style={{ color: '#003478' }}>September 2023</h3>
+                <h3 style={{ color: '#003478' }}>March 2024</h3>
                 <Stack flexDirection={'row'}>
                   <Typography sx={{ marginTop: '20px' }}>Period:</Typography>
                   <Stack flexDirection={'row'}>

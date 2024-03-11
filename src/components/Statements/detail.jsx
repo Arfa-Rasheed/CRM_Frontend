@@ -107,7 +107,7 @@ const StatementDetail = () => {
                             </Stack>
                             <Stack alignItems={'center'} sx={{ width: '96%', height: '94%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
                                 <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '100%' }}>
-                                    <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '100%' }}>
+                                    <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height:isAdmin ? '100%' :'57%' }}>
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="Date:"
@@ -151,7 +151,7 @@ const StatementDetail = () => {
                                         />
                                         <TextField
                                             disabled={_id ? true : false}
-                                            label="Policy Premium:"
+                                            label="Premium:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
                                             value={policyData.policyValue}
@@ -186,7 +186,7 @@ const StatementDetail = () => {
                                             disabled={_id ? true : false}
                                             label="Agency Commission:"
                                             variant="filled"
-                                            sx={{ width: '30%' }}
+                                            sx={{ width: '30%',display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.agencyCommission}
                                             onChange={(e) => { handleInputChange(e.target.value, "agencyCommission") }}
                                         />
@@ -210,7 +210,7 @@ const StatementDetail = () => {
                                             disabled={_id ? true : false}
                                             label="Adv Payment:"
                                             variant="filled"
-                                            sx={{ width: '30%' }}
+                                            sx={{ width: '30%',display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.advPayment}
                                             onChange={(e) => { handleInputChange(e.target.value, "advPayment") }}
                                         />
@@ -218,7 +218,7 @@ const StatementDetail = () => {
                                             disabled={_id ? true : false}
                                             label="OW1 Contract Level:"
                                             variant="filled"
-                                            sx={{ width: '30%' }}
+                                            sx={{ width: '30%',display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.overwrittingAgentContractLevel1}
                                             onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentContractLevel1") }}
                                         />
@@ -226,14 +226,14 @@ const StatementDetail = () => {
                                             disabled={_id ? true : false}
                                             label="OW1 Commission"
                                             variant="filled"
-                                            sx={{ width: '30%' }}
+                                            sx={{ width: '30%',display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.overwrittingAgentCommission1}
                                             onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentCommission1") }} />
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="OW2 Contract Level:"
                                             variant="filled"
-                                            sx={{ width: '30%' }}
+                                            sx={{ width: '30%',display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.overwrittingAgentContractLevel2}
                                             onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentContractLevel2") }}
                                         />
@@ -241,28 +241,28 @@ const StatementDetail = () => {
                                             disabled={_id ? true : false}
                                             label="OW2 Commission"
                                             variant="filled"
-                                            sx={{ width: '30%' }}
+                                            sx={{ width: '30%',display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.overwrittingAgentCommission2}
                                             onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentCommission2") }} />
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="Split2_SplitRatio"
                                             variant="filled"
-                                            sx={{ width: '30%' }}
+                                            sx={{ width: '30%',display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.split2_splitRatio}
                                             onChange={(e) => { handleInputChange(e.target.value, "split2_splitRatio") }} />
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="Split_2_OWAgent1_Commission"
                                             variant="filled"
-                                            sx={{ width: '30%' }}
+                                            sx={{ width: '30%',display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.split_2_OWAgent1_Commission}
                                             onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent1_Commission") }} />
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="Split_2_OWAgent2_Commission"
                                             variant="filled"
-                                            sx={{ width: '30%' }}
+                                            sx={{ width: '30%',display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.split_2_OWAgent2_Commission}
                                             onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent2_Commission") }} />
                                     </Stack>

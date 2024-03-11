@@ -29,13 +29,13 @@ const Carriers = () => {
               <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '90%', height: '90%'}}>
                 <CarriersItems carrierPic={Carrier1}/>
                 <CarriersItems carrierPic={Carrier2}/>
-                <CarriersItems carrierPic={Carrier3}/>
-                <CarriersItems carrierPic={Carrier4}/>
-                <CarriersItems carrierPic={Carrier5}/>
-                <CarriersItems carrierPic={Carrier6}/>
+                <CarriersItems carrierPic={Carrier3} url={'https://secure.transamerica.com/login/sign-in/login.html?_ga=2.49544806.1513904153.1708785280-2023475507.1686661885'}/>
+                <CarriersItems carrierPic={Carrier4} url={'	https://www.athene.com/'}/>
+                <CarriersItems carrierPic={Carrier5} url={'	https://nationwidefinancial.com/'}/>
+                <CarriersItems carrierPic={Carrier6} url={'https://www.northamericancompany.com/'}/>
                 <CarriersItems carrierPic={Carrier7}/>
-                <CarriersItems carrierPic={Carrier8}/>
-                <CarriersItems carrierPic={Carrier9}/>
+                <CarriersItems carrierPic={Carrier8} url={'https://www.aetna.com/insurance-producer.html'}/>
+                <CarriersItems carrierPic={Carrier9} url={'https://www.bcbstx.com/producer'}/>
               </Stack>
             {/* </Stack> */}
           </Stack>

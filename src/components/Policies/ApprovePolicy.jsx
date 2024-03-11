@@ -235,19 +235,7 @@ const ApprovePolicy = () => {
                                                 onChange={(e) => { handleInputChange(e.target.value, "agencyCommissionPercentage", "number") }}
                                             />
                                         </Stack>
-                                        {/* <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Agent Commision</Typography>
-                                            <TextField
-
-                                                type='number'
-                                                // label="Policy Submission Date:" 
-                                                className='text-field'
-                                                variant="outlined"
-                                                value={policyData.agentCommission}
-                                                sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "agentCommission", "number") }}
-                                            />
-                                        </Stack> */}
+                                      
 
 
                                     </Stack>
@@ -399,10 +387,10 @@ const ApprovePolicy = () => {
                                                 value={policyData.agentLastName}
                                                 sx={{ width: '20%' }}
                                                 onChange={(e) => { handleInputChange(e.target.value, "agentLastName", "text") }}
-                                            />,
+                                            />
                                         </Stack>
                                         <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Agent Code:</Typography>
+                                            <Typography className='input-label'>Writting Agent Code:</Typography>
                                             <TextField
 
                                                 variant="outlined"
@@ -433,13 +421,10 @@ const ApprovePolicy = () => {
                                                 onChange={(e) => { handleInputChange(e.target.value, "agentCarrierNumber", "text") }}
                                             />
                                         </Stack>
-
-
-
                                     </Stack>
 
                                     <Stack direction={'row'}>
-                                        <Typography>Is Split</Typography>
+                                        <Typography>Is there any split</Typography>
                                         <Switch
                                             checked={isChecked}
                                             onChange={handleToggle}
@@ -558,7 +543,7 @@ const ApprovePolicy = () => {
                                     <Typography className='details-heading'>OVERWRITE1 DETAILS:</Typography>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '79%' }}>
                                         <Stack className='Policy-textfield'>
-                                            <Typography className='input-label' >Agent First Name:</Typography>
+                                            <Typography className='input-label' >OW1 Agent First Name:</Typography>
                                             <TextField
 
                                                 className='text-field'
@@ -569,7 +554,7 @@ const ApprovePolicy = () => {
                                             />
                                         </Stack>
                                         <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Agent Last Name:</Typography>
+                                            <Typography className='input-label'>OW1 Agent Last Name:</Typography>
                                             <TextField
 
                                                 className='text-field'
@@ -580,7 +565,7 @@ const ApprovePolicy = () => {
                                             />
                                         </Stack>
                                         <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Agent Code:</Typography>
+                                            <Typography className='input-label'>OW1 Agent Code:</Typography>
                                             <TextField
 
                                                 variant="outlined"
@@ -590,7 +575,7 @@ const ApprovePolicy = () => {
                                             />
                                         </Stack>
                                         <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Contract Level:</Typography>
+                                            <Typography className='input-label'>OW1 Contract Level:</Typography>
                                             <TextField
 
                                                 variant="outlined"
@@ -605,7 +590,7 @@ const ApprovePolicy = () => {
                                     <Typography className='details-heading'>OVERWRITE2 DETAILS:</Typography>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '79%' }}>
                                         <Stack className='Policy-textfield'>
-                                            <Typography className='input-label' >Agent First Name:</Typography>
+                                            <Typography className='input-label' >OW2 Agent First Name:</Typography>
                                             <TextField
 
                                                 className='text-field'
@@ -616,7 +601,7 @@ const ApprovePolicy = () => {
                                             />
                                         </Stack>
                                         <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Agent Last Name:</Typography>
+                                            <Typography className='input-label'>OW2 Agent Last Name:</Typography>
                                             <TextField
 
                                                 className='text-field'
@@ -627,7 +612,7 @@ const ApprovePolicy = () => {
                                             />
                                         </Stack>
                                         <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Agent Code:</Typography>
+                                            <Typography className='input-label'>OW2 Agent Code:</Typography>
                                             <TextField
 
                                                 variant="outlined"
@@ -637,7 +622,7 @@ const ApprovePolicy = () => {
                                             />
                                         </Stack>
                                         <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Contract Level:</Typography>
+                                            <Typography className='input-label'>OW2 Contract Level:</Typography>
                                             <TextField
 
                                                 variant="outlined"
