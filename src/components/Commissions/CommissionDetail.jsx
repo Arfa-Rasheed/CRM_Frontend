@@ -22,6 +22,8 @@ const CommissionDetail = () => {
         policySubmissionDate: "",
         policyCarrier: "",
         policyNumber: 0,
+        agentFirstName: "",
+        agentLastName: "",
         agentCarrierNumber: 0,
         agentCode: "",
         policyValue: 0,
@@ -47,6 +49,8 @@ const CommissionDetail = () => {
         split_2_OWAgent1_Commission: 0,
         split_2_OWAgent2_AgentCode: "",
         split_2_OWAgent2_Commission: 0,
+        insuredFirstName: "",
+        insuredLastName: ""
 
 
     })
@@ -78,12 +82,28 @@ const CommissionDetail = () => {
 
         if (res.status === 200) {
             dispatch(hideLoader())
-            snackbar_Ref.current.showMessage("error", res?.data.message, "", "i-chk-circle");
+            snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
             setTimeout(() => {
                 navigate('/statements');
             }, 4000);
         }
     }
+
+    const chargedBackHandler = async () => {
+        dispatch(showLoader())
+        const res = await httpClient.post(`/policies/chargedBack/${_id}`, policyData).catch((error) => {
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+        })
+        if (res.status === 200) {
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
+            setTimeout(() => {
+                // navigate('/statements');
+            }, 4000);
+        }
+    }
+
 
     useEffect(() => {
         if (_id) {
@@ -98,12 +118,12 @@ const CommissionDetail = () => {
                 <div style={{
                     display: 'flex',
                     height: '91.6vh',
-                    overflowY: 'hidden'
+                    // overflowY: 'hidden'
                 }}>
                     <SideBar />
                     <CustomizedSnackbars ref={snackbar_Ref} />
-                    <Stack sx={{ width: '81.8%', marginLeft: '18%' }}>
-                        <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "105vh", marginTop: '10px' }}>
+                    <Stack sx={{ width: '81.8%', height: '140vh', marginLeft: '18%' }}>
+                        <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "140vh", marginTop: '10px' }}>
                             <Stack alignItems={'center'} sx={{ width: '96%', height: '98%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
                                 {
                                     isAdmin
@@ -145,6 +165,22 @@ const CommissionDetail = () => {
                                             variant="filled"
                                             value={policyData.policyNumber}
                                             onChange={(e) => { handleInputChange(e.target.value, "policyNumber") }}
+                                        />
+                                        <TextField
+                                            disabled={_id ? true : false}
+                                            sx={{ width: '30%' }}
+                                            label="Agent First Name:"
+                                            variant="filled"
+                                            value={policyData.agentFirstName}
+                                            onChange={(e) => { handleInputChange(e.target.value, "agentFirstName") }}
+                                        />
+                                        <TextField
+                                            disabled={_id ? true : false}
+                                            sx={{ width: '30%' }}
+                                            label="Agent Last Name:"
+                                            variant="filled"
+                                            value={policyData.agentLastName}
+                                            onChange={(e) => { handleInputChange(e.target.value, "agentLastName") }}
                                         />
                                         <TextField
                                             disabled={_id ? true : false}
@@ -259,7 +295,7 @@ const CommissionDetail = () => {
                                             disabled={_id ? true : false}
                                             label="OW1 Contract Level:"
                                             variant="filled"
-                                            sx={{ width: '30%',display: isAdmin ? 'flex' : 'none' }}
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.overwrittingAgentContractLevel1}
                                             onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentContractLevel1") }}
                                         />
@@ -267,14 +303,14 @@ const CommissionDetail = () => {
                                             disabled={_id ? true : false}
                                             label="OW1 Commission"
                                             variant="filled"
-                                            sx={{ width: '30%' ,display: isAdmin ? 'flex' : 'none'}}
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.overwrittingAgentCommission1}
                                             onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentCommission1") }} />
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="OW2 Contract Level:"
                                             variant="filled"
-                                            sx={{ width: '30%',display: isAdmin ? 'flex' : 'none' }}
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.overwrittingAgentContractLevel2}
                                             onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentContractLevel2") }}
                                         />
@@ -282,33 +318,47 @@ const CommissionDetail = () => {
                                             disabled={_id ? true : false}
                                             label="OW2 Commission"
                                             variant="filled"
-                                            sx={{ width: '30%',display: isAdmin ? 'flex' : 'none' }}
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.overwrittingAgentCommission2}
                                             onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentCommission2") }} />
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="Split2_SplitRatio"
                                             variant="filled"
-                                            sx={{ width: '30%',display: isAdmin ? 'flex' : 'none'}}
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.split2_splitRatio}
                                             onChange={(e) => { handleInputChange(e.target.value, "split2_splitRatio") }} />
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="Split_2_OWAgent1_Commission"
                                             variant="filled"
-                                            sx={{ width: '30%',display: isAdmin ? 'flex' : 'none' }}
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.split_2_OWAgent1_Commission}
                                             onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent1_Commission") }} />
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="Split_2_OWAgent2_Commission"
                                             variant="filled"
-                                            sx={{ width: '30%' ,display: isAdmin ? 'flex' : 'none' }}
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.split_2_OWAgent2_Commission}
                                             onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent2_Commission") }} />
+                                        <TextField
+                                            disabled={_id ? true : false}
+                                            label="Insured First Name"
+                                            variant="filled"
+                                            sx={{ width: '30%' }}
+                                            value={policyData.insuredFirstName}
+                                            onChange={(e) => { handleInputChange(e.target.value, "insuredFirstName") }} />
+                                        <TextField
+                                            disabled={_id ? true : false}
+                                            label="Insured Last Name"
+                                            variant="filled"
+                                            sx={{ width: '30%' }}
+                                            value={policyData.insuredLastName}
+                                            onChange={(e) => { handleInputChange(e.target.value, "insuredLastName") }} />
                                     </Stack>
 
-                                    <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'flex-end'} sx={{ width: '100%', height: '13vh', }}>
+                                    <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '100%', height: '13vh', }}>
                                         <Button
                                             variant="contained"
                                             // disabled={isAdmin ? (policyData.isPaid ? true : false) : false}
@@ -330,6 +380,27 @@ const CommissionDetail = () => {
                                         >
                                             {isAdmin ? <>Paid Out</> : <>Close</>}
                                         </Button>
+                                        {policyData.isPaid ? (
+                                            <Button
+                                                variant="contained"
+                                                sx={{
+                                                    display: isAdmin ? 'block' : 'none',
+                                                    backgroundColor: "#F08613",
+                                                    color: 'white',
+                                                    width: '186px',
+                                                    height: "5vh",
+                                                    fontSize: '12px',
+                                                    "&:hover": {
+                                                        backgroundColor: '#F08613',
+                                                    },
+                                                }}
+                                                onClick={chargedBackHandler}
+                                            >
+                                                Charge Back
+                                            </Button>
+                                        ) : <></>}
+
+
                                     </Stack>
                                 </Stack>
                             </Stack>

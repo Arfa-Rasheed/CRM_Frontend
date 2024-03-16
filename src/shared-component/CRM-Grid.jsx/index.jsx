@@ -40,6 +40,7 @@ const CRMGrid = (props) => {
         marginTop: '15px',
         marginLeft: '10px',
         marginRight: '10px',
+        marginBottom:'20px',
         boxShadow: 'none'
       }}
     >

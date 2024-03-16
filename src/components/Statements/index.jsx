@@ -21,7 +21,7 @@ const Commissions = () => {
   })
   const adminGridHeader = [
     {
-      field: 'policySubmissionDate',
+      field: 'policyDate',
       headerName: "Policy Date",
       width: '20%',
       isLink:true,
@@ -45,8 +45,8 @@ const Commissions = () => {
       isLink:true,
     },
     {
-      field: 'policyValue',
-      headerName: "Policy Value:",
+      field: 'premium',
+      headerName: "Premium:",
       width: '20%',
       isLink:true,
     },

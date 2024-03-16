@@ -12,6 +12,13 @@ import Carrier6 from '../../assets/Carrier 6.png'
 import Carrier7 from '../../assets/Carrier 7.png'
 import Carrier8 from '../../assets/Carrier8.png'
 import Carrier9 from '../../assets/carrier9.png'
+import UnitedHealthCare from '../../assets/United HealthCare.png'
+import LSPN from '../../assets/LSPNPic.png'
+import UnitedAmerica from '../../assets/UnitedAmericanPic.png'
+import Cigna from '../../assets/CignaPic.png'
+import Debtmerica from '../../assets/DeptmericaPic.png'
+import Prudential from '../../assets/PrudentialPic.png'
+import MutualOfUmaha from '../../assets/MutualOfUmahaPic.png'
 
 const Carriers = () => {
   return (
@@ -21,10 +28,10 @@ const Carriers = () => {
         <div style={{
           display: 'flex',
           height: '92vh',
-          overflowY:'hidden'
+          // overflowY:'hidden'
         }}>
           <SideBar />
-          <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: '92vh',marginLeft:'18%'  }}>
+          <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: '200vh',marginLeft:'18%'  }}>
             {/* <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '98%', height: '95%', backgroundColor: '#F2F2F2', borderRadius: '15px' }}> */}
               <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '90%', height: '90%'}}>
                 <CarriersItems carrierPic={Carrier1}/>
@@ -36,6 +43,14 @@ const Carriers = () => {
                 <CarriersItems carrierPic={Carrier7}/>
                 <CarriersItems carrierPic={Carrier8} url={'https://www.aetna.com/insurance-producer.html'}/>
                 <CarriersItems carrierPic={Carrier9} url={'https://www.bcbstx.com/producer'}/>
+                <CarriersItems carrierPic={UnitedHealthCare} />
+                <CarriersItems carrierPic={LSPN} />
+                <CarriersItems carrierPic={UnitedAmerica} />
+                <CarriersItems carrierPic={Cigna} />
+                <CarriersItems carrierPic={Debtmerica} />
+                <CarriersItems carrierPic={Prudential} />
+                <CarriersItems carrierPic={MutualOfUmaha} />
+
               </Stack>
             {/* </Stack> */}
           </Stack>
