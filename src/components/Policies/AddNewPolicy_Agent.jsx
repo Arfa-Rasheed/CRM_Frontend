@@ -134,7 +134,7 @@ const AddNewPolicy_Agent = () => {
                                         />
 
                                         <TextField
-                                            // disabled={true}
+                                            disabled={true}
                                             label="Agent Code:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
@@ -143,7 +143,7 @@ const AddNewPolicy_Agent = () => {
                                         />
 
                                         <TextField
-                                            // disabled={true}
+                                            disabled={true}
                                             label="Contract Level:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
