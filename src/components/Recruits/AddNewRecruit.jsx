@@ -8,6 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import httpClient from '../../_util/api'
 import { useDispatch } from 'react-redux'
 import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar'
+import { Asterisk } from 'phosphor-react'
 // import states from '../../constants'
 
 const AddNewRecruit = () => {
@@ -212,7 +213,9 @@ const AddNewRecruit = () => {
                         }}>
                             <Stack className='text-field-container'>
                                 <Stack className='text-field'>
-                                    <Typography className='form-questions'>To start up, please tell us Agent's Resident State </Typography>
+                                    <Typography className='form-questions'>To start up, please tell us Agent's Resident State
+                                        <Asterisk color='red' size={12} weight="bold" />
+                                    </Typography>
 
                                     <Autocomplete
                                         disablePortal
@@ -229,7 +232,8 @@ const AddNewRecruit = () => {
                             </Stack>
 
                             <Stack>
-                                <Typography className='form-questions'>Is Agent above 18 yrs and legally authorized to work in the U. S.? </Typography>
+                                <Typography className='form-questions'>Is Agent above 18 yrs and legally authorized to work in the U. S.? 
+                                <Asterisk color='red' size={12} weight="bold" /></Typography>
                                 <FormGroup>
                                     <FormControlLabel checked={agentData.age === 'Yes'} control={<Checkbox onChange={(e) => { handleInputChange("Yes", "age") }} />} label="Yes" />
                                     <FormControlLabel checked={agentData.age === 'No'} control={<Checkbox onChange={(e) => { handleInputChange("No", "age") }} />} label="No" />
@@ -238,7 +242,8 @@ const AddNewRecruit = () => {
 
                             {/* Name Stack */}
                             <Stack>
-                                <Typography className='form-questions'>Name</Typography>
+                                <Typography className='form-questions'>Name
+                                <Asterisk color='red' size={12} weight="bold" /></Typography>
                                 <Stack>
                                     <Stack flexDirection={'row'} className='text-field-container'>
                                         <Stack className='text-field'>
@@ -246,7 +251,8 @@ const AddNewRecruit = () => {
                                                 value={agentData.firstName}
                                                 onChange={(e) => { handleInputChange(e.target.value, "firstName") }}
                                             />
-                                            <Typography>First</Typography>
+                                            <Typography>First
+                                            </Typography>
                                         </Stack>
 
                                         <Stack className='text-field'>
@@ -262,7 +268,9 @@ const AddNewRecruit = () => {
 
                             {/* Email Stack */}
                             <Stack>
-                                <Typography className='form-questions'>Email</Typography>
+                                <Typography className='form-questions'>Email
+                                <Asterisk color='red' size={12} weight="bold" />
+                                </Typography>
                                 <Stack>
                                     <Stack flexDirection={'row'} className='text-field-container'>
                                         <Stack className='text-field'>
@@ -286,7 +294,8 @@ const AddNewRecruit = () => {
 
                             {/* Address Stack */}
                             <Stack>
-                                <Typography className='form-questions'>Address</Typography>
+                                <Typography className='form-questions'>Address
+                                <Asterisk color='red' size={12} weight="bold" /></Typography>
                                 <Stack>
                                     <Stack className='text-field-container'>
                                         <Stack className='text-field'>
@@ -325,7 +334,7 @@ const AddNewRecruit = () => {
                                                 disablePortal
                                                 id="combo-box-demo"
                                                 options={states}
-                                                sx={{ width: 350 ,height:45}}
+                                                sx={{ width: 350, height: 45 }}
                                                 renderInput={(params) => <TextField {...params} label="Select a State" />}
                                                 value={agentData.residentState}
                                                 onChange={(e, newValue) => {
@@ -352,7 +361,8 @@ const AddNewRecruit = () => {
 
                             {/* Active Licensed Stack  */}
                             <Stack >
-                                <Typography className='form-questions'>Do Agent have an Active License?</Typography>
+                                <Typography className='form-questions'>Do Agent have an Active License?
+                                <Asterisk color='red' size={12} weight="bold" /></Typography>
                                 <Stack>
                                     <FormGroup>
                                         <Stack flexDirection={'row'}>
@@ -367,7 +377,9 @@ const AddNewRecruit = () => {
                             {agentData.recruitingAgentCode ?
                                 (
                                     <Stack className='text-field-container'>
-                                        <Typography className='form-questions'>Who is Recruiting Agent?</Typography>
+                                        <Typography className='form-questions'>Who is Recruiting Agent?
+                                        <Asterisk color='red' size={12} weight="bold" />
+                                        </Typography>
                                         <Stack className='text-field'>
                                             <TextField
                                                 value={agentData.recruitingAgentCode}
@@ -386,7 +398,8 @@ const AddNewRecruit = () => {
                                     (
                                         <>
                                             <Stack className='text-field-container'>
-                                                <Typography className='form-questions'>Agent's Contract Level</Typography>
+                                                <Typography className='form-questions'>Agent's Contract Level
+                                                <Asterisk color='red' size={12} weight="bold" /></Typography>
                                                 <Stack className='text-field'>
                                                     <TextField />
                                                 </Stack>
@@ -394,7 +407,8 @@ const AddNewRecruit = () => {
 
 
                                             <Stack className='text-field-container'>
-                                                <Typography className='form-questions'>Agent's Role</Typography>
+                                                <Typography className='form-questions'>Agent's Role
+                                                <Asterisk color='red' size={12} weight="bold" /></Typography>
                                                 <Stack className='text-field'>
                                                     <TextField />
                                                 </Stack>
@@ -402,7 +416,8 @@ const AddNewRecruit = () => {
 
 
                                             <Stack className='text-field-container'>
-                                                <Typography className='form-questions'>Agent's Title</Typography>
+                                                <Typography className='form-questions'>Agent's Title
+                                                <Asterisk color='red' size={12} weight="bold" /></Typography>
                                                 <Stack className='text-field'>
                                                     <TextField />
                                                 </Stack>
@@ -416,6 +431,7 @@ const AddNewRecruit = () => {
                             <Stack flexDirection={'row'} justifyContent={'space-between'}>
                                 <Button
                                     variant="contained"
+                                    disabled = ""
                                     sx={{
                                         backgroundColor: "#003478",
                                         color: 'white',

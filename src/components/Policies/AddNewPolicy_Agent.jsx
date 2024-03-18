@@ -158,14 +158,6 @@ const AddNewPolicy_Agent = () => {
                                             value={policyData.policyValue}
                                             onChange={(e) => { handleInputChange(e.target.value, "policyValue") }}
                                         />
-                                        {/* <TextField
-                                            disabled={id ? true : false}
-                                            label="Adv Payment %:"
-                                            variant="filled"
-                                            sx={{ width: '30%' }}
-                                            value={policyData.advPaymentPercentage}
-                                            onChange={(e) => { handleInputChange(e.target.value, "advPaymentPercentage") }}
-                                        /> */}
                                         <TextField
                                             disabled={id ? true : false}
                                             label="Insured First Name:"

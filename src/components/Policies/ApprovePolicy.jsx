@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Box, Button, Grid, InputAdornment, TextField, Stack, Typography, Switch, LinearProgress } from '@mui/material'
-import { MagnifyingGlass, Notepad, Plus } from 'phosphor-react'
+import { Asterisk, AsteriskSimple, MagnifyingGlass, Notepad, Plus } from 'phosphor-react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import httpClient from '../../_util/api'
@@ -225,7 +225,9 @@ const ApprovePolicy = () => {
                                             />
                                         </Stack>
                                         <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Agency Commision %</Typography>
+                                            <Typography className='input-label'>Agency Commision %
+                                            <Asterisk color='red' size={12} weight="bold" />
+                                            </Typography>
                                             <TextField
 
                                                 type='number'
@@ -243,7 +245,8 @@ const ApprovePolicy = () => {
                                     <Typography className='details-heading'>POLICY DETAILS:</Typography>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%' }}>
                                         <Stack className='Policy-textfield'>
-                                            <Typography className='input-label' >Policy Submission Date:</Typography>
+                                            <Typography className='input-label' >Policy Submission Date:
+                                            <Asterisk color='red' size={12} weight="bold" /></Typography>
                                             <TextField
 
                                                 className='text-field'
@@ -285,7 +288,8 @@ const ApprovePolicy = () => {
                                             />
                                         </Stack>
                                         <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Advance Payment %</Typography>
+                                            <Typography className='input-label'>Advance Payment %
+                                            <Asterisk color='red' size={12} weight="bold" /></Typography>
                                             <TextField
 
                                                 type='number'
@@ -642,7 +646,9 @@ const ApprovePolicy = () => {
                                             sx={{ width: '100%', height: '13vh' }}>
                                             <Button
                                                 variant="contained"
+                                                disabled={ policyData.agencyCommissionPercentage ? false : policyData.advPaymentPercentage ? false : policyData.policySubmissionDate ? false : true}
                                                 sx={{
+                                                    // disabled: policyData.agencyCommissionPercentage ? false : policyData.advPaymentPercentage ? false : policyData.policySubmissionDate ? false : true,
                                                     backgroundColor: "#003478",
                                                     color: 'white',
                                                     width: '186px',
@@ -651,11 +657,14 @@ const ApprovePolicy = () => {
                                                     "&:hover": {
                                                         backgroundColor: '#003478',
                                                     },
+                                                    "&:disabled":{
+                                                            backgroundColor: '#406391',
+                                                            color: 'white',
+                                                    }
                                                 }}
-                                                // onClick={() => navigate('/policies')}
                                                 onClick={approveHandler}
                                             >
-                                                {id ? "Approve" : "Save"}
+                                                Approve
                                             </Button>
                                         </Stack>
                                     </Stack>
