@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import { MenuItem, Popover, Stack, Typography } from '@mui/material';
 import './style.scss'
 import httpClient from '../../../_util/api';
+import { Bell } from 'phosphor-react';
 
 const Notifications = (props) => {
   const agentCode = localStorage.getItem('agentCode')
@@ -60,14 +62,18 @@ const Notifications = (props) => {
 
   return (
     <div style={{
-      display: 'flex', alignItems: 'center', justifyContent: 'center', width: '4%', height: '6vh', backgroundColor: 'white', borderRadius: '30px',
+      display: 'flex', alignItems: 'center', justifyContent: 'center', width: '4%', height: '6vh', backgroundColor:anchorEl ? '#F08613' : 'white', borderRadius: '30px',
       '&:hover': {
         backgroundColor: "#F08613" ,
         cursor: 'pointer'
       }
     }}
     >
-      <NotificationsIcon sx={{ color: '#404040', fontSize: '31px' }} onClick={handleClick}  />
+      {
+        anchorEl ? (<NotificationsIcon sx={{ color: 'white', fontSize: '31px' }} onClick={handleClick} />)
+        : ( <NotificationsIcon sx={{ color: '#404040', fontSize: '31px' }} onClick={handleClick}  />)
+      }
+       {/* <NotificationsIcon sx={{ color: '#404040', fontSize: '31px' }} onClick={handleClick}  /> */}
       <Popover
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
