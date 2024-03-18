@@ -42,12 +42,14 @@ const Login = () => {
             const firstName =  res.data.firstName
             const agentTitle = res.data.isAdmin ? "" : res.data.agentTitle
             const agentCode = res.data.isAdmin ? "" : res.data.agentCode
+            const contractLevel = res.data.isAdmin ? "" :res.data.contractLevel
             localStorage.setItem('authToken', authToken);
             localStorage.setItem('isAdmin', isAdmin);
             localStorage.setItem("userId", userId)
             localStorage.setItem("firstName", firstName)
             localStorage.setItem("agentTitle", agentTitle)
             localStorage.setItem("agentCode",agentCode)
+            localStorage.setItem("contractLevel",contractLevel)
             dispatch(setIsLoggedIn(true))
             dispatch(setUserDetail(res.data))
             console.log("userDetails", userDetails);
