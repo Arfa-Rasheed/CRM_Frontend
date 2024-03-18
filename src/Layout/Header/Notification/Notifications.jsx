@@ -73,7 +73,6 @@ const Notifications = (props) => {
         anchorEl ? (<NotificationsIcon sx={{ color: 'white', fontSize: '31px' }} onClick={handleClick} />)
         : ( <NotificationsIcon sx={{ color: '#404040', fontSize: '31px' }} onClick={handleClick}  />)
       }
-       {/* <NotificationsIcon sx={{ color: '#404040', fontSize: '31px' }} onClick={handleClick}  /> */}
       <Popover
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
