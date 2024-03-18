@@ -1,7 +1,7 @@
 import { AppBar, Divider, Stack, Toolbar } from '@mui/material'
 import React from 'react'
 import Profile from './Profile'
-import Notifications from './Notifications'
+import Notifications from './Notification/Notifications'
 import Logo from './Logo'
 
 const Header = () => {
