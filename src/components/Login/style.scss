@@ -7,6 +7,9 @@
     .textField-container{
         width:100%;
         height:9vh;
+        .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+            height: 0px !important;
+        }
         // border:2px solid blue
         // display: flex;
         // justify-content:;
