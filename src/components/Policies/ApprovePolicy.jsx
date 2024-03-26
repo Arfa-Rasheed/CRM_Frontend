@@ -18,10 +18,11 @@ const ApprovePolicy = () => {
     const snackbar_Ref = useRef()
     const dispatch = useDispatch()
     const [commissionSplit, setCommisionSplit] = useState("Yes")
-    const [isChecked, setIsChecked] = useState(false)
+    // const [isChecked, setIsChecked] = useState(false)
     const isAdmin = localStorage.getItem("isAdmin")
     const { id } = useParams()
     const [policyData, setPolicyData] = useState({
+        isSplit: false,
         id: "",
         date: "",
         isApproved: false,
@@ -31,7 +32,7 @@ const ApprovePolicy = () => {
         agencyCommissionPercentage: 0,
         paidAgencyCommission: 0,
 
-        policySubmissionDate: "",
+        policyApprovalDate: "",
         policyCarrier: "",
         policyType: "",
         policyNumber: "",
@@ -131,8 +132,26 @@ const ApprovePolicy = () => {
         }
     }
 
+    const chargedBackHandler = async () => {
+        dispatch(showLoader())
+        const res = await httpClient.post(`/policies/chargedBack/${id}`, policyData).catch((error) => {
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+        })
+        if (res.status === 200) {
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
+            setTimeout(() => {
+                // navigate('/statements');
+            }, 4000);
+        }
+    }
+
     const handleToggle = () => {
-        setIsChecked((prev) => !prev);
+        setPolicyData(prevState => ({
+            ...prevState,
+            isSplit: !prevState.isSplit,
+        }));
     };
 
     useEffect(() => {
@@ -152,7 +171,7 @@ const ApprovePolicy = () => {
                 }}>
                     <SideBar />
                     <CustomizedSnackbars ref={snackbar_Ref} />
-                    <Stack alignItems={'center'} sx={{ width: '81.8%' ,marginLeft:'18%'}}>
+                    <Stack alignItems={'center'} sx={{ width: '81.8%', marginLeft: '18%' }}>
                         <Box sx={{ height: '12vh' }}>
                             <Button
                                 variant="contained"
@@ -188,12 +207,11 @@ const ApprovePolicy = () => {
                         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "112vh", marginTop: '10px' }}>
 
                             <Stack alignItems={'center'} sx={{ width: '96%', height: '100%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
-                                <Stack sx={{ width: '89%' }}>
+                                <Stack sx={{ width: '89%' }} >
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '79%', height: '59%' }}>
                                         <Stack className='Policy-textfield'>
                                             <Typography className='input-label' >Date:</Typography>
                                             <TextField
-
                                                 className='text-field'
                                                 variant="outlined"
                                                 value={policyData.date}
@@ -205,7 +223,6 @@ const ApprovePolicy = () => {
                                         <Stack className='Policy-textfield'>
                                             <Typography className='input-label'>Policy Registration Id:</Typography>
                                             <TextField
-
                                                 className='text-field'
                                                 variant="outlined"
                                                 value={policyData.id}
@@ -226,10 +243,9 @@ const ApprovePolicy = () => {
                                         </Stack>
                                         <Stack className='Policy-textfield'>
                                             <Typography className='input-label'>Agency Commision %
-                                            <Asterisk color='red' size={12} weight="bold" />
+                                                <Asterisk color='red' size={12} weight="bold" />
                                             </Typography>
                                             <TextField
-
                                                 type='number'
                                                 variant="outlined"
                                                 value={policyData.agencyCommissionPercentage}
@@ -237,23 +253,20 @@ const ApprovePolicy = () => {
                                                 onChange={(e) => { handleInputChange(e.target.value, "agencyCommissionPercentage", "number") }}
                                             />
                                         </Stack>
-                                      
-
 
                                     </Stack>
 
                                     <Typography className='details-heading'>POLICY DETAILS:</Typography>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%' }}>
                                         <Stack className='Policy-textfield'>
-                                            <Typography className='input-label' >Policy Submission Date:
-                                            <Asterisk color='red' size={12} weight="bold" /></Typography>
+                                            <Typography className='input-label' >Policy Approval Date:
+                                                <Asterisk color='red' size={12} weight="bold" /></Typography>
                                             <TextField
-
                                                 className='text-field'
                                                 variant="outlined"
-                                                value={policyData.policySubmissionDate}
+                                                value={policyData.policyApprovalDate}
                                                 sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "policySubmissionDate", "text") }}
+                                                onChange={(e) => { handleInputChange(e.target.value, "policyApprovalDate", "text") }}
                                             />
                                         </Stack>
                                         <Stack className='Policy-textfield'>
@@ -289,11 +302,9 @@ const ApprovePolicy = () => {
                                         </Stack>
                                         <Stack className='Policy-textfield'>
                                             <Typography className='input-label'>Advance Payment %
-                                            <Asterisk color='red' size={12} weight="bold" /></Typography>
+                                                <Asterisk color='red' size={12} weight="bold" /></Typography>
                                             <TextField
-
                                                 type='number'
-                                                // label="Policy Submission Date:" 
                                                 className='text-field'
                                                 variant="outlined"
                                                 value={policyData.advPaymentPercentage}
@@ -307,7 +318,6 @@ const ApprovePolicy = () => {
                                                 <Typography className='input-label'>Remaining Payment %</Typography>
                                                 <TextField
                                                     type='number'
-                                                    // label="Policy Submission Date:" 
                                                     className='text-field'
                                                     variant="outlined"
                                                     value={policyData.remainingPaymentPercentage}
@@ -318,8 +328,6 @@ const ApprovePolicy = () => {
                                             <Stack className='Policy-textfield'>
                                                 <Typography className='input-label'>Insured First Name</Typography>
                                                 <TextField
-
-                                                    // label="Policy Submission Date:" 
                                                     className='text-field'
                                                     variant="outlined"
                                                     value={policyData.insuredFirstName}
@@ -330,8 +338,6 @@ const ApprovePolicy = () => {
                                             <Stack className='Policy-textfield'>
                                                 <Typography className='input-label'>Insured Last Name</Typography>
                                                 <TextField
-
-                                                    // label="Policy Submission Date:" 
                                                     className='text-field'
                                                     variant="outlined"
                                                     value={policyData.insuredLastName}
@@ -342,8 +348,6 @@ const ApprovePolicy = () => {
                                             <Stack className='Policy-textfield'>
                                                 <Typography className='input-label'>Policy Start date:</Typography>
                                                 <TextField
-
-                                                    // label="Policy Submission Date:" 
                                                     className='text-field'
                                                     variant="outlined"
                                                     value={policyData.policyStartDate}
@@ -354,8 +358,6 @@ const ApprovePolicy = () => {
                                             <Stack className='Policy-textfield'>
                                                 <Typography className='input-label'>Policy End date:</Typography>
                                                 <TextField
-
-                                                    // label="Policy Submission Date:" 
                                                     className='text-field'
                                                     variant="outlined"
                                                     value={policyData.policyEndDate}
@@ -416,8 +418,6 @@ const ApprovePolicy = () => {
                                         <Stack className='Policy-textfield'>
                                             <Typography className='input-label'>Agent Carrier Number</Typography>
                                             <TextField
-
-                                                // label="Policy Submission Date:" 
                                                 className='text-field'
                                                 variant="outlined"
                                                 value={policyData.agentCarrierNumber}
@@ -430,18 +430,18 @@ const ApprovePolicy = () => {
                                     <Stack direction={'row'}>
                                         <Typography>Is there any split</Typography>
                                         <Switch
-                                            checked={isChecked}
+                                            checked={policyData.isSplit}
                                             onChange={handleToggle}
                                             // color="primary" // You can customize the color if needed
                                             sx={{ marginTop: '-8px', color: '#003478' }}
                                         />
                                     </Stack>
                                     {
-                                        isChecked ? (
+                                        policyData.isSplit ? (
                                             <>
                                                 {/* Split1 details */}
                                                 <Typography className='details-heading'>SPLIT DETAILS:</Typography>
-                                                <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '79%' }}>
+                                                <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%' }}>
                                                     <Stack className='Policy-textfield'>
                                                         <Typography className='input-label' >Agent First Name:</Typography>
                                                         <TextField
@@ -485,6 +485,17 @@ const ApprovePolicy = () => {
                                                         />
                                                     </Stack>
 
+                                                    <Stack className='Policy-textfield'>
+                                                        <Typography className='input-label'>Split Ratio:</Typography>
+                                                        <TextField
+
+                                                            variant="outlined"
+                                                            value={policyData.split1_splitRatio}
+                                                            sx={{ width: '20%' }}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split1_splitRatio") }}
+                                                        />
+                                                    </Stack>
+
 
 
 
@@ -492,7 +503,7 @@ const ApprovePolicy = () => {
 
                                                 {/* Split2 Details */}
                                                 <Typography className='details-heading'>SPLIT 2 DETAILS:</Typography>
-                                                <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '79%' }}>
+                                                <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%' }}>
                                                     <Stack className='Policy-textfield'>
                                                         <Typography className='input-label' >Agent First Name:</Typography>
                                                         <TextField
@@ -533,6 +544,17 @@ const ApprovePolicy = () => {
                                                             value={policyData.split2_ContractLevel}
                                                             sx={{ width: '20%' }}
                                                             onChange={(e) => { handleInputChange(e.target.value, "split2_ContractLevel") }}
+                                                        />
+                                                    </Stack>
+
+                                                    <Stack className='Policy-textfield'>
+                                                        <Typography className='input-label'>Split Ratio:</Typography>
+                                                        <TextField
+
+                                                            variant="outlined"
+                                                            value={policyData.split2_splitRatio}
+                                                            sx={{ width: '20%' }}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split2_splitRatio") }}
                                                         />
                                                     </Stack>
                                                 </Stack>
@@ -637,38 +659,57 @@ const ApprovePolicy = () => {
                                         </Stack>
                                     </Stack>
 
-
-                                    <Stack sx={{ width: '100%', }} >
-                                        <Stack
-                                            flexDirection={'row'}
-                                            alignItems={'center'}
-                                            justifyContent={'flex-end'}
-                                            sx={{ width: '100%', height: '13vh' }}>
-                                            <Button
-                                                variant="contained"
-                                                disabled={ policyData.agencyCommissionPercentage ? false : policyData.advPaymentPercentage ? false : policyData.policySubmissionDate ? false : true}
-                                                sx={{
-                                                    // disabled: policyData.agencyCommissionPercentage ? false : policyData.advPaymentPercentage ? false : policyData.policySubmissionDate ? false : true,
-                                                    backgroundColor: "#003478",
-                                                    color: 'white',
-                                                    width: '186px',
-                                                    height: "5vh",
-                                                    fontSize: '12px',
-                                                    "&:hover": {
-                                                        backgroundColor: '#003478',
-                                                    },
-                                                    "&:disabled":{
+                                    <Stack alignItems={'center'} sx={{ width: '100%' }}>
+                                        <Stack sx={{ width: '90%', }} >
+                                            <Stack
+                                                flexDirection={'row'}
+                                                alignItems={'center'}
+                                                justifyContent={'space-between'}
+                                                sx={{ width: '100%', height: '13vh' }}>
+                                                {policyData.isPaid ? (
+                                                    <Button
+                                                        variant="contained"
+                                                        sx={{
+                                                            display: isAdmin ? 'block' : 'none',
+                                                            backgroundColor: "#F08613",
+                                                            color: 'white',
+                                                            width: '186px',
+                                                            height: "5vh",
+                                                            fontSize: '12px',
+                                                            "&:hover": {
+                                                                backgroundColor: '#F08613',
+                                                            },
+                                                        }}
+                                                        onClick={chargedBackHandler}
+                                                    >
+                                                        Charge Back
+                                                    </Button>
+                                                ) : <></>}
+                                                <Button
+                                                    variant="contained"
+                                                    disabled={policyData.agencyCommissionPercentage ? false : policyData.advPaymentPercentage ? false : policyData.policyApprovalDate ? false : true}
+                                                    sx={{
+                                                        // disabled: policyData.agencyCommissionPercentage ? false : policyData.advPaymentPercentage ? false : policyData.policyApprovalDate ? false : true,
+                                                        backgroundColor: "#003478",
+                                                        color: 'white',
+                                                        width: '186px',
+                                                        height: "5vh",
+                                                        fontSize: '12px',
+                                                        "&:hover": {
+                                                            backgroundColor: '#003478',
+                                                        },
+                                                        "&:disabled": {
                                                             backgroundColor: '#406391',
                                                             color: 'white',
-                                                    }
-                                                }}
-                                                onClick={approveHandler}
-                                            >
-                                                Approve
-                                            </Button>
+                                                        }
+                                                    }}
+                                                    onClick={approveHandler}
+                                                >
+                                                    {policyData.isApproved ? 'Update' : 'Approve'}
+                                                </Button>
+                                            </Stack>
                                         </Stack>
                                     </Stack>
-
                                 </Stack>
                             </Stack>
                         </Stack>

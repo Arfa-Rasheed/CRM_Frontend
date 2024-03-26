@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Box, Button, Grid, InputAdornment, TextField, Stack } from '@mui/material'
+import { Box, Button, Grid, InputAdornment, TextField, Stack, Typography, Switch } from '@mui/material'
 import { MagnifyingGlass, Plus } from 'phosphor-react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
@@ -15,7 +15,8 @@ const AddNewPolicy_Agent = () => {
     const snackbar_Ref = useRef(null)
     const dispatch = useDispatch()
     const [policyData, setPolicyData] = useState({
-        date: "",
+        isSplit: false,
+        policySubmissionDate: "",
         policyCarrier: "",
         policyType: "",
         policyNumber: 0,
@@ -25,19 +26,32 @@ const AddNewPolicy_Agent = () => {
         overwrittingAgentFirstName: "",
         overwrittingAgentLastName: "",
         policyValue: 0,
-        // advPaymentPercentage: 0,
-        // advPayment: 0
         insuredFirstName: "",
         insuredLastName: "",
+
+        split1_AgentFirstName: "",
+        split1_AgentLastName: "",
+        split1_AgentCode: "",
+        split1_ContractLevel: "",
+        split1_AgentCarrierNumber: "",
+        split1_splitRatio: "",
+
+        split2_AgentFirstName: "",
+        split2_AgentLastName: "",
+        split2_AgentCode: "",
+        split2_ContractLevel: "",
+        split2_AgentCarrierNumber: "",
+        split2_splitRatio: "",
+
     })
 
     const handleInputChange = (data, field) => {
         setPolicyData((prevFormData) => ({ ...prevFormData, [field]: data }));
     };
 
-    const addNewPolicyHandler =async () => {
+    const addNewPolicyHandler = async () => {
         dispatch(showLoader())
-        const res =await httpClient.post('/policies/addNewPolicy', policyData)
+        const res = await httpClient.post('/policies/addNewPolicy', policyData)
             .catch((error) => {
                 dispatch(hideLoader())
                 console.log("error", error)
@@ -59,16 +73,23 @@ const AddNewPolicy_Agent = () => {
         const res = await httpClient.get(`/policies/getPolicyByID/${id}`).catch((error) => {
             dispatch(hideLoader())
             snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
-         })
-    
+        })
+
         if (res.status === 200) {
             dispatch(hideLoader())
             setPolicyData(res?.data)
         }
     }
 
+    const handleToggle = () => {
+        setPolicyData(prevState => ({
+            ...prevState,
+            isSplit: !prevState.isSplit,
+        }));
+    };
+
     useEffect(() => {
-        console.log("agentCode",policyData.agentCode);
+        console.log("agentCode", policyData.agentCode);
         if (id) {
             getPolicyDetail()
         }
@@ -82,22 +103,22 @@ const AddNewPolicy_Agent = () => {
                 <div style={{
                     display: 'flex',
                     height: '91.6vh',
-                    overflowY: 'hidden'
+                    // overflowY: 'hidden'
                 }}>
                     <SideBar />
-                    <CustomizedSnackbars ref={snackbar_Ref}/>
-                    <Stack sx={{ width: '81.8%' ,marginLeft:'18%'}}>
-                        <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "105vh", marginTop: '10px' }}>
-                            <Stack alignItems={'center'} sx={{ width: '96%', height: '94%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
+                    <CustomizedSnackbars ref={snackbar_Ref} />
+                    <Stack sx={{ width: '81.8%', marginLeft: '18%', height: policyData.isSplit ? '127vh' :"91vh"}}>
+                        <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%',marginTop: '10px',height: policyData.isSplit ? '141vh': "105vh" }}>
+                            <Stack alignItems={'center'} sx={{ width: '96%', height: '97%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
                                 <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '100%' }}>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '59%' }}>
                                         <TextField
                                             disabled={id ? true : false}
-                                            label="Date:"
+                                            label="Policy Submission Date:"
                                             variant="filled"
-                                            value={policyData.date}
+                                            value={policyData.policySubmissionDate}
                                             sx={{ width: '30%' }}
-                                            onChange={(e) => { handleInputChange(e.target.value, "date") }}
+                                            onChange={(e) => { handleInputChange(e.target.value, "policySubmissionDate") }}
                                         />
                                         <TextField
                                             disabled={id ? true : false}
@@ -174,7 +195,120 @@ const AddNewPolicy_Agent = () => {
                                             value={policyData.insuredLastName}
                                             onChange={(e) => { handleInputChange(e.target.value, "insuredLastName") }}
                                         />
+
                                     </Stack>
+
+                                    <Stack sx={{ width: '100%',height: policyData.isSplit ? '68%':"8%" }}>
+                                        <Stack direction={'row'}>
+                                            <Typography>Is there any split</Typography>
+                                            <Switch
+                                                checked={policyData.isSplit}
+                                                onChange={handleToggle}
+                                                // color="primary" // You can customize the color if needed
+                                                sx={{ marginTop: '-8px', color: '#003478' }}
+                                            />
+                                        </Stack>
+
+                                        {
+                                            policyData.isSplit ? (
+                                                <>
+                                                    {/* Split1 details */}
+                                                    <Typography className='details-heading'>SPLIT1 DETAILS:</Typography>
+                                                    <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%',height: '59%'  }}>
+                                                        <TextField
+                                                            disabled={id ? true : false}
+                                                            label="Split1 Agent First Name:"
+                                                            variant="filled"
+                                                            sx={{ width: '30%' }}
+                                                            value={policyData.split1_AgentFirstName}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split1_AgentFirstName") }}
+                                                        />
+                                                        <TextField
+                                                            className='text-field'
+                                                            label='Split1 Agent Last Name'
+                                                            variant="filled"
+                                                            value={policyData.split1_AgentLastName}
+                                                            sx={{ width: '30%' }}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split1_AgentLastName", "text") }}
+                                                        />
+                                                        <TextField
+                                                            label='Split1 Agent Code'
+                                                            variant="filled"
+                                                            sx={{ width: '30%' }}
+                                                            value={policyData.split1_AgentCode}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split1_AgentCode", "text") }}
+                                                        />
+                                                        <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{ width: '65%' }} >
+                                                            <TextField
+                                                                label='Split1 Contract Level'
+                                                                variant="filled"
+                                                                sx={{ width: '46.3%' }}
+                                                                value={policyData.split1_ContractLevel}
+                                                                onChange={(e) => { handleInputChange(e.target.value, "split1_ContractLevel") }}
+                                                            />
+                                                            <TextField
+                                                                label='Split1 Split Ratio:'
+                                                                variant="filled"
+                                                                sx={{ width: '46%' }}
+                                                                value={policyData.split1_splitRatio}
+                                                                onChange={(e) => { handleInputChange(e.target.value, "split1_splitRatio") }}
+                                                            />
+                                                        </Stack>
+
+                                                    </Stack>
+
+                                                    {/* Split2 Details */}
+                                                    <Typography className='details-heading'>SPLIT2 DETAILS:</Typography>
+                                                    <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%',height: '59%'  }}>
+                                                        <TextField
+                                                            label="Split2 Agent First Name"
+                                                            className='text-field'
+                                                            variant="filled"
+                                                            value={policyData.split2_AgentFirstName}
+                                                            sx={{ width: '30%' }}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split2_AgentFirstName", "text") }}
+                                                        />
+                                                        <TextField
+                                                            label="Split2 Agent Last Name"
+                                                            className='text-field'
+                                                            variant="filled"
+                                                            value={policyData.split2_AgentLastName}
+                                                            sx={{ width: '30%' }}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split2_AgentLastName", "text") }}
+                                                        />
+                                                        <TextField
+                                                            label="Split2 Agent Code:"
+                                                            variant="filled"
+                                                            value={policyData.split2_AgentCode}
+                                                            sx={{ width: '30%' }}
+                                                            onChange={(e) => { handleInputChange(e.target.value, "split2_AgentCode", "text") }}
+                                                        />
+                                                        <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{ width: '65%' }} >
+                                                            <TextField
+                                                                label="Split2 Contract Level"
+                                                                variant="filled"
+                                                                value={policyData.split2_ContractLevel}
+                                                                sx={{ width: '46.3%' }}
+                                                                onChange={(e) => { handleInputChange(e.target.value, "split2_ContractLevel") }}
+                                                            />
+                                                            <TextField
+                                                                label="Split2 Split Ratio"
+                                                                variant="filled"
+                                                                value={policyData.split2_splitRatio}
+                                                                sx={{ width: '46%' }}
+                                                                onChange={(e) => { handleInputChange(e.target.value, "split2_splitRatio") }}
+                                                            />
+                                                        </Stack>
+                                                    </Stack>
+                                                </>
+                                            ) :
+                                                (
+                                                    <></>
+                                                )
+                                        }
+
+                                    </Stack>
+
                                     <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '90%', height: '13vh', display: id ? "none" : "" }}>
                                         <Button
                                             variant="contained"
@@ -205,7 +339,7 @@ const AddNewPolicy_Agent = () => {
                                                     backgroundColor: '#003478',
                                                 },
                                             }}
-                                        // onClick={() => setNewPolicyClicked(true)}
+                                            onClick={() => navigate('/policies')}
                                         >
                                             Close
                                         </Button>

@@ -60,8 +60,8 @@ const CommissionDetail = () => {
     };
 
 
-    const getPolicyDetail = async () => {
-        const res = await httpClient.get(`/policies/getPolicyByID/${_id}`)
+    const getCommissionDetail = async () => {
+        const res = await httpClient.get(`/policies/getCommissionById/${_id}`)
             .catch((error) => {
                 snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
             })
@@ -107,7 +107,7 @@ const CommissionDetail = () => {
 
     useEffect(() => {
         if (_id) {
-            getPolicyDetail()
+            getCommissionDetail()
         }
     }, [])
 

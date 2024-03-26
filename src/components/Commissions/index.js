@@ -21,8 +21,8 @@ const Commissions = () => {
 
   const gridHeader = [
     {
-      field: 'policySubmissionDate',
-      headerName: "Policy Submission Date:",
+      field: 'policyApproval Date',
+      headerName: "Policy Approval Date:",
       isLink: true,
 
     },
@@ -139,8 +139,8 @@ const Commissions = () => {
 
   const gridHeaderAgent = [
     {
-      field: 'policySubmissionDate',
-      headerName: "Policy Submission Date:",
+      field: 'policyApprovalDate',
+      headerName: "Policy Approval Date:",
       isLink: true,
 
     },
@@ -204,7 +204,7 @@ const Commissions = () => {
 
   const LoadGridData = async () => {
     dispatch(showLoader())
-    const res = await httpClient.get(isAdmin ? 'policies/getAllApprovedPolicies' : 'policies/getAllApprovedPoliciesAgentView')
+    const res = await httpClient.get(isAdmin ? 'policies/getAllCommissions' : 'policies/getAllApprovedPoliciesAgentView')
       .catch((error) => {
         dispatch(hideLoader())
         snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");

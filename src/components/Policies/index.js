@@ -27,7 +27,7 @@ const Policies = () => {
 
   const gridHeader = [
     {
-      field: 'date',
+      field: 'policySubmissionDate',
       headerName: "Date:",
       width: '20%',
       isLink: true,
@@ -93,7 +93,7 @@ const Policies = () => {
 
   const adminGridHeader = [
     {
-      field: 'date',
+      field: 'policySubmissionDate',
       headerName: "Date:",
       width: '20%',
       isLink: true
