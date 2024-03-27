@@ -21,7 +21,7 @@ const Commissions = () => {
 
   const gridHeader = [
     {
-      field: 'policyApproval Date',
+      field: 'policyApprovalDate',
       headerName: "Policy Approval Date:",
       isLink: true,
 

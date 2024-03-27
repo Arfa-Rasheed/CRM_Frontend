@@ -6,11 +6,12 @@ import SideBar from '../../Layout/Sidebar'
 import httpClient from '../../_util/api'
 import './style.scss'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
-import Calendar from '../../shared-component/Calender'
+import Calendar from '../../shared-component/Calender/Calender'
 import LinearProgressWithLabel from '../../shared-component/ProgressBar'
 import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar'
 import { useDispatch } from 'react-redux'
 import { hideLoader, showLoader } from '../../Store/mainSlice'
+import dayjs from 'dayjs';
 // import LinearProgressWithLabel from '../../shared-component/ProgressBar '
 
 const ApprovePolicy = () => {
@@ -31,7 +32,7 @@ const ApprovePolicy = () => {
         agentCommission: 0,
         agencyCommissionPercentage: 0,
         paidAgencyCommission: 0,
-
+        policySubmissionDate: "",
         policyApprovalDate: "",
         policyCarrier: "",
         policyType: "",
@@ -82,6 +83,11 @@ const ApprovePolicy = () => {
     const handleInputChange = (data, field, fieldType) => {
         const updatedValue = fieldType === 'number' ? parseFloat(data) : data;
         setPolicyData((prevFormData) => ({ ...prevFormData, [field]: updatedValue }));
+    };
+
+    const handleDateChange = (date, field) => {
+        const formattedDate = dayjs(date).format('M/D/YYYY');
+        setPolicyData((prevFormData) => ({ ...prevFormData, [field]: formattedDate }));
     };
 
 
@@ -210,15 +216,9 @@ const ApprovePolicy = () => {
                                 <Stack sx={{ width: '89%' }} >
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '79%', height: '59%' }}>
                                         <Stack className='Policy-textfield'>
-                                            <Typography className='input-label' >Date:</Typography>
-                                            <TextField
-                                                className='text-field'
-                                                variant="outlined"
-                                                value={policyData.date}
-                                                sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "date", "text") }}
-                                            />
-                                            {/* <Calendar/> */}
+                                            <Typography className='input-label' >Policy Submission Date:</Typography>
+                                            <Calendar value={policyData.policySubmissionDate} onDateChange={(date) => handleDateChange(date, 'policySubmissionDate')} />
+
                                         </Stack>
                                         <Stack className='Policy-textfield'>
                                             <Typography className='input-label'>Policy Registration Id:</Typography>
@@ -259,15 +259,9 @@ const ApprovePolicy = () => {
                                     <Typography className='details-heading'>POLICY DETAILS:</Typography>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%' }}>
                                         <Stack className='Policy-textfield'>
-                                            <Typography className='input-label' >Policy Approval Date:
+                                            <Typography className='input-label' >Policy Commission Date:
                                                 <Asterisk color='red' size={12} weight="bold" /></Typography>
-                                            <TextField
-                                                className='text-field'
-                                                variant="outlined"
-                                                value={policyData.policyApprovalDate}
-                                                sx={{ width: '20%' }}
-                                                onChange={(e) => { handleInputChange(e.target.value, "policyApprovalDate", "text") }}
-                                            />
+                                            <Calendar value={policyData.policyApprovalDate} onDateChange={(date) => handleDateChange(date, 'policyApprovalDate')} />
                                         </Stack>
                                         <Stack className='Policy-textfield'>
                                             <Typography className='input-label'>Carrier:</Typography>
@@ -321,7 +315,7 @@ const ApprovePolicy = () => {
                                                     className='text-field'
                                                     variant="outlined"
                                                     value={policyData.remainingPaymentPercentage}
-                                                    sx={{ width: '20%' }}
+                                                    sx={{ width: '30%' }}
                                                     onChange={(e) => { handleInputChange(e.target.value, "remainingPaymentPercentage", "number") }}
                                                 />
                                             </Stack>
@@ -642,7 +636,7 @@ const ApprovePolicy = () => {
                                             <TextField
 
                                                 variant="outlined"
-                                                value={policyData.overwrittingAgentCode1}
+                                                value={policyData.overwrittingAgentCode2}
                                                 sx={{ width: '20%' }}
                                                 onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentCode1", "text") }}
                                             />

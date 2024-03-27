@@ -8,6 +8,8 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar'
 import { useDispatch } from 'react-redux'
 import { hideLoader, showLoader } from '../../Store/mainSlice'
+import dayjs from 'dayjs'
+import Calendar from '../../shared-component/Calender/Calender'
 
 const AddNewPolicy_Agent = () => {
     const { id } = useParams()
@@ -48,6 +50,12 @@ const AddNewPolicy_Agent = () => {
     const handleInputChange = (data, field) => {
         setPolicyData((prevFormData) => ({ ...prevFormData, [field]: data }));
     };
+
+    const handleDateChange = (date, field) => {
+        const formattedDate = dayjs(date).format('M/D/YYYY');
+        setPolicyData((prevFormData) => ({ ...prevFormData, [field]: formattedDate }));
+    };
+
 
     const addNewPolicyHandler = async () => {
         dispatch(showLoader())
@@ -107,8 +115,8 @@ const AddNewPolicy_Agent = () => {
                 }}>
                     <SideBar />
                     <CustomizedSnackbars ref={snackbar_Ref} />
-                    <Stack sx={{ width: '81.8%', marginLeft: '18%', height: policyData.isSplit ? '127vh' :"91vh"}}>
-                        <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%',marginTop: '10px',height: policyData.isSplit ? '141vh': "105vh" }}>
+                    <Stack sx={{ width: '81.8%', marginLeft: '18%', height: policyData.isSplit ? '127vh' : "91vh" }}>
+                        <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', marginTop: '10px', height: policyData.isSplit ? '141vh' : "105vh" }}>
                             <Stack alignItems={'center'} sx={{ width: '96%', height: '97%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
                                 <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '100%' }}>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '59%' }}>
@@ -120,6 +128,7 @@ const AddNewPolicy_Agent = () => {
                                             sx={{ width: '30%' }}
                                             onChange={(e) => { handleInputChange(e.target.value, "policySubmissionDate") }}
                                         />
+                                        {/* <Calendar value={policyData.policyApprovalDate} onDateChange={(date) => handleDateChange(date, 'policyApprovalDate')} /> */}
                                         <TextField
                                             disabled={id ? true : false}
                                             label="Policy Carrier:"
@@ -198,7 +207,7 @@ const AddNewPolicy_Agent = () => {
 
                                     </Stack>
 
-                                    <Stack sx={{ width: '100%',height: policyData.isSplit ? '68%':"8%" }}>
+                                    <Stack sx={{ width: '100%', height: policyData.isSplit ? '68%' : "8%" }}>
                                         <Stack direction={'row'}>
                                             <Typography>Is there any split</Typography>
                                             <Switch
@@ -214,7 +223,7 @@ const AddNewPolicy_Agent = () => {
                                                 <>
                                                     {/* Split1 details */}
                                                     <Typography className='details-heading'>SPLIT1 DETAILS:</Typography>
-                                                    <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%',height: '59%'  }}>
+                                                    <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '59%' }}>
                                                         <TextField
                                                             disabled={id ? true : false}
                                                             label="Split1 Agent First Name:"
@@ -259,7 +268,7 @@ const AddNewPolicy_Agent = () => {
 
                                                     {/* Split2 Details */}
                                                     <Typography className='details-heading'>SPLIT2 DETAILS:</Typography>
-                                                    <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%',height: '59%'  }}>
+                                                    <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '59%' }}>
                                                         <TextField
                                                             label="Split2 Agent First Name"
                                                             className='text-field'
