@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import { Button, Stack, Tab, Tabs } from '@mui/material'
@@ -12,6 +12,7 @@ import { hideLoader, showLoader } from '../../Store/mainSlice.js'
 
 const Commissions = () => {
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
+  const agentCode = localStorage.getItem("agentCode")
   const snackbar_Ref = useRef(null);
   const dispatch = useDispatch()
   const [transactionClicked, setTransactionClicked] = useState(false)
@@ -72,9 +73,9 @@ const Commissions = () => {
       isLink: true,
     },
     {
-      field:'commissionableAmountPercentage',
-      headerName:'Commissionable Amount',
-      isLink:true,
+      field: 'commissionableAmountPercentage',
+      headerName: 'Commissionable Amount',
+      isLink: true,
     },
     {
       field: 'agentCommission',
@@ -83,12 +84,12 @@ const Commissions = () => {
     },
     (isAdmin
       ? [
-            {
-                field: 'paidAgencyCommission',
-                headerName: 'Paid Agency Commission',
-                isProgressBar: true,
-            },
-        ]
+        {
+          field: 'paidAgencyCommission',
+          headerName: 'Paid Agency Commission',
+          isProgressBar: true,
+        },
+      ]
       : []),
     {
       field: 'advPaymentPercentage',
@@ -180,22 +181,22 @@ const Commissions = () => {
       isLink: true,
     },
     {
-      field:'commissionableAmountPercentage',
-      headerName:'Commissionable Amount',
-      isLink:true,
+      field: 'commissionableAmountPercentage',
+      headerName: 'Commissionable Amount',
+      isLink: true,
     },
 
-    
+
     {
       field: 'agentCommission',
       headerName: 'Agent Commission',
       isLink: true,
     },
-    
+
   ]
 
 
-  
+
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -204,7 +205,7 @@ const Commissions = () => {
 
   const LoadGridData = async () => {
     dispatch(showLoader())
-    const res = await httpClient.get(isAdmin ? 'policies/getAllCommissions' : 'policies/getAllApprovedPoliciesAgentView')
+    const res = await httpClient.get(isAdmin ? 'policies/getAllCommissions' : `policies/getAllCommissionsAgentView/${agentCode}`)
       .catch((error) => {
         dispatch(hideLoader())
         snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
@@ -215,6 +216,7 @@ const Commissions = () => {
       setGridData(res.data)
 
     }
+
   }
 
   useEffect(() => {
@@ -231,11 +233,11 @@ const Commissions = () => {
           overflowY: 'hidden'
         }}>
           <SideBar />
-          <CustomizedSnackbars ref={snackbar_Ref}/>
-          <Stack sx={{ width: '80.8%',marginLeft:'18%' }}>
+          <CustomizedSnackbars ref={snackbar_Ref} />
+          <Stack sx={{ width: '80.8%', marginLeft: '18%' }}>
             <Stack sx={{ width: '99.9%', height: '19vh', marginLeft: '10px', marginTop: '17px', marginBottom: '-71px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
-              <h2 style={{ color: 'black', textAlign:'center' }}>Commission</h2>
-              <h3 style={{ color: '#003478',marginLeft:'40px'}}> March 2024</h3>
+              <h2 style={{ color: 'black', textAlign: 'center' }}>Commission</h2>
+              <h3 style={{ color: '#003478', marginLeft: '40px' }}> March 2024</h3>
               <Stack alignItems={'center'} sx={{ width: '100%' }}>
                 {/* <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{ width: '65%', }}>
                   <Button

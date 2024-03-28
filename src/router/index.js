@@ -34,6 +34,7 @@ const AppRouter = () => {
           <Route path='/carriers' element={<Carriers />}></Route>
           <Route path='/tools' element={<Tools />}></Route>
           <Route path='/policies' element={<Policies />}></Route>
+          <Route path='/policyDetail/:policyNumber' element={<AddNewPolicy_Agent/>}></Route>
           <Route path='/statements' element={<Statements />}></Route>
           <Route path ='/statementDetail/:_id' element={<StatementDetail/>}></Route>
           <Route path='/commissions' element={<Commissions />}></Route>

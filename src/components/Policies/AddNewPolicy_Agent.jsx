@@ -13,6 +13,7 @@ import Calendar from '../../shared-component/Calender/Calender'
 
 const AddNewPolicy_Agent = () => {
     const { id } = useParams()
+    const {policyNumber} = useParams()
     const navigate = useNavigate()
     const snackbar_Ref = useRef(null)
     const dispatch = useDispatch()
@@ -78,7 +79,7 @@ const AddNewPolicy_Agent = () => {
 
     const getPolicyDetail = async () => {
         dispatch(showLoader())
-        const res = await httpClient.get(`/policies/getPolicyByID/${id}`).catch((error) => {
+        const res = await httpClient.get(id ? `/policies/getPolicyByID/${id}` : `/policies/getPolicyByPolicyNumber/${policyNumber}`).catch((error) => {
             dispatch(hideLoader())
             snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
         })
@@ -98,10 +99,17 @@ const AddNewPolicy_Agent = () => {
 
     useEffect(() => {
         console.log("agentCode", policyData.agentCode);
-        if (id) {
+        if (policyNumber) {
             getPolicyDetail()
         }
     }, [])
+
+    useEffect(() => {
+        console.log("agentCode", policyData.agentCode);
+        if (policyNumber) {
+            getPolicyDetail()
+        }
+    }, [policyNumber])
 
 
     return (

@@ -5,16 +5,20 @@ import { MenuItem, Popover, Stack, Typography } from '@mui/material';
 import './style.scss'
 import httpClient from '../../../_util/api';
 import { Bell } from 'phosphor-react';
+import { useNavigate } from 'react-router-dom';
 
 const Notifications = (props) => {
   const agentCode = localStorage.getItem('agentCode')
   const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate()
   const [notifications, setNotifications] = useState([
     {
       message: "",
-      status: 0
+      status: 0,
+      policyNumber:""
     }
   ]);
+
   const isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
 
   const handleClick = () => {
@@ -26,11 +30,18 @@ const Notifications = (props) => {
     setAnchorEl(null);
   };
 
-  const handleOptionChange = (selectedOption) => {
-    setAnchorEl(null);
-    if (props.onOptionChange) {
-      props.onOptionChange(selectedOption)
-    }
+  const handleOptionChange = (policyNumber) => {
+    // setAnchorEl(null);
+    // console.log();
+    // console.log("notification",notifications)
+    navigate(`/policyDetail/${policyNumber}`)
+    //  navigate(`/policyDetail/0900785190`)
+    // navigate('/policies')
+    // if (props.onOptionChange) {
+    //   props.onOptionChange(selectedOption)
+    //   // navigate(`/policyDetail/${notifications.policyNumber}`)
+    //   // navigate('/policies')
+    // }
   };
 
   const getNotifications = async () => {
@@ -41,6 +52,7 @@ const Notifications = (props) => {
         console.log("res", res.data);
         setNotifications(res.data.map(notifications => ({
           message: notifications.message,
+          policyNumber: notifications.policyNumber,
           status: notifications.status
         })))
       }
@@ -50,6 +62,7 @@ const Notifications = (props) => {
       if (res?.status === 200) {
         setNotifications(res.data.map(notifications => ({
           message: notifications.message,
+          policyNumber: notifications.policyNumber,
           status: notifications.status
         })))
       }
@@ -100,7 +113,7 @@ const Notifications = (props) => {
                   }
                 }}
                 key={index}
-                onClick={() => handleOptionChange(item)}
+                onClick={() => handleOptionChange(item.policyNumber)}
               >
                 <Typography sx={{ fontSize: '14px' }}>{item.message}</Typography>
               </MenuItem>
