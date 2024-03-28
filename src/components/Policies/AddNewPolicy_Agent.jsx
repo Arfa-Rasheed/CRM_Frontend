@@ -13,7 +13,7 @@ import Calendar from '../../shared-component/Calender/Calender'
 
 const AddNewPolicy_Agent = () => {
     const { id } = useParams()
-    const {policyNumber} = useParams()
+    const { policyNumber } = useParams()
     const navigate = useNavigate()
     const snackbar_Ref = useRef(null)
     const dispatch = useDispatch()
@@ -129,7 +129,7 @@ const AddNewPolicy_Agent = () => {
                                 <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '100%' }}>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '59%' }}>
                                         <TextField
-                                            disabled={id ? true : false}
+                                            disabled={id ? true : policyNumber ? true : false}
                                             label="Policy Submission Date:"
                                             variant="filled"
                                             value={policyData.policySubmissionDate}
@@ -138,7 +138,7 @@ const AddNewPolicy_Agent = () => {
                                         />
                                         {/* <Calendar value={policyData.policyApprovalDate} onDateChange={(date) => handleDateChange(date, 'policyApprovalDate')} /> */}
                                         <TextField
-                                            disabled={id ? true : false}
+                                            disabled={id ? true : policyNumber ? true : false}
                                             label="Policy Carrier:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
@@ -146,7 +146,7 @@ const AddNewPolicy_Agent = () => {
                                             onChange={(e) => { handleInputChange(e.target.value, "policyCarrier") }}
                                         />
                                         <TextField
-                                            disabled={id ? true : false}
+                                            disabled={id ? true : policyNumber ? true : false}
                                             label="Policy Type:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
@@ -155,7 +155,7 @@ const AddNewPolicy_Agent = () => {
                                         />
 
                                         <TextField
-                                            disabled={id ? true : false}
+                                            disabled={id ? true : policyNumber ? true : false}
                                             sx={{ width: '30%' }}
                                             label="Policy Number:"
                                             variant="filled"
@@ -163,7 +163,7 @@ const AddNewPolicy_Agent = () => {
                                             onChange={(e) => { handleInputChange(e.target.value, "policyNumber") }}
                                         />
                                         <TextField
-                                            disabled={id ? true : false}
+                                            disabled={id ? true : policyNumber ? true : false}
                                             sx={{ width: '30%' }}
                                             label="Agent Carrier Number:"
                                             variant="filled"
@@ -189,7 +189,7 @@ const AddNewPolicy_Agent = () => {
                                             onChange={(e) => { handleInputChange(e.target.value, "contractLevel") }}
                                         />
                                         <TextField
-                                            disabled={id ? true : false}
+                                            disabled={id ? true : policyNumber ? true : false}
                                             label="Policy Premium:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
@@ -197,7 +197,7 @@ const AddNewPolicy_Agent = () => {
                                             onChange={(e) => { handleInputChange(e.target.value, "policyValue") }}
                                         />
                                         <TextField
-                                            disabled={id ? true : false}
+                                            disabled={id ? true : policyNumber ? true : false}
                                             label="Insured First Name:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
@@ -205,7 +205,7 @@ const AddNewPolicy_Agent = () => {
                                             onChange={(e) => { handleInputChange(e.target.value, "insuredFirstName") }}
                                         />
                                         <TextField
-                                            disabled={id ? true : false}
+                                            disabled={id ? true : policyNumber ? true : false}
                                             label="Insured Last Name:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
@@ -233,7 +233,7 @@ const AddNewPolicy_Agent = () => {
                                                     <Typography className='details-heading'>SPLIT1 DETAILS:</Typography>
                                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '59%' }}>
                                                         <TextField
-                                                            disabled={id ? true : false}
+                                                            disabled={id ? true : policyNumber ? true : false}
                                                             label="Split1 Agent First Name:"
                                                             variant="filled"
                                                             sx={{ width: '30%' }}
@@ -241,6 +241,7 @@ const AddNewPolicy_Agent = () => {
                                                             onChange={(e) => { handleInputChange(e.target.value, "split1_AgentFirstName") }}
                                                         />
                                                         <TextField
+                                                            disabled={id ? true : policyNumber ? true : false}
                                                             className='text-field'
                                                             label='Split1 Agent Last Name'
                                                             variant="filled"
@@ -249,6 +250,7 @@ const AddNewPolicy_Agent = () => {
                                                             onChange={(e) => { handleInputChange(e.target.value, "split1_AgentLastName", "text") }}
                                                         />
                                                         <TextField
+                                                            disabled={id ? true : policyNumber ? true : false}
                                                             label='Split1 Agent Code'
                                                             variant="filled"
                                                             sx={{ width: '30%' }}
@@ -257,6 +259,7 @@ const AddNewPolicy_Agent = () => {
                                                         />
                                                         <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{ width: '65%' }} >
                                                             <TextField
+                                                                disabled={id ? true : policyNumber ? true : false}
                                                                 label='Split1 Contract Level'
                                                                 variant="filled"
                                                                 sx={{ width: '46.3%' }}
@@ -264,6 +267,7 @@ const AddNewPolicy_Agent = () => {
                                                                 onChange={(e) => { handleInputChange(e.target.value, "split1_ContractLevel") }}
                                                             />
                                                             <TextField
+                                                                disabled={id ? true : policyNumber ? true : false}
                                                                 label='Split1 Split Ratio:'
                                                                 variant="filled"
                                                                 sx={{ width: '46%' }}
@@ -278,6 +282,7 @@ const AddNewPolicy_Agent = () => {
                                                     <Typography className='details-heading'>SPLIT2 DETAILS:</Typography>
                                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '59%' }}>
                                                         <TextField
+                                                            disabled={id ? true : policyNumber ? true : false}
                                                             label="Split2 Agent First Name"
                                                             className='text-field'
                                                             variant="filled"
@@ -286,6 +291,7 @@ const AddNewPolicy_Agent = () => {
                                                             onChange={(e) => { handleInputChange(e.target.value, "split2_AgentFirstName", "text") }}
                                                         />
                                                         <TextField
+                                                            disabled={id ? true : policyNumber ? true : false}
                                                             label="Split2 Agent Last Name"
                                                             className='text-field'
                                                             variant="filled"
@@ -294,6 +300,7 @@ const AddNewPolicy_Agent = () => {
                                                             onChange={(e) => { handleInputChange(e.target.value, "split2_AgentLastName", "text") }}
                                                         />
                                                         <TextField
+                                                            disabled={id ? true : policyNumber ? true : false}
                                                             label="Split2 Agent Code:"
                                                             variant="filled"
                                                             value={policyData.split2_AgentCode}
@@ -302,6 +309,7 @@ const AddNewPolicy_Agent = () => {
                                                         />
                                                         <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{ width: '65%' }} >
                                                             <TextField
+                                                                disabled={id ? true : policyNumber ? true : false}
                                                                 label="Split2 Contract Level"
                                                                 variant="filled"
                                                                 value={policyData.split2_ContractLevel}
@@ -309,6 +317,7 @@ const AddNewPolicy_Agent = () => {
                                                                 onChange={(e) => { handleInputChange(e.target.value, "split2_ContractLevel") }}
                                                             />
                                                             <TextField
+                                                                disabled={id ? true : policyNumber ? true : false}
                                                                 label="Split2 Split Ratio"
                                                                 variant="filled"
                                                                 value={policyData.split2_splitRatio}
@@ -326,10 +335,11 @@ const AddNewPolicy_Agent = () => {
 
                                     </Stack>
 
-                                    <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '90%', height: '13vh', display: id ? "none" : "" }}>
+                                    <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '90%', height: '13vh', }}>
                                         <Button
                                             variant="contained"
                                             sx={{
+                                                display: id ? "none" : policyNumber ? "none" : "" ,
                                                 backgroundColor: "#F08613",
                                                 color: 'white',
                                                 width: '186px',

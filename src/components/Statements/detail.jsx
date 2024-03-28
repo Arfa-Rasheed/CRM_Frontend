@@ -67,21 +67,6 @@ const StatementDetail = () => {
     }
 
 
-    const chargedBackHandler = async () => {
-        dispatch(showLoader())
-        const res = await httpClient.post(`/policies/chargedBack/${policyNumber}`, policyData).catch((error) => {
-            dispatch(hideLoader())
-            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
-        })
-        if (res.status === 200) {
-            dispatch(hideLoader())
-            snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
-            setTimeout(() => {
-                navigate('/statements');
-            }, 4000);
-        }
-    }
-
     useEffect(() => {
         if (_id) {
             getStatementDetail()
@@ -109,7 +94,7 @@ const StatementDetail = () => {
                             </Stack> */}
                             <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '96%', height: '96%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
                                 <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '70%' }}>
-                                    <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: isAdmin ? '100%' : '57%' }}>
+                                    <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: isAdmin ? '100%' : '100%' }}>
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="Policy Date:"
@@ -214,23 +199,7 @@ const StatementDetail = () => {
                                     </Stack>
 
                                     <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '100%', height: '13vh', }}>
-                                        {/* <Button
-                                            variant="contained"
-                                            sx={{
-                                                display: isAdmin ? 'block' : 'none',
-                                                backgroundColor: "#F08613",
-                                                color: 'white',
-                                                width: '186px',
-                                                height: "5vh",
-                                                fontSize: '12px',
-                                                "&:hover": {
-                                                    backgroundColor: '#F08613',
-                                                },
-                                            }}
-                                            onClick={chargedBackHandler}
-                                        >
-                                            Charge Back
-                                        </Button> */}
+                                    
                                         <Button
                                             variant="contained"
                                             sx={{

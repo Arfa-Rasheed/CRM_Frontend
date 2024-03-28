@@ -11,6 +11,7 @@ import { hideLoader, showLoader } from '../../Store/mainSlice.js'
 
 const Commissions = () => {
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
+  const agentCode = localStorage.getItem("agentCode")
   const [gridData,setGridData] = useState([]);
   const dispatch = useDispatch()
   const currentDate = new Date();
@@ -71,7 +72,7 @@ const Commissions = () => {
 
   const gridHeader = [
     {
-      field: 'policySubmissionDate',
+      field: 'policyDate',
       headerName: "Policy Date",
       width: '20%',
       isLink:true,
@@ -95,8 +96,8 @@ const Commissions = () => {
       isLink:true,
     },
     {
-      field: 'policyValue',
-      headerName: "Commission Premium:",
+      field: 'premium',
+      headerName: "Premium:",
       width: '20%',
       isLink:true,
     },
@@ -149,7 +150,7 @@ const Commissions = () => {
 
   const LoadGridData=async()=>{
     dispatch(showLoader())
-    const res = await httpClient.post(isAdmin ? '/policies/statement' : '/policies/statementAgentView',dates).catch((error) => { 
+    const res = await httpClient.post(isAdmin ? '/policies/statement' :`/policies/statementAgentView/${agentCode}`,dates).catch((error) => { 
       dispatch(hideLoader())
       snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle")
      })

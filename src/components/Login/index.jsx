@@ -19,6 +19,8 @@ const Login = () => {
     const userDetails = useSelector((state) => state.mainSlice.userdetail)
     // const userId = useSelector((state)=>state.mainSlice.userdetail.userId)
     const isAdmin = useSelector((state) => state.user.isAdmin)
+    const [isForgetPassword,setIsForgetPassword] = useState(false)
+    const [isVerifyOTP, setIsVerifyOTP] = useState(false)
     const [userCredentials, setUserCredentials] = useState(
         {
             email: '',
@@ -29,6 +31,15 @@ const Login = () => {
     const handleInputChange = (data, field) => {
         setUserCredentials((prevFormData) => ({ ...prevFormData, [field]: data }));
     };
+
+    const forgotPasswordHandler = ()=>{
+        setIsForgetPassword(true)
+    }
+
+    const nextHandler = async() =>{
+        setIsForgetPassword(false)
+        setIsVerifyOTP(true)
+    }
 
     const loginHandler = async () => {
         dispatch(showLoader());
@@ -92,13 +103,91 @@ const Login = () => {
 
                                 </Stack>
                                 <Stack className='Login-container' style={{ width: '68%', height: '69vh'}}>
-                                    <Stack alignItems={'center'} justifyContent={'space-around'} sx={{ width: '100%',height:'72%'}}>
+                                    <Stack alignItems={'center'} justifyContent={'space-around'} sx={{ width: '100%',height: isForgetPassword ? '41%' :'72%'}}>
                                         <Stack justifyContent={'space-between'} sx={{ width: '70%',height:'80%' }}>
-                                            <Typography variant='h5' sx={{ fontWeight: 'bold' }}>Sign in to your account</Typography>
+                                            <Typography variant='h5' sx={{ fontWeight: 'bold' }}>
+                                               { isForgetPassword ?
+                                                "Forgot Password" :
+                                                isVerifyOTP ? 
+                                                "Forgot Password" :
+                                                "Sign in to your account"
+                                                
+                                            }
+                                                </Typography>
 
-                                            <Stack justifyContent={'space-between'} style={{ width: '100%', height: '80%' }}>
+                                            <Stack justifyContent={'space-between'} style={{ width: '100%', height: '80%',display: isForgetPassword ? 'none' : isVerifyOTP ? "none" :'flex' }}>
                                                 <Stack justifyContent={'space-between'} className="textField-container">
                                                     <Typography>Email</Typography>
+                                                    <TextField id="outlined-basic" placeholder="Email Address" variant="outlined" sx={{ width: '245px', height: '5vh' }}
+                                                        onChange={(e) => handleInputChange(e.target.value, "email")}
+                                                    />
+                                                </Stack>
+
+                                                <Stack justifyContent={'space-between'} className="textField-container">
+                                                    <Typography>Password</Typography>
+                                                    <TextField id="outlined-basic" placeholder="Password" variant="outlined" sx={{ width: '245px', height: '5vh' }}
+                                                        onChange={(e) => handleInputChange(e.target.value, "password")} type='password'
+                                                    />
+                                                </Stack>
+
+                                                <Typography textAlign={'right'} style={{ fontSize: '14px', color: "#F08613" }} onClick={forgotPasswordHandler}>Forgot Your Password?</Typography>
+                                                <Button
+                                                    variant="contained"
+                                                    sx={{
+                                                        backgroundColor: "#F08613",
+                                                        color: 'white',
+                                                        width: '100%',
+                                                        height: "5vh",
+                                                        fontSize: '12px',
+                                                        "&:hover": {
+                                                            backgroundColor: "#F08613",
+                                                        },
+                                                    }}
+                                                    onClick={loginHandler}
+                                                >
+                                                    Sign In
+                                                </Button>
+                                                
+
+                                            </Stack>
+
+                                            {
+                                                isForgetPassword && (
+                                                    <Stack justifyContent={'space-between'} style={{ width: '100%', height: '80%',display: isForgetPassword ? 'hidden' :'flex' }}>
+                                                    <Stack justifyContent={'space-between'} className="textField-container">
+                                                        <Typography>Email</Typography>
+                                                        <TextField id="outlined-basic" placeholder="Email Address" variant="outlined" sx={{ width: '245px', height: '5vh' }}
+                                                            onChange={(e) => handleInputChange(e.target.value, "email")}
+                                                        />
+                                                    </Stack>
+    
+                                                   <Button
+                                                        variant="contained"
+                                                        sx={{
+                                                            backgroundColor: "#F08613",
+                                                            color: 'white',
+                                                            width: '100%',
+                                                            height: "5vh",
+                                                            fontSize: '12px',
+                                                            "&:hover": {
+                                                                backgroundColor: "#F08613",
+                                                            },
+                                                        }}
+                                                        onClick={nextHandler}
+                                                    >
+                                                       Next
+                                                    </Button>
+                                                    
+    
+                                                </Stack>
+                                                )
+                                            }
+
+                                            {
+                                                isVerifyOTP && (
+                                                    <Stack justifyContent={'space-between'} style={{ width: '100%', height: '80%',display: isForgetPassword ? 'none' :'flex' }}>
+                                                <Stack justifyContent={'space-between'} className="textField-container">
+                                                    <Typography>OTP</Typography>
                                                     <TextField id="outlined-basic" placeholder="Email Address" variant="outlined" sx={{ width: '245px', height: '5vh' }}
                                                         onChange={(e) => handleInputChange(e.target.value, "email")}
                                                     />
@@ -126,19 +215,18 @@ const Login = () => {
                                                     }}
                                                     onClick={loginHandler}
                                                 >
-                                                    Sign In
+                                                    Verify OTP
                                                 </Button>
-                                                {/* <Stack flexDirection={'row'}>
-                                                    <Typography style={{ fontSize: '12px' }}>Don't have an account? </Typography>
-                                                    <Typography style={{ fontSize: '12px', color: "#F08613" }}>Sign Up</Typography>
-                                                </Stack> */}
+                                                
 
                                             </Stack>
+                                                )
+                                            }
                                         </Stack>
-                                        <Stack flexDirection={'row'}>
+                                        {/* <Stack flexDirection={'row'}>
                                                     <Typography style={{ fontSize: '14px' }}>Don't have an account? </Typography>
                                                     <Typography style={{ fontSize: '14px', color: "#F08613" }}>Sign Up</Typography>
-                                                </Stack>
+                                                </Stack> */}
                                     </Stack>
 
 

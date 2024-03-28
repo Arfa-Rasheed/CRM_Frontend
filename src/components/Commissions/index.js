@@ -205,7 +205,7 @@ const Commissions = () => {
 
   const LoadGridData = async () => {
     dispatch(showLoader())
-    const res = await httpClient.get(isAdmin ? 'policies/getAllCommissions' : `policies/getAllCommissionsAgentView/${agentCode}`)
+    const res = await httpClient.get(isAdmin ? 'policies/getAllCommissions' : `policies/getAllCommissions_AgentView/${agentCode}`)
       .catch((error) => {
         dispatch(hideLoader())
         snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
