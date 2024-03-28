@@ -122,7 +122,7 @@ const CommissionDetail = () => {
                 }}>
                     <SideBar />
                     <CustomizedSnackbars ref={snackbar_Ref} />
-                    <Stack sx={{ width: '81.8%', height: '140vh', marginLeft: '18%' }}>
+                    <Stack sx={{ width: '81.8%', height:isAdmin ? '140vh' : '90vh', marginLeft: '18%' }}>
                         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "140vh", marginTop: '10px' }}>
                             <Stack alignItems={'center'} sx={{ width: '96%', height: '98%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
                                 {
@@ -283,14 +283,14 @@ const CommissionDetail = () => {
                                             value={policyData.advPayment}
                                             onChange={(e) => { handleInputChange(e.target.value, "advPayment") }}
                                         />
-                                        <TextField
+                                        {/* <TextField
                                             disabled={_id ? true : false}
                                             label="Remaning Payment %:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
                                             value={policyData.remainingPaymentPercentage}
                                             onChange={(e) => { handleInputChange(e.target.value, "remainingPaymentPercentage") }}
-                                        />
+                                        /> */}
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="OW1 Contract Level:"

@@ -681,7 +681,7 @@ const ApprovePolicy = () => {
                                                 ) : <></>}
                                                 <Button
                                                     variant="contained"
-                                                    disabled={policyData.agencyCommissionPercentage ? false : policyData.advPaymentPercentage ? false : policyData.policyApprovalDate ? false : true}
+                                                    // disabled={policyData.agencyCommissionPercentage ? false : policyData.advPaymentPercentage ? false : policyData.policyApprovalDate ? false : true}
                                                     sx={{
                                                         // disabled: policyData.agencyCommissionPercentage ? false : policyData.advPaymentPercentage ? false : policyData.policyApprovalDate ? false : true,
                                                         backgroundColor: "#003478",

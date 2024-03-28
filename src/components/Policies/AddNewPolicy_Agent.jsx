@@ -97,9 +97,11 @@ const AddNewPolicy_Agent = () => {
         }));
     };
 
+    // const isEmpty 
+
     useEffect(() => {
         console.log("agentCode", policyData.agentCode);
-        if (policyNumber) {
+        if (id) {
             getPolicyDetail()
         }
     }, [])
@@ -190,7 +192,7 @@ const AddNewPolicy_Agent = () => {
                                         />
                                         <TextField
                                             disabled={id ? true : policyNumber ? true : false}
-                                            label="Policy Premium:"
+                                            label="Premium:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
                                             value={policyData.policyValue}

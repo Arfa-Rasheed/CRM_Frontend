@@ -84,7 +84,7 @@ const Policies = () => {
     },
     {
       field: 'policyValue',
-      headerName: "Policy Premium:",
+      headerName: "Premium:",
       width: '20%',
       isLink: true,
     },
@@ -142,7 +142,7 @@ const Policies = () => {
     },
     {
       field: 'policyValue',
-      headerName: "Policy Value",
+      headerName: "Premium",
       width: '20%',
       isLink: true
     },
