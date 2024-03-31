@@ -12,6 +12,7 @@ import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar'
 import { useDispatch } from 'react-redux'
 import { hideLoader, showLoader } from '../../Store/mainSlice'
 import dayjs from 'dayjs';
+import PoliciesDropdown from '../../shared-component/PoliciesDropdown'
 // import LinearProgressWithLabel from '../../shared-component/ProgressBar '
 
 const ApprovePolicy = () => {
@@ -89,6 +90,35 @@ const ApprovePolicy = () => {
         const formattedDate = dayjs(date).format('M/D/YYYY');
         setPolicyData((prevFormData) => ({ ...prevFormData, [field]: formattedDate }));
     };
+
+    const handleAutocompleteValue = (data, field) => {
+        setPolicyData((prevValue) => ({ ...prevValue, [field]: data }))
+    }
+
+    const carriers = [
+        'Crump',
+        'SuranceBay',
+        'TransAmerica',
+        'Athene',
+        'NationWide',
+        'NorthAmerican',
+        'Oscar',
+        'Aetna',
+        'BlueCross BlueShield',
+        'United Healthcare',
+        'LSPN',
+        'United American',
+        'Cigna',
+        'Debtmerica',
+        'Prudential',
+        'Mutual Of Omaha'
+    ]
+
+    const policyTypes =[
+        'Life',
+        'Health',
+        'Annuities'
+    ]
 
 
     const getPolicyDetail = async () => {
@@ -283,6 +313,7 @@ const ApprovePolicy = () => {
                                                 sx={{ width: '20%' }}
                                                 onChange={(e) => { handleInputChange(e.target.value, "policyType", "text") }}
                                             />
+                                            {/* <PoliciesDropdown options={policyTypes} label='Policy Type' origin='approvePolicy' onSelectValue={(data) => handleAutocompleteValue(data, 'policyType')} /> */}
                                         </Stack>
                                         <Stack className='Policy-textfield'>
                                             <Typography className='input-label'>Policy Number</Typography>

@@ -19,6 +19,7 @@ import { hideLoader, showLoader } from '../../Store/mainSlice.js'
 const Policies = () => {
   const [newPolicyClicked, setNewPolicyClicked] = useState(false);
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
+  const [ searchString,setSearchString] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [gridData, setGridData] = useState([])
@@ -176,9 +177,13 @@ const Policies = () => {
     navigate("/addNewPolicy_agent")
   }
 
+  const handleInputChange = (data) => {
+    setSearchString(data);
+};
+
   const LoadGridData = async () => {
     dispatch(showLoader())
-    const res = await httpClient.get(isAdmin ? 'policies/getAllPolicies' : 'policies/getAllPoliciesAgentView')
+    const res = await httpClient.get(isAdmin ? `policies/getAllPolicies?search=${searchString}` : `policies/getAllPoliciesAgentView?search=${searchString}`)
       .catch((error) => {
         dispatch(hideLoader())
         snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
@@ -197,7 +202,7 @@ const Policies = () => {
     console.log("baseURL:", isAdmin ? "/approvePolicy/" : "/addNewPolicy_agent");
     console.log("display:", isAdmin ? "none" : "flex");
     LoadGridData()
-  }, [])
+  }, [searchString])
 
   return (
     <div>
@@ -220,7 +225,10 @@ const Policies = () => {
 
                     </InputAdornment>
                   ),
-                }} />
+                }} 
+                onChange={(e) => { handleInputChange(e.target.value) }}
+                
+                />
               <Button
                 variant="contained"
                 sx={{

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Box, Button, Grid, InputAdornment, TextField, Stack, Typography, Switch } from '@mui/material'
+import { Box, Button, Grid, InputAdornment, TextField, Stack, Typography, Switch, filledInputClasses } from '@mui/material'
 import { MagnifyingGlass, Plus } from 'phosphor-react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux'
 import { hideLoader, showLoader } from '../../Store/mainSlice'
 import dayjs from 'dayjs'
 import Calendar from '../../shared-component/Calender/Calender'
+import PoliciesDropdown from '../../shared-component/PoliciesDropdown'
 
 const AddNewPolicy_Agent = () => {
     const { id } = useParams()
@@ -17,6 +18,7 @@ const AddNewPolicy_Agent = () => {
     const navigate = useNavigate()
     const snackbar_Ref = useRef(null)
     const dispatch = useDispatch()
+   
     const [policyData, setPolicyData] = useState({
         isSplit: false,
         policySubmissionDate: "",
@@ -97,7 +99,35 @@ const AddNewPolicy_Agent = () => {
         }));
     };
 
-    // const isEmpty 
+    const handleAutocompleteValue = (data, field) => {
+        setPolicyData((prevValue) => ({ ...prevValue, [field]: data }))
+    }
+
+    const carriers = [
+        'Crump',
+        'SuranceBay',
+        'TransAmerica',
+        'Athene',
+        'NationWide',
+        'NorthAmerican',
+        'Oscar',
+        'Aetna',
+        'BlueCross BlueShield',
+        'United Healthcare',
+        'LSPN',
+        'United American',
+        'Cigna',
+        'Debtmerica',
+        'Prudential',
+        'Mutual Of Omaha'
+    ]
+
+    const policyTypes =[
+        'Life',
+        'Health',
+        'Annuities'
+    ]
+
 
     useEffect(() => {
         console.log("agentCode", policyData.agentCode);
@@ -130,33 +160,11 @@ const AddNewPolicy_Agent = () => {
                             <Stack alignItems={'center'} sx={{ width: '96%', height: '97%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
                                 <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '100%' }}>
                                     <Stack className='addNewPolicyTextField' flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '59%' }}>
-                                        {/* <TextField
-                                            disabled={id ? true : policyNumber ? true : false}
-                                            label="Policy Submission Date:"
-                                            variant="filled"
-                                            value={policyData.policySubmissionDate}
-                                            sx={{ width: '30%' }}
-                                            onChange={(e) => { handleInputChange(e.target.value, "policySubmissionDate") }}
-                                        /> */}
                                         <Calendar value={policyData.policySubmissionDate} onDateChange={(date) => handleDateChange(date, 'policySubmissionDate')} />
-                                        <TextField
-                                            disabled={id ? true : policyNumber ? true : false}
-                                            label="Policy Carrier:"
-                                            variant="filled"
-                                            sx={{ width: '30%' }}
-                                            value={policyData.policyCarrier}
-                                            // isRequired={true}
-                                            onChange={(e) => { handleInputChange(e.target.value, "policyCarrier") }}
-                                        />
-                                        <TextField
-                                            disabled={id ? true : policyNumber ? true : false}
-                                            label="Policy Type:"
-                                            variant="filled"
-                                            sx={{ width: '30%' }}
-                                            value={policyData.policyType}
-                                            onChange={(e) => { handleInputChange(e.target.value, "policyType") }}
-                                        />
-
+                                      
+                                        <PoliciesDropdown options={carriers} label='Policy Carrier' origin="addPolicy" onSelectValue={(data) => handleAutocompleteValue(data, 'policyCarrier')} />
+                                     
+                                        <PoliciesDropdown options={policyTypes} label='Policy Type' origin="addPolicy" onSelectValue={(data) => handleAutocompleteValue(data, 'policyType')} />
                                         <TextField
                                             disabled={id ? true : policyNumber ? true : false}
                                             sx={{ width: '30%' }}
@@ -342,7 +350,7 @@ const AddNewPolicy_Agent = () => {
                                         <Button
                                             variant="contained"
                                             sx={{
-                                                display: id ? "none" : policyNumber ? "none" : "" ,
+                                                display: id ? "none" : policyNumber ? "none" : "",
                                                 backgroundColor: "#F08613",
                                                 color: 'white',
                                                 width: '186px',

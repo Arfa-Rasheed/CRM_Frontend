@@ -8,19 +8,18 @@ import './style.scss'
 export default function Calendar(props) {
   const [value , setValue] =React.useState(null)
   const handleDateChange = (newValue) => {
-    setValue(newValue); // Update local state
-    props.onDateChange(newValue.format('MM/DD/YYYY')); // Pass selected date to parent component
+    setValue(newValue); 
+    props.onDateChange(newValue.format('MM/DD/YYYY')); 
   };
 
   React.useEffect(() => {
     console.log("value",props?.value);
     if (props?.value) {
-      // Parse the date string into a dayjs object
       const parsedDate = dayjs(props?.value , 'M/D/YYYY');
       console.log("parsedDate",parsedDate);
-      setValue(parsedDate.isValid() ? parsedDate : parsedDate ); // Set the parsed date as value if it's valid
+      setValue(parsedDate.isValid() ? parsedDate : parsedDate );
     } else {
-      setValue(null); // If props.value is null or undefined, set value state to null
+      setValue(null); 
     }
   }, [props?.value]);
   return (
