@@ -231,7 +231,7 @@ const ApprovePolicy = () => {
                                             />
                                         </Stack>
                                         <Stack className='Policy-textfield'>
-                                            <Typography className='input-label'>Policy Value</Typography>
+                                            <Typography className='input-label'>Premium</Typography>
                                             <TextField
 
                                                 type='number'

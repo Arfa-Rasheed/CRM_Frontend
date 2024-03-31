@@ -55,6 +55,7 @@ const Commissions = () => {
     {
       field: 'splitPercentage',
       headerName: "Split%:",
+      isLink:true
 
     },
     {

@@ -38,7 +38,7 @@ const AddNewAgent = () => {
     const submitHandler = async () => {
         dispatch(showLoader())
         if (id) {
-            const res = httpClient.put(`/agents/updateAgent/${id}`, agentData)
+            const res =await httpClient.post(`/agents/editAgent/${id}`, agentData)
                 .catch((error) => {
                     dispatch(hideLoader())
                     snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
@@ -46,7 +46,7 @@ const AddNewAgent = () => {
             if (res?.status === 200) {
                 dispatch(hideLoader())
                 console.log("Add new agent res", res);
-                navigate(`/agent/${id}`)
+                navigate(`/agent`)
             }
         }
         else if (isAdmin === true) {
@@ -214,7 +214,7 @@ const AddNewAgent = () => {
                                         }}
                                         onClick={submitHandler}
                                     >
-                                        Submit
+                                        {id ? 'Edit' : 'Submit'}
                                     </Button>
                                 </Stack>
                             </Stack>

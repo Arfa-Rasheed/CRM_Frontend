@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Avatar, LinearProgress } from '@mui/material';
+import { Avatar, LinearProgress, Typography } from '@mui/material';
 import { Link } from "react-router-dom";
 import LinearProgressWithLabel from '../ProgressBar';
 
@@ -40,7 +40,7 @@ const CRMGrid = (props) => {
         marginTop: '15px',
         marginLeft: '10px',
         marginRight: '10px',
-        marginBottom:'20px',
+        marginBottom: '20px',
         boxShadow: 'none'
       }}
     >
@@ -54,52 +54,62 @@ const CRMGrid = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.gridData.map((row, index) => (
-            <TableRow
-              key={index}
-              onMouseEnter={() => setHoveredRowIndex(index)}
-              onMouseLeave={() => setHoveredRowIndex(null)}
-              style={{ backgroundColor: index === hoveredRowIndex ? '#F08613' : 'white', height: '5vh' }}
-            >
-              {props.gridHeader.map((headerObj) => (
-                <TableCell
-                  key={headerObj.field}
-                  style={{
-                    paddingTop: '8px',
-                    paddingBottom: '8px',
-                    borderBottom: '6px solid rgba(224, 224, 224, 1)',
-                    color: row.isApproved
-                      ? (row.isChargedBack
-                        ? "red"
-                        : "#008000"
-                      )
-                      : 'black'
-                    // color: row.isApproved ? "green" :"black"
-                  }}
+          {
+            props.gridData ? (
+              props.gridData.map((row, index) => (
+                <TableRow
+                  key={index}
+                  onMouseEnter={() => setHoveredRowIndex(index)}
+                  onMouseLeave={() => setHoveredRowIndex(null)}
+                  style={{ backgroundColor: index === hoveredRowIndex ? '#F08613' : 'white', height: '5vh' }}
                 >
-                  {
-                    headerObj.field === 'checkbox' ? (
-                      <input
-                        type="checkbox"
-                        checked={props.selectedAgentIds.includes(row.id)}
-                        onChange={() => props.handleCheckboxChange(row.id)}
-                      />
-                    ) : headerObj.field === 'img' ? (
-                      <Avatar src={row[headerObj.field]} shape="circle" size="large" />
-                    ) : headerObj.isLink ? (
-                      linkTemplate(row, headerObj)
-                    )
-                      : headerObj.isProgressBar ? (
-                        <LinearProgressWithLabel value={row[headerObj.field]} />
-                      )
-                      : (
-                        row[headerObj.field]
-                      )
-                  }
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
+                  {props.gridHeader.map((headerObj) => (
+                    <TableCell
+                      key={headerObj.field}
+                      style={{
+                        paddingTop: '8px',
+                        paddingBottom: '8px',
+                        borderBottom: '6px solid rgba(224, 224, 224, 1)',
+                        color: row.isApproved
+                          ? (row.isChargedBack
+                            ? "red"
+                            : "#008000"
+                          )
+                          : 'black'
+                        // color: row.isApproved ? "green" :"black"
+                      }}
+                    >
+                      {
+                        headerObj.field === 'checkbox' ? (
+                          <input
+                            type="checkbox"
+                            checked={props.selectedAgentIds.includes(row.id)}
+                            onChange={() => props.handleCheckboxChange(row.id)}
+                          />
+                        ) : headerObj.field === 'img' ? (
+                          <Avatar src={row[headerObj.field]} shape="circle" size="large" />
+                        ) : headerObj.isLink ? (
+                          linkTemplate(row, headerObj)
+                        )
+                          : headerObj.isProgressBar ? (
+                            <LinearProgressWithLabel value={row[headerObj.field]} />
+                          )
+                            : (
+                              row[headerObj.field]
+                            )
+                      }
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            )
+              :
+              (
+                <TableRow>
+                  <Typography sx={{ width: '743%', textAlign: 'center' }}>No Records Found</Typography>
+                </TableRow>
+              )
+          }
         </TableBody>
       </Table>
     </TableContainer>
