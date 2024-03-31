@@ -129,22 +129,23 @@ const AddNewPolicy_Agent = () => {
                         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', marginTop: '10px', height: policyData.isSplit ? '141vh' : "105vh" }}>
                             <Stack alignItems={'center'} sx={{ width: '96%', height: '97%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
                                 <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '100%' }}>
-                                    <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '59%' }}>
-                                        <TextField
+                                    <Stack className='addNewPolicyTextField' flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '59%' }}>
+                                        {/* <TextField
                                             disabled={id ? true : policyNumber ? true : false}
                                             label="Policy Submission Date:"
                                             variant="filled"
                                             value={policyData.policySubmissionDate}
                                             sx={{ width: '30%' }}
                                             onChange={(e) => { handleInputChange(e.target.value, "policySubmissionDate") }}
-                                        />
-                                        {/* <Calendar value={policyData.policyApprovalDate} onDateChange={(date) => handleDateChange(date, 'policyApprovalDate')} /> */}
+                                        /> */}
+                                        <Calendar value={policyData.policySubmissionDate} onDateChange={(date) => handleDateChange(date, 'policySubmissionDate')} />
                                         <TextField
                                             disabled={id ? true : policyNumber ? true : false}
                                             label="Policy Carrier:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
                                             value={policyData.policyCarrier}
+                                            // isRequired={true}
                                             onChange={(e) => { handleInputChange(e.target.value, "policyCarrier") }}
                                         />
                                         <TextField

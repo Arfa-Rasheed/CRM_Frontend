@@ -16,3 +16,22 @@
         }
     }
 }
+
+.addNewPolicyTextField{
+    .css-1xgnz6y-MuiStack-root>.MuiTextField-root, .css-1xgnz6y-MuiStack-root>.MuiPickersTextField-root {
+        width: 294px;
+        height: 60px;
+        background-color: rgb(0 0 0 / 8%);
+        .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+            height: 60px;
+        }
+      
+    }
+    // .css-1rtg91x-MuiDateCalendar-root {
+    //     width: 293px;
+    // }
+}
+
+.css-1rtg91x-MuiDateCalendar-root {
+    width: 293px;
+}

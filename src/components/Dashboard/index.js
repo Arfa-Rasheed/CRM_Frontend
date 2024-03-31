@@ -16,7 +16,7 @@ const Dashboard = () => {
     const snackbar_Ref = useRef(null)
     const dispatch = useDispatch()
     const [year, setYear] = useState('2024')
-    const [month, setMonth] = useState('February')
+    const [month, setMonth] = useState('March')
     const [currentMonth, setCurrentMonth] = useState('')
     const [totalSoldPolicies, setTotalSoldPolicies] = useState(0)
     const [totalHealthInsurance, setTotalHealthInsurance] = useState(0)
@@ -39,7 +39,7 @@ const Dashboard = () => {
     const [yearlyTotalSoldAnnuitiesPolicies, setYearlyTotalSoldAnnuitiesPolicies] = useState(0);
     const [selectedOption, setSelectedOption] = useState('Sales Matrix')
     const [yearlyPolicySelectedOption, setYearlyPolicySelectedOption] = useState('Sales Matrix')
-
+    const [totalNoOfRecruits, setTotalNoOfRecruits] = useState()
     const [highestCommissionedAgentData, setHighestCommissionedAgentData] = useState({
         agentFirstName: "",
         agentLastName: "",
@@ -107,7 +107,7 @@ const Dashboard = () => {
                 snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
             })
 
-        if (res.status === 200) {
+        if (res?.status === 200) {
             dispatch(hideLoader())
             console.log("dash res", res?.data[month]);
             setTotalHealthInsurance(res?.data[month].Health.count)
@@ -135,7 +135,7 @@ const Dashboard = () => {
                 snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
             })
 
-        if (res.status === 200) {
+        if (res?.status === 200) {
             dispatch(hideLoader())
             setBarChartData(res?.data.barChartData)
             console.log("res?.data.totalSoldPolicies", res?.data.totalSoldPolicies);
@@ -168,6 +168,20 @@ const Dashboard = () => {
         }
     }
 
+    const getTotalNoOfRecruits = async () => {
+        dispatch(showLoader())
+        const res = await httpClient.get(`/dashboard/TotalNoOfRecruits/February`).catch((error) => {
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+        })
+
+        if (res.status === 200) {
+            dispatch(hideLoader())
+            console.log(res);
+            setTotalNoOfRecruits(res.data.noOfRecruits)
+        }
+    }
+
     useEffect(() => {
         // LoadMonthlyPolicyData()
         yearlyPolicyData()
@@ -179,6 +193,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         getDetailsOfHighestCommissionedAgent()
+        getTotalNoOfRecruits()
     }, [])
     return (
 
@@ -460,6 +475,7 @@ const Dashboard = () => {
                                 <Grid container sx={{ justifyContent: 'center', height: '14vh' }} className='grid-inner-container'>
                                     <Grid items md='10' >
                                         <Typography>Total Recruits:</Typography>
+                                        <Typography>{totalNoOfRecruits}</Typography>
                                     </Grid>
                                 </Grid>
 

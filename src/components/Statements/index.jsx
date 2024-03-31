@@ -22,8 +22,8 @@ const Commissions = () => {
   })
   const adminGridHeader = [
     {
-      field: 'policyDate',
-      headerName: "Policy Date",
+      field: 'paidOutDate',
+      headerName: "Paid Out Date",
       width: '20%',
       isLink:true,
     },
@@ -72,8 +72,8 @@ const Commissions = () => {
 
   const gridHeader = [
     {
-      field: 'policyDate',
-      headerName: "Policy Date",
+      field: 'paidOutDate',
+      headerName: "Paid Out Date",
       width: '20%',
       isLink:true,
     },
@@ -127,22 +127,6 @@ const Commissions = () => {
     },
   ]
 
-  const grid_data = [
-    {
-      dateOfPayment: '02/12/2022',
-      policyCarrier: "TransAmerica",
-      policyNumber: "KPT904704456",
-      agentCarrierNumber: "C-46786",
-      agentCode: "B-67698",
-      comissionPremium: "$20,000,00",
-      split: "",
-      contractLevel: "",
-      overwrite: "",
-      earnedAdv: "",
-      earnedAdvAmount: "$27,000,00"
-    },
-
-  ]
 
   const handleInputChange = (data,field) => {
     setDates((prevFormData) => ({ ...prevFormData, [field]: data }));

@@ -132,7 +132,7 @@ const StatementDetail = () => {
                                             disabled={_id ? true : false}
                                             label="Agent Code:"
                                             variant="filled"
-                                            sx={{ width: '30%', display: isAdmin ? 'none' : 'block' }}
+                                            sx={{ width: '30%', display: isAdmin ? 'none' : 'flex' }}
                                             value={policyData.agentCode}
                                             onChange={(e) => { handleInputChange(e.target.value, "agentCode") }}
                                         />
@@ -140,7 +140,7 @@ const StatementDetail = () => {
                                         <TextField
                                             disabled={_id ? true : false}
                                             sx={{ width: '30%' }}
-                                            label="Agaent Commission:"
+                                            label="Agent Commission:"
                                             variant="filled"
                                             value={policyData.agentCommission}
                                             onChange={(e) => { handleInputChange(e.target.value, "agentCommission") }}
@@ -181,14 +181,6 @@ const StatementDetail = () => {
                                         />
                                         <TextField
                                             disabled={_id ? true : false}
-                                            label="Agent Commission:"
-                                            variant="filled"
-                                            sx={{ width: '30%' }}
-                                            value={policyData.agentCommission}
-                                            onChange={(e) => { handleInputChange(e.target.value, "agentCommission") }}
-                                        />
-                                        <TextField
-                                            disabled={_id ? true : false}
                                             label="Adv Payment %:"
                                             variant="filled"
                                             sx={{ width: '30%' }}
@@ -199,7 +191,7 @@ const StatementDetail = () => {
                                     </Stack>
 
                                     <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '100%', height: '13vh', }}>
-                                    
+
                                         <Button
                                             variant="contained"
                                             sx={{

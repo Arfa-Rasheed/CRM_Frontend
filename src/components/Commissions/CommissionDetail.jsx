@@ -74,7 +74,7 @@ const CommissionDetail = () => {
 
     const paidOutHandler = async () => {
         dispatch(showLoader())
-        const res = await httpClient.post(`/policies/isPaid/${_id}`, policyData)
+        const res = await httpClient.post(`/policies/isPaid`, policyData)
             .catch((error) => {
                 dispatch(hideLoader())
                 snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
@@ -84,7 +84,7 @@ const CommissionDetail = () => {
             dispatch(hideLoader())
             snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
             setTimeout(() => {
-                navigate('/statements');
+                navigate('/commissions');
             }, 4000);
         }
     }
