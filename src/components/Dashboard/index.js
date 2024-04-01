@@ -170,7 +170,7 @@ const Dashboard = () => {
 
     const getTotalNoOfRecruits = async () => {
         dispatch(showLoader())
-        const res = await httpClient.get(`/dashboard/TotalNoOfRecruits/February`).catch((error) => {
+        const res = await httpClient.get(`/dashboard/TotalNoOfRecruits/${month}`).catch((error) => {
             dispatch(hideLoader())
             snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
         })

@@ -53,14 +53,14 @@ const Policies = () => {
       isLink: true,
     },
     {
-      field: 'overwrittingAgentFirstName1',
-      headerName: "OW1 Name:",
+      field: 'agentFirstName',
+      headerName: "Writting Agent First Name",
       width: '20%',
       isLink: true,
     },
     {
-      field: 'overwrittingAgentFirstName2',
-      headerName: "OW2 Name:",
+      field: 'agentLastName',
+      headerName: "Writting Agent Last Name",
       width: '20%',
       isLink: true,
     },
@@ -124,7 +124,7 @@ const Policies = () => {
       isLink: true
     },
     {
-      field: 'overwrittingAgentFirstName1',
+      field: 'agentFirstName',
       headerName: "Writting Agent Name",
       width: '20%',
       isLink: true

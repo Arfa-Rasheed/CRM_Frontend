@@ -17,6 +17,7 @@ const StatementDetail = () => {
     const dispatch = useDispatch()
     const snackbar_Ref = useRef()
     const [policyData, setPolicyData] = useState({
+        paidOutDate:"",
         isPaid: false,
         policySubmissionDate: "",
         policyCarrier: "",
@@ -99,9 +100,9 @@ const StatementDetail = () => {
                                             disabled={_id ? true : false}
                                             label="Policy Date:"
                                             variant="filled"
-                                            value={policyData.policyDate}
+                                            value={policyData.paidOutDate}
                                             sx={{ width: '30%' }}
-                                            onChange={(e) => { handleInputChange(e.target.value, "policyDate") }}
+                                            onChange={(e) => { handleInputChange(e.target.value, "paidOutDate") }}
                                         />
                                         <TextField
                                             disabled={_id ? true : false}
