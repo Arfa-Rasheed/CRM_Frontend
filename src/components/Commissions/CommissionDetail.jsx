@@ -42,12 +42,22 @@ const CommissionDetail = () => {
         overwrittingAgentCode2: "",
         overwrittingAgentContractLevel2: 0,
         overwrittingAgentCommission2: 0,
+        split1_ContractLevel:0,
+        split1_agentCode:"",
+        split1_agentCommission:0,
+        split1_splitRatio:0,
+        split_1_OWAgent1_ContractLevel:0,
+        split_1_OWAgent1_Commission:0,
+        split_1_OWAgent2_ContractLevel:0,
+        split_1_OWAgent2_Commission:0,
+
         split2_AgentCode: "",
         split2_agentCommission: 0,
+        split2_ContractLevel:0,
         split2_splitRatio: 0,
-        split_2_OWAgent1_AgentCode: "",
+        split_2_OWAgent1_ContractLevel: 0,
         split_2_OWAgent1_Commission: 0,
-        split_2_OWAgent2_AgentCode: "",
+        split_2_OWAgent2_ContractLevel: 0,
         split_2_OWAgent2_Commission: 0,
         insuredFirstName: "",
         insuredLastName: ""
@@ -323,6 +333,57 @@ const CommissionDetail = () => {
                                             onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentCommission2") }} />
                                         <TextField
                                             disabled={_id ? true : false}
+                                            label="Split1_SplitRatio"
+                                            variant="filled"
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
+                                            value={policyData.split1_splitRatio}
+                                            onChange={(e) => { handleInputChange(e.target.value, "split1_splitRatio") }} />
+                                        <TextField
+                                            disabled={_id ? true : false}
+                                            label="Split1 Contract Level"
+                                            variant="filled"
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
+                                            value={policyData.split1_ContractLevel}
+                                            onChange={(e) => { handleInputChange(e.target.value, "split1_ContractLevel") }} />
+                                        <TextField
+                                            disabled={_id ? true : false}
+                                            label="Split1 Agent Commission"
+                                            variant="filled"
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
+                                            value={policyData.split1_agentCommission}
+                                            onChange={(e) => { handleInputChange(e.target.value, "split1_agentCommission") }} />
+                                        <TextField
+                                            disabled={_id ? true : false}
+                                            label="Split_1_OWAgent1_Contract Level"
+                                            variant="filled"
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
+                                            value={policyData.split_1_OWAgent1_ContractLevel}
+                                            onChange={(e) => { handleInputChange(e.target.value, "split_1_OWAgent1_ContractLevel") }} />
+                                        <TextField
+                                            disabled={_id ? true : false}
+                                            label="Split_1_OWAgent1_Commission"
+                                            variant="filled"
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
+                                            value={policyData.split_1_OWAgent1_Commission}
+                                            onChange={(e) => { handleInputChange(e.target.value, "split_1_OWAgent1_Commission") }} />
+                                         <TextField
+                                            disabled={_id ? true : false}
+                                            label="Split_1_OWAgent2_Contract Level"
+                                            variant="filled"
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
+                                            value={policyData.split_1_OWAgent2_ContractLevel}
+                                            onChange={(e) => { handleInputChange(e.target.value, "split_1_OWAgent2_ContractLevel") }} />
+                                        <TextField
+                                            disabled={_id ? true : false}
+                                            label="Split_1_OWAgent2_Commission"
+                                            variant="filled"
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
+                                            value={policyData.split_1_OWAgent2_Commission}
+                                            onChange={(e) => { handleInputChange(e.target.value, "split_1_OWAgent2_Commission") }} />
+
+                                        {/* Split2   */}
+                                        <TextField
+                                            disabled={_id ? true : false}
                                             label="Split2_SplitRatio"
                                             variant="filled"
                                             sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
@@ -330,18 +391,46 @@ const CommissionDetail = () => {
                                             onChange={(e) => { handleInputChange(e.target.value, "split2_splitRatio") }} />
                                         <TextField
                                             disabled={_id ? true : false}
+                                            label="Split2 Contract Level"
+                                            variant="filled"
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
+                                            value={policyData.split2_ContractLevel}
+                                            onChange={(e) => { handleInputChange(e.target.value, "split2_ContractLevel") }} />
+                                        <TextField
+                                            disabled={_id ? true : false}
+                                            label="Split2 Agent Commission"
+                                            variant="filled"
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
+                                            value={policyData.split2_agentCommission}
+                                            onChange={(e) => { handleInputChange(e.target.value, "split2_agentCommission") }} />
+                                        <TextField
+                                            disabled={_id ? true : false}
+                                            label="Split_2_OWAgent1_Contract Level"
+                                            variant="filled"
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
+                                            value={policyData.split_2_OWAgent1_ContractLevel}
+                                            onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent1_ContractLevel") }} />
+                                        <TextField
+                                            disabled={_id ? true : false}
                                             label="Split_2_OWAgent1_Commission"
                                             variant="filled"
                                             sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.split_2_OWAgent1_Commission}
                                             onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent1_Commission") }} />
+                                         <TextField
+                                            disabled={_id ? true : false}
+                                            label="Split_2_OWAgent2_Contract Level"
+                                            variant="filled"
+                                            sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
+                                            value={policyData.split_2_OWAgent2_ContractLevel}
+                                            onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent2_ContractLevel") }} />
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="Split_2_OWAgent2_Commission"
                                             variant="filled"
                                             sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.split_2_OWAgent2_Commission}
-                                            onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent2_Commission") }} />
+                                            onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent2_Commission") }} />    
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="Insured First Name"
@@ -361,7 +450,6 @@ const CommissionDetail = () => {
                                     <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '100%', height: '13vh', }}>
                                         <Button
                                             variant="contained"
-                                            // disabled={isAdmin ? (policyData.isPaid ? true : false) : false}
                                             sx={{
                                                 backgroundColor: "#003478",
                                                 color: 'white',

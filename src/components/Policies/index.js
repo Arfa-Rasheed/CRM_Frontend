@@ -53,6 +53,18 @@ const Policies = () => {
       isLink: true,
     },
     {
+      field: 'insuredFirstName',
+      headerName: "Insured First Name:",
+      width: '20%',
+      isLink: true,
+    },
+    {
+      field: 'insuredLastName',
+      headerName: "Insured Last Name:",
+      width: '20%',
+      isLink: true,
+    },
+    {
       field: 'agentFirstName',
       headerName: "Writting Agent First Name",
       width: '20%',
@@ -89,6 +101,7 @@ const Policies = () => {
       width: '20%',
       isLink: true,
     },
+  
 
   ]
 
@@ -118,14 +131,32 @@ const Policies = () => {
       isLink: true
     },
     {
-      field: 'agentCarrierNumber',
-      headerName: "Agent Carrier Number",
+      field: 'insuredFirstName',
+      headerName: "Insured First Name:",
+      width: '20%',
+      isLink: true,
+    },
+    {
+      field: 'insuredLastName',
+      headerName: "Insured Last Name:",
+      width: '20%',
+      isLink: true,
+    },
+    {
+      field: 'agentFirstName',
+      headerName: "Writting Agent First Name",
       width: '20%',
       isLink: true
     },
     {
-      field: 'agentFirstName',
-      headerName: "Writting Agent Name",
+      field: 'agentLastName',
+      headerName: "Writting Agent Last Name",
+      width: '20%',
+      isLink: true
+    },
+    {
+      field: 'agentCarrierNumber',
+      headerName: "Agent Carrier Number",
       width: '20%',
       isLink: true
     },
@@ -216,7 +247,7 @@ const Policies = () => {
           <SideBar />
           <CustomizedSnackbars ref={snackbar_Ref}/>
           <Stack sx={{ width: '81.8%',marginLeft:'17.5%' }}>
-            <Box sx={{ width: '100%', height: '12vh', marginTop: '20px', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <Box sx={{ width: '100%', height: '20vh', marginTop: '20px', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
               <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
                 InputProps={{
                   startAdornment: (
@@ -253,12 +284,15 @@ const Policies = () => {
                 </Grid>
               </Button>
             </Box>
+            {/* <Box sx={{height:'130vh'}}> */}
             <CRMGrid
               sx={{ marginTop: '10px', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
               gridHeader={isAdmin ? adminGridHeader : gridHeader}
               gridData={gridData}
               baseURL={isAdmin ? "/approvePolicy/" : "/addNewPolicy_agent/"}
             />
+            {/* </Box> */}
+           
           </Stack>
         </div>
       </div>

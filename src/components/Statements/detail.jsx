@@ -120,13 +120,21 @@ const StatementDetail = () => {
                                             value={policyData.policyNumber}
                                             onChange={(e) => { handleInputChange(e.target.value, "policyNumber") }}
                                         />
+                                          <TextField
+                                            disabled={_id ? true : false}
+                                            sx={{ width: '30%' }}
+                                            label="Insured First Name:"
+                                            variant="filled"
+                                            value={policyData.insuredFirstName}
+                                            onChange={(e) => { handleInputChange(e.target.value, "insuredFirstName") }}
+                                        />
                                         <TextField
                                             disabled={_id ? true : false}
                                             sx={{ width: '30%' }}
-                                            label="Agaent Carrier Number:"
+                                            label="Insured First Name::"
                                             variant="filled"
-                                            value={policyData.agentCarrierNumber}
-                                            onChange={(e) => { handleInputChange(e.target.value, "agentCarrierNumber") }}
+                                            value={policyData.insuredLastName}
+                                            onChange={(e) => { handleInputChange(e.target.value, "insuredLastName") }}
                                         />
 
                                         <TextField
@@ -172,7 +180,26 @@ const StatementDetail = () => {
                                             onChange={(e) => { handleInputChange(e.target.value, "contractLevel") }}
                                         />
 
+                                       <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{width:'65%'}}>
+                                       <TextField
+                                            disabled={_id ? true : false}
+                                            label="Agency Commission:"
+                                            variant="filled"
+                                            sx={{ width: '46%', display: isAdmin ? 'flex' : 'none' }}
+                                            value={policyData.agencyCommission}
+                                            onChange={(e) => { handleInputChange(e.target.value, "agencyCommission") }}
+                                        />
                                         <TextField
+                                            disabled={_id ? true : false}
+                                            label="Adv Payment %:"
+                                            variant="filled"
+                                            sx={{ width: '46%' }}
+                                            value={policyData.advPaymentPercentage}
+                                            onChange={(e) => { handleInputChange(e.target.value, "advPaymentPercentage") }}
+                                        />
+
+                                       </Stack>
+                                        {/* <TextField
                                             disabled={_id ? true : false}
                                             label="Agency Commission:"
                                             variant="filled"
@@ -187,7 +214,7 @@ const StatementDetail = () => {
                                             sx={{ width: '30%' }}
                                             value={policyData.advPaymentPercentage}
                                             onChange={(e) => { handleInputChange(e.target.value, "advPaymentPercentage") }}
-                                        />
+                                        /> */}
 
                                     </Stack>
 

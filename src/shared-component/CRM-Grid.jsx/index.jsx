@@ -45,7 +45,7 @@ const CRMGrid = (props) => {
       }}
     >
       <Table stickyHeader aria-label="sticky table" sx={{}}>
-        <TableHead style={{ height: '20vh' }}>
+        <TableHead style={{ height: '10vh' }}>
           <TableRow>
             {props.gridHeader.length > 0 &&
               props.gridHeader.map((headerObj) => (
@@ -80,11 +80,11 @@ const CRMGrid = (props) => {
                       }}
                     >
                       {
-                        headerObj.field === 'checkbox' ? (
+                        headerObj.isCheckbox ? (
                           <input
                             type="checkbox"
-                            checked={props.selectedAgentIds.includes(row.id)}
-                            onChange={() => props.handleCheckboxChange(row.id)}
+                            checked={props.selectedIds.includes(row._id)}
+                            onChange={() => props.handleCheckboxChange(row._id)}
                           />
                         ) : headerObj.field === 'img' ? (
                           <Avatar src={row[headerObj.field]} shape="circle" size="large" />

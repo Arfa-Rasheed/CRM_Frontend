@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
-import { Button, Stack, TextField, Typography } from '@mui/material'
+import { Box, Button, Grid, InputAdornment, Stack, TextField, Typography } from '@mui/material'
 import CRMGrid from '../../shared-component/CRM-Grid.jsx'
 import './style.scss'
 import httpClient from '../../_util/api.jsx'
@@ -10,25 +10,24 @@ import { useDispatch } from 'react-redux'
 import { hideLoader, showLoader } from '../../Store/mainSlice.js'
 import Calendar from '../../shared-component/Calender/Calender.jsx'
 import dayjs from 'dayjs';
+import { MagnifyingGlass } from 'phosphor-react'
 
 const Commissions = () => {
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
   const agentCode = localStorage.getItem("agentCode")
   const [gridData, setGridData] = useState([]);
+  const [searchString, setSearchString] = useState("")
   const dispatch = useDispatch()
-  // const currentDate = new Date();
   const snackbar_Ref = useRef(null);
   const [dates, setDates] = useState({
-    // startDate: "3/11/2024",
-    // endDate: "3/29/2023"
     startDate: "",
     endDate: ""
   })
 
   let date = new Date()
-  let currentDate = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`
+  let currentDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
   let currentMonth = `${date.toLocaleString('en-us', { month: 'long' })} ${date.getFullYear()}`
- 
+
 
 
   const adminGridHeader = [
@@ -47,6 +46,18 @@ const Commissions = () => {
     {
       field: 'policyNumber',
       headerName: "Policy Number:",
+      width: '20%',
+      isLink: true,
+    },
+    {
+      field: 'insuredFirstName',
+      headerName: "Insured First Name:",
+      width: '20%',
+      isLink: true,
+    },
+    {
+      field: 'insuredLastName',
+      headerName: "Insured Last Name:",
       width: '20%',
       isLink: true,
     },
@@ -101,6 +112,18 @@ const Commissions = () => {
       isLink: true,
     },
     {
+      field: 'insuredFirstName',
+      headerName: "Insured First Name:",
+      width: '20%',
+      isLink: true,
+    },
+    {
+      field: 'insuredLastName',
+      headerName: "Insured Last Name:",
+      width: '20%',
+      isLink: true,
+    },
+    {
       field: 'agentCarrierNumber',
       headerName: "Agent Carrier Number",
       width: '20%',
@@ -139,20 +162,20 @@ const Commissions = () => {
   ]
 
 
-  const handleInputChange = (data, field) => {
-    setDates((prevFormData) => ({ ...prevFormData, [field]: data }));
+  const handleInputChange = (data) => {
+    setSearchString(data);
   };
 
-  
+
   const handleDateChange = (date, field) => {
     const formattedDate = dayjs(date).format('M/D/YYYY');
     setDates((prevFormData) => ({ ...prevFormData, [field]: formattedDate }));
-};
+  };
 
 
   const LoadGridData = async () => {
     dispatch(showLoader())
-    const res = await httpClient.post(isAdmin ? '/policies/statement' : `/policies/statementAgentView/${agentCode}`, dates).catch((error) => {
+    const res = await httpClient.post(isAdmin ? `/policies/statement/?search=${searchString}` : `/policies/statementAgentView/${agentCode}/?search=${searchString}`, dates).catch((error) => {
       dispatch(hideLoader())
       snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle")
     })
@@ -167,11 +190,7 @@ const Commissions = () => {
     if (dates) {
       LoadGridData()
     }
-    else {
-
-    }
-
-  }, [dates])
+  }, [searchString,dates])
   return (
     <div>
       <Header />
@@ -184,18 +203,34 @@ const Commissions = () => {
           <SideBar />
           <CustomizedSnackbars ref={snackbar_Ref} />
           <Stack sx={{ width: '80.8%', marginLeft: '18%' }}>
-            <Stack sx={{ width: '99.9%', height: '30vh', marginLeft: '10px', marginTop: '17px', marginBottom: '-74px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
+            <Box sx={{ width: '100%', height: '12vh', marginTop: '20px', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <MagnifyingGlass size={16} weight="light" />
+
+                    </InputAdornment>
+                  ),
+                }}
+                onChange={(e) => { handleInputChange(e.target.value) }}
+              />
+
+            </Box>
+            <Stack sx={{ width: '99.9%', height:isAdmin ? '43vh' : '30vh', marginLeft: '10px',marginTop: isAdmin ? '0' : '-27px', marginBottom: '-74px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
               {/* <h3 style={{ color: '#003478', marginLeft: '40px' }}>September 2023</h3> */}
               <Stack alignItems={'center'} sx={{ width: '100%', height: '64px', marginTop: '20px' }}>
                 <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '50%', }}>
-                  <h2 style={{ color: 'black' }}>Commission Statement</h2>
-                  <p><b>Date:{currentDate}</b></p>
-
+                  <h2 style={{ color: 'black' }}>Statement</h2>
 
                 </Stack>
               </Stack>
               <Stack flexDirection={'row'} justifyContent={'space-around'} sx={{ width: '100%' }}>
-                <h3 style={{ color: '#003478' }}>{currentMonth}</h3>
+                <Stack>
+                  <h3 style={{ color: '#003478', lineHeight: '1px' }}>{currentMonth}</h3>
+                  <p style={{ lineHeight: '0px' }}><b>Date:{currentDate}</b></p>
+                </Stack>
+
                 <Stack flexDirection={'row'}>
                   <Typography sx={{ marginTop: '20px' }}>Period:</Typography>
                   <Stack flexDirection={'row'}>
@@ -209,7 +244,7 @@ const Commissions = () => {
                     </Stack>
                     <Stack>
                       <Typography>End Date:</Typography>
-                       <Calendar value={dates.endDate} onDateChange={(date) => handleDateChange(date, 'endDate')} />
+                      <Calendar value={dates.endDate} onDateChange={(date) => handleDateChange(date, 'endDate')} />
                     </Stack>
                   </Stack>
                 </Stack>

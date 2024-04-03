@@ -21,62 +21,84 @@ import CustomSnackbar from '../../shared-component/Snackbar/SnackBar.jsx'
 const Administration = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
   const snackbar_Ref = useRef(null);
   const [gridData, setGridData] = useState([])
   const [selectedAgentIds, setSelectedAgentIds] = useState([]);
   const gridHeader = [
     {
-      field: 'checkbox',
+      field: '_id',
+      isCheckbox : true,
       headerName: (
         <input
           type="checkbox"
           onChange={(e) => {
-            // Handle checkbox click for all rows
-            if (e.target.checked) {
-              const allAgentIds = gridData.map((agent) => agent.id);
-              setSelectedAgentIds(allAgentIds);
+            // // Handle checkbox click for all rows
+            // if (e.target.checked) {
+            //   const allAgentIds = gridData.map((agent) => agent.id);
+            //   setSelectedAgentIds(allAgentIds);
+            // } else {
+            //   setSelectedAgentIds([]);
+            // }
+
+            const isChecked = e.target.checked;
+            const agentId = e.target.value; // Assuming value attribute contains the agent ID
+            if (isChecked) {
+                // If the checkbox is checked, add the agent ID to the selected agent IDs
+                setSelectedAgentIds([agentId]);
             } else {
-              setSelectedAgentIds([]);
+                // If the checkbox is unchecked, remove the agent ID from the selected agent IDs
+                setSelectedAgentIds([]);
             }
           }}
+          
         />
       ),
     },
     {
       field: 'img',
-      headerName: ""
+      headerName: "",
+      isLink: true,
     },
     {
       field: 'firstName',
       headerName: "Name:",
+      isLink: true
     },
     {
       field: 'level',
       headerName: "Level:",
+      isLink: true,
     },
     {
       field: 'agentCode',
       headerName: "Agent Code:",
+      isLink: true,
     },
     {
       field: 'agentTitle',
       headerName: "Agent Title:",
+      isLink: true,
     },
     {
       field: 'agentRole',
       headerName: "Agent Role:",
+      isLink: true,
     },
     {
       field: 'recruitmentDate',
       headerName: "Recruitment Date:",
+      isLink: true,
     },
     {
       field: 'recruits',
       headerName: "Recruits:",
+      isLink: true,
     },
     {
       field: 'commissionEarned',
       headerName: "Commision Earned:",
+      isLink: true,
     },
   ]
 
@@ -112,7 +134,7 @@ const Administration = () => {
 
   const LoadgridData = async () => {
     dispatch(showLoader())
-    const res = await httpClient.get("/agents/getAllAgents")
+    const res = await httpClient.get(isAdmin ? '/agents/getApprovedAgents' : '/agents/getAllAgentsAgentView')
       .catch((error) => {
         dispatch(hideLoader())
         snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle")
@@ -120,7 +142,7 @@ const Administration = () => {
     if (res?.status === 200) {
       dispatch(hideLoader())
       setGridData(res.data)
-     
+
     }
   }
 
@@ -140,7 +162,7 @@ const Administration = () => {
         }}>
           <SideBar />
           <CustomSnackbar ref={snackbar_Ref} />
-          <Stack sx={{ width: '81.7%',marginLeft:'18%'  }}>
+          {/* <Stack sx={{ width: '81.7%', marginLeft: '18%' }}>
             <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
               <Box sx={{ width: '60%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                 <Box sx={{ height: '12vh' }}>
@@ -237,7 +259,7 @@ const Administration = () => {
               />
             </div>
 
-          </Stack>
+          </Stack> */}
         </div>
       </div>
 
