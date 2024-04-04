@@ -217,7 +217,7 @@ const Commissions = () => {
               />
 
             </Box>
-            <Stack sx={{ width: '99.9%', height:isAdmin ? '43vh' : '30vh', marginLeft: '10px',marginTop: isAdmin ? '0' : '-27px', marginBottom: '-74px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
+            <Stack sx={{ width: '99.9%', height:isAdmin ? '57vh' : '30vh', marginLeft: '10px',marginTop: isAdmin ? '0' : '-27px', marginBottom: '-74px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
               {/* <h3 style={{ color: '#003478', marginLeft: '40px' }}>September 2023</h3> */}
               <Stack alignItems={'center'} sx={{ width: '100%', height: '64px', marginTop: '20px' }}>
                 <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '50%', }}>

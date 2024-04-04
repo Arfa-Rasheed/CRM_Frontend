@@ -10,6 +10,7 @@ import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar'
 import { hideLoader, setIsLoggedIn, setUserDetail, showLoader } from '../../Store/mainSlice'
 import landingPageImg from '../../assets/landingPageImg.svg'
 import joptimanLogo from '../../assets/joptimanLogo.png'
+import LoadingButton from '@mui/lab/LoadingButton';
 
 
 const Login = () => {
@@ -201,7 +202,7 @@ const Login = () => {
                                                 </Stack>
 
                                                 <Typography textAlign={'right'} style={{ fontSize: '14px', color: "#F08613" }}>Forgot Your Password?</Typography>
-                                                <Button
+                                                <LoadingButton
                                                     variant="contained"
                                                     sx={{
                                                         backgroundColor: "#F08613",
@@ -216,7 +217,7 @@ const Login = () => {
                                                     onClick={loginHandler}
                                                 >
                                                     Verify OTP
-                                                </Button>
+                                                </LoadingButton>
                                                 
 
                                             </Stack>
