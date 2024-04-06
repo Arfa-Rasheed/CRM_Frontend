@@ -81,11 +81,6 @@ const Commissions = () => {
 
     },
     {
-      field: 'contractLevel',
-      headerName: "Contract Level:",
-      isLink: true,
-    },
-    {
       field: 'agencyCommissionPercentage',
       headerName: 'Agency Commission %',
       isLink: true,
@@ -100,20 +95,15 @@ const Commissions = () => {
       headerName: 'Commissionable Amount',
       isLink: true,
     },
-    {
-      field: 'agentCommission',
-      headerName: 'Agent Commission',
-      isLink: true,
-    },
-    (isAdmin
-      ? [
+    // (isAdmin
+    //   ? [
         {
           field: 'paidAgencyCommission',
           headerName: 'Paid Agency Commission',
           isProgressBar: true,
         },
-      ]
-      : []),
+      // ]
+      // : []),
     {
       field: 'advPaymentPercentage',
       headerName: "Earned Adv %:",
@@ -122,6 +112,16 @@ const Commissions = () => {
     {
       field: 'advPayment',
       headerName: "Earned Adv Amount:",
+      isLink: true,
+    },
+    {
+      field: 'contractLevel',
+      headerName: "Writting Agent Contract Level:",
+      isLink: true,
+    },
+    {
+      field: 'agentCommission',
+      headerName: 'Writting Agent Commission',
       isLink: true,
     },
     {
@@ -142,6 +142,21 @@ const Commissions = () => {
     {
       field: 'overwrittingAgentCommission2',
       headerName: "OW2 Agent Commission:",
+      isLink: true,
+    },
+    {
+      field: 'split1_splitRatio',
+      headerName: "Split1 %",
+      isLink: true,
+    },
+    {
+      field: 'split_1_OWAgent1_Commission',
+      headerName: 'Split1 OW1 commission',
+      isLink: true,
+    },
+    {
+      field: 'split_1_OWAgent2_Commission',
+      headerName: 'Split1 OW2 commission',
       isLink: true,
     },
     {
@@ -199,20 +214,19 @@ const Commissions = () => {
 
     },
     {
-      field: 'contractLevel',
-      headerName: "Contract Level:",
-      isLink: true,
-    },
-    {
       field: 'commissionableAmountPercentage',
       headerName: 'Commissionable Amount',
       isLink: true,
     },
-
+    {
+      field: 'contractLevel',
+      headerName: "Writting Agent Contract Level:",
+      isLink: true,
+    },
 
     {
       field: 'agentCommission',
-      headerName: 'Agent Commission',
+      headerName: 'Writting Agent Commission',
       isLink: true,
     },
 

@@ -232,8 +232,8 @@ const AddNewRecruit = () => {
                             </Stack>
 
                             <Stack>
-                                <Typography className='form-questions'>Is Agent above 18 yrs and legally authorized to work in the U. S.? 
-                                <Asterisk color='red' size={12} weight="bold" /></Typography>
+                                <Typography className='form-questions'>Is Agent above 18 yrs and legally authorized to work in the U. S.?
+                                    <Asterisk color='red' size={12} weight="bold" /></Typography>
                                 <FormGroup>
                                     <FormControlLabel checked={agentData.age === 'Yes'} control={<Checkbox onChange={(e) => { handleInputChange("Yes", "age") }} />} label="Yes" />
                                     <FormControlLabel checked={agentData.age === 'No'} control={<Checkbox onChange={(e) => { handleInputChange("No", "age") }} />} label="No" />
@@ -243,7 +243,7 @@ const AddNewRecruit = () => {
                             {/* Name Stack */}
                             <Stack>
                                 <Typography className='form-questions'>Name
-                                <Asterisk color='red' size={12} weight="bold" /></Typography>
+                                    <Asterisk color='red' size={12} weight="bold" /></Typography>
                                 <Stack>
                                     <Stack flexDirection={'row'} className='text-field-container'>
                                         <Stack className='text-field'>
@@ -269,7 +269,7 @@ const AddNewRecruit = () => {
                             {/* Email Stack */}
                             <Stack>
                                 <Typography className='form-questions'>Email
-                                <Asterisk color='red' size={12} weight="bold" />
+                                    <Asterisk color='red' size={12} weight="bold" />
                                 </Typography>
                                 <Stack>
                                     <Stack flexDirection={'row'} className='text-field-container'>
@@ -281,7 +281,7 @@ const AddNewRecruit = () => {
                                             <Typography>Email</Typography>
                                         </Stack>
 
-                                        <Stack className='text-field'>
+                                        <Stack className='text-field' sx={{ display: _id ? 'none' : 'flex' }}>
                                             <TextField
                                                 value={agentData.confirmEmail}
                                                 onChange={(e) => { handleInputChange(e.target.value, "confirmEmail") }}
@@ -295,7 +295,7 @@ const AddNewRecruit = () => {
                             {/* Address Stack */}
                             <Stack>
                                 <Typography className='form-questions'>Address
-                                <Asterisk color='red' size={12} weight="bold" /></Typography>
+                                    <Asterisk color='red' size={12} weight="bold" /></Typography>
                                 <Stack>
                                     <Stack className='text-field-container'>
                                         <Stack className='text-field'>
@@ -362,7 +362,7 @@ const AddNewRecruit = () => {
                             {/* Active Licensed Stack  */}
                             <Stack >
                                 <Typography className='form-questions'>Do Agent have an Active License?
-                                <Asterisk color='red' size={12} weight="bold" /></Typography>
+                                    <Asterisk color='red' size={12} weight="bold" /></Typography>
                                 <Stack>
                                     <FormGroup>
                                         <Stack flexDirection={'row'}>
@@ -378,7 +378,7 @@ const AddNewRecruit = () => {
                                 (
                                     <Stack className='text-field-container'>
                                         <Typography className='form-questions'>Who is Recruiting Agent?
-                                        <Asterisk color='red' size={12} weight="bold" />
+                                            <Asterisk color='red' size={12} weight="bold" />
                                         </Typography>
                                         <Stack className='text-field'>
                                             <TextField
@@ -394,44 +394,45 @@ const AddNewRecruit = () => {
                             }
 
                             {
-                                _id ?
-                                    (
-                                        <>
-                                            <Stack className='text-field-container'>
-                                                <Typography className='form-questions'>Agent's Contract Level
+                                // _id ?
+                                isAdmin && (
+                                    <>
+                                        <Stack className='text-field-container'>
+                                            <Typography className='form-questions'>Agent's Contract Level
                                                 <Asterisk color='red' size={12} weight="bold" /></Typography>
-                                                <Stack className='text-field'>
-                                                    <TextField />
-                                                </Stack>
+                                            <Stack className='text-field'>
+                                                <TextField />
                                             </Stack>
+                                        </Stack>
 
 
-                                            <Stack className='text-field-container'>
-                                                <Typography className='form-questions'>Agent's Role
+                                        <Stack className='text-field-container'>
+                                            <Typography className='form-questions'>Agent's Role
                                                 <Asterisk color='red' size={12} weight="bold" /></Typography>
-                                                <Stack className='text-field'>
-                                                    <TextField />
-                                                </Stack>
+                                            <Stack className='text-field'>
+                                                <TextField />
                                             </Stack>
+                                        </Stack>
 
 
-                                            <Stack className='text-field-container'>
-                                                <Typography className='form-questions'>Agent's Title
+                                        <Stack className='text-field-container'>
+                                            <Typography className='form-questions'>Agent's Title
                                                 <Asterisk color='red' size={12} weight="bold" /></Typography>
-                                                <Stack className='text-field'>
-                                                    <TextField />
-                                                </Stack>
+                                            <Stack className='text-field'>
+                                                <TextField />
                                             </Stack>
+                                        </Stack>
 
-                                        </>
-                                    ) : (
-                                        <></>
-                                    )
+                                    </>
+                                )
+                                // : (
+                                //     <></>
+                                // )
                             }
                             <Stack flexDirection={'row'} justifyContent={'space-between'}>
                                 <Button
                                     variant="contained"
-                                    disabled = ""
+                                    disabled=""
                                     sx={{
                                         backgroundColor: "#003478",
                                         color: 'white',
@@ -444,28 +445,33 @@ const AddNewRecruit = () => {
                                     }}
                                     onClick={submitHandler}
                                 >
-                                    {_id ? "Approve" : "Submit"}
+                                    {
+                                        isAdmin
+                                            ? (_id ? "Approve" : "Submit")
+                                            : "Close"
+                                    }
                                 </Button>
 
                                 {
-                                    _id ? (
-                                        <Button
-                                            variant="contained"
-                                            sx={{
-                                                backgroundColor: "#F08613",
-                                                color: 'white',
-                                                width: '170px',
-                                                height: "5vh",
-                                                fontSize: '12px',
-                                                "&:hover": {
+                                    _id ?
+                                        isAdmin && (
+                                            <Button
+                                                variant="contained"
+                                                sx={{
                                                     backgroundColor: "#F08613",
-                                                },
-                                            }}
-                                            onClick={deleteHandler}
-                                        >
-                                            Reject
-                                        </Button>
-                                    )
+                                                    color: 'white',
+                                                    width: '170px',
+                                                    height: "5vh",
+                                                    fontSize: '12px',
+                                                    "&:hover": {
+                                                        backgroundColor: "#F08613",
+                                                    },
+                                                }}
+                                                onClick={deleteHandler}
+                                            >
+                                                Reject
+                                            </Button>
+                                        )
                                         : (<></>)
                                 }
 
