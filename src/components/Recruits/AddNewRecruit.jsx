@@ -448,7 +448,7 @@ const AddNewRecruit = () => {
                                     {
                                         isAdmin
                                             ? (_id ? "Approve" : "Submit")
-                                            : "Close"
+                                            : "Submit"
                                     }
                                 </Button>
 

@@ -124,9 +124,9 @@ const Agents = () => {
     }
   }
 
-  const handleInputChange = (data)=>{
-    setSearchString(data)
-  }
+    const handleInputChange = (data)=>{
+      setSearchString(data)
+    }
 
   const LoadgridData = async () => {
     dispatch(showLoader())
@@ -166,17 +166,17 @@ const Agents = () => {
                 </Box>
 
                 <Box sx={{ width: '56%', height: '17vh', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
-                  <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <MagnifyingGlass size={16} weight="light" />
+                    <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <MagnifyingGlass size={16} weight="light" />
 
-                        </InputAdornment>
-                      ),
-                    }} 
-                    onChange ={(event)=>handleInputChange(event.target.value)}
-                    />
+                          </InputAdornment>
+                        ),
+                      }} 
+                      onChange ={(event)=>handleInputChange(event.target.value)}
+                      />
                   <Button
                     variant="contained"
                     sx={{
