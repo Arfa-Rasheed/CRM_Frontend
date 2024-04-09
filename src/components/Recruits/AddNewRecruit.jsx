@@ -127,9 +127,9 @@ const AddNewRecruit = () => {
             if (res?.status === 200) {
                 dispatch(hideLoader())
                 snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
-                setTimeout(() => {
-                    navigate('/recruits')
-                }, 3000);
+                // setTimeout(() => {
+                //     navigate('/recruits')
+                // }, 3000);
             }
         }
         else if (isAdmin === true) {
@@ -401,7 +401,10 @@ const AddNewRecruit = () => {
                                             <Typography className='form-questions'>Agent's Contract Level
                                                 <Asterisk color='red' size={12} weight="bold" /></Typography>
                                             <Stack className='text-field'>
-                                                <TextField />
+                                                <TextField 
+                                                value={agentData.level}
+                                                onChange={(e) => { handleInputChange(e.target.value, "level") }}
+                                                />
                                             </Stack>
                                         </Stack>
 
@@ -410,7 +413,10 @@ const AddNewRecruit = () => {
                                             <Typography className='form-questions'>Agent's Role
                                                 <Asterisk color='red' size={12} weight="bold" /></Typography>
                                             <Stack className='text-field'>
-                                                <TextField />
+                                                <TextField 
+                                                value={agentData.agentRole}
+                                                onChange={(e) => { handleInputChange(e.target.value, "agentRole") }}
+                                                />
                                             </Stack>
                                         </Stack>
 
@@ -419,7 +425,10 @@ const AddNewRecruit = () => {
                                             <Typography className='form-questions'>Agent's Title
                                                 <Asterisk color='red' size={12} weight="bold" /></Typography>
                                             <Stack className='text-field'>
-                                                <TextField />
+                                                <TextField 
+                                                  value={agentData.agentTitle}
+                                                  onChange={(e) => { handleInputChange(e.target.value, "agentTitle") }}
+                                                />
                                             </Stack>
                                         </Stack>
 
