@@ -162,9 +162,9 @@ const AddNewPolicy_Agent = () => {
                                     <Stack className='addNewPolicyTextField' flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '59%' }}>
                                         <Calendar value={policyData.policySubmissionDate} onDateChange={(date) => handleDateChange(date, 'policySubmissionDate')} />
                                       
-                                        <PoliciesDropdown options={carriers} label='Policy Carrier' origin="addPolicy" onSelectValue={(data) => handleAutocompleteValue(data, 'policyCarrier')} />
+                                        <PoliciesDropdown value={policyData.policyCarrier} options={carriers} label='Policy Carrier' origin="addPolicy" onSelectValue={(data) => handleAutocompleteValue(data, 'policyCarrier')} />
                                      
-                                        <PoliciesDropdown options={policyTypes} label='Policy Type' origin="addPolicy" onSelectValue={(data) => handleAutocompleteValue(data, 'policyType')} />
+                                        <PoliciesDropdown value={policyData.policyType} options={policyTypes} label='Policy Type' origin="addPolicy" onSelectValue={(data) => handleAutocompleteValue(data, 'policyType')} />
                                         <TextField
                                             disabled={id ? true : policyNumber ? true : false}
                                             sx={{ width: '30%' }}

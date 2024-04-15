@@ -102,6 +102,8 @@ const Notifications = (props) => {
               <MenuItem
                 className='menu-item'
                 sx={{
+                  display:'flex',
+                  flexWrap:'wrap',
                   margin: '2px',
                   paddingTop: '12px',
                   paddingBottom: '12px',

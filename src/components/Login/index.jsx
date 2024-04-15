@@ -10,6 +10,8 @@ import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar'
 import { hideLoader, setIsLoggedIn, setUserDetail, showLoader } from '../../Store/mainSlice'
 import landingPageImg from '../../assets/landingPageImg.svg'
 import joptimanLogo from '../../assets/joptimanLogo.png'
+import svglogo from '../../assets/logo.svg'
+import joptimenConsultancyLogo from '../../assets/JoptimanConsultancyLogo.png'
 import LoadingButton from '@mui/lab/LoadingButton';
 
 
@@ -98,8 +100,10 @@ const Login = () => {
                         <Stack sx={{ width: '47%', height: '100vh', backgroundColor: '#F08613' }}>
                             <Stack alignItems={'center'} justifyContent={'space-around'} sx={{ width: '100%', height: '100%', backgroundColor: 'white', borderBottomRightRadius: "200px" }}>
                                 <Stack alignItems={'flex-end'} sx={{ width: '86%'}}>
-                                    <Stack sx={{ width: '23%' }}>
-                                        <img sx={{ width: '100%' }} src={joptimanLogo} />
+                                    <Stack flexDirection={'row'} sx={{ width: '23%' }}>
+                                        {/* <img sx={{ width: '100%' }} src={joptimanLogo} /> */}
+                                        <img src={svglogo}/>
+                                        <img src={joptimenConsultancyLogo} style={{width:'102px',height:'5vh'}}/>
                                     </Stack>
 
                                 </Stack>
