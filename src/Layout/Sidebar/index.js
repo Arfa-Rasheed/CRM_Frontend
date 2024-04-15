@@ -21,6 +21,59 @@ const SideBar = () => {
     const dispatch = useDispatch()
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
 
+    const sideBarMenu = [
+        {
+            icon: DasboardIcon,
+            name: "Dashboard",
+            path:'/dashboard'
+        },
+        {
+            icon: AdminstrationIcon,
+            name: "Administrations",
+            path:'/administration'
+        },
+        {
+            icon: CarriersIcons,
+            name: "Carriers",
+            path:'/carriers'
+        },
+        {
+            icon: ToolsIcon,
+            name: "Tools",
+            path:'/tools'
+        },
+        {
+            icon: PoliciesIcon,
+            name: "Policies",
+            path:'/policies'
+        },
+        {
+            icon: StatementsIcon,
+            name: "Statements",
+            path:'/statements'
+        },
+        {
+            icon: CommssionsIcon,
+            name: "Commissions",
+            path:'/commissions'
+        },
+        {
+            icon: RecruitsIcon,
+            name: "Recruits",
+            path:"/recruits"
+        },
+        {
+            icon: agentIcon,
+            name: "Agents",
+            path: "/agents"
+        },
+        {
+            icon: LogoutIcon,
+            name: "Logout",
+            path: ""
+        },
+    ]
+
     const logoutHandler = () => {
         dispatch(showLoader())
         localStorage.removeItem("authToken")
@@ -32,6 +85,7 @@ const SideBar = () => {
         }, 3000)
     }
 
+
     return (
         <div style={{
             position: 'fixed', // Set position to fixed
@@ -41,17 +95,48 @@ const SideBar = () => {
             justifyContent: 'center',
             width: '18%',
             height: '124%',
-            backgroundColor: '#EDEDED'
+            backgroundColor: '#003478'
         }}>
             <Stack
-                justifyContent={'center'}
+                // justifyContent={'center'}
                 sx={{
                     width: '80%',
                     height: '81%',
+                    marginTop: '41px',
                 }}>
                 <List>
-                    <ListItem className='listItem' disablePadding>
-                        <ListItemButton href="/dashboard" sx={{ backgroundColor: '#DADADA' }}>
+                    {sideBarMenu.map((menu) => {
+                        return (
+                            <ListItem className='listItem' disablePadding>
+                                <ListItemButton href={menu.path} sx={{
+                                    backgroundColor: 'white',
+                                    height:'5vh',
+                                    borderRadius:'8px',
+                                    '&:hover': {
+                                        backgroundColor: '#F08613'
+                                    }
+                                }}>
+                                    <ListItemIcon>
+                                        <img src={menu.icon} />
+                                    </ListItemIcon>
+                                    <ListItemText>
+                                    {menu.name}
+                                    </ListItemText>
+                                    <ListItemIcon className='listIcon'>
+                                        <img src={rightArrow}
+                                        />
+                                    </ListItemIcon>
+                                </ListItemButton>
+                            </ListItem>
+                        )
+                    })}
+                    {/* <ListItem className='listItem' disablePadding>
+                        <ListItemButton href="/dashboard" sx={{
+                            backgroundColor: '#DADADA' ,
+                    '&:hover': {
+                            backgroundColor: '#F08613'
+                    }
+                    }}>
                             <ListItemIcon>
                                 <img src={DasboardIcon} />
                             </ListItemIcon>
@@ -63,9 +148,9 @@ const SideBar = () => {
                                 />
                             </ListItemIcon>
                         </ListItemButton>
-                    </ListItem>
+                    </ListItem> */}
 
-                    <ListItem className='listItem' disablePadding style={{ display: isAdmin ? 'block' : 'none' }}>
+                    {/* <ListItem className='listItem' disablePadding style={{ display: isAdmin ? 'block' : 'none' }}>
                         <ListItemButton href="/administration" sx={{ backgroundColor: '#DADADA' }}>
                             <ListItemIcon>
                                 <img src={AdminstrationIcon} />
@@ -194,7 +279,7 @@ const SideBar = () => {
                                 <img src={rightArrow} />
                             </ListItemIcon>
                         </ListItemButton>
-                    </ListItem>
+                    </ListItem> */}
                 </List>
 
             </Stack>
