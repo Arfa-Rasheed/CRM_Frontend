@@ -25,42 +25,42 @@ const SideBar = () => {
         {
             icon: DasboardIcon,
             name: "Dashboard",
-            path:'/dashboard'
+            path: '/dashboard'
         },
         {
             icon: AdminstrationIcon,
             name: "Administrations",
-            path:'/administration'
+            path: '/administration'
         },
         {
             icon: CarriersIcons,
             name: "Carriers",
-            path:'/carriers'
+            path: '/carriers'
         },
         {
             icon: ToolsIcon,
             name: "Tools",
-            path:'/tools'
+            path: '/tools'
         },
         {
             icon: PoliciesIcon,
             name: "Policies",
-            path:'/policies'
+            path: '/policies'
         },
         {
             icon: StatementsIcon,
             name: "Statements",
-            path:'/statements'
+            path: '/statements'
         },
         {
             icon: CommssionsIcon,
             name: "Commissions",
-            path:'/commissions'
+            path: '/commissions'
         },
         {
             icon: RecruitsIcon,
             name: "Recruits",
-            path:"/recruits"
+            path: "/recruits"
         },
         {
             icon: agentIcon,
@@ -107,23 +107,35 @@ const SideBar = () => {
                 <List>
                     {sideBarMenu.map((menu) => {
                         return (
-                            <ListItem className='listItem' disablePadding>
+                            <ListItem className='listItem' disablePadding
+                                style={{
+                                    display: isAdmin ? (
+                                        'block'
+                                        // menu.name === 'Agents'
+                                        //     ? 'block' : 'none'
+                                    )
+                                    : (
+                                        menu.name === 'Agents'
+                                        ? 'none' : 'block'
+                                    )
+                        }}
+                            >
                                 <ListItemButton href={menu.path} sx={{
                                     backgroundColor: 'white',
-                                    height:'5vh',
-                                    borderRadius:'8px',
+                                    height: '5vh',
+                                    borderRadius: '8px',
                                     '&:hover': {
                                         backgroundColor: '#F08613'
                                     }
-                                   
+
                                 }}
-                                onClick={menu.name === "Logout" ? logoutHandler : undefined} 
+                                    onClick={menu.name === "Logout" ? logoutHandler : undefined}
                                 >
                                     <ListItemIcon>
                                         <img src={menu.icon} />
                                     </ListItemIcon>
                                     <ListItemText>
-                                    {menu.name}
+                                        {menu.name}
                                     </ListItemText>
                                     <ListItemIcon className='listIcon'>
                                         <img src={rightArrow}
