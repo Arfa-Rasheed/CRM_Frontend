@@ -65,7 +65,7 @@ const SideBar = () => {
         {
             icon: agentIcon,
             name: "Agents",
-            path: "/agents"
+            path: "/agent"
         },
         {
             icon: LogoutIcon,
@@ -115,7 +115,10 @@ const SideBar = () => {
                                     '&:hover': {
                                         backgroundColor: '#F08613'
                                     }
-                                }}>
+                                   
+                                }}
+                                onClick={menu.name === "Logout" ? logoutHandler : undefined} 
+                                >
                                     <ListItemIcon>
                                         <img src={menu.icon} />
                                     </ListItemIcon>
