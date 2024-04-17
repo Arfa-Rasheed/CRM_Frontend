@@ -16,7 +16,7 @@ const Dashboard = () => {
     const snackbar_Ref = useRef(null)
     const dispatch = useDispatch()
     const [year, setYear] = useState('2024')
-    const [month, setMonth] = useState('March')
+    const [month, setMonth] = useState('April')
     const [currentMonth, setCurrentMonth] = useState('')
     const [totalSoldPolicies, setTotalSoldPolicies] = useState(0)
     const [totalHealthInsurance, setTotalHealthInsurance] = useState(0)
@@ -110,20 +110,21 @@ const Dashboard = () => {
         if (res?.status === 200) {
             dispatch(hideLoader())
             console.log("dash res", res?.data[month]);
-            setTotalHealthInsurance(res?.data[month].Health.count)
-            setTotalLifeInsurance(res?.data[month].Life.count)
-            setTotalAnnuities(res?.data[month].Annuities.count)
+            // if (res?.data[month].length > 0) {
+                setTotalHealthInsurance(res?.data[month].Health.count)
+                setTotalLifeInsurance(res?.data[month].Life.count)
+                setTotalAnnuities(res?.data[month].Annuities.count)
 
-            // Sales Matrix
-            setTotalHealthInsuranceCost(res?.data[month].Health.totalSale)
-            setTotalLifeInsuranceCost(res?.data[month].Life.totalSale)
-            setTotalAnnuitiesCost(res?.data[month].Annuities.totalSale)
+                // Sales Matrix
+                setTotalHealthInsuranceCost(res?.data[month].Health.totalSale)
+                setTotalLifeInsuranceCost(res?.data[month].Life.totalSale)
+                setTotalAnnuitiesCost(res?.data[month].Annuities.totalSale)
 
-            // CashFlow Matrix
-            setTotalHealthRevenue(res?.data[month].Health.totalRevenue)
-            setTotalLifeRevenue(res?.data[month].Life.totalRevenue)
-            setTotalAnnuitiesRevenue(res?.data[month].Annuities.totalRevenue)
-
+                // CashFlow Matrix
+                setTotalHealthRevenue(res?.data[month].Health.totalRevenue)
+                setTotalLifeRevenue(res?.data[month].Life.totalRevenue)
+                setTotalAnnuitiesRevenue(res?.data[month].Annuities.totalRevenue)
+            // }
         }
     }
 

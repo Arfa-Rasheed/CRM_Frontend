@@ -126,7 +126,7 @@ const Commissions = () => {
     },
     {
       field: 'overwrittingAgentContractLevel1',
-      headerName: "OW Agent1 %:",
+      headerName: "OW Agent1 Contract Level:",
       isLink: true,
     },
     {
@@ -136,7 +136,7 @@ const Commissions = () => {
     },
     {
       field: 'overwrittingAgentContractLevel2',
-      headerName: "OW Agent2 %:",
+      headerName: "OW Agent2 Contract Level::",
       isLink: true,
     },
     {
@@ -147,6 +147,11 @@ const Commissions = () => {
     {
       field: 'split1_splitRatio',
       headerName: "Split1 %",
+      isLink: true,
+    },
+    {
+      field: 'split1_agentCommission',
+      headerName: "Split1 Agent Commission",
       isLink: true,
     },
     {
@@ -162,6 +167,11 @@ const Commissions = () => {
     {
       field: 'split2_splitRatio',
       headerName: "Split2 %",
+      isLink: true,
+    },
+    {
+      field: 'split2_agentCommission',
+      headerName: "Split2 Agent Commission",
       isLink: true,
     },
     {

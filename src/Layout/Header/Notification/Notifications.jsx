@@ -15,7 +15,7 @@ const Notifications = (props) => {
     {
       message: "",
       status: 0,
-      policyNumber:""
+      policyNumber: ""
     }
   ]);
 
@@ -58,7 +58,7 @@ const Notifications = (props) => {
       }
     }
     else {
-      const res =await httpClient.get(`/notifications/getAllNotifications_AgentView/${agentCode}`).catch((error) => { console.log(error) })
+      const res = await httpClient.get(`/notifications/getAllNotifications_AgentView/${agentCode}`).catch((error) => { console.log(error) })
       if (res?.status === 200) {
         setNotifications(res.data.map(notifications => ({
           message: notifications.message,
@@ -75,16 +75,16 @@ const Notifications = (props) => {
 
   return (
     <div style={{
-      display: 'flex', alignItems: 'center', justifyContent: 'center', width: '4%', height: '6vh', backgroundColor:anchorEl ? '#F08613' : 'white', borderRadius: '30px',
+      display: 'flex', alignItems: 'center', justifyContent: 'center', width: '4%', height: '6vh', backgroundColor: anchorEl ? '#F08613' : 'white', borderRadius: '30px',
       '&:hover': {
-        backgroundColor: "#F08613" ,
+        backgroundColor: "#F08613",
         cursor: 'pointer'
       }
     }}
     >
       {
         anchorEl ? (<NotificationsIcon sx={{ color: 'white', fontSize: '31px' }} onClick={handleClick} />)
-        : ( <NotificationsIcon sx={{ color: '#404040', fontSize: '31px' }} onClick={handleClick}  />)
+          : (<NotificationsIcon sx={{ color: '#404040', fontSize: '31px' }} onClick={handleClick} />)
       }
       <Popover
         anchorEl={anchorEl}
@@ -102,8 +102,8 @@ const Notifications = (props) => {
               <MenuItem
                 className='menu-item'
                 sx={{
-                  display:'flex',
-                  flexWrap:'wrap',
+                  // display:'flex',
+                  // flexWrap:'wrap',
                   margin: '2px',
                   paddingTop: '12px',
                   paddingBottom: '12px',
@@ -117,7 +117,10 @@ const Notifications = (props) => {
                 key={index}
                 onClick={() => handleOptionChange(item.policyNumber)}
               >
-                <Typography sx={{ fontSize: '14px' }}>{item.message}</Typography>
+                <Stack sx={{width:"100px"}}>
+                  <Typography sx={{ fontSize: '14px' }}>{item.message}</Typography>
+                </Stack>
+                {/* <Typography sx={{ fontSize: '14px' }}>{item.message}</Typography> */}
               </MenuItem>
             );
           })
