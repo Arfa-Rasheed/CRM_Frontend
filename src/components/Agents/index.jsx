@@ -143,7 +143,6 @@ const Agents = () => {
   }
 
   useEffect(() => {
-    alert("")
     LoadgridData()
   }, [searchString])
 
