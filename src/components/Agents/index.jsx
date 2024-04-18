@@ -143,6 +143,7 @@ const Agents = () => {
   }
 
   useEffect(() => {
+    alert("")
     LoadgridData()
   }, [searchString])
 
@@ -233,6 +234,7 @@ const Agents = () => {
                 selectedIds={selectedAgentIds}
                 handleCheckboxChange={handleCheckboxChange}
                 sx={{ width: '100%' }}
+                baseURL={'/agentDetail/'}
               />
             </div>
 
