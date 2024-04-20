@@ -97,13 +97,13 @@ const Commissions = () => {
     },
     // (isAdmin
     //   ? [
-        {
-          field: 'paidAgencyCommission',
-          headerName: 'Paid Agency Commission',
-          isProgressBar: true,
-        },
-      // ]
-      // : []),
+    {
+      field: 'paidAgencyCommission',
+      headerName: 'Paid Agency Commission',
+      isProgressBar: true,
+    },
+    // ]
+    // : []),
     {
       field: 'advPaymentPercentage',
       headerName: "Earned Adv %:",
@@ -252,7 +252,7 @@ const Commissions = () => {
     );
   }
 
-  const removeAgentHandler = async () => {
+  const removeCommissionHandler = async () => {
     dispatch(showLoader())
     if (selectedCommissionId.length > 0) {
       const commissionIdsString = selectedCommissionId.join(',');
@@ -271,6 +271,8 @@ const Commissions = () => {
 
     }
   }
+
+
 
   const handleInputChange = (data) => {
     setSearchString(data);
@@ -334,7 +336,7 @@ const Commissions = () => {
                     backgroundColor: '#003478',
                   },
                 }}
-                onClick={removeAgentHandler}
+                onClick={removeCommissionHandler}
               >
                 <Grid container
                   alignItems={'center'}
@@ -344,6 +346,24 @@ const Commissions = () => {
                   <Grid item md="3"><Minus size={20} weight="light" /></Grid>
                 </Grid>
               </Button>
+              
+              {/* <Button
+                variant="contained"
+                sx={{
+                  display: isAdmin ? 'block' : 'none',
+                  backgroundColor: "#F08613",
+                  color: 'white',
+                  width: '186px',
+                  height: "5vh",
+                  fontSize: '12px',
+                  "&:hover": {
+                    backgroundColor: '#F08613',
+                  },
+                }}
+              // onClick={chargedBackHandler}
+              >
+                Charge Back
+              </Button> */}
 
             </Box>
             <Stack sx={{ width: '99.9%', height: '19vh', marginLeft: '10px', marginTop: '17px', marginBottom: '-71px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
@@ -353,7 +373,7 @@ const Commissions = () => {
               </Stack>
             </Stack>
 
-            <Stack sx={{height:'70vh'}}>
+            <Stack sx={{ height: '70vh' }}>
               <CRMGrid
                 gridName='comissionGrid'
                 gridHeader={isAdmin ? gridHeader : gridHeaderAgent}
