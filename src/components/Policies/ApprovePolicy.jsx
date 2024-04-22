@@ -147,9 +147,9 @@ const ApprovePolicy = () => {
             if (res?.status === 200) {
                 dispatch(hideLoader())
                 snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
-                // setTimeout(() => {
-                //     navigate('/policies')
-                // }, 6000);
+                setTimeout(() => {
+                    navigate('/policies')
+                }, 6000);
             }
         }
         else {
