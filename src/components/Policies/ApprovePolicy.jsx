@@ -28,7 +28,7 @@ const ApprovePolicy = () => {
         id: "",
         date: "",
         isApproved: false,
-        policyRegistrationID: "",
+        policyRegistrationId: "",
         policyValue: 0,
         agentCommission: 0,
         agencyCommissionPercentage: 0,
@@ -255,7 +255,7 @@ const ApprovePolicy = () => {
                                             <TextField
                                                 className='text-field'
                                                 variant="outlined"
-                                                value={policyData.id}
+                                                value={policyData.policyRegistrationId}
                                                 sx={{ width: '20%' }}
                                                 onChange={(e) => { handleInputChange(e.target.value, "id") }}
                                             />
