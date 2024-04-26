@@ -50,7 +50,7 @@ const AdminAccount = () => {
                                 </Stack>
 
                                 <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{ width: '100%' }}>
-                                    <Stack sx={{ width: '33%', border: '2px solid red', height: '50vh', borderRadius: '12px' }}>
+                                    <Stack sx={{ width: '33%', height: '50vh', borderRadius: '12px' }}>
 
              <Avatar sx={{width:'100%',height:'100%'}}/>
 
