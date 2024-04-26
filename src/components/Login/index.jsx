@@ -57,6 +57,8 @@ const Login = () => {
             const isAdmin = res.data.isAdmin
             const userId = res.data.userId
             const firstName = res.data.firstName
+            const lastName = res.data.isAdmin ? res.data.lastName : "" 
+            const adminCode = res.data.isAdmin ? res.data.adminCode : ""
             const agentTitle = res.data.isAdmin ? "" : res.data.agentTitle
             const agentCode = res.data.isAdmin ? "" : res.data.agentCode
             const contractLevel = res.data.isAdmin ? "" : res.data.contractLevel
@@ -64,6 +66,8 @@ const Login = () => {
             localStorage.setItem('isAdmin', isAdmin);
             localStorage.setItem("userId", userId)
             localStorage.setItem("firstName", firstName)
+            localStorage.setItem("lastName", lastName)
+            localStorage.setItem("adminCode", adminCode)
             localStorage.setItem("agentTitle", agentTitle)
             localStorage.setItem("agentCode", agentCode)
             localStorage.setItem("contractLevel", contractLevel)

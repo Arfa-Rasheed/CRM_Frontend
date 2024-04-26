@@ -19,6 +19,7 @@ import CommissionDetail from '../components/Commissions/CommissionDetail'
 import StatementDetail from '../components/Statements/detail'
 import LinearProgressWithLabel from '../shared-component/ProgressBar'
 import AddNewRecruit from '../components/Recruits/AddNewRecruit'
+import AdminAccount from '../components/Account/AdminAccount'
 
 
 const AppRouter = () => {
@@ -28,7 +29,8 @@ const AppRouter = () => {
         <Routes>
           <Route path='/' element={<Login />}></Route>
           <Route path='/dashboard' element={<Dashboard />}></Route>
-          <Route path='/accountDetails' element={<AccountDetail />}></Route>
+          <Route path='/agentAccountDetails' element={<AccountDetail />}></Route>
+          <Route path='/adminAccountDetails' element={<AdminAccount />}></Route>
           <Route path='/dashboard' element={<Dashboard />}></Route>
           <Route path='/administration' element={<Administration />}></Route>
           <Route path='/carriers' element={<Carriers />}></Route>

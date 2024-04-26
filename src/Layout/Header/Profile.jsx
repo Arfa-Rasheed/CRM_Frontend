@@ -54,7 +54,7 @@ const Profile = () => {
                 alignItems="center"
                 spacing={2}
             >
-                <Avatar onClick={() => navigate("/accountDetails")} />
+                <Avatar onClick={() => navigate(isAdmin ? "/adminAccountDetails" :"/agentAccountDetails")} />
                 <Stack spacing={10} direction={'row'}>
                     <Stack>
                         {/* <Typography>{isAdmin ? adminFirstName : userData.firstName}</Typography> */}
