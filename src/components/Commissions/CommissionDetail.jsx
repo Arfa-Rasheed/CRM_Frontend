@@ -46,6 +46,7 @@ const CommissionDetail = () => {
         split1_agentCode:"",
         split1_agentCommission:0,
         split1_splitRatio:0,
+        
         split_1_OWAgent1_ContractLevel:0,
         split_1_OWAgent1_Commission:0,
         split_1_OWAgent2_ContractLevel:0,

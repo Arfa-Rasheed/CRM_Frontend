@@ -19,7 +19,7 @@ import { hideLoader, showLoader } from '../../Store/mainSlice.js'
 const Policies = () => {
   const [newPolicyClicked, setNewPolicyClicked] = useState(false);
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
-  const [ searchString,setSearchString] = useState('')
+  const [searchString, setSearchString] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [gridData, setGridData] = useState([])
@@ -101,7 +101,7 @@ const Policies = () => {
       width: '20%',
       isLink: true,
     },
-  
+
 
   ]
 
@@ -210,7 +210,7 @@ const Policies = () => {
 
   const handleInputChange = (data) => {
     setSearchString(data);
-};
+  };
 
   const LoadGridData = async () => {
     dispatch(showLoader())
@@ -229,9 +229,6 @@ const Policies = () => {
 
 
   useEffect(() => {
-    console.log("isAdmin", isAdmin);
-    console.log("baseURL:", isAdmin ? "/approvePolicy/" : "/addNewPolicy_agent");
-    console.log("display:", isAdmin ? "none" : "flex");
     LoadGridData()
   }, [searchString])
 
@@ -245,8 +242,8 @@ const Policies = () => {
           overflowY: 'hidden'
         }}>
           <SideBar />
-          <CustomizedSnackbars ref={snackbar_Ref}/>
-          <Stack sx={{ width: '81.8%',marginLeft:'17.5%' }}>
+          <CustomizedSnackbars ref={snackbar_Ref} />
+          <Stack sx={{ width: '81.8%', marginLeft: '17.5%' }}>
             <Box sx={{ width: '100%', height: '20vh', marginTop: '20px', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
               <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
                 InputProps={{
@@ -256,10 +253,10 @@ const Policies = () => {
 
                     </InputAdornment>
                   ),
-                }} 
+                }}
                 onChange={(e) => { handleInputChange(e.target.value) }}
-                
-                />
+
+              />
               <Button
                 variant="contained"
                 sx={{
@@ -292,7 +289,7 @@ const Policies = () => {
               baseURL={isAdmin ? "/approvePolicy/" : "/addNewPolicy_agent/"}
             />
             {/* </Box> */}
-           
+
           </Stack>
         </div>
       </div>
