@@ -72,8 +72,9 @@ const AddNewRecruit = () => {
     const navigate = useNavigate()
     const { _id } = useParams()
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
-    const recruitingAgentCode = localStorage.getItem("userId")
+    const recruitingAgentCode = localStorage.getItem("agentCode")
     const [agentData, setAgentData] = useState({
+        isApproved:false,
         residentState: "",
         age: "",
         firstName: "",
@@ -438,7 +439,7 @@ const AddNewRecruit = () => {
                                 //     <></>
                                 // )
                             }
-                            <Stack flexDirection={'row'} justifyContent={'space-between'}>
+                            <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{display:agentData.isApproved===true ? 'none' : 'flex'}}>
                                 <Button
                                     variant="contained"
                                     disabled=""

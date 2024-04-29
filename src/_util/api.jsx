@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const httpClient = axios.create({
-    // baseURL: "http://localhost:5000/api/",
-    baseURL: "https://joptimen-backend-542774489131.herokuapp.com/api/"
+    baseURL: "http://localhost:5000/api/",
+    // baseURL: "https://joptimen-backend-542774489131.herokuapp.com/api/"
 });
 
 httpClient.interceptors.request.use(function (config) {
