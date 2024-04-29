@@ -179,7 +179,7 @@ const AccountDetail = () => {
                                         <Stack>
                                             <Typography>First Name: {userData.firstName}</Typography>
                                             <Typography>Last Name:{userData.lastName}</Typography>
-                                            <Typography>Agent Code:{userData.id}</Typography>
+                                            <Typography>Agent Code:{userData.agentCode}</Typography>
                                             <Typography>Agent Title:{userData.agentTitle}</Typography>
                                             <Typography>Agent Role:{userData.agentRole}</Typography>
                                             <Typography>Level:{userData.level}</Typography>
