@@ -37,8 +37,8 @@ const Dashboard = () => {
     const [yearlyTotalSoldHealthInsurancePolicies, setYearlyTotalSoldHealthInsurancePolicies] = useState(0);
     const [yearlyTotalSoldLifeInsurancePolicies, setYearlyTotalSoldLifeInsurancePolicies] = useState(0);
     const [yearlyTotalSoldAnnuitiesPolicies, setYearlyTotalSoldAnnuitiesPolicies] = useState(0);
-    const [selectedOption, setSelectedOption] = useState('Sales Matrix')
-    const [yearlyPolicySelectedOption, setYearlyPolicySelectedOption] = useState('Sales Matrix')
+    const [selectedOption, setSelectedOption] = useState('Productivity Matrix')
+    const [yearlyPolicySelectedOption, setYearlyPolicySelectedOption] = useState('Productivity Matrix')
     const [totalNoOfRecruits, setTotalNoOfRecruits] = useState()
     const [highestCommissionedAgentData, setHighestCommissionedAgentData] = useState({
         agentFirstName: "",
@@ -51,20 +51,16 @@ const Dashboard = () => {
 
 
     const DropdownOptions1 = [
-        "Sales Matrix",
+        "Productivity Matrix",
         "Policy Matrix",
         "CashFlow Matrix"
     ];
 
 
     const DropdownOptions2 = [
-        "Performance Matrix",
-        "Sales Matrix",
+        "Productivity Matrix",
         "Policy Matrix",
-        "CashFlow Matrix",
-        "Health Insurance",
-        "Life Insurance",
-        "Annuities",
+        "CashFlow Matrix"
     ];
 
     const previousMonths = [
@@ -109,22 +105,23 @@ const Dashboard = () => {
 
         if (res?.status === 200) {
             dispatch(hideLoader())
+            console.log("dash res", res);
             console.log("dash res", res?.data[month]);
-            // if (res?.data[month].length > 0) {
-                setTotalHealthInsurance(res?.data[month].Health.count)
-                setTotalLifeInsurance(res?.data[month].Life.count)
-                setTotalAnnuities(res?.data[month].Annuities.count)
+            if (res?.data[month]) {
+            setTotalHealthInsurance(res?.data[month].Health.count)
+            setTotalLifeInsurance(res?.data[month].Life.count)
+            setTotalAnnuities(res?.data[month].Annuities.count)
 
-                // Sales Matrix
-                setTotalHealthInsuranceCost(res?.data[month].Health.totalSale)
-                setTotalLifeInsuranceCost(res?.data[month].Life.totalSale)
-                setTotalAnnuitiesCost(res?.data[month].Annuities.totalSale)
+            // Sales Matrix
+            setTotalHealthInsuranceCost(res?.data[month].Health.totalSale)
+            setTotalLifeInsuranceCost(res?.data[month].Life.totalSale)
+            setTotalAnnuitiesCost(res?.data[month].Annuities.totalSale)
 
-                // CashFlow Matrix
-                setTotalHealthRevenue(res?.data[month].Health.totalRevenue)
-                setTotalLifeRevenue(res?.data[month].Life.totalRevenue)
-                setTotalAnnuitiesRevenue(res?.data[month].Annuities.totalRevenue)
-            // }
+            // CashFlow Matrix
+            setTotalHealthRevenue(res?.data[month].Health.totalRevenue)
+            setTotalLifeRevenue(res?.data[month].Life.totalRevenue)
+            setTotalAnnuitiesRevenue(res?.data[month].Annuities.totalRevenue)
+            }
         }
     }
 
@@ -223,6 +220,9 @@ const Dashboard = () => {
                                 <Grid container sx={{ justifyContent: 'center', marginBottom: '5px' }} className='grid-inner-container'>
                                     <Grid items md='10' >
                                         <List>
+                                            <ListItem className='list-items'>
+                                                <ListItemText sx={{ color: '#003478' }}><b>Health Insurance</b></ListItemText>
+                                            </ListItem>
                                             <ListItem className='list-items' >
                                                 {
                                                     selectedOption === 'Policy Matrix' ?
@@ -238,14 +238,10 @@ const Dashboard = () => {
                                                             ) :
                                                             (
                                                                 <>
-                                                                    <b>Total sales:</b> ${totalHealthInsuranceCost}
+                                                                    <b>Total Productivity:</b> ${totalHealthInsuranceCost}
                                                                 </>
                                                             )
                                                 }
-                                            </ListItem>
-                                            <ListItem className='list-items'>
-                                                <ListItemText sx={{ color: '#003478' }}><b>Health Insurance</b></ListItemText>
-                                                {/* <ListItemIcon><img src={}></img></ListItemIcon> */}
                                             </ListItem>
                                         </List>
                                     </Grid>
@@ -253,10 +249,14 @@ const Dashboard = () => {
 
                             </Grid>
                             <Grid item md='3'>
-                                <CRMButtons title='Sales Statistics' />
+                                {/* <CRMButtons title='Sales Statistics' /> */}
+                                <h2 style={{ color: 'black', textAlign: 'center',lineHeight:'0px' }}>Sales Statistics</h2>
                                 <Grid container sx={{ justifyContent: 'center', marginTop: '9px' }} className='grid-inner-container'>
                                     <Grid items md='10' >
                                         <List>
+                                            <ListItem className='list-items'>
+                                                <ListItemText sx={{ color: '#003478' }}><b>Life Insurance</b></ListItemText>
+                                            </ListItem>
                                             <ListItem className='list-items'>
                                                 {
                                                     selectedOption === 'Policy Matrix' ?
@@ -272,15 +272,12 @@ const Dashboard = () => {
                                                             ) :
                                                             (
                                                                 <>
-                                                                    <b>Total sales:</b> ${totaLifeInsuranceCost}
+                                                                    <b>Total Productivity:</b> ${totaLifeInsuranceCost}
                                                                 </>
                                                             )
                                                 }
                                             </ListItem>
-                                            <ListItem className='list-items'>
-                                                <ListItemText sx={{ color: '#003478' }}><b>Life Insurance</b></ListItemText>
-                                                {/* <ListItemIcon><img src={}></img></ListItemIcon> */}
-                                            </ListItem>
+
                                         </List>
                                     </Grid>
                                 </Grid>
@@ -292,6 +289,9 @@ const Dashboard = () => {
                                 <Grid container sx={{ justifyContent: 'center' }} className='grid-inner-container'>
                                     <Grid items md='10' >
                                         <List>
+                                            <ListItem className='list-items'>
+                                                <ListItemText sx={{ color: '#003478' }}><b>Annuities</b></ListItemText>
+                                            </ListItem>
                                             <ListItem className='list-items'>
                                                 {
                                                     selectedOption === 'Policy Matrix' ?
@@ -307,15 +307,12 @@ const Dashboard = () => {
                                                             ) :
                                                             (
                                                                 <>
-                                                                    <b>Total sales:</b> ${totalAnnuitiesCost}
+                                                                    <b>Total Productivity:</b> ${totalAnnuitiesCost}
                                                                 </>
                                                             )
                                                 }
                                             </ListItem>
-                                            <ListItem className='list-items'>
-                                                <ListItemText sx={{ color: '#003478' }}><b>Annuities</b></ListItemText>
-                                                {/* <ListItemIcon><img src={}></img></ListItemIcon> */}
-                                            </ListItem>
+
                                         </List>
                                     </Grid>
                                 </Grid>
@@ -329,10 +326,10 @@ const Dashboard = () => {
                                 <Grid item md="3">
                                     <CRMDropdown type='YearlyPolicyType' title={yearlyPolicySelectedOption} options={DropdownOptions2} onOptionChange={handleYearlyPolicyDropdownChange} />
                                 </Grid>
-                                <Grid item md="3" sx={{ marginTop: '-14px' }}><CRMButtons title='Sales Statistics 2023' /></Grid>
+                                <Grid item md="3" sx={{ marginTop: '-14px' }}><h2 style={{ color: 'black', textAlign: 'center' }}>Sales Statistics 2024</h2></Grid>
                                 <Grid item md="3"><CRMDropdown title='Previous Years' options={previousYears} onOptionChange={handleYearChange} /> </Grid>
                             </Grid>
-                            <Grid container style={{ height: '37vh', width: '91%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', margin: '0 auto', borderRadius: '15px' }}>
+                            <Grid container style={{ height: '37vh', width: '91%', flexDirection: 'row', alignItems: 'center', margin: '0 auto', borderRadius: '15px' }}>
                                 <Grid item md="6" sx={{ height: '30vh', flexDirection: 'column', alignContent: 'space-between' }}>
                                     <div style={{ display: 'flex' }}>
                                         <div style={{ border: '3px solid #F08613', marginTop: '0px', display: 'inline', height: '20px' }}></div>
@@ -358,7 +355,7 @@ const Dashboard = () => {
                                                                         <b>Annuities</b>
                                                                     ) :
                                                                     (
-                                                                        <b>Total sales:</b>
+                                                                        <b>Total Productivity:</b>
                                                                     )
                                             }
                                         </Box>
@@ -433,7 +430,7 @@ const Dashboard = () => {
                                 </Grid> */}
 
                                 {barChartData ? (
-                                    <Grid item md="6" sx={{}}>
+                                    <Grid item md="6" sx={{height:'40vh'}}>
                                         <BarChart barChartData={barChartData} selectedOption={yearlyPolicySelectedOption} />
                                     </Grid>
                                 ) : (
@@ -451,22 +448,20 @@ const Dashboard = () => {
                                     <Grid item md='10' >
                                         <Typography sx={{ fontSize: '13px' }}>Highest Sales</Typography>
                                         <Typography sx={{ fontSize: '13px' }}>Agent Name:{highestCommissionedAgentData.agentFirstName} {highestCommissionedAgentData.agentLastName}</Typography>
-                                        <Typography sx={{ fontSize: '13px' }}>Agent Code:{highestCommissionedAgentData.agentCode}</Typography>
                                         <Typography sx={{ fontSize: '13px' }}>Agent Role:</Typography>
-                                        <Typography sx={{ fontSize: '13px' }}>Agent Sales:{highestCommissionedAgentData.agentCommission}</Typography>
+
                                     </Grid>
                                 </Grid>
 
                             </Grid>
                             <Grid item md='3'>
-                                <CRMButtons title='Sales Statistics' />
+                                {/* <CRMButtons title='Sales Statistics' /> */}
+                                <h2 style={{ color: 'black', textAlign: 'center',lineHeight:'0px' }}>Sales Statistics</h2>
                                 <Grid container className='grid-inner-container' sx={{ justifyContent: 'center', marginTop: '9px', height: '14vh' }} >
                                     <Grid items md='10' >
                                         <Typography sx={{ fontSize: '13px' }}>Highest Recruits:</Typography>
                                         <Typography sx={{ fontSize: '13px' }}>Agent Name:{highestCommissionedAgentData.agentFirstName} {highestCommissionedAgentData.agentLastName}</Typography>
-                                        <Typography sx={{ fontSize: '13px' }}>Agent Code:{highestCommissionedAgentData.agentCode}</Typography>
-                                        <Typography sx={{ fontSize: '13px' }}>Agent Role:</Typography>
-                                        <Typography sx={{ fontSize: '13px' }}>Agent Sales:{highestCommissionedAgentData.agentCommission}</Typography>
+                                        <Typography sx={{ fontSize: '13px' }}>Agent Title:{highestCommissionedAgentData.agentTitle}</Typography>
                                     </Grid>
                                 </Grid>
 

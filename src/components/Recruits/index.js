@@ -49,11 +49,6 @@ const Recruits = () => {
       headerName: "Agent Title:",
     },
     {
-      field: 'agentRole',
-      headerName: "Agent Role:",
-      isLink: true,
-    },
-    {
       field: 'recruitmentDate',
       headerName: "Recruitment Date:",
       isLink: true,
@@ -75,16 +70,16 @@ const Recruits = () => {
   const LoadgridData = async () => {
     dispatch(showLoader())
     const res = await httpClient.get(isAdmin ? '/agents/getAllAgents' : '/agents/getAllAgentsAgentView')
-    .catch((error) => { 
-      dispatch(hideLoader())
-      snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");  
-    })
+      .catch((error) => {
+        dispatch(hideLoader())
+        snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+      })
     if (res?.status === 200) {
       dispatch(hideLoader())
       setGridData(res?.data)
     }
-    else{
-      console.log("error: ") 
+    else {
+      console.log("error: ")
     }
   }
 
@@ -102,11 +97,11 @@ const Recruits = () => {
           overflowY: 'hidden'
         }}>
           <SideBar />
-          <CustomSnackBars ref={snackbar_Ref}/>
-          <Stack sx={{ width: '81.7%' ,marginLeft:'20%'}}>
+          <CustomSnackBars ref={snackbar_Ref} />
+          <Stack sx={{ width: '81.7%', marginLeft: '20%' }}>
             <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
               <Box sx={{ width: '60%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-                <Box sx={{ height: '12vh' }}>
+                {/* <Box sx={{ height: '12vh' }}>
                   <Button
                     variant="contained"
                     sx={{
@@ -130,6 +125,10 @@ const Recruits = () => {
 
                     </Grid>
                   </Button>
+                </Box> */}
+
+                <Box sx={{ height: '12vh' }}>
+                  <h2 style={{ color: 'black', textAlign: 'center' }}>All Recruits</h2>
                 </Box>
 
                 <Box sx={{ width: '56%', height: '12vh', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>

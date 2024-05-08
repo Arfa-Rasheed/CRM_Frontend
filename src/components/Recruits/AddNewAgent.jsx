@@ -9,6 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import CustomSnackbar from '../../shared-component/Snackbar/SnackBar'
 import { hideLoader, showLoader } from '../../Store/mainSlice'
 import { useDispatch } from 'react-redux'
+import PoliciesDropdown from '../../shared-component/PoliciesDropdown'
 
 const AddNewAgent = () => {
     const navigate = useNavigate()
@@ -30,15 +31,39 @@ const AddNewAgent = () => {
         email: ""
     })
 
+    const agentTitle = [
+        "Associate in Training",
+        "Associate",
+        "Director",
+        "Executive",
+    ]
+
+
     const handleInputChange = (data, field) => {
 
         setAgentData((prevFormData) => ({ ...prevFormData, [field]: data }));
     };
 
+    const handleAutocompleteValue = (data, field) => {
+        setAgentData((prevValue) => ({ ...prevValue, [field]: data }))
+        if (data === 'Associate in Training') {
+            setAgentData((prevValue) => ({ ...prevValue, level: 0.0 }))
+        }
+        else if (data === 'Associate') {
+            setAgentData((prevValue) => ({ ...prevValue, level: 0.5 }))
+        }
+        else if (data === 'Director') {
+            setAgentData((prevValue) => ({ ...prevValue, level: 0.7 }))
+        }
+        else {
+            setAgentData((prevValue) => ({ ...prevValue, level: 0.9 }))
+        }
+    }
+
     const submitHandler = async () => {
         dispatch(showLoader())
         if (id) {
-            const res =await httpClient.post(`/agents/editAgent/${id}`, agentData)
+            const res = await httpClient.post(`/agents/editAgent/${id}`, agentData)
                 .catch((error) => {
                     dispatch(hideLoader())
                     snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
@@ -114,7 +139,7 @@ const AddNewAgent = () => {
                 }}>
                     <SideBar />
                     <CustomSnackbar ref={snackbar_Ref} />
-                    <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: '92vh',marginLeft:'18%' }}>
+                    <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: '92vh', marginLeft: '18%' }}>
                         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '98%', height: '95%', backgroundColor: '#F2F2F2', borderRadius: '15px' }}>
                             <Stack alignItems={'center'} sx={{ width: '100%', height: '73%' }}>
                                 <Stack flexDirection={'row'} justifyContent={'center'} sx={{ width: "97%", height: '68%' }}>
@@ -148,6 +173,7 @@ const AddNewAgent = () => {
                                             />
 
                                             <TextField label="Level:" variant="filled"
+                                                disabled={true}
                                                 sx={{ width: '30%', marginLeft: '23px' }}
                                                 value={agentData.level}
                                                 onChange={(e) => { handleInputChange(e.target.value, "level") }}
@@ -159,11 +185,12 @@ const AddNewAgent = () => {
                                                 onChange={(e) => { handleInputChange(e.target.value, "agentCarrierNumber") }}
                                             /> */}
 
-                                            <TextField label="Agent Title:" variant="filled"
+                                            {/* <TextField label="Agent Title:" variant="filled"
                                                 sx={{ width: '30%', marginLeft: '23px' }}
                                                 value={agentData.agentTitle}
                                                 onChange={(e) => { handleInputChange(e.target.value, "agentTitle") }}
-                                            />
+                                            /> */}
+                                            <PoliciesDropdown value={agentData.agentTitle} options={agentTitle} label='Agent Title:' origin="addAgent" onSelectValue={(data) => handleAutocompleteValue(data, 'agentTitle')} />
 
                                             <TextField label="Agent Role:" variant="filled"
                                                 sx={{ width: '30%', marginLeft: '23px' }}
@@ -214,7 +241,7 @@ const AddNewAgent = () => {
                                         }}
                                         onClick={submitHandler}
                                     >
-                                        {id ? 'Edit' : 'Submit'}
+                                        Promote
                                     </Button>
                                 </Stack>
                             </Stack>

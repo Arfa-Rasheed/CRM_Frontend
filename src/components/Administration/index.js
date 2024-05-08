@@ -17,7 +17,7 @@ import { hideLoader, showLoader } from '../../Store/mainSlice.js'
 import PageLoader from '../../Layout/FullPageLoader/FullPageLoader.jsx'
 import CustomSnackbar from '../../shared-component/Snackbar/SnackBar.jsx'
 import Dropdown from '../../shared-component/AdministrationDropdown/Dropdown.jsx'
-
+import JOptimanLogo from '../../assets/JOptimanLogo-Large.png'
 
 const Administration = () => {
   const navigate = useNavigate()
@@ -25,13 +25,13 @@ const Administration = () => {
   const AdministrationMenu = [
     {
       title: "Home Office",
-      options: [
-        // {
-        //   name:"Kaplan Financial Education",
-        //   url:"https://www.kaplanfinancial.com/"
-        // },
-        "dewr"
-      ]
+      // options: [
+      //   // {
+      //   //   name:"Kaplan Financial Education",
+      //   //   url:"https://www.kaplanfinancial.com/"
+      //   // },
+      //   "dewr"
+      // ]
     },
     {
       title: "Onboarding & Contracting",
@@ -73,9 +73,6 @@ const Administration = () => {
     },
     {
       title: "Producing Agent Standards Operating",
-      options: [
-        "",
-      ]
     },
     {
       title: "Compliance",
@@ -102,41 +99,56 @@ const Administration = () => {
           url: "https://www.athene.com/producer/connect/tools/forms-materials"
         },
         {
-          name:"JOptiman Status Change Form"
+          name: "JOptiman Status Change Form"
         }
-      
+
       ]
     },
     {
       title: "Promotions",
       options: [
         {
-          name:"Advancement Guidlines",
+          name: "Advancement Guidlines",
           url: ""
         },
         {
-          name:"Advancement Announcements",
+          name: "Advancement Announcements",
           url: ""
         },
-       
-       
+
+
       ]
     },
     {
       title: "Events",
       options: [
         {
-          name:"Announcements",
+          name: "Announcements",
           url: ""
         },
         {
-          name:"Calendars",
+          name: "Calendars",
           url: ""
         },
-       
+
       ]
-    }
+    },
+    {
+      title: "Direct Deposit",
+      isLink: true,
+    },
   ]
+
+  function openPDFInNewTab(pdfUrl) {
+    // Create a new <a> element
+    const link = document.createElement('a');
+    // Set the href attribute to the PDF file URL
+    link.href = pdfUrl;
+    // Set the target attribute to '_blank' to open in a new tab
+    link.target = '_blank';
+    // Trigger a click event on the link
+    link.click();
+  }
 
 
   return (
@@ -153,19 +165,57 @@ const Administration = () => {
 
           <Stack sx={{ width: '81.7%', height: '90vh', marginLeft: '19%' }}>
             <h2 style={{ color: 'black', textAlign: 'center' }}>Administration</h2>
-            <Stack alignItems={'center'} sx={{ height: '100%' }}>
-              <Stack justifyContent={'space-between'} sx={{
-                width: '85%',
-                // height:'75%',
-              }}>
-                {
-                  AdministrationMenu.map((menu) => {
-                    return (
-                      // <Typography>{menu}</Typography>
-                      <Dropdown title={menu.title} options={menu.options} />
-                    )
-                  })
-                }
+            <Stack flexDirection={'row'}>
+              <Stack alignItems={'center'} sx={{ width: '60%' }}>
+                <Stack justifyContent={'space-between'} sx={{
+                  width: '85%',
+
+                  // height:'75%',
+                }}>
+                  {
+                    AdministrationMenu.map((menu) => {
+                      return (
+                        // <Typography>{menu}</Typography>
+                        menu.isLink
+                          ? (
+                            <Button
+                              aria-controls="dropdown-menu"
+                              aria-haspopup="true"
+                              onClick={(e) => {
+                                openPDFInNewTab("https://portal.asurehcm.com ");
+                                e.stopPropagation();
+                              }}
+                              sx={{
+                                backgroundColor: "#003478",
+                                color: "white",
+                                height: "36px",
+                                width: "267px",
+                                fontSize: "12px",
+                                padding: "3px",
+                                marginTop: '4px',
+                                borderTopLeftRadius: "0",
+                                borderBottomLeftRadius: "0",
+                                "&:hover": {
+                                  backgroundColor: '#003478',
+                                },
+                              }}
+                            >
+                              Direct Deposit
+
+                            </Button>
+
+                          )
+                          : (
+                            <Dropdown title={menu.title} options={menu.options} />
+                          )
+                      )
+                    })
+                  }
+                </Stack>
+              </Stack>
+
+              <Stack justifyContent={'flex-end'} sx={{ width: '44%', height: "81.7vh",position: 'fixed',right:'0px'}}>
+                <img src={JOptimanLogo} width={'100%'} height={'85%'}/>
               </Stack>
             </Stack>
           </Stack>

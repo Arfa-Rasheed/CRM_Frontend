@@ -6,8 +6,10 @@ import './style.scss';
 
 const BarChart = ({ barChartData , selectedOption }) => {
   const options = {
-    width: "4000px", 
-    height: "273px", 
+    // width: "4000px", 
+    // height: "273px", 
+    // width: "100px", 
+    // height: "100px", 
   };
 
   const months = Object.keys(barChartData);
@@ -51,7 +53,9 @@ const BarChart = ({ barChartData , selectedOption }) => {
 
   return (
     <div>
-      <Bar data={data} options={options} plugins={[CategoryScale]} style={{width:'100%'}}/>
+      <Bar data={data} options={options} plugins={[CategoryScale]}
+      //  style={{width:'100%',height:'50%'}}
+      />
     </div>
   );
 };

@@ -111,12 +111,13 @@ const SideBar = () => {
                                 style={{
                                     display: isAdmin ? (
                                         'block'
-                                        // menu.name === 'Agents'
-                                        //     ? 'block' : 'none'
                                     )
                                     : (
                                         menu.name === 'Agents'
-                                        ? 'none' : 'block'
+                                        ? 'none'
+                                        : menu.name === 'Commissions'
+                                        ? 'none'
+                                        : 'block'
                                     )
                         }}
                             >

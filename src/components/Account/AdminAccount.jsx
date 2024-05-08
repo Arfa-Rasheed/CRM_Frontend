@@ -146,16 +146,16 @@ const AdminAccount = () => {
 
                                     </Box>
 
-                                    <Stack alignItems={'center'} justifyContent={'center'} sx={{ width:isUpdateAccountClicked ? '71%' : '62%', height: '100%', backgroundColor: '#D9D9D9', borderRadius: '12px' }}>
-                                        <Stack sx={{ width: '90%', height: '90%' }}>
+                                    <Stack alignItems={'center'} justifyContent={'center'} sx={{ width:isUpdateAccountClicked ? '71%' : '52%', height: '100%', backgroundColor: '#D9D9D9', borderRadius: '12px' }}>
+                                        <Stack sx={{ width: '90%', height: '67%' }}>
                                             <Stack flexDirection={'row'} >
-                                                <Typography sx={{ fontWeight: 'bold' }}>First Name:</Typography><Typography>{adminData.firstName}</Typography>
+                                                <Typography sx={{ fontWeight: 'bold',fontSize: isUpdateAccountClicked ?'18px' : '23px' }}>FISRT NAME: </Typography><Typography sx={{fontSize:isUpdateAccountClicked ?'18px' : '23px' }}> {adminData.firstName}</Typography>
                                             </Stack>
                                             <Stack flexDirection={'row'} >
-                                                <Typography sx={{ fontWeight: 'bold' }}>Last Name:</Typography><Typography>{adminData.lastName}</Typography>
+                                                <Typography sx={{ fontWeight: 'bold',fontSize:isUpdateAccountClicked ?'18px' : '23px'  }}>LAST NAME: </Typography><Typography sx={{fontSize:isUpdateAccountClicked ?'18px' : '23px' }}> {adminData.lastName}</Typography>
                                             </Stack>
                                             <Stack flexDirection={'row'} >
-                                                <Typography sx={{ fontWeight: 'bold' }}>Admin Code:</Typography><Typography>{adminData.adminCode}</Typography>
+                                                <Typography sx={{ fontWeight: 'bold' ,fontSize:isUpdateAccountClicked ?'18px' : '23px' }}>ADMIN CODE: </Typography><Typography sx={{fontSize:isUpdateAccountClicked ?'18px' : '23px' }}> {adminData.adminCode}</Typography>
                                             </Stack>
                                         </Stack>
 

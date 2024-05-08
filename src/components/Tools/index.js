@@ -18,6 +18,7 @@ import PageLoader from '../../Layout/FullPageLoader/FullPageLoader.jsx'
 import CustomSnackbar from '../../shared-component/Snackbar/SnackBar.jsx'
 import Dropdown from '../../shared-component/AdministrationDropdown/Dropdown.jsx'
 import AdministrationButton from '../../shared-component/AdministrationButton/Button.jsx'
+import JOptimanLogo from '../../assets/JOptimanLogo-Large.png'
 
 const Tools = () => {
   const navigate = useNavigate()
@@ -25,97 +26,97 @@ const Tools = () => {
   const ToolsMenu = [
     {
       title: "State Licensing Requirements",
-      url:"https://nipr.com/licensing-center/state-requirements",
-      isDropdown:false
+      url: "https://nipr.com/licensing-center/state-requirements",
+      isDropdown: false
     },
     {
       title: "Pre-Licensing Study Material",
       options: [
         {
-          name:"ExamFX",
-          url:"https://www.examfx.com/"
+          name: "ExamFX",
+          url: "https://www.examfx.com/"
         },
         {
-          name:"ExamFX Candidate Registration Guide",
-          url:""
+          name: "ExamFX Candidate Registration Guide",
+          url: ""
         },
         {
-          name:"ExamFX",
-          url:""
+          name: "ExamFX",
+          url: ""
         },
       ],
-      isDropdown:true
+      isDropdown: true
     },
     {
       title: "Continuing Education",
       options: [
         {
-          name:"Kaplan Financial Education",
-          url:"https://www.kaplanfinancial.com/"
+          name: "Kaplan Financial Education",
+          url: "https://www.kaplanfinancial.com/"
         },
         {
-          name:"Kaplan Financial Continuing Education Registration Guid",
-          url:""
+          name: "Kaplan Financial Continuing Education Registration Guid",
+          url: ""
         },
         {
-          name:"State Requirement for CE",
-          url:"https://www.kaplanfinancial.com/insurance-continuing-education/requirements"
+          name: "State Requirement for CE",
+          url: "https://www.kaplanfinancial.com/insurance-continuing-education/requirements"
         },
 
       ],
-      isDropdown:true
+      isDropdown: true
     },
     {
       title: "Heirarchy Chart",
       options: [
         ""
       ],
-      isDropdown:false
+      isDropdown: false
     },
     {
       title: "Sales Illustration",
       options: [
         {
-          name:"Nationwide Illustration Tools",
-          url:"https://nationwidefinancial.com/resources/tools?product=life&amp;function=calculate&amp;_ga=2.28881724.1819211996.1712080280-432224549.1711570415&amp;_gl=1*2qez4f*_ga*NDMyMjI0NTQ5LjE3MTE1NzA0MTU.*_ga_GLJSQEPWL4*MTcxMjA4MDI4MC4zLjEuMTcxMjA4MDMyNy4xMy4wLjA",
+          name: "Nationwide Illustration Tools",
+          url: "https://nationwidefinancial.com/resources/tools?product=life&amp;function=calculate&amp;_ga=2.28881724.1819211996.1712080280-432224549.1711570415&amp;_gl=1*2qez4f*_ga*NDMyMjI0NTQ5LjE3MTE1NzA0MTU.*_ga_GLJSQEPWL4*MTcxMjA4MDI4MC4zLjEuMTcxMjA4MDMyNy4xMy4wLjA",
         },
         {
-          name:"North American Illustration Tools",
-          url:"https://igoforms2.ipipeline.com/CossEnterpriseSuite/(S(wjjsdaqtozaf5ycqsrcabakm))/webforms/StartUpResp.aspx"
+          name: "North American Illustration Tools",
+          url: "https://igoforms2.ipipeline.com/CossEnterpriseSuite/(S(wjjsdaqtozaf5ycqsrcabakm))/webforms/StartUpResp.aspx"
         },
         {
-          name:"Athene Annuity Illustration Center",
-          url:"https://igoforms2.ipipeline.com/CossEnterpriseSuite/(S(wjjsdaqtozaf5ycqsrcabakm))/webforms/StartUpResp.aspx"
+          name: "Athene Annuity Illustration Center",
+          url: "https://igoforms2.ipipeline.com/CossEnterpriseSuite/(S(wjjsdaqtozaf5ycqsrcabakm))/webforms/StartUpResp.aspx"
         },
         {
-          name:"Athene Annuity Electronic Servicing",
-          url:"https://www.athene.com/producer/connect/tools/electronic-servicing"
+          name: "Athene Annuity Electronic Servicing",
+          url: "https://www.athene.com/producer/connect/tools/electronic-servicing"
         },
         {
-          name:"Transamerica iGO e-App",
-          url:"https://igoforms2.ipipeline.com/CossEnterpriseSuite/(S(ihauzpt4seqquhj2gaunymfr))/webforms/StartUpResp.aspx"
+          name: "Transamerica iGO e-App",
+          url: "https://igoforms2.ipipeline.com/CossEnterpriseSuite/(S(ihauzpt4seqquhj2gaunymfr))/webforms/StartUpResp.aspx"
         },
         {
-          name:"Transamerica Insurance Review",
-          url:"https://ani.transamerica.com/ani/Uploads/Pages/51491/Brokerage_Insurance_Review_Producer.pdf"
+          name: "Transamerica Insurance Review",
+          url: "https://ani.transamerica.com/ani/Uploads/Pages/51491/Brokerage_Insurance_Review_Producer.pdf"
         },
         {
-          name:"Transamerica Solve Options",
-          url:"https://ani.transamerica.com/ani/Uploads/Pages/53028/251394_0320%20Common%20Solves%20Piece%20Flyer_FINAL_Digital.pdf"
+          name: "Transamerica Solve Options",
+          url: "https://ani.transamerica.com/ani/Uploads/Pages/53028/251394_0320%20Common%20Solves%20Piece%20Flyer_FINAL_Digital.pdf"
         },
       ],
-      isDropdown:true
+      isDropdown: true
     },
     {
       title: "Resources",
       options: [
         {
-          name:"3Marks",
-          url:"https://3mark.com"
+          name: "3Marks",
+          url: "https://3mark.com"
         }
       ]
     },
-    
+
   ]
 
 
@@ -131,32 +132,38 @@ const Tools = () => {
         }}>
           <SideBar />
 
-          <Stack sx={{ width: '81.7%',height:'90vh', marginLeft: '19%'}}>
+          <Stack sx={{ width: '81.7%', height: '90vh', marginLeft: '19%' }}>
             <h2 style={{ color: 'black', textAlign: 'center' }}>Tools</h2>
-            <Stack  alignItems={'center'} sx={{height:'100%'}}>
-              <Stack justifyContent={'space-between'} sx={{
-                width:'85%',
-                // height:'75%',
+            <Stack flexDirection={'row'}>
+              <Stack alignItems={'center'} sx={{width:'60%', height: '100%' }}>
+                <Stack justifyContent={'space-between'} sx={{
+                  width: '85%',
+                  // height:'75%',
                 }}>
-              {
-                ToolsMenu.map((menu) => {
-                  return (
-                    // <Typography>{menu}</Typography>
-                    <>
-                    {
-                      menu.isDropdown 
-                      ? (
-                        <Dropdown title={menu.title} options={menu.options} />
+                  {
+                    ToolsMenu.map((menu) => {
+                      return (
+                        // <Typography>{menu}</Typography>
+                        <>
+                          {
+                            menu.isDropdown
+                              ? (
+                                <Dropdown title={menu.title} options={menu.options} />
+                              )
+                              : (
+                                <AdministrationButton title={menu.title} />
+                              )
+                          }
+                        </>
+                        // <Dropdown title={menu.title} options={menu.options} />
                       )
-                      : (
-                        <AdministrationButton title={menu.title}/>
-                      )
-                    }
-                    </>
-                    // <Dropdown title={menu.title} options={menu.options} />
-                  )
-                })
-              }
+                    })
+                  }
+                </Stack>
+              </Stack>
+
+              <Stack justifyContent={'flex-end'} sx={{ width: '44%', height: "81.7vh",position: 'fixed',right:'0px' }}>
+                <img src={JOptimanLogo} width={'100%'} height={'85%'} />
               </Stack>
             </Stack>
           </Stack>

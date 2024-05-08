@@ -73,11 +73,6 @@ const Agents = () => {
       isLink: true,
     },
     {
-      field: 'agentRole',
-      headerName: "Agent Role:",
-      isLink: true,
-    },
-    {
       field: 'recruitmentDate',
       headerName: "Recruitment Date:",
       isLink: true,
@@ -165,7 +160,7 @@ const Agents = () => {
                   <h2 style={{ color: 'black', textAlign: 'center' }}>All Agents</h2>
                 </Box>
 
-                <Box sx={{ width: '56%', height: '17vh', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <Box sx={{ width: '56%', height: '12vh', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
                     <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
                       InputProps={{
                         startAdornment: (
@@ -177,28 +172,7 @@ const Agents = () => {
                       }} 
                       onChange ={(event)=>handleInputChange(event.target.value)}
                       />
-                  <Button
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "#003478",
-                      color: 'white',
-                      width: '245px',
-                      height: "5vh",
-                      fontSize: '12px',
-                      "&:hover": {
-                        backgroundColor: '#003478',
-                      },
-                    }}
-                    onClick={() => { navigate('/addAgent') }}
-                  >
-                    <Grid container
-                      alignItems={'center'}
-                      sx={{ width: '100%' }}
-                    >
-                      <Grid item md="9">Add Agent</Grid>
-                      <Grid item md="3"><Plus size={20} weight="light" /></Grid>
-                    </Grid>
-                  </Button>
+               
                   <Button
                     variant="contained"
                     disabled={selectedAgentIds.length < 1 ? true : false}

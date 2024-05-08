@@ -60,11 +60,11 @@ const Dropdown = (props) => {
             </Button>
             {
                 menuOpen && (
-                    <Stack flexDirection={'row'} >
+                    <Stack flexWrap={'wrap'} flexDirection={'row'} sx={{brder:"2px solid red" ,width:'52%'}}>
                         {
                             options?.map((option) => {
                                 return (
-                                    <Box sx={{width:'25%',borderRadius:"4px",border:'2px solid black'}}>
+                                    <Stack  sx={{width:'100%',borderRadius:"4px",border:'2px solid black'}}>
                                         <Typography sx={{textAlign:'center',fontSize:'14px',cursor:"pointer"}} 
                                          onClick={(e) => {
                                             if (option.url) { // Check if URL is not empty
@@ -72,7 +72,7 @@ const Dropdown = (props) => {
                                             e.stopPropagation(); 
                                         } }}
                                        >{option.name}</Typography>
-                                    </Box>
+                                    </Stack>
                                 )
                             })
                         }

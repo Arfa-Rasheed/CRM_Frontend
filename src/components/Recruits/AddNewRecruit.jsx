@@ -395,7 +395,7 @@ const AddNewRecruit = () => {
                             }
 
                             {
-                                // _id ?
+                                _id ?
                                 isAdmin && (
                                     <>
                                         <Stack className='text-field-container'>
@@ -405,18 +405,6 @@ const AddNewRecruit = () => {
                                                 <TextField 
                                                 value={agentData.level}
                                                 onChange={(e) => { handleInputChange(e.target.value, "level") }}
-                                                />
-                                            </Stack>
-                                        </Stack>
-
-
-                                        <Stack className='text-field-container'>
-                                            <Typography className='form-questions'>Agent's Role
-                                                <Asterisk color='red' size={12} weight="bold" /></Typography>
-                                            <Stack className='text-field'>
-                                                <TextField 
-                                                value={agentData.agentRole}
-                                                onChange={(e) => { handleInputChange(e.target.value, "agentRole") }}
                                                 />
                                             </Stack>
                                         </Stack>
@@ -435,9 +423,9 @@ const AddNewRecruit = () => {
 
                                     </>
                                 )
-                                // : (
-                                //     <></>
-                                // )
+                                : (
+                                    <></>
+                                )
                             }
                             <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{display:agentData.isApproved===true ? 'none' : 'flex'}}>
                                 <Button

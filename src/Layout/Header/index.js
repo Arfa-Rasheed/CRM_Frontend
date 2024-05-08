@@ -33,7 +33,7 @@ const Header = () => {
                             <Notifications />
                         </Stack>
                         
-                        {/* <Divider variant="inset" style={{ backgroundColor: 'white' }} /> */}
+                    
 
                         <Profile />
                     </Stack>

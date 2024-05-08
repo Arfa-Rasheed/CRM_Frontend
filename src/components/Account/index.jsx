@@ -177,14 +177,24 @@ const AccountDetail = () => {
                                             </Stack>
                                         </Box>
                                         <Stack>
-                                            <Typography>First Name: {userData.firstName}</Typography>
-                                            <Typography>Last Name:{userData.lastName}</Typography>
-                                            <Typography>Agent Code:{userData.agentCode}</Typography>
-                                            <Typography>Agent Title:{userData.agentTitle}</Typography>
-                                            <Typography>Agent Role:{userData.agentRole}</Typography>
-                                            <Typography>Level:{userData.level}</Typography>
-                                            <Typography>Email:{userData.email}</Typography>
-
+                                            <Stack flexDirection={'row'}>
+                                            <Typography sx={{fontWeight:'bold'}}>FIRST NAME:</Typography><Typography> {userData.firstName}</Typography>
+                                            </Stack>
+                                            <Stack flexDirection={'row'}>
+                                            <Typography sx={{fontWeight:'bold'}}>LAST NAME:</Typography><Typography>{userData.lastName}</Typography>
+                                            </Stack>
+                                            <Stack flexDirection={'row'}>
+                                            <Typography sx={{fontWeight:'bold'}}>AGENT CODE:</Typography><Typography>{userData.agentCode}</Typography>
+                                            </Stack>
+                                            <Stack flexDirection={'row'}>
+                                            <Typography sx={{fontWeight:'bold'}}>AGENT TITLE:</Typography><Typography>{userData.agentTitle}</Typography>
+                                            </Stack>
+                                            <Stack flexDirection={'row'}>
+                                            <Typography sx={{fontWeight:'bold'}}>LEVEL:</Typography><Typography>{userData.level}</Typography>
+                                            </Stack>
+                                            <Stack flexDirection={'row'}>
+                                            <Typography sx={{fontWeight:'bold'}}>EMAIL:</Typography><Typography>{userData.email}</Typography>
+                                            </Stack>
                                         </Stack>
                                     </Stack>
 

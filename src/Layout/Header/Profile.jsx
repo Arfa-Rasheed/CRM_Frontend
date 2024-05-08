@@ -1,4 +1,4 @@
-import { Avatar, Stack, Typography } from '@mui/material'
+import { Avatar, Divider, Stack, Typography } from '@mui/material'
 import React, { useEffect, useRef, useState } from 'react'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Navigate, useNavigate } from 'react-router';
@@ -47,7 +47,7 @@ const Profile = () => {
 
 
     return (
-        <div style={{ width: '15%' }}>
+        <div style={{ width: '27%' }}>
             <CustomizedSnackbars ref={snackbar_Ref} />
             <Stack
                 direction={'row'}
@@ -56,12 +56,13 @@ const Profile = () => {
             >
                 <Avatar onClick={() => navigate(isAdmin ? "/adminAccountDetails" :"/agentAccountDetails")} />
                 <Stack spacing={10} direction={'row'}>
-                    <Stack>
-                        {/* <Typography>{isAdmin ? adminFirstName : userData.firstName}</Typography> */}
-                        <Typography>{firstName}</Typography>
-                        <Typography>{isAdmin ? "Admin" : agentTitle}</Typography>
+                    <Stack flexDirection={'row'} sx={{width:'100%'}}>
+                        
+                        <Typography sx={{marginRight:'4px'}}>{firstName}</Typography>
+                        <Divider orientation="vertical"  flexItem  sx={{backgroundColor:'white',width:'1px',marginRight:'4px'}}/>
+                        <Typography sx={{marginRight:'4px'}}>{isAdmin ? "Admin" : agentTitle}</Typography>
                     </Stack>
-                    <KeyboardArrowDownIcon sx={{ fontSize: '35px', marginTop: '10px' }} />
+                 
                 </Stack>
             </Stack>
         </div>
