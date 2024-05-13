@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const httpClient = axios.create({
-    baseURL: "http://localhost:5000/api/",
-    // baseURL: "https://joptimen-backend-542774489131.herokuapp.com/api/"
+    // baseURL: "http://localhost:5000/api/",
+    baseURL: "http://api.projecttesting.pro/"
 });
 
 httpClient.interceptors.request.use(function (config) {
@@ -33,6 +33,23 @@ export default httpClient;
 //     listen 80;
 //     server_name alkauseradmissions.net www.alkauseradmissions.net; 
 //     root /root/Al-Kauser-Frontend/build; 
+
+//     location / {
+//         try_files $uri $uri/ =404;
+//     }
+
+//     location ~ \.css$ {
+//         types {
+//             text/css css;
+//         }
+//     }
+
+// }
+
+
+// server {
+//     listen 80;
+//     root /root/CRM_Frontend/build; 
 
 //     location / {
 //         try_files $uri $uri/ =404;

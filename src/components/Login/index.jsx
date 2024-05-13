@@ -62,19 +62,19 @@ const Login = () => {
             const agentTitle = res.data.isAdmin ? "" : res.data.agentTitle
             const agentCode = res.data.isAdmin ? "" : res.data.agentCode
             const contractLevel = res.data.isAdmin ? "" : res.data.contractLevel
+            const profilePic = res.data.profilePic ? res.data.profilePic : ""
             localStorage.setItem('authToken', authToken);
             localStorage.setItem('isAdmin', isAdmin);
             localStorage.setItem("userId", userId)
             localStorage.setItem("firstName", firstName)
             localStorage.setItem("lastName", lastName)
+            localStorage.setItem("profilePic",profilePic)
             localStorage.setItem("adminCode", adminCode)
             localStorage.setItem("agentTitle", agentTitle)
             localStorage.setItem("agentCode", agentCode)
             localStorage.setItem("contractLevel", contractLevel)
             dispatch(setIsLoggedIn(true))
             dispatch(setUserDetail(res.data))
-            console.log("userDetails", userDetails);
-            console.log("userId", userId);
             snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
             setTimeout(() => {
                 navigate('/dashboard');

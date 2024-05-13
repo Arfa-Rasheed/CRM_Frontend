@@ -4,7 +4,7 @@
     // width: 304px;
     // z-index: 5;
     top: 55px;
-    left: 320px;
+    left: 335px;
 
     .menu-item{
         margin: 2px;
@@ -13,8 +13,8 @@
    
 }
 #dropdown-menu-yearly-policy-menu{
-    top: 210px;
-    left: 320px;
+    top: 200px;
+    left: 335px;
     .menu-item{
         margin: 2px;
         border: 2px solid #EDEDED;
@@ -23,6 +23,14 @@
 
 #dropdown-menu-previous-months{
     top:55px;
+    left:1120px;
+    .menu-item{
+        margin: 2px;
+        border: 2px solid #EDEDED;
+    }
+}
+#dropdown-menu-previous-months2{
+    top:528px;
     left:1120px;
     .menu-item{
         margin: 2px;
@@ -47,5 +55,5 @@
 
 .menu-item-text-previous-months{
     text-align: center;
-    width: 270px;
+    width: 260px;
 }

@@ -109,91 +109,91 @@ const Policies = () => {
     {
       field: 'policySubmissionDate',
       headerName: "Date:",
-      width: '20%',
+      // width: '20%',
       isLink: true
     },
     {
       field: 'policyCarrier',
       headerName: "Policy Carrier:",
-      width: '20%',
+      // width: '20%',
       isLink: true
     },
     {
       field: 'policyType',
       headerName: "Policy Type:",
-      width: '20%',
+      // width: '20%',
       isLink: true
     },
     {
       field: 'policyNumber',
       headerName: "Policy Number:",
-      width: '20%',
+      // width: '20%',
       isLink: true
     },
     {
       field: 'insuredFirstName',
       headerName: "Insured First Name:",
-      width: '20%',
+      // width: '20%',
       isLink: true,
     },
     {
       field: 'insuredLastName',
       headerName: "Insured Last Name:",
-      width: '20%',
+      // width: '20%',
       isLink: true,
     },
     {
       field: 'agentFirstName',
       headerName: "Writting Agent First Name",
-      width: '20%',
+      // width: '30%',
       isLink: true
     },
     {
       field: 'agentLastName',
       headerName: "Writting Agent Last Name",
-      width: '20%',
+      // width: '20%',
       isLink: true
     },
     {
       field: 'agentCarrierNumber',
       headerName: "Agent Carrier Number",
-      width: '20%',
+      // width: '20%',
       isLink: true
     },
     {
       field: 'agentCode',
       headerName: "Agent Code",
-      width: '20%',
+      // width: '20%',
       isLink: true
     },
     {
       field: 'contractLevel',
       headerName: "Contract Level",
-      width: '20%',
+      // width: '20%',
       isLink: true
     },
     {
       field: 'policyValue',
       headerName: "Premium",
-      width: '20%',
+      // width: '20%',
       isLink: true
     },
     {
       field: 'advPayment',
       headerName: "Adv. Payment",
-      width: '20%',
+      // width: '20%',
       isLink: true
     },
     {
       field: 'balance',
       headerName: "Balance",
-      width: '20%',
+      // width: '20%',
       isLink: true
     },
     {
       field: 'agencyCommission',
       headerName: "Agency Commission",
-      width: '20%',
+      // width: '20%',
       isLink: true
     },
     {
@@ -281,14 +281,21 @@ const Policies = () => {
                 </Grid>
               </Button>
             </Box>
-            {/* <Box sx={{height:'130vh'}}> */}
+
+            <Stack sx={{ width: '99.9%', height: '19vh', marginLeft: '10px', marginTop: '17px', marginBottom: '-71px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px'}}>
+                <h2 style={{ color: 'black', textAlign: 'center' }}>Policies</h2>
+                <h3 style={{ color: '#003478', marginLeft: '40px' }}> March 2024</h3>
+                <Stack alignItems={'center'} sx={{ width: '100%' }}>
+                </Stack>
+              </Stack>
+            <Box sx={{height:isAdmin ? "275vh" :'130vh'}}>
             <CRMGrid
               sx={{ marginTop: '10px', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
               gridHeader={isAdmin ? adminGridHeader : gridHeader}
               gridData={gridData}
               baseURL={isAdmin ? "/approvePolicy/" : "/addNewPolicy_agent/"}
             />
-            {/* </Box> */}
+            </Box>
 
           </Stack>
         </div>

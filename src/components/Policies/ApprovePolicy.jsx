@@ -691,30 +691,9 @@ const ApprovePolicy = () => {
                                                 alignItems={'center'}
                                                 justifyContent={'space-between'}
                                                 sx={{ width: '100%', height: '13vh' }}>
-                                                {policyData.isPaid ? (
-                                                    <Button
-                                                        variant="contained"
-                                                        sx={{
-                                                            display: isAdmin ? 'block' : 'none',
-                                                            backgroundColor: "#F08613",
-                                                            color: 'white',
-                                                            width: '186px',
-                                                            height: "5vh",
-                                                            fontSize: '12px',
-                                                            "&:hover": {
-                                                                backgroundColor: '#F08613',
-                                                            },
-                                                        }}
-                                                        onClick={chargedBackHandler}
-                                                    >
-                                                        Charge Back
-                                                    </Button>
-                                                ) : <></>}
                                                 <Button
                                                     variant="contained"
-                                                    // disabled={policyData.agencyCommissionPercentage ? false : policyData.advPaymentPercentage ? false : policyData.policyApprovalDate ? false : true}
                                                     sx={{
-                                                        // disabled: policyData.agencyCommissionPercentage ? false : policyData.advPaymentPercentage ? false : policyData.policyApprovalDate ? false : true,
                                                         backgroundColor: "#003478",
                                                         color: 'white',
                                                         width: '186px',

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
-import { Avatar, Grid, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material'
+import { Avatar, Grid, List, ListItem, ListItemIcon, ListItemText, Stack, Typography } from '@mui/material'
 import './style.scss'
 import CRMDropdown from '../../shared-component/CRM-Dropdown/index'
 import CRMButtons from '../../shared-component/CRMButtons'
@@ -11,12 +11,14 @@ import httpClient from '../../_util/api'
 import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar'
 import { hideLoader, showLoader } from '../../Store/mainSlice'
 import { useDispatch } from 'react-redux'
+
 const Dashboard = () => {
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
     const snackbar_Ref = useRef(null)
     const dispatch = useDispatch()
     const [year, setYear] = useState('2024')
-    const [month, setMonth] = useState('April')
+    const [month, setMonth] = useState('May')
+    const [month1, setMonth1] = useState('May')
     const [currentMonth, setCurrentMonth] = useState('')
     const [totalSoldPolicies, setTotalSoldPolicies] = useState(0)
     const [totalHealthInsurance, setTotalHealthInsurance] = useState(0)
@@ -46,8 +48,8 @@ const Dashboard = () => {
         agentCode: "",
         agentRole: "",
         totalSales: "",
-
     })
+    const [highestRecruitsAgentData,setHighestRecruitsAgentData] = useState({})
 
 
     const DropdownOptions1 = [
@@ -64,9 +66,9 @@ const Dashboard = () => {
     ];
 
     const previousMonths = [
-        "December",
-        "January",
-        "February"
+        "February",
+        "March",
+        "April"
     ]
 
     const previousYears = [
@@ -90,6 +92,10 @@ const Dashboard = () => {
     const handleMonthChange = (selectedOption) => {
         setMonth(selectedOption)
     }
+    const handleMonthChange1 = (selectedOption) => {
+        console.log('Selected Option:', selectedOption);
+        setMonth1(selectedOption)
+    }
 
     const handleYearChange = (selectedOption) => {
         setYear(selectedOption)
@@ -108,19 +114,19 @@ const Dashboard = () => {
             console.log("dash res", res);
             console.log("dash res", res?.data[month]);
             if (res?.data[month]) {
-            setTotalHealthInsurance(res?.data[month].Health.count)
-            setTotalLifeInsurance(res?.data[month].Life.count)
-            setTotalAnnuities(res?.data[month].Annuities.count)
+                setTotalHealthInsurance(res?.data[month].Health.count)
+                setTotalLifeInsurance(res?.data[month].Life.count)
+                setTotalAnnuities(res?.data[month].Annuities.count)
 
-            // Sales Matrix
-            setTotalHealthInsuranceCost(res?.data[month].Health.totalSale)
-            setTotalLifeInsuranceCost(res?.data[month].Life.totalSale)
-            setTotalAnnuitiesCost(res?.data[month].Annuities.totalSale)
+                // Sales Matrix
+                setTotalHealthInsuranceCost(res?.data[month].Health.totalSale)
+                setTotalLifeInsuranceCost(res?.data[month].Life.totalSale)
+                setTotalAnnuitiesCost(res?.data[month].Annuities.totalSale)
 
-            // CashFlow Matrix
-            setTotalHealthRevenue(res?.data[month].Health.totalRevenue)
-            setTotalLifeRevenue(res?.data[month].Life.totalRevenue)
-            setTotalAnnuitiesRevenue(res?.data[month].Annuities.totalRevenue)
+                // CashFlow Matrix
+                setTotalHealthRevenue(res?.data[month].Health.totalRevenue)
+                setTotalLifeRevenue(res?.data[month].Life.totalRevenue)
+                setTotalAnnuitiesRevenue(res?.data[month].Annuities.totalRevenue)
             }
         }
     }
@@ -154,7 +160,7 @@ const Dashboard = () => {
 
     const getDetailsOfHighestCommissionedAgent = async () => {
         dispatch(showLoader())
-        const res = await httpClient.get(`/dashboard/getDetailsOfHighestCommissionedAgent/${month}`)
+        const res = await httpClient.get(`/dashboard/getDetailsOfHighestCommissionedAgent/${month1}`)
             .catch((error) => {
                 dispatch(hideLoader())
                 snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
@@ -162,13 +168,30 @@ const Dashboard = () => {
         if (res?.status === 200) {
             dispatch(hideLoader())
             console.log("highestcommision agent", res);
-            setHighestCommissionedAgentData(res.data)
+            setHighestCommissionedAgentData(res?.data)
         }
     }
 
+
+    const getDetailsOfHighestRecruitsAgent = async () => {
+        dispatch(showLoader())
+        const res = await httpClient.get(`/dashboard/highestRecruitsAgent/${month1}`)
+            .catch((error) => {
+                dispatch(hideLoader())
+                snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+            })
+        if (res?.status === 200) {
+            dispatch(hideLoader())
+            console.log("highestRecruitsAgent", res);
+            setHighestRecruitsAgentData(res.data)
+        }
+    }
+
+
+
     const getTotalNoOfRecruits = async () => {
         dispatch(showLoader())
-        const res = await httpClient.get(`/dashboard/TotalNoOfRecruits/${month}`).catch((error) => {
+        const res = await httpClient.get(`/dashboard/TotalNoOfRecruits/${month1}`).catch((error) => {
             dispatch(hideLoader())
             snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
         })
@@ -191,8 +214,13 @@ const Dashboard = () => {
 
     useEffect(() => {
         getDetailsOfHighestCommissionedAgent()
+        getDetailsOfHighestRecruitsAgent()
         getTotalNoOfRecruits()
-    }, [])
+    }, [month1])
+
+    // useEffect(()=>{
+    //     getDetailsOfHighestRecruitsAgent()
+    // },[])
     return (
 
         <div>
@@ -250,7 +278,7 @@ const Dashboard = () => {
                             </Grid>
                             <Grid item md='3'>
                                 {/* <CRMButtons title='Sales Statistics' /> */}
-                                <h2 style={{ color: 'black', textAlign: 'center',lineHeight:'0px' }}>Sales Statistics</h2>
+                                <h2 style={{ color: 'black', textAlign: 'center', lineHeight: '0px' }}>Sales Statistics</h2>
                                 <Grid container sx={{ justifyContent: 'center', marginTop: '9px' }} className='grid-inner-container'>
                                     <Grid items md='10' >
                                         <List>
@@ -284,7 +312,7 @@ const Dashboard = () => {
 
                             </Grid>
                             <Grid item md='3'>
-                                <CRMDropdown title='Previous Months' options={previousMonths} onOptionChange={handleMonthChange} />
+                                <CRMDropdown title='Previous Months' dropdownNo='2' options={previousMonths} onOptionChange={handleMonthChange} />
                                 {/* <CRMButtons title='Previus Months'/> */}
                                 <Grid container sx={{ justifyContent: 'center' }} className='grid-inner-container'>
                                     <Grid items md='10' >
@@ -430,7 +458,7 @@ const Dashboard = () => {
                                 </Grid> */}
 
                                 {barChartData ? (
-                                    <Grid item md="6" sx={{height:'40vh'}}>
+                                    <Grid item md="6" sx={{ height: '40vh' }}>
                                         <BarChart barChartData={barChartData} selectedOption={yearlyPolicySelectedOption} />
                                     </Grid>
                                 ) : (
@@ -443,38 +471,83 @@ const Dashboard = () => {
                         <Grid container style={{ backgroundColor: "#EDEDED", height: '23vh', width: '95%', justifyContent: 'space-around', alignItems: 'center', margin: '0 auto', borderRadius: '15px' }}>
                             <Grid item md='3'>
                                 <CRMButtons title='Agents Matrix' />
-                                <Grid container sx={{ justifyContent: 'center', marginTop: '9px', height: '16vh' }} className='grid-inner-container'>
-                                    {/* <Grid item md="12"><Avatar></Avatar>   </Grid> */}
-                                    <Grid item md='10' >
-                                        <Typography sx={{ fontSize: '13px' }}>Highest Sales</Typography>
-                                        <Typography sx={{ fontSize: '13px' }}>Agent Name:{highestCommissionedAgentData.agentFirstName} {highestCommissionedAgentData.agentLastName}</Typography>
-                                        <Typography sx={{ fontSize: '13px' }}>Agent Role:</Typography>
+                                <Grid container sx={{ justifyContent: 'center', marginTop: '9px', height: '14vh' }} className='grid-inner-container'>
+                                    <Grid items md='4'>
+                                        <Typography sx={{ fontSize: '14px', fontWeight: 'bold', color: '#003478' }}>Highest Sales</Typography>
+                                    </Grid>
+                                    <Grid container style={{ justifyContent: 'center' }}>
+                                        <Grid items md='3'>
+                                            {/* <Avatar sx={{ width: '56px', height: '56px' }} /> */}
 
+                                            {
+                                                highestCommissionedAgentData.profilePic ?
+                                                (
+                                                    <img src={highestCommissionedAgentData.profilePic} style={{ width: '56px', height: '56px',borderRadius:'40px' }}/>
+                                                )
+                                                :
+                                                (
+                                                    <Avatar sx={{ width: '56px', height: '56px' }} />
+                                                )
+                                            }
+                                        </Grid>
+                                        <Grid items md='8'>
+                                            <Stack flexDirection='row'>
+                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold' }}>Agent Name:</Typography><Typography sx={{ fontSize: '12px' }}>{highestCommissionedAgentData.agentFirstName} {highestCommissionedAgentData.agentLastName}</Typography>
+                                            </Stack>
+                                            <Stack flexDirection='row'>
+                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold' }}>Agent Title:</Typography><Typography sx={{ fontSize: '12px' }}>{highestCommissionedAgentData.agentTitle} </Typography>
+                                            </Stack>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
 
                             </Grid>
                             <Grid item md='3'>
                                 {/* <CRMButtons title='Sales Statistics' /> */}
-                                <h2 style={{ color: 'black', textAlign: 'center',lineHeight:'0px' }}>Sales Statistics</h2>
-                                <Grid container className='grid-inner-container' sx={{ justifyContent: 'center', marginTop: '9px', height: '14vh' }} >
-                                    <Grid items md='10' >
-                                        <Typography sx={{ fontSize: '13px' }}>Highest Recruits:</Typography>
-                                        <Typography sx={{ fontSize: '13px' }}>Agent Name:{highestCommissionedAgentData.agentFirstName} {highestCommissionedAgentData.agentLastName}</Typography>
-                                        <Typography sx={{ fontSize: '13px' }}>Agent Title:{highestCommissionedAgentData.agentTitle}</Typography>
+                                <h2 style={{ color: 'black', textAlign: 'center', lineHeight: '0px' }}>Sales Statistics</h2>
+                                <Grid container sx={{ justifyContent: 'center', marginTop: '9px', height: '14vh' }} className='grid-inner-container'>
+                                    <Grid items md='5'>
+                                        <Typography sx={{ fontSize: '14px', fontWeight: 'bold', color: '#003478' }}>Highest Recruits</Typography>
+                                    </Grid>
+                                    <Grid container style={{ justifyContent: 'center' }}>
+                                        <Grid items md='3'>
+                                            {
+                                                highestRecruitsAgentData.profilePic ?
+                                                (
+                                                    <img src={highestRecruitsAgentData.profilePic} style={{ width: '56px', height: '56px',borderRadius:'40px' }}/>
+                                                )
+                                                :
+                                                (
+                                                    <Avatar sx={{ width: '56px', height: '56px' }} />
+                                                )
+                                            }
+                                           
+                                        </Grid>
+                                        <Grid items md='8'>
+                                            <Stack flexDirection='row'>
+                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold' }}>Agent Name:</Typography><Typography sx={{ fontSize: '12px' }}>{highestRecruitsAgentData.firstName} {highestRecruitsAgentData.lastName}</Typography>
+                                            </Stack>
+                                            <Stack flexDirection='row'>
+                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold' }}>Agent Title:</Typography><Typography sx={{ fontSize: '12px' }}> {highestRecruitsAgentData.agentTitle}</Typography>
+                                            </Stack>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
 
                             </Grid>
                             <Grid item md='3'>
-                                <CRMButtons title='Previous Months' />
+                            <CRMDropdown title='Previous Months' dropdownNo='5'  options={previousMonths} onOptionChange={handleMonthChange1} />
                                 <Grid container sx={{ justifyContent: 'center', height: '14vh' }} className='grid-inner-container'>
-                                    <Grid items md='10' >
-                                        <Typography>Total Recruits:</Typography>
-                                        <Typography>{totalNoOfRecruits}</Typography>
+                                    <Grid items md='6'>
+                                        <Typography sx={{ fontSize: '14px', fontWeight: 'bold', color: '#003478' }}>Number Of Recruits</Typography>
+                                    </Grid>
+                                    <Grid container style={{ justifyContent: 'center' }}>
+                                        <Grid items md='1'>
+                                            <Typography sx={{ fontSize: '24px', fontWeight: 'bold' }}>{totalNoOfRecruits}</Typography>
+                                        </Grid>
+
                                     </Grid>
                                 </Grid>
-
                             </Grid>
                         </Grid>
                     </Grid>

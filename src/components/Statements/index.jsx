@@ -93,93 +93,93 @@ const Statements = () => {
     {
       field: 'overwrittingAgentContractLevel1',
       headerName: "OW Agent1 Contract Level",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'overwrittingAgentCommission1',
       headerName: "OW Agent1 Commission",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'overwrittingAgentContractLevel2',
       headerName: "OW Agent2 Contract Level",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'overwrittingAgentCommission2',
       headerName: "OW Agent2 Commission",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split1_ContractLevel',
       headerName: " Split1 ContractLevel",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split1_splitRatio',
       headerName: " Split1 Split Ratio",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split1_agentCommission',
       headerName: " Split1 Agent Commission",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split_1_OWAgent1_ContractLevel',
       headerName: "split1 OWAgent1 Contract Level",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split_1_OWAgent1_Commission',
       headerName: "split1 OWAgent1 Commission",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split_1_OWAgent2_ContractLevel',
       headerName: "split1 OWAgent2 Contract Level",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split_1_OWAgent2_Commission',
       headerName: "split1 OWAgent2 Commission",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split2_ContractLevel',
       headerName: " Split2 ContractLevel",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split2_splitRatio',
       headerName: " Split2 Split Ratio",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split2_agentCommission',
       headerName: " Split2 Agent Commission",
-      isLink:true,
+      isLink: true,
     },
 
     {
       field: 'split_2_OWAgent1_ContractLevel',
       headerName: "Split2 OWAgent1 Contract Level",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split_2_OWAgent1_Commission',
       headerName: "Split2 OWAgent1 Commission",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split_2_OWAgent2_ContractLevel',
       headerName: "Split2 OWAgent2 Contract Level",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split_2_OWAgent2_Commission',
       headerName: "Split2 OWAgent2 Commission",
-      isLink:true,
+      isLink: true,
     },
   ]
 
@@ -253,95 +253,95 @@ const Statements = () => {
     {
       field: 'overwrittingAgentContractLevel1',
       headerName: "OW Agent1 Contract Level",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'overwrittingAgentCommission1',
       headerName: "OW Agent1 Commission",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'overwrittingAgentContractLevel2',
       headerName: "OW Agent2 Contract Level",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'overwrittingAgentCommission2',
       headerName: "OW Agent2 Commission",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split1_ContractLevel',
       headerName: " Split1 ContractLevel",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split1_splitRatio',
       headerName: " Split1 Split Ratio",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split1_agentCommission',
       headerName: " Split1 Agent Commission",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split_1_OWAgent1_ContractLevel',
       headerName: "split1 OWAgent1 Contract Level",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split_1_OWAgent1_Commission',
       headerName: "split1 OWAgent1 Commission",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split_1_OWAgent2_ContractLevel',
       headerName: "split1 OWAgent2 Contract Level",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split_1_OWAgent2_Commission',
       headerName: "split1 OWAgent2 Commission",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split2_ContractLevel',
       headerName: " Split2 ContractLevel",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split2_splitRatio',
       headerName: " Split2 Split Ratio",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split2_agentCommission',
       headerName: " Split2 Agent Commission",
-      isLink:true,
+      isLink: true,
     },
 
     {
       field: 'split_2_OWAgent1_ContractLevel',
       headerName: "Split2 OWAgent1 Contract Level",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split_2_OWAgent1_Commission',
       headerName: "Split2 OWAgent1 Commission",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split_2_OWAgent2_ContractLevel',
       headerName: "Split2 OWAgent2 Contract Level",
-      isLink:true,
+      isLink: true,
     },
     {
       field: 'split_2_OWAgent2_Commission',
       headerName: "Split2 OWAgent2 Commission",
-      isLink:true,
+      isLink: true,
     },
-    
+
   ]
 
 
@@ -373,7 +373,7 @@ const Statements = () => {
     if (dates) {
       LoadGridData()
     }
-  }, [searchString,dates])
+  }, [searchString, dates])
   return (
     <div>
       <Header />
@@ -400,47 +400,52 @@ const Statements = () => {
               />
 
             </Box>
-            <Stack sx={{ width: '99.9%', height:isAdmin ? '57vh' : '38vh', marginLeft: '10px',marginTop: isAdmin ? '0' : '-27px', marginBottom: '-74px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
-              {/* <h3 style={{ color: '#003478', marginLeft: '40px' }}>September 2023</h3> */}
-              <Stack alignItems={'center'} sx={{ width: '100%', height: '64px', marginTop: '20px' }}>
-                <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '50%', }}>
-                  <h2 style={{ color: 'black' }}>Statement</h2>
 
-                </Stack>
-              </Stack>
-              <Stack flexDirection={'row'} justifyContent={'space-around'} sx={{ width: '100%' }}>
-                <Stack>
-                  <h3 style={{ color: '#003478', lineHeight: '1px' }}>{currentMonth}</h3>
-                  <p style={{ lineHeight: '0px' }}><b>Date:{currentDate}</b></p>
-                </Stack>
+            <Stack sx={{ height: '81vh'}}>
+              <Stack sx={{ width: '99.9%', height: isAdmin ? '30vh' : '38vh', marginLeft: '10px', marginTop: isAdmin ? '0' : '-27px', marginBottom: '-74px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
+                {/* <h3 style={{ color: '#003478', marginLeft: '40px' }}>September 2023</h3> */}
+                <Stack alignItems={'center'} sx={{ width: '100%', height: '64px', marginTop: '20px' }}>
+                  <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '10%', }}>
+                    <h2 style={{ color: 'black' }}>Statement</h2>
 
-                <Stack flexDirection={'row'}>
-                  <Typography sx={{ marginTop: '20px' }}>Period:</Typography>
-                  <Stack flexDirection={'row'}>
-                    <Stack>
-                      <Typography>Start Date:</Typography>
-                      <div className='DateField'>
-                        <Calendar value={dates.startDate} onDateChange={(date) => handleDateChange(date, 'startDate')} />
-
-                      </div>
-
-                    </Stack>
-                    <Stack>
-                      <Typography>End Date:</Typography>
-                      <Calendar value={dates.endDate} onDateChange={(date) => handleDateChange(date, 'endDate')} />
-                    </Stack>
                   </Stack>
                 </Stack>
+                <Stack flexDirection={'row'} justifyContent={'space-around'} sx={{ width: '100%' }}>
+                  <Stack>
+                    <h3 style={{ color: '#003478', lineHeight: '1px' }}>{currentMonth}</h3>
+                    <p style={{ lineHeight: '0px' }}><b>Date:{currentDate}</b></p>
+                  </Stack>
 
+                  <Stack flexDirection={'row'}>
+                    <Typography sx={{ marginTop: '20px' }}>Period:</Typography>
+                    <Stack flexDirection={'row'}>
+                      <Stack>
+                        <Typography>Start Date:</Typography>
+                        <div className='DateField'>
+                          <Calendar value={dates.startDate} onDateChange={(date) => handleDateChange(date, 'startDate')} />
+
+                        </div>
+
+                      </Stack>
+                      <Stack>
+                        <Typography>End Date:</Typography>
+                        <Calendar value={dates.endDate} onDateChange={(date) => handleDateChange(date, 'endDate')} />
+                      </Stack>
+                    </Stack>
+                  </Stack>
+
+                </Stack>
+              </Stack>
+              <Stack sx={{height:'57vh'}}>
+                <CRMGrid
+                  sx={{ borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
+                  gridName='comissionGrid'
+                  gridHeader={isAdmin === true ? adminGridHeader : gridHeader}
+                  gridData={gridData}
+                  baseURL={'/statementDetail/'}
+                />
               </Stack>
             </Stack>
-            <CRMGrid
-              sx={{ borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
-              gridName='comissionGrid'
-              gridHeader={isAdmin === true ? adminGridHeader : gridHeader}
-              gridData={gridData}
-              baseURL={'/statementDetail/'}
-            />
           </Stack>
         </div>
       </div>

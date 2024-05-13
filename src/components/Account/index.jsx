@@ -37,7 +37,7 @@ const AccountDetail = () => {
         commissionEarned: 0,
         password: "",
         phoneNumber: 0,
-        img: ""
+        profilePic: ""
     })
 
     const myAccountHandler = async () => {
@@ -77,7 +77,6 @@ const AccountDetail = () => {
             snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
         }
     }
-
     const handleInputChange = (data, field, fieldType) => {
         const updatedValue = fieldType === 'number' ? parseFloat(data) : data;
         setuserData((prevFormData) => ({ ...prevFormData, [field]: updatedValue }));
@@ -141,11 +140,11 @@ const AccountDetail = () => {
                                 <Stack flexDirection={'row'} justifyContent={'center'} sx={{ width: "97%", height: '56%' }}>
                                     <Stack alignItems={'center'} sx={{ width: '58%', height: '42vh', backgroundColor: 'white', borderRadius: '20px' }}>
                                         <Box sx={{ width: '22%', height: '12vh',display:'flex' }}>
-                                            {/* <img src={profilePhoto} style={{ width: '100%', height: '100%' }} /> */}
+                                          
                                             {
-                                                userData.img
+                                                userData.profilePic
                                                     ? (
-                                                        <img src={userData.img} style={{ height: '100%', width: '94%',borderRadius:'58px' }} />
+                                                        <img src={userData.profilePic} style={{ height: '100%', width: '94%',borderRadius:'58px' }} />
                                                     )
                                                     : (
                                                         <>
@@ -170,7 +169,7 @@ const AccountDetail = () => {
                                                     ref={uploadPhotoRef}
                                                     type="file"
                                                     accept="image/*"
-                                                    onChange={(e) => handleFileChange(e, "img")}
+                                                    onChange={(e) => handleFileChange(e, "profilePic")}
                                                     style={{ display: 'none' }}
                                                     className="upload-photo-input"
                                                 />
