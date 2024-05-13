@@ -35,7 +35,7 @@ export default httpClient;
 //     root /root/Al-Kauser-Frontend/build; 
 
 //     location / {
-//         try_files $uri $uri/ =404;
+//         try_files $uri $uri/ /index.html;
 //     }
 
 //     location ~ \.css$ {
@@ -52,7 +52,7 @@ export default httpClient;
 //     root /root/CRM_Frontend/build; 
 
 //     location / {
-//         try_files $uri $uri/ =404;
+//         try_files $uri $uri/ /index.html;
 //     }
 
 //     location ~ \.css$ {
