@@ -102,11 +102,12 @@ const Notifications = (props) => {
               <MenuItem
                 className='menu-item'
                 sx={{
-                  // display:'flex',
-                  // flexWrap:'wrap',
+                  display:'flex',
+                  flexWrap:'wrap',
                   margin: '2px',
-                  paddingTop: '12px',
-                  paddingBottom: '12px',
+                  height:'auto',
+                  // paddingTop: '12px',
+                  // paddingBottom: '12px',
                   backgroundColor: item.status === 0 ? "#F08613" : "#DADADA",
                   borderRadius: '13px',
                   '&:hover': {
