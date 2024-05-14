@@ -38,7 +38,7 @@ const Administration = () => {
       options: [
         {
           name: "Our System Flow Chart",
-          url: ""
+          url: "https://drive.google.com/file/d/1jloXU97IUywnT5kkkaK5lYalIFVmfi1m/view?usp=drive_link"
         },
         {
           name: "SureLC Joptiman",
@@ -99,7 +99,8 @@ const Administration = () => {
           url: "https://www.athene.com/producer/connect/tools/forms-materials"
         },
         {
-          name: "JOptiman Status Change Form"
+          name: "JOptiman Status Change Form",
+          url: "https://drive.google.com/file/d/1EeEThs13V3lJxlaoX2jIx3O7akUX0dKM/view?usp=drive_link"
         }
 
       ]
@@ -135,7 +136,8 @@ const Administration = () => {
     },
     {
       title: "Direct Deposit",
-      isLink: true,
+      isLink:true,
+      url: "https://drive.google.com/file/d/1RuKLWYO_qK9ew38bGYS7_B7JVJnR9cf5/view?usp=drive_link",
     },
   ]
 
@@ -182,7 +184,7 @@ const Administration = () => {
                               aria-controls="dropdown-menu"
                               aria-haspopup="true"
                               onClick={(e) => {
-                                openPDFInNewTab("https://portal.asurehcm.com ");
+                                openPDFInNewTab("https://drive.google.com/file/d/1RuKLWYO_qK9ew38bGYS7_B7JVJnR9cf5/view?usp=drive_link");
                                 e.stopPropagation();
                               }}
                               sx={{

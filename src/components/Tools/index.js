@@ -38,11 +38,11 @@ const Tools = () => {
         },
         {
           name: "ExamFX Candidate Registration Guide",
-          url: ""
+          url: "https://drive.google.com/file/d/1kluJMyrw98qbmhkwaR6IPBfSWngHkVy6/view?usp=drive_link"
         },
         {
-          name: "ExamFX",
-          url: ""
+          name: "ExamFX Study Steps and Tips",
+          url: "https://drive.google.com/file/d/1X36s7quPvpz5yhNJF-uZF-4ka3-uYWxs/view?usp=drive_link"
         },
       ],
       isDropdown: true
@@ -56,7 +56,7 @@ const Tools = () => {
         },
         {
           name: "Kaplan Financial Continuing Education Registration Guid",
-          url: ""
+          url: "https://drive.google.com/file/d/12ORGueMN6wwK5qQctWy2HIvL4UjUliZA/view?usp=drive_link"
         },
         {
           name: "State Requirement for CE",

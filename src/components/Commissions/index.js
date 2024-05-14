@@ -907,60 +907,58 @@ const Commissions = () => {
           <SideBar />
           <CustomizedSnackbars ref={snackbar_Ref} />
           <Stack sx={{ width: '80.8%', marginLeft: '18%' }}>
-            <Box sx={{ width: '100%', height: '30vh', marginTop: '20px', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <MagnifyingGlass size={16} weight="light" />
-
-                    </InputAdornment>
-                  ),
-                }}
-                onChange={(e) => { handleInputChange(e.target.value) }}
-              />
-              <Button
-                variant="contained"
-                disabled={selectedCommissionId.length < 1 ? true : false}
-                sx={{
-                  display: isAdmin ? 'flex' : 'none',
-                  backgroundColor: "#003478",
-                  color: 'white',
-                  width: '245px',
-                  height: "5vh",
-                  fontSize: '12px',
-                  "&:hover": {
-                    backgroundColor: '#003478',
-                  },
-                }}
-                onClick={removeCommissionHandler}
-              >
-                <Grid container
-                  alignItems={'center'}
-                  sx={{ width: '100%' }}
-                >
-                  <Grid item md="9">Remove Commission</Grid>
-                  <Grid item md="3"><Minus size={20} weight="light" /></Grid>
-                </Grid>
-              </Button>
-
-
-            </Box>
-            <Stack 
-            sx={{ height: '203vh',
-            
-            overflow:"hidden" ,
-            
-          }}
-            >
-              <Stack sx={{ width: '99.9%', height: '19vh', marginLeft: '10px', marginTop: '17px', marginBottom: '-71px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px'}}>
+            <Stack alignItems={'flex-end'}  >
+              <Stack flexDirection={'row'}  justifyContent={'space-between'} sx={{ width: '58%'}}>
                 <h2 style={{ color: 'black', textAlign: 'center' }}>Commission</h2>
-                {/* <h3 style={{ color: '#003478', marginLeft: '40px' }}> March 2024</h3> */}
-                <Stack alignItems={'center'} sx={{ width: '100%' }}>
-                </Stack>
+
+                <Box sx={{ height: '12vh', marginTop: '20px', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
+                  <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <MagnifyingGlass size={16} weight="light" />
+
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => { handleInputChange(e.target.value) }}
+                  />
+                  <Button
+                    variant="contained"
+                    disabled={selectedCommissionId.length < 1 ? true : false}
+                    sx={{
+                      display: isAdmin ? 'flex' : 'none',
+                      backgroundColor: "#003478",
+                      color: 'white',
+                      width: '245px',
+                      height: "5vh",
+                      fontSize: '12px',
+                      "&:hover": {
+                        backgroundColor: '#003478',
+                      },
+                    }}
+                    onClick={removeCommissionHandler}
+                  >
+                    <Grid container
+                      alignItems={'center'}
+                      sx={{ width: '100%' }}
+                    >
+                      <Grid item md="9">Remove Commission</Grid>
+                      <Grid item md="3"><Minus size={20} weight="light" /></Grid>
+                    </Grid>
+                  </Button>
+
+
+                </Box>
               </Stack>
 
-              {/* <Stack sx={{ height: '70vh' }}> */}
+            </Stack>
+            <Stack
+              sx={{
+                height: '203vh',
+                overflow: "hidden",
+              }}
+            >
               <CRMGrid
                 gridName='comissionGrid'
                 gridHeader={isAdmin ? gridHeader : gridHeaderAgent}

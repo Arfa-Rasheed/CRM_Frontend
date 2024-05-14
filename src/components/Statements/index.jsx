@@ -386,30 +386,35 @@ const Statements = () => {
           <SideBar />
           <CustomizedSnackbars ref={snackbar_Ref} />
           <Stack sx={{ width: '80.8%', marginLeft: '18%' }}>
-            <Box sx={{ width: '100%', height: '12vh', marginTop: '20px', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <MagnifyingGlass size={16} weight="light" />
+            <Stack alignItems={'flex-end'}  >
+              <Stack flexDirection={'row'}  justifyContent={'space-between'} sx={{ width: '58%' }}>
+                <h2 style={{ color: 'black', textAlign: 'center' }}>Statement</h2>
 
-                    </InputAdornment>
-                  ),
-                }}
-                onChange={(e) => { handleInputChange(e.target.value) }}
-              />
+                <Box sx={{width:'34%', height: '12vh', marginTop: '20px', display: 'flex',  flexDirection: 'column', justifyContent: 'space-between' }}>
+                  <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <MagnifyingGlass size={16} weight="light" />
 
-            </Box>
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => { handleInputChange(e.target.value) }}
+                  />
+                </Box>
+              </Stack>
 
-            <Stack sx={{ height: '81vh'}}>
-              <Stack sx={{ width: '99.9%', height: isAdmin ? '30vh' : '38vh', marginLeft: '10px', marginTop: isAdmin ? '0' : '-27px', marginBottom: '-74px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
+            </Stack>
+            <Stack sx={{ height: '81vh' }}>
+              <Stack sx={{ width: '99.9%', height: isAdmin ? '30vh' : '38vh', marginLeft: '10px', marginTop: isAdmin ? '0' : '-27px', marginBottom: '-118px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
                 {/* <h3 style={{ color: '#003478', marginLeft: '40px' }}>September 2023</h3> */}
-                <Stack alignItems={'center'} sx={{ width: '100%', height: '64px', marginTop: '20px' }}>
+                {/* <Stack alignItems={'center'} sx={{ width: '100%', height: '64px', marginTop: '20px' }}>
                   <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '10%', }}>
                     <h2 style={{ color: 'black' }}>Statement</h2>
 
                   </Stack>
-                </Stack>
+                </Stack> */}
                 <Stack flexDirection={'row'} justifyContent={'space-around'} sx={{ width: '100%' }}>
                   <Stack>
                     <h3 style={{ color: '#003478', lineHeight: '1px' }}>{currentMonth}</h3>
@@ -417,8 +422,8 @@ const Statements = () => {
                   </Stack>
 
                   <Stack flexDirection={'row'}>
-                    <Typography sx={{ marginTop: '20px' }}>Period:</Typography>
-                    <Stack flexDirection={'row'}>
+                    {/* <Typography sx={{ marginTop: '20px' }}>Period:</Typography> */}
+                    <Stack >
                       <Stack>
                         <Typography>Start Date:</Typography>
                         <div className='DateField'>
@@ -436,7 +441,7 @@ const Statements = () => {
 
                 </Stack>
               </Stack>
-              <Stack sx={{height:'57vh'}}>
+              <Stack sx={{ height: '64vh' }}>
                 <CRMGrid
                   sx={{ borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
                   gridName='comissionGrid'

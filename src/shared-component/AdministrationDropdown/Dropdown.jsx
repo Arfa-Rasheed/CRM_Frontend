@@ -64,7 +64,7 @@ const Dropdown = (props) => {
                         {
                             options?.map((option) => {
                                 return (
-                                    <Stack  sx={{width:'100%',borderRadius:"4px",border:'2px solid black'}}>
+                                    <Stack  sx={{width:'81%',borderRadius:"4px",border:'2px solid black'}}>
                                         <Typography sx={{textAlign:'center',fontSize:'14px',cursor:"pointer"}} 
                                          onClick={(e) => {
                                             if (option.url) { // Check if URL is not empty

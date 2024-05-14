@@ -244,7 +244,51 @@ const Policies = () => {
           <SideBar />
           <CustomizedSnackbars ref={snackbar_Ref} />
           <Stack sx={{ width: '81.8%', marginLeft: '17.5%' }}>
-            <Box sx={{ width: '100%', height: '20vh', marginTop: '20px', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <Stack alignItems={'flex-end'}  >
+              <Stack flexDirection={'row'}  justifyContent={'space-between'} sx={{ width: '58%' }}>
+                <h2 style={{ color: 'black', textAlign: 'center' }}>Policies</h2>
+
+                <Box sx={{ height: '12vh', marginTop: '20px', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
+                  <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <MagnifyingGlass size={16} weight="light" />
+
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => { handleInputChange(e.target.value) }}
+
+                  />
+                  <Button
+                    variant="contained"
+                    sx={{
+                      display: isAdmin ? "none" : "flex",
+                      backgroundColor: newPolicyClicked ? '#F08613' : "#003478",
+                      color: 'white',
+                      width: '245px',
+                      height: "5vh",
+                      fontSize: '12px',
+                      "&:hover": {
+                        backgroundColor: '#F08613',
+                      },
+                    }}
+                    onClick={addNewPolicyHandler}
+                  >
+                    <Grid container
+                      alignItems={'center'}
+                      sx={{ width: '100%' }}
+                    >
+                      <Grid item md="9"> New Policy</Grid>
+                      <Grid item md="3"><Plus size={20} weight="light" /></Grid>
+                    </Grid>
+                  </Button>
+                </Box>
+              </Stack>
+
+            </Stack>
+            {/* <Box sx={{ width: '100%', height: '20vh', marginTop: '20px', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
               <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
                 InputProps={{
                   startAdornment: (
@@ -280,21 +324,16 @@ const Policies = () => {
                   <Grid item md="3"><Plus size={20} weight="light" /></Grid>
                 </Grid>
               </Button>
-            </Box>
+            </Box> */}
 
-            <Stack sx={{ width: '99.9%', height: '19vh', marginLeft: '10px', marginTop: '17px', marginBottom: '-71px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px'}}>
-                <h2 style={{ color: 'black', textAlign: 'center' }}>Policies</h2>
-                <h3 style={{ color: '#003478', marginLeft: '40px' }}> March 2024</h3>
-                <Stack alignItems={'center'} sx={{ width: '100%' }}>
-                </Stack>
-              </Stack>
-            <Box sx={{height:isAdmin ? "275vh" :'130vh'}}>
-            <CRMGrid
-              sx={{ marginTop: '10px', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
-              gridHeader={isAdmin ? adminGridHeader : gridHeader}
-              gridData={gridData}
-              baseURL={isAdmin ? "/approvePolicy/" : "/addNewPolicy_agent/"}
-            />
+           
+            <Box sx={{ height: isAdmin ? "275vh" : '130vh' }}>
+              <CRMGrid
+                sx={{ marginTop: '10px', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
+                gridHeader={isAdmin ? adminGridHeader : gridHeader}
+                gridData={gridData}
+                baseURL={isAdmin ? "/approvePolicy/" : "/addNewPolicy_agent/"}
+              />
             </Box>
 
           </Stack>

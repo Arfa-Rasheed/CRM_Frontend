@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const httpClient = axios.create({
-    // baseURL: "http://localhost:5000/api/",
-    baseURL: "http://api.projecttesting.pro/api/"
+    baseURL: "http://localhost:5000/api/",
+    // baseURL: "http://api.projecttesting.pro/api/"
 });
 
 httpClient.interceptors.request.use(function (config) {
