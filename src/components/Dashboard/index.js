@@ -483,7 +483,7 @@ const Dashboard = () => {
                                             {
                                                 highestCommissionedAgentData.profilePic ?
                                                 (
-                                                    <img src={highestCommissionedAgentData.profilePic} style={{ width: '103px', height: '103px',borderRadius:'40px' }}/>
+                                                    <img src={highestCommissionedAgentData.profilePic} style={{ width: '103px', height: '103px',borderRadius:'17px' }}/>
                                                 )
                                                 :
                                                 (
@@ -493,7 +493,7 @@ const Dashboard = () => {
                                         </Grid>
                                         <Grid items md='7'>
                                             <Stack flexDirection='row'>
-                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold' }}>Agent Name:</Typography><Typography sx={{ fontSize: '12px' }}>{highestCommissionedAgentData.agentFirstName} {highestCommissionedAgentData.agentLastName}</Typography>
+                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold' }}>Agent Name:</Typography><Typography sx={{ fontSize: '12px' }}>{highestCommissionedAgentData.firstName} {highestCommissionedAgentData.lastName}</Typography>
                                             </Stack>
                                             <Stack flexDirection='row'>
                                                 <Typography sx={{ fontSize: '13px', fontWeight: 'bold' }}>Agent Title:</Typography><Typography sx={{ fontSize: '12px' }}>{highestCommissionedAgentData.agentTitle} </Typography>
@@ -516,7 +516,7 @@ const Dashboard = () => {
                                                 highestRecruitsAgentData.profilePic ?
                                                 (
                                                     // <img src={highestRecruitsAgentData.profilePic} style={{ width: '56px', height: '56px',borderRadius:'40px' }}/>
-                                                    <img src={highestCommissionedAgentData.profilePic} style={{ width: '103px', height: '103px',borderRadius:'40px' }}/>
+                                                    <img src={highestCommissionedAgentData.profilePic} style={{ width: '103px', height: '103px',borderRadius:'17px' }}/>
 
                                                 )
                                                 :

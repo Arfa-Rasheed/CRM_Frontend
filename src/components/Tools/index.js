@@ -68,10 +68,9 @@ const Tools = () => {
     },
     {
       title: "Heirarchy Chart",
-      options: [
-        ""
-      ],
-      isDropdown: false
+      isDropdown: false,
+      isLink:true,
+      url:"https://drive.google.com/file/d/19A9t8R90d9Otud4Xwd6k1kHK7pEydjON/view?usp=drive_link"
     },
     {
       title: "Sales Illustration",
@@ -119,6 +118,17 @@ const Tools = () => {
 
   ]
 
+  function openPDFInNewTab(pdfUrl) {
+    // Create a new <a> element
+    const link = document.createElement('a');
+    // Set the href attribute to the PDF file URL
+    link.href = pdfUrl;
+    // Set the target attribute to '_blank' to open in a new tab
+    link.target = '_blank';
+    // Trigger a click event on the link
+    link.click();
+  }
+
 
   return (
     <>
@@ -149,6 +159,34 @@ const Tools = () => {
                             menu.isDropdown
                               ? (
                                 <Dropdown title={menu.title} options={menu.options} />
+                              )
+                              : menu.isLink ?
+                              (
+                                <Button
+                                aria-controls="dropdown-menu"
+                                aria-haspopup="true"
+                                onClick={(e) => {
+                                  openPDFInNewTab(menu.url);
+                                  e.stopPropagation();
+                                }}
+                                sx={{
+                                  backgroundColor: "#003478",
+                                  color: "white",
+                                  height: "36px",
+                                  width: "267px",
+                                  fontSize: "12px",
+                                  padding: "3px",
+                                  marginTop: '4px',
+                                  borderTopLeftRadius: "0",
+                                  borderBottomLeftRadius: "0",
+                                  "&:hover": {
+                                    backgroundColor: '#003478',
+                                  },
+                                }}
+                              >
+                                {menu.title}
+  
+                              </Button>
                               )
                               : (
                                 <AdministrationButton title={menu.title} />

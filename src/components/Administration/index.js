@@ -20,6 +20,7 @@ import Dropdown from '../../shared-component/AdministrationDropdown/Dropdown.jsx
 import JOptimanLogo from '../../assets/JOptimanLogo-Large.png'
 
 const Administration = () => {
+  const isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const AdministrationMenu = [
@@ -32,6 +33,10 @@ const Administration = () => {
       //   // },
       //   "dewr"
       // ]
+      // ...(isAdmin ? {
+      //    isLink:true,
+      //    url:"https://drive.google.com/file/d/11bFvkJWG6mzC_hUIRuDXIEGdT3-9P96K/view?usp=drive_link"
+      // })
     },
     {
       title: "Onboarding & Contracting",
@@ -53,8 +58,10 @@ const Administration = () => {
     },
     {
       title: "Communication",
-      option: [
-        "Emails"
+      options: [
+       { name: "Emails",
+         url:""
+       }
       ]
     },
     {
@@ -73,6 +80,8 @@ const Administration = () => {
     },
     {
       title: "Producing Agent Standards Operating",
+      isLink:true,
+      url:"https://docs.google.com/presentation/d/1J1pIHWkPCmyn-5PVXxACHsz5Zvgh3Na4/edit?usp=drive_link&ouid=109044533597939584194&rtpof=true&sd=true"
     },
     {
       title: "Compliance",
@@ -184,7 +193,7 @@ const Administration = () => {
                               aria-controls="dropdown-menu"
                               aria-haspopup="true"
                               onClick={(e) => {
-                                openPDFInNewTab("https://drive.google.com/file/d/1RuKLWYO_qK9ew38bGYS7_B7JVJnR9cf5/view?usp=drive_link");
+                                openPDFInNewTab(menu.url);
                                 e.stopPropagation();
                               }}
                               sx={{
@@ -202,7 +211,7 @@ const Administration = () => {
                                 },
                               }}
                             >
-                              Direct Deposit
+                              {menu.title}
 
                             </Button>
 
