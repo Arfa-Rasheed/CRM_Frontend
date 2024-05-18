@@ -387,10 +387,14 @@ const Statements = () => {
           <CustomizedSnackbars ref={snackbar_Ref} />
           <Stack sx={{ width: '80.8%', marginLeft: '18%' }}>
             <Stack alignItems={'flex-end'}  >
-              <Stack flexDirection={'row'}  justifyContent={'space-between'} sx={{ width: '58%' }}>
+              <Stack flexDirection={'row'}  justifyContent={'space-between'} sx={{ width: '95%' }}>
+              <Stack>
+                    <h3 style={{ color: '#003478', lineHeight: '1px' }}>{currentMonth}</h3>
+                    <p style={{ lineHeight: '0px' }}><b>Date:{currentDate}</b></p>
+                  </Stack>
                 <h2 style={{ color: 'black', textAlign: 'center' }}>Statement</h2>
 
-                <Box sx={{width:'34%', height: '12vh', marginTop: '20px', display: 'flex',  flexDirection: 'column', justifyContent: 'space-between' }}>
+                <Box sx={{width:'21%', height: '12vh', marginTop: '20px', display: 'flex',  flexDirection: 'column', justifyContent: 'space-between' }}>
                   <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
                     InputProps={{
                       startAdornment: (
@@ -407,7 +411,7 @@ const Statements = () => {
 
             </Stack>
             <Stack sx={{ height: '81vh' }}>
-              <Stack sx={{ width: '99.9%', height: isAdmin ? '30vh' : '38vh', marginLeft: '10px', marginTop: isAdmin ? '0' : '-27px', marginBottom: '-118px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
+              <Stack sx={{ width: '99.9%', height: isAdmin ? '23vh' : '31vh', marginLeft: '10px', marginTop: isAdmin ? '0' : '-27px', marginBottom: '-118px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
                 {/* <h3 style={{ color: '#003478', marginLeft: '40px' }}>September 2023</h3> */}
                 {/* <Stack alignItems={'center'} sx={{ width: '100%', height: '64px', marginTop: '20px' }}>
                   <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '10%', }}>
@@ -415,15 +419,15 @@ const Statements = () => {
 
                   </Stack>
                 </Stack> */}
-                <Stack flexDirection={'row'} justifyContent={'space-around'} sx={{ width: '100%' }}>
-                  <Stack>
+                <Stack flexDirection={'row'} justifyContent={'center'} sx={{ width: '100%' }}>
+                  {/* <Stack>
                     <h3 style={{ color: '#003478', lineHeight: '1px' }}>{currentMonth}</h3>
                     <p style={{ lineHeight: '0px' }}><b>Date:{currentDate}</b></p>
-                  </Stack>
+                  </Stack> */}
 
-                  <Stack flexDirection={'row'}>
+                  {/* <Stack flexDirection={'row'}> */}
                     {/* <Typography sx={{ marginTop: '20px' }}>Period:</Typography> */}
-                    <Stack >
+                    <Stack flexDirection={'row'}>
                       <Stack>
                         <Typography>Start Date:</Typography>
                         <div className='DateField'>
@@ -437,11 +441,11 @@ const Statements = () => {
                         <Calendar value={dates.endDate} onDateChange={(date) => handleDateChange(date, 'endDate')} />
                       </Stack>
                     </Stack>
-                  </Stack>
+                  {/* </Stack> */}
 
                 </Stack>
               </Stack>
-              <Stack sx={{ height: '64vh' }}>
+              <Stack sx={{ height: '70vh' }}>
                 <CRMGrid
                   sx={{ borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
                   gridName='comissionGrid'

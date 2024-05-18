@@ -16,6 +16,7 @@ import { useDispatch } from 'react-redux'
 import { hideLoader, showLoader } from '../../Store/mainSlice.js'
 import PageLoader from '../../Layout/FullPageLoader/FullPageLoader.jsx'
 import CustomSnackbar from '../../shared-component/Snackbar/SnackBar.jsx'
+import DeletePopup from '../../shared-component/DeletePopup/index.js'
 
 
 const Agents = () => {
@@ -25,6 +26,7 @@ const Agents = () => {
   const snackbar_Ref = useRef(null);
   const [gridData, setGridData] = useState([])
   const [searchString, setSearchString] = useState("")
+  const [openDeletePopup, setOpenDeletePopup] = useState("")
   const [selectedAgentIds, setSelectedAgentIds] = useState([]);
   const gridHeader = [
     {
@@ -42,7 +44,7 @@ const Agents = () => {
               setSelectedAgentIds([]);
             }
 
-           
+
           }}
         />
       ),
@@ -100,28 +102,28 @@ const Agents = () => {
   }
 
   const removeAgentHandler = async () => {
-    dispatch(showLoader())
+    // dispatch(showLoader())
     if (selectedAgentIds.length > 0) {
       const agentIdsString = selectedAgentIds.join(',');
-      const res = await httpClient.delete(`/agents/deleteAgent/${agentIdsString}`).catch((error) => {
-        dispatch(hideLoader())
-        console.log("error: ", error)
-        snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle")
-      })
-
-      if (res?.status === 200) {
-        dispatch(hideLoader())
-        LoadgridData()
-        snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle")
-        setSelectedAgentIds([])
-      }
-
+      setOpenDeletePopup(true)
     }
   }
 
-    const handleInputChange = (data)=>{
-      setSearchString(data)
-    }
+  const handleDeleteAgent = async (id) => {
+    alert('')
+    console.log("SelectedAgentIds",id);
+    console.log("uygiu");
+    setSelectedAgentIds(id)
+  }
+
+  const closeDeletePopup = async (data) => {
+    setOpenDeletePopup(false)
+  }
+
+  const handleInputChange = (data) => {
+    setSearchString(data)
+  }
+
 
   const LoadgridData = async () => {
     dispatch(showLoader())
@@ -145,6 +147,7 @@ const Agents = () => {
     <>
       <PageLoader />
       <Header />
+      {openDeletePopup && <DeletePopup open={true} onClose={closeDeletePopup} selectedAgentIds={selectedAgentIds} message={"Do You Want To permanently delete the agent or temporarily deactivate the agent"} buttons={[{ title: 'Deactivate', color: "#F08613" }, { title: 'Delete', color: "#003478" }]} onDelete={(value)=>handleDeleteAgent(value)} />}
       <div style={{ marginTop: '56px' }}>
         <div style={{
           display: 'flex',
@@ -161,18 +164,18 @@ const Agents = () => {
                 </Box>
 
                 <Box sx={{ width: '56%', height: '12vh', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
-                    <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MagnifyingGlass size={16} weight="light" />
+                  <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <MagnifyingGlass size={16} weight="light" />
 
-                          </InputAdornment>
-                        ),
-                      }} 
-                      onChange ={(event)=>handleInputChange(event.target.value)}
-                      />
-               
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(event) => handleInputChange(event.target.value)}
+                  />
+
                   <Button
                     variant="contained"
                     disabled={selectedAgentIds.length < 1 ? true : false}

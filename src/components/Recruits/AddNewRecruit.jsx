@@ -83,6 +83,7 @@ const AddNewRecruit = () => {
         agentCarrierNumber: "",
         agentTitle: "",
         agentRole: "",
+        agentCode:"",
         recruitmentDate: "",
         email: "",
         confirmEmail: "",
@@ -420,6 +421,7 @@ const AddNewRecruit = () => {
                                                 />
                                             </Stack>
                                         </Stack>
+
 
                                     </>
                                 )

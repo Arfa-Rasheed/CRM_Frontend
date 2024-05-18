@@ -149,7 +149,7 @@ const AdminAccount = () => {
                                     <Stack alignItems={'center'} justifyContent={'center'} sx={{ width:isUpdateAccountClicked ? '71%' : '52%', height: '100%', backgroundColor: '#D9D9D9', borderRadius: '12px' }}>
                                         <Stack sx={{ width: '90%', height: '67%' }}>
                                             <Stack flexDirection={'row'} >
-                                                <Typography sx={{ fontWeight: 'bold',fontSize: isUpdateAccountClicked ?'18px' : '23px' }}>FISRT NAME: </Typography><Typography sx={{fontSize:isUpdateAccountClicked ?'18px' : '23px' }}> {adminData.firstName}</Typography>
+                                                <Typography sx={{ fontWeight: 'bold',fontSize: isUpdateAccountClicked ?'18px' : '23px' }}>FIRST NAME: </Typography><Typography sx={{fontSize:isUpdateAccountClicked ?'18px' : '23px' }}> {adminData.firstName}</Typography>
                                             </Stack>
                                             <Stack flexDirection={'row'} >
                                                 <Typography sx={{ fontWeight: 'bold',fontSize:isUpdateAccountClicked ?'18px' : '23px'  }}>LAST NAME: </Typography><Typography sx={{fontSize:isUpdateAccountClicked ?'18px' : '23px' }}> {adminData.lastName}</Typography>

@@ -327,14 +327,21 @@ const Policies = () => {
             </Box> */}
 
            
-            <Box sx={{ height: isAdmin ? "275vh" : '130vh' }}>
+         
+            <Stack
+              sx={{
+                height: '203vh',
+                overflow: "hidden",
+              }}
+            >
               <CRMGrid
                 sx={{ marginTop: '10px', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
                 gridHeader={isAdmin ? adminGridHeader : gridHeader}
                 gridData={gridData}
                 baseURL={isAdmin ? "/approvePolicy/" : "/addNewPolicy_agent/"}
               />
-            </Box>
+              </Stack>
+      
 
           </Stack>
         </div>

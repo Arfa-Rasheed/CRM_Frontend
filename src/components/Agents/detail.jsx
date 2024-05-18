@@ -2,7 +2,7 @@ import { MagnifyingGlass, Notepad } from 'phosphor-react'
 import React, { useEffect, useRef, useState } from 'react'
 import SideBar from '../../Layout/Sidebar'
 import Header from '../../Layout/Header'
-import { Box, Button, Grid, InputAdornment, Stack, TextField, Typography } from '@mui/material'
+import { Avatar, Box, Button, Grid, InputAdornment, Stack, TextField, Typography } from '@mui/material'
 import { useNavigate, useParams } from 'react-router-dom'
 import PersonIcon from '../../assets/PersonIcon.png'
 import profilePhoto from '../../assets/profilePhotoCRM.png'
@@ -126,28 +126,7 @@ const AgentDetail = () => {
                         <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
                             <Box sx={{ width: '60%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                                 <Box sx={{ height: '12vh' }}>
-                                    <Button
-                                        variant="contained"
-                                        sx={{
-                                            backgroundColor: '#F08613',
-                                            color: 'white',
-                                            width: '245px',
-                                            height: "5vh",
-                                            fontSize: '12px',
-                                            "&:hover": {
-                                                backgroundColor: '#F08613',
-                                            },
-                                        }}
-                                    >
-                                        <Grid container
-                                            alignItems={'center'}
-                                            sx={{ width: '100%' }}
-                                        >
-                                            <Grid item md="3"><img src={PersonIcon} /></Grid>
-                                            <Grid item md="9"> All Agents</Grid>
-
-                                        </Grid>
-                                    </Button>
+                                     <h2 style={{ color: 'black', textAlign: 'center' }}>Agent Detail</h2>
                                 </Box>
 
                                 <Box sx={{ width: '56%', height: '12vh', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -177,7 +156,9 @@ const AgentDetail = () => {
                                             alignItems={'center'}
                                             sx={{ width: '100%' }}
                                         >
-                                            <Grid item md="3"><img src={PersonIcon} /></Grid>
+                                            <Grid item md="3">
+                                                <img src={PersonIcon} />
+                                            </Grid>
                                             <Grid item md="9">Edit Agent Details</Grid>
 
                                         </Grid>
@@ -190,7 +171,14 @@ const AgentDetail = () => {
                         <Stack flexDirection={'row'} justifyContent={'center'} sx={{ width: "97%", height: '56%' }}>
                             <Stack alignItems={'center'} sx={{ width: '58%', height: '42vh', backgroundColor: 'white', borderRadius: '20px' }}>
                                 <Box sx={{ width: '22%', height: '12vh' }}>
-                                    <img src={profilePhoto} style={{ width: '100%', height: '100%' }} />
+                                    {/* <img src={profilePhoto} style={{ width: '100%', height: '100%' }} /> */}
+                                    {
+                                        agentData.profilePic ? (
+                                            <img src={agentData.profilePic} style={{ width: '100%', height: '100%' }} /> 
+                                        )
+                                        :
+                                        <Avatar sx={{ width: '100%', height: '100%' }} />
+                                    }
                                 </Box>
                                 <Stack>
                                     <Typography>First Name: {agentData.firstName}</Typography>

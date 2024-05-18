@@ -35,7 +35,7 @@ const AddNewAgent = () => {
         "Associate in Training",
         "Associate",
         "Director",
-        "Executive",
+        "Executive President",
     ]
 
 
@@ -192,12 +192,7 @@ const AddNewAgent = () => {
                                             /> */}
                                             <PoliciesDropdown value={agentData.agentTitle} options={agentTitle} label='Agent Title:' origin="addAgent" onSelectValue={(data) => handleAutocompleteValue(data, 'agentTitle')} />
 
-                                            <TextField label="Agent Role:" variant="filled"
-                                                sx={{ width: '30%', marginLeft: '23px' }}
-                                                value={agentData.agentRole}
-                                                onChange={(e) => { handleInputChange(e.target.value, "agentRole") }}
-                                            />
-
+                                          
                                             <TextField label="Recruitment Date:" variant="filled"
                                                 sx={{ width: '30%', marginLeft: '23px' }}
                                                 value={agentData.recruitmentDate}

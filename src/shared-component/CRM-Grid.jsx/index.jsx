@@ -76,7 +76,6 @@ const CRMGrid = (props) => {
                             : "#008000"
                           )
                           : 'black'
-                        // color: row.isApproved ? "green" :"black"
                       }}
                     >
                       {

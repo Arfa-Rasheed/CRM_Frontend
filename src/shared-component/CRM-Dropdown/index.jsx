@@ -41,7 +41,7 @@ const CRMDropdown = (props) => {
           backgroundColor: props.dropdownNo === '2' ? "white" : props.dropdownNo === '5' ? '#F08613' : props.title === 'Previous Years' ? "white" : "#ED7D31",
           color: props.dropdownNo === '2'  ? "black" : props.title === 'Previous Years' ? "black" : "white",
           height: "39px",
-          width: "294px",
+          width: "343px",
           fontSize: "12px",
           padding: "3px",
           borderTopLeftRadius: "0",
@@ -63,6 +63,7 @@ const CRMDropdown = (props) => {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        // sx={{width:'375px'}}
       >
         {props.options.map((items) => {
           return (

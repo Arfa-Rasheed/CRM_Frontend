@@ -28,7 +28,8 @@ export const {
   showLoader,
   hideLoader,
   setUserDetail,
-  setIsLoggedIn
+  setIsLoggedIn,
+  
 } = mainSlice.actions;
 
 export default mainSlice.reducer;
