@@ -174,7 +174,7 @@ const AgentDetail = () => {
                                     {/* <img src={profilePhoto} style={{ width: '100%', height: '100%' }} /> */}
                                     {
                                         agentData.profilePic ? (
-                                            <img src={agentData.profilePic} style={{ width: '100%', height: '100%' }} /> 
+                                            <img src={agentData.profilePic} style={{ width: '100%', height: '100%' ,borderRadius:"15px" }} /> 
                                         )
                                         :
                                         <Avatar sx={{ width: '100%', height: '100%' }} />

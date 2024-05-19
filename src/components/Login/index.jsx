@@ -22,12 +22,13 @@ const Login = () => {
     const userDetails = useSelector((state) => state.mainSlice.userdetail)
     // const userId = useSelector((state)=>state.mainSlice.userdetail.userId)
     const isAdmin = useSelector((state) => state.user.isAdmin)
-    const [isForgetPassword,setIsForgetPassword] = useState(false)
+    const [isForgetPassword, setIsForgetPassword] = useState(false)
     const [isVerifyOTP, setIsVerifyOTP] = useState(false)
     const [userCredentials, setUserCredentials] = useState(
         {
             email: '',
-            password: ''
+            password: '',
+            OTP:""
         }
     )
 
@@ -35,13 +36,41 @@ const Login = () => {
         setUserCredentials((prevFormData) => ({ ...prevFormData, [field]: data }));
     };
 
-    const forgotPasswordHandler = ()=>{
+    const forgotPasswordHandler = () => {
         setIsForgetPassword(true)
     }
 
-    const nextHandler = async() =>{
-        setIsForgetPassword(false)
-        setIsVerifyOTP(true)
+    const nextHandler = async () => {
+        dispatch(showLoader())
+        const res =await httpClient.post('/user/forgetPassword', userCredentials).catch((error) => {
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle")
+        })
+        
+        console.log("status",res)
+        if (res?.status === 200) {
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle")
+            setIsForgetPassword(false)
+            setIsVerifyOTP(true)
+        }
+
+        // setIsForgetPassword(false)
+        // setIsVerifyOTP(true)
+    }
+
+    const verifyOTPHandler = async ()=>{
+        dispatch(showLoader())
+        const res = await httpClient.post('/user/verifyOTP',userCredentials).catch((error)=>{
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+        })
+
+        if(res?.status === 200){
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("success" , res?.data.message ,"", "i-chk-circle" );
+            setIsVerifyOTP(false)
+        }
     }
 
     const loginHandler = async () => {
@@ -51,13 +80,16 @@ const Login = () => {
             snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
         })
 
+
+       console.log("login res",res)
+
         if (res?.status === 200) {
             dispatch(hideLoader())
             const authToken = res.data.token
             const isAdmin = res.data.isAdmin
             const userId = res.data.userId
             const firstName = res.data.firstName
-            const lastName = res.data.isAdmin ? res.data.lastName : "" 
+            const lastName = res.data.isAdmin ? res.data.lastName : ""
             const adminCode = res.data.isAdmin ? res.data.adminCode : ""
             const agentTitle = res.data.isAdmin ? "" : res.data.agentTitle
             const agentCode = res.data.isAdmin ? "" : res.data.agentCode
@@ -68,7 +100,7 @@ const Login = () => {
             localStorage.setItem("userId", userId)
             localStorage.setItem("firstName", firstName)
             localStorage.setItem("lastName", lastName)
-            localStorage.setItem("profilePic",profilePic)
+            localStorage.setItem("profilePic", profilePic)
             localStorage.setItem("adminCode", adminCode)
             localStorage.setItem("agentTitle", agentTitle)
             localStorage.setItem("agentCode", agentCode)
@@ -103,28 +135,28 @@ const Login = () => {
 
                         <Stack sx={{ width: '47%', height: '100vh', backgroundColor: '#F08613' }}>
                             <Stack alignItems={'center'} justifyContent={'space-around'} sx={{ width: '100%', height: '100%', backgroundColor: 'white', borderBottomRightRadius: "200px" }}>
-                                <Stack alignItems={'flex-end'} sx={{ width: '86%'}}>
+                                <Stack alignItems={'flex-end'} sx={{ width: '86%' }}>
                                     <Stack flexDirection={'row'} sx={{ width: '23%' }}>
                                         {/* <img sx={{ width: '100%' }} src={joptimanLogo} /> */}
-                                        <img src={svglogo}/>
-                                        <img src={joptimenConsultancyLogo} style={{width:'102px',height:'5vh'}}/>
+                                        <img src={svglogo} />
+                                        <img src={joptimenConsultancyLogo} style={{ width: '102px', height: '5vh' }} />
                                     </Stack>
 
                                 </Stack>
-                                <Stack className='Login-container' style={{ width: '68%', height: '69vh'}}>
-                                    <Stack alignItems={'center'} justifyContent={'space-around'} sx={{ width: '100%',height: isForgetPassword ? '41%' :'72%'}}>
-                                        <Stack justifyContent={'space-between'} sx={{ width: '70%',height:'80%' }}>
+                                <Stack className='Login-container' style={{ width: '68%', height: '69vh' }}>
+                                    <Stack alignItems={'center'} justifyContent={'space-around'} sx={{ width: '100%', height: isForgetPassword ? '41%' : '72%' }}>
+                                        <Stack justifyContent={'space-between'} sx={{ width: '70%', height: '80%' }}>
                                             <Typography variant='h5' sx={{ fontWeight: 'bold' }}>
-                                               { isForgetPassword ?
-                                                "Forgot Password" :
-                                                isVerifyOTP ? 
-                                                "Forgot Password" :
-                                                "Sign in to your account"
-                                                
-                                            }
-                                                </Typography>
+                                                {isForgetPassword ?
+                                                    "Forgot Password" :
+                                                    isVerifyOTP ?
+                                                        "Forgot Password" :
+                                                        "Sign in to your account"
 
-                                            <Stack justifyContent={'space-between'} style={{ width: '100%', height: '80%',display: isForgetPassword ? 'none' : isVerifyOTP ? "none" :'flex' }}>
+                                                }
+                                            </Typography>
+
+                                            <Stack justifyContent={'space-between'} style={{ width: '100%', height: '80%', display: isForgetPassword ? 'none' : isVerifyOTP ? "none" : 'flex' }}>
                                                 <Stack justifyContent={'space-between'} className="textField-container">
                                                     <Typography>Email</Typography>
                                                     <TextField id="outlined-basic" placeholder="Email Address" variant="outlined" sx={{ width: '245px', height: '5vh' }}
@@ -139,7 +171,7 @@ const Login = () => {
                                                     />
                                                 </Stack>
 
-                                                <Typography textAlign={'right'} style={{ fontSize: '14px', color: "#F08613" }} onClick={forgotPasswordHandler}>Forgot Your Password?</Typography>
+                                                <Typography textAlign={'right'} style={{ fontSize: '14px', color: "#F08613" ,cursor:"pointer"}} onClick={forgotPasswordHandler}>Forgot Your Password?</Typography>
                                                 <Button
                                                     variant="contained"
                                                     sx={{
@@ -156,79 +188,79 @@ const Login = () => {
                                                 >
                                                     Sign In
                                                 </Button>
-                                                
+
 
                                             </Stack>
 
                                             {
                                                 isForgetPassword && (
-                                                    <Stack justifyContent={'space-between'} style={{ width: '100%', height: '80%',display: isForgetPassword ? 'hidden' :'flex' }}>
-                                                    <Stack justifyContent={'space-between'} className="textField-container">
-                                                        <Typography>Email</Typography>
-                                                        <TextField id="outlined-basic" placeholder="Email Address" variant="outlined" sx={{ width: '245px', height: '5vh' }}
-                                                            onChange={(e) => handleInputChange(e.target.value, "email")}
-                                                        />
-                                                    </Stack>
-    
-                                                   <Button
-                                                        variant="contained"
-                                                        sx={{
-                                                            backgroundColor: "#F08613",
-                                                            color: 'white',
-                                                            width: '100%',
-                                                            height: "5vh",
-                                                            fontSize: '12px',
-                                                            "&:hover": {
+                                                    <Stack justifyContent={'space-between'} style={{ width: '100%', height: '80%', display: isForgetPassword ? 'hidden' : 'flex' }}>
+                                                        <Stack justifyContent={'space-between'} className="textField-container">
+                                                            <Typography>Email</Typography>
+                                                            <TextField id="outlined-basic" placeholder="Email Address" variant="outlined" sx={{ width: '245px', height: '5vh' }}
+                                                                onChange={(e) => handleInputChange(e.target.value, "email")}
+                                                            />
+                                                        </Stack>
+
+                                                        <Button
+                                                            variant="contained"
+                                                            sx={{
                                                                 backgroundColor: "#F08613",
-                                                            },
-                                                        }}
-                                                        onClick={nextHandler}
-                                                    >
-                                                       Next
-                                                    </Button>
-                                                    
-    
-                                                </Stack>
+                                                                color: 'white',
+                                                                width: '100%',
+                                                                height: "5vh",
+                                                                fontSize: '12px',
+                                                                "&:hover": {
+                                                                    backgroundColor: "#F08613",
+                                                                },
+                                                            }}
+                                                            onClick={nextHandler}
+                                                        >
+                                                            Next
+                                                        </Button>
+
+
+                                                    </Stack>
                                                 )
                                             }
 
                                             {
                                                 isVerifyOTP && (
-                                                    <Stack justifyContent={'space-between'} style={{ width: '100%', height: '80%',display: isForgetPassword ? 'none' :'flex' }}>
-                                                <Stack justifyContent={'space-between'} className="textField-container">
-                                                    <Typography>OTP</Typography>
-                                                    <TextField id="outlined-basic" placeholder="Email Address" variant="outlined" sx={{ width: '245px', height: '5vh' }}
-                                                        onChange={(e) => handleInputChange(e.target.value, "email")}
-                                                    />
-                                                </Stack>
+                                                    <Stack justifyContent={'space-between'} style={{ width: '100%', height: '80%', display: isForgetPassword ? 'none' : 'flex' }}>
+                                                        <Stack justifyContent={'space-between'} className="textField-container">
+                                                            <Typography>OTP</Typography>
+                                                            <TextField id="outlined-basic" placeholder="OTP" variant="outlined" sx={{ width: '245px', height: '5vh' }}
+                                                                onChange={(e) => handleInputChange(e.target.value, "OTP")}
+                                                            />
+                                                        </Stack>
 
-                                                <Stack justifyContent={'space-between'} className="textField-container">
-                                                    <Typography>Password</Typography>
-                                                    <TextField id="outlined-basic" placeholder="Password" variant="outlined" sx={{ width: '245px', height: '5vh' }}
-                                                        onChange={(e) => handleInputChange(e.target.value, "password")} type='password'
-                                                    />
-                                                </Stack>
+                                                        <Stack justifyContent={'space-between'} className="textField-container">
+                                                            <Typography>Password</Typography>
+                                                            <TextField id="outlined-basic" placeholder="Password" variant="outlined" sx={{ width: '245px', height: '5vh' }}
+                                                                onChange={(e) => handleInputChange(e.target.value, "password")} type='password'
+                                                            />
+                                                        </Stack>
 
-                                                <Typography textAlign={'right'} style={{ fontSize: '14px', color: "#F08613" }}>Forgot Your Password?</Typography>
-                                                <LoadingButton
-                                                    variant="contained"
-                                                    sx={{
-                                                        backgroundColor: "#F08613",
-                                                        color: 'white',
-                                                        width: '100%',
-                                                        height: "5vh",
-                                                        fontSize: '12px',
-                                                        "&:hover": {
-                                                            backgroundColor: "#F08613",
-                                                        },
-                                                    }}
-                                                    onClick={loginHandler}
-                                                >
-                                                    Verify OTP
-                                                </LoadingButton>
-                                                
+                                                        <Typography textAlign={'right'} style={{ fontSize: '14px', color: "#F08613" }}>Forgot Your Password?</Typography>
+                                                        <LoadingButton
+                                                            variant="contained"
+                                                            sx={{
+                                                                backgroundColor: "#F08613",
+                                                                color: 'white',
+                                                                width: '100%',
+                                                                height: "5vh",
+                                                                fontSize: '12px',
+                                                                "&:hover": {
+                                                                    backgroundColor: "#F08613",
+                                                                },
+                                                            }}
+                                                            onClick={verifyOTPHandler}
+                                                        >
+                                                            Verify OTP
+                                                        </LoadingButton>
 
-                                            </Stack>
+
+                                                    </Stack>
                                                 )
                                             }
                                         </Stack>

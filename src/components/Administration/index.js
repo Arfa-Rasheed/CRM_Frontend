@@ -23,20 +23,42 @@ const Administration = () => {
   const isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [showGrid, setShowGrid] = useState(false)
+
+  const homeOfficeData = [
+    {
+      deptName: "Licensing and Contracting Department",
+      email: "info@joptimanconsultancy.com",
+      phoneNumber: "(469)382-7970"
+    },
+    {
+      deptName: "New and in force policy Department",
+      email: "info@joptimanconsultancy.com",
+      phoneNumber: "(469)382-7970"
+    },
+    {
+      deptName: "Annuities",
+      email: "info@joptimanconsultancy.com",
+      phoneNumber: "(469)382-7970"
+    },
+    {
+      deptName: "Tech Support",
+      email: "info@joptimanconsultancy.com",
+      phoneNumber: "(469)382-7970"
+    },
+  ]
   const AdministrationMenu = [
     {
       title: "Home Office",
-      // options: [
-      //   // {
-      //   //   name:"Kaplan Financial Education",
-      //   //   url:"https://www.kaplanfinancial.com/"
-      //   // },
-      //   "dewr"
-      // ]
-      // ...(isAdmin ? {
-      //    isLink:true,
-      //    url:"https://drive.google.com/file/d/11bFvkJWG6mzC_hUIRuDXIEGdT3-9P96K/view?usp=drive_link"
-      // })
+      ...(isAdmin ? {
+        isLink: true,
+        url: "https://drive.google.com/file/d/11bFvkJWG6mzC_hUIRuDXIEGdT3-9P96K/view?usp=drive_link"
+      }
+        :
+        {
+          isGrid: true,
+        }
+      )
     },
     {
       title: "Onboarding & Contracting",
@@ -59,9 +81,10 @@ const Administration = () => {
     {
       title: "Communication",
       options: [
-       { name: "Emails",
-         url:""
-       }
+        {
+          name: "Emails",
+          url: ""
+        }
       ]
     },
     {
@@ -80,8 +103,8 @@ const Administration = () => {
     },
     {
       title: "Producing Agent Standards Operating",
-      isLink:true,
-      url:"https://docs.google.com/presentation/d/1J1pIHWkPCmyn-5PVXxACHsz5Zvgh3Na4/edit?usp=drive_link&ouid=109044533597939584194&rtpof=true&sd=true"
+      isLink: true,
+      url: "https://docs.google.com/presentation/d/1J1pIHWkPCmyn-5PVXxACHsz5Zvgh3Na4/edit?usp=drive_link&ouid=109044533597939584194&rtpof=true&sd=true"
     },
     {
       title: "Compliance",
@@ -145,7 +168,7 @@ const Administration = () => {
     },
     {
       title: "Direct Deposit",
-      isLink:true,
+      isLink: true,
       url: "https://drive.google.com/file/d/1RuKLWYO_qK9ew38bGYS7_B7JVJnR9cf5/view?usp=drive_link",
     },
   ]
@@ -159,6 +182,10 @@ const Administration = () => {
     link.target = '_blank';
     // Trigger a click event on the link
     link.click();
+  }
+
+  const handleShowOfficeGrid = () => {
+    setShowGrid(!showGrid)
   }
 
 
@@ -186,7 +213,6 @@ const Administration = () => {
                   {
                     AdministrationMenu.map((menu) => {
                       return (
-                        // <Typography>{menu}</Typography>
                         menu.isLink
                           ? (
                             <Button
@@ -216,17 +242,57 @@ const Administration = () => {
                             </Button>
 
                           )
-                          : (
-                            <Dropdown title={menu.title} options={menu.options} />
+                          : menu.isGrid ? (
+                            <>
+                              <Button
+                                aria-controls="dropdown-menu"
+                                aria-haspopup="true"
+                                onClick={handleShowOfficeGrid}
+                                sx={{
+                                  backgroundColor: "#003478",
+                                  color: "white",
+                                  height: "36px",
+                                  width: "267px",
+                                  fontSize: "12px",
+                                  padding: "3px",
+                                  marginTop: '4px',
+                                  borderTopLeftRadius: "0",
+                                  borderBottomLeftRadius: "0",
+                                  "&:hover": {
+                                    backgroundColor: '#003478',
+                                  },
+                                }}
+                              >
+                                {menu.title}
+
+                              </Button>
+
+                              {
+                                showGrid &&
+                                homeOfficeData.map((data) => {
+                                  return <table border="1">
+                                    <tr >
+                                      <td width='500px' style={{border: '1px solid black'}}>{data.deptName}</td>
+                                      <td style={{border: '1px solid black'}}>{data.email}</td>
+                                      <td width='140px' style={{border: '1px solid black'}}>{data.phoneNumber}</td>
+                                    </tr>
+                                  </table>
+                                })
+                              }
+                            </>
+
                           )
+                            : (
+                              <Dropdown title={menu.title} options={menu.options} />
+                            )
                       )
                     })
                   }
                 </Stack>
               </Stack>
 
-              <Stack justifyContent={'flex-end'} sx={{ width: '44%', height: "81.7vh",position: 'fixed',right:'0px'}}>
-                <img src={JOptimanLogo} width={'100%'} height={'85%'}/>
+              <Stack justifyContent={'flex-end'} sx={{ width: '44%', height: "81.7vh", position: 'fixed', right: '0px' }}>
+                <img src={JOptimanLogo} width={'100%'} height={'85%'} />
               </Stack>
             </Stack>
           </Stack>

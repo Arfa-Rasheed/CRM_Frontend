@@ -26,8 +26,17 @@ const Tools = () => {
   const ToolsMenu = [
     {
       title: "State Licensing Requirements",
-      url: "https://nipr.com/licensing-center/state-requirements",
-      isDropdown: false
+      options:[
+        {
+          name:"State Licensing Guide",
+          url:"https://nipr.com/licensing-center/state-requirements",
+        },
+        {
+          name:"Apply For State Licensing",
+          url:"https://nipr.com/licensing-center/apply"
+        }
+      ],
+      isDropdown: true
     },
     {
       title: "Pre-Licensing Study Material",
@@ -113,7 +122,8 @@ const Tools = () => {
           name: "3Marks",
           url: "https://3mark.com"
         }
-      ]
+      ],
+      isDropdown: true
     },
 
   ]
