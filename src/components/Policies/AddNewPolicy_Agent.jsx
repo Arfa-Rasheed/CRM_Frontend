@@ -11,6 +11,7 @@ import { hideLoader, showLoader } from '../../Store/mainSlice'
 import dayjs from 'dayjs'
 import Calendar from '../../shared-component/Calender/Calender'
 import PoliciesDropdown from '../../shared-component/PoliciesDropdown'
+import './style.scss'
 
 const AddNewPolicy_Agent = () => {
     const { id } = useParams()
@@ -181,7 +182,7 @@ const AddNewPolicy_Agent = () => {
                                             value={policyData.agentCarrierNumber}
                                             onChange={(e) => { handleInputChange(e.target.value, "agentCarrierNumber") }}
                                         />
-
+                                    
                                         <TextField
                                             disabled={true}
                                             label="Agent Code:"

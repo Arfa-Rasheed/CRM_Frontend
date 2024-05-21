@@ -9,6 +9,7 @@ import LinearProgressWithLabel from '../../shared-component/ProgressBar'
 import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar'
 import { useDispatch } from 'react-redux'
 import { hideLoader, showLoader } from '../../Store/mainSlice'
+import './style.scss'
 
 const StatementDetail = () => {
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
@@ -131,7 +132,7 @@ const StatementDetail = () => {
                                         <TextField
                                             disabled={_id ? true : false}
                                             sx={{ width: '30%' }}
-                                            label="Insured First Name::"
+                                            label="Insured Last Name:"
                                             variant="filled"
                                             value={policyData.insuredLastName}
                                             onChange={(e) => { handleInputChange(e.target.value, "insuredLastName") }}
