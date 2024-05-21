@@ -18,7 +18,14 @@ const AgentDetail = () => {
     const dispatch = useDispatch()
     const snackbar_Ref = useRef(null)
     const { _id } = useParams()
+    // const [salesData,setSalesData] = useState({})
     const [policyData,setPolicyData] = useState([])
+    const [salesData, setSalesData] = useState({
+        Life: { sales: 0 },
+        Health: { sales: 0 },
+        Annuities: { sales: 0 },
+        totalPoliciesvalue: 0,
+    });
     const [agentData, setAgentData] = useState({
         id:"",
         firstName: "",
@@ -34,7 +41,8 @@ const AgentDetail = () => {
         recruitmentDate: "",
         recruits: 0,
         commissionEarned: 0,
-        img: ""
+        img: "",
+        active:true
     })
 
     const gridHeader = [
@@ -96,6 +104,7 @@ const AgentDetail = () => {
     const LoadAgentData = async () => {
         dispatch(showLoader())
         const res = await httpClient.get(`/agents/getAgentByID/${_id}`).catch((error) => { 
+            dispatch(hideLoader())
             snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
         })
 
@@ -103,8 +112,61 @@ const AgentDetail = () => {
             dispatch(hideLoader())
             console.log("Detail res", res.data)
             setAgentData(res?.data.agentDetails)
+            setSalesData(res?.data.sales)
             setPolicyData(res?.data.policyDetailsArray)
         }
+    }
+
+
+    const deleteAgentHandler = async()=>{
+        const res = await httpClient.delete(`/agents/deleteAgent/${_id}`).catch((error) => {
+            dispatch(hideLoader())
+            console.log("error: ", error)
+            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle")
+        })
+
+        if (res?.status === 200) {
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle")
+            setTimeout(()=>{
+                navigate('/agent')
+            },3000)
+           
+        }
+    }
+
+    const activityHandler = async(title)=>{
+        console.log("lwejfi");
+      if(title === 'DeActivate Agent'){
+        const res = await httpClient.post(`/agents/deactivateAgent/${_id}`).catch((error) => {
+        dispatch(hideLoader())
+        console.log("error: ", error)
+        snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle")
+      })
+
+        if (res?.status === 200) {
+        dispatch(hideLoader())
+        snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle")
+        setTimeout(()=>{
+            navigate('/agent')
+        },3000)
+        }
+     }
+     else{
+        const res = await httpClient.post(`/agents/activateAgent/${_id}`).catch((error) => {
+            dispatch(hideLoader())
+            console.log("error: ", error)
+            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle")
+          })
+    
+            if (res?.status === 200) {
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle")
+            setTimeout(()=>{
+                navigate('/agent')
+            },3000)
+            }
+     }
     }
 
     useEffect(() => {
@@ -168,7 +230,9 @@ const AgentDetail = () => {
                             </Box>
                         </Box>
 
-                        <Stack flexDirection={'row'} justifyContent={'center'} sx={{ width: "97%", height: '56%' }}>
+                        <Stack flexDirection={'row'} 
+                        justifyContent={'center'} 
+                        sx={{ width: "97%", height: '56%' }}>
                             <Stack alignItems={'center'} sx={{ width: '58%', height: '42vh', backgroundColor: 'white', borderRadius: '20px' }}>
                                 <Box sx={{ width: '22%', height: '12vh' }}>
                                     {/* <img src={profilePhoto} style={{ width: '100%', height: '100%' }} /> */}
@@ -191,8 +255,8 @@ const AgentDetail = () => {
                                 </Stack>
                             </Stack>
 
-                            <Stack alignItems={'center'} sx={{ width: '100%', height: "45vh", marginLeft: '23px' }}>
-                                <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '79%' }}>
+                            <Stack justifyContent={'space-between'} sx={{ width: '100%', height: "45vh", marginLeft: '23px' }}>
+                                <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '79%'}}>
                                     <Stack sx={{ width: '30%', height: '30%', backgroundColor: '#F08613' }}>
                                         <Typography className='agentDetail-text'>Recruitment Date:</Typography>
                                         <Typography className='agentDetail-text'>{agentData.recruitmentDate}</Typography>
@@ -209,22 +273,22 @@ const AgentDetail = () => {
 
                                     <Stack sx={{ width: '30%', height: '30%', backgroundColor: '#2F5597' }}>
                                         <Typography className='agentDetail-text'>Health Insurance Sales:</Typography>
-                                        <Typography className='agentDetail-text'>{ }</Typography>
+                                        <Typography className='agentDetail-text'>{salesData.Life.sales }</Typography>
                                     </Stack>
                                     <Stack sx={{ width: '30%', height: '30%', backgroundColor: '#2F5597' }}>
                                         <Typography className='agentDetail-text'>Life Insurance Sales:</Typography>
-                                        <Typography className='agentDetail-text'>{ }</Typography>
+                                        <Typography className='agentDetail-text'>{salesData.Health.sales }</Typography>
                                     </Stack>
                                     <Stack sx={{ width: '30%', height: '30%', backgroundColor: '#2F5597' }}>
                                         <Typography className='agentDetail-text'>Annuities Sales:</Typography>
-                                        <Typography className='agentDetail-text'>{ }</Typography>
+                                        <Typography className='agentDetail-text'>{salesData.Annuities.sales }</Typography>
                                     </Stack>
 
 
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{ width: '65%', height: '30%' }}>
                                         <Stack sx={{ width: '46%', height: '100%', backgroundColor: '#6C5352' }}>
                                             <Typography className='agentDetail-text'>Total Policy Value</Typography>
-                                            <Typography className='agentDetail-text'>{ }</Typography>
+                                            <Typography className='agentDetail-text'>{salesData?.totalPoliciesvalue}</Typography>
                                         </Stack>
                                         <Stack sx={{ width: '46%', height: '100%', backgroundColor: '#6C5352' }}>
                                             <Typography className='agentDetail-text'>Total Commission Earned:</Typography>
@@ -234,11 +298,44 @@ const AgentDetail = () => {
 
                                 </Stack>
 
-
+                                <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{width:'70%'}}>
+                                    <Button
+                                        variant="contained"
+                                        sx={{
+                                            backgroundColor: '#F08613',
+                                            color: 'white',
+                                            width: '245px',
+                                            height: "5vh",
+                                            fontSize: '12px',
+                                            "&:hover": {
+                                                backgroundColor: '#F08613',
+                                            },
+                                        }}
+                                        onClick={()=>activityHandler(agentData.active ? "DeActivate Agent" :"Activate Agent")}
+                                    >
+                                       {agentData.active ? "DeActivate Agent" :"Activate Agent" }
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        sx={{
+                                            backgroundColor: '#003478',
+                                            color: 'white',
+                                            width: '245px',
+                                            height: "5vh",
+                                            fontSize: '12px',
+                                            "&:hover": {
+                                                backgroundColor: '#003478',
+                                            },
+                                        }}
+                                        onClick={deleteAgentHandler}
+                                    >
+                                        Delete Agent 
+                                    </Button>
+                                </Stack> 
                             </Stack>
                         </Stack>
 
-                        <Stack justifyContent={'center'} alignItems={'center'}>
+                        {/* <Stack justifyContent={'center'} alignItems={'center'} sx={{border:'2px solid red'}}>
                         <Button
                                         variant="contained"
                                         sx={{
@@ -261,7 +358,7 @@ const AgentDetail = () => {
 
                                         </Grid>
                                     </Button>
-                        </Stack>
+                        </Stack> */}
                         <div className='policiesDataGrid'>
                             <CRMGrid
                                 gridHeader={gridHeader}
@@ -281,167 +378,3 @@ const AgentDetail = () => {
 
 export default AgentDetail
 
-// import { Checkbox, FormControlLabel, FormGroup, Stack, TextField, Typography } from '@mui/material'
-// import React from 'react'
-// import SideBar from '../../Layout/Sidebar'
-// import Header from '../../Layout/Header'
-// import './style.scss'
-
-// const AddNewRecruit = () => {
-//     return (
-//         <>
-//             <Header />
-//             <div style={{ marginTop: '56px' }}>
-//                 <div style={{
-//                     display: 'flex',
-//                     height: '100vh',
-//                     // overflowY: 'hidden'
-//                 }}>
-
-//                     <SideBar />
-//                     <Stack alignItems={'center'} justifyContent={'center'} sx={{marginLeft:'18%',width: '82%', height: '198vh', marginTop: '9px', }}>
-//                         <Stack justifyContent={'space-between'} sx={{  width: '88%', height: '88%' }}>
-//                             <Stack className='text-field-container'>
-//                             <Stack className='text-field'>
-//                                 <Typography className='form-questions'>To start up, please tell us Agent's Resident State </Typography>
-//                                 <TextField />
-//                             </Stack>
-//                             </Stack>
-                        
-//                             <Stack>
-//                                 <Typography className='form-questions'>Is Agent above 18 yrs and legally authorized to work in the U. S.? </Typography>
-//                                 <FormGroup>
-//                                     <FormControlLabel control={<Checkbox />} label="Yes" />
-//                                     <FormControlLabel control={<Checkbox />} label="No" />
-//                                 </FormGroup>
-//                             </Stack>
-
-//                             {/* Name Stack */}
-//                             <Stack>
-//                                 <Typography className='form-questions'>Name</Typography>
-//                                 <Stack>
-//                                     <Stack flexDirection={'row'} className='text-field-container'>
-//                                         <Stack className='text-field'>
-//                                             <TextField />
-//                                             <Typography>First</Typography>
-//                                         </Stack>
-
-//                                         <Stack className='text-field'>
-//                                             <TextField />
-//                                             <Typography>Last</Typography>
-//                                         </Stack>
-//                                     </Stack>
-//                                 </Stack>
-//                             </Stack>
-
-//                             {/* Email Stack */}
-//                             <Stack>
-//                                 <Typography className='form-questions'>Email</Typography>
-//                                 <Stack>
-//                                     <Stack flexDirection={'row'} className='text-field-container'>
-//                                         <Stack className='text-field'>
-//                                             <TextField />
-//                                             <Typography>Email</Typography>
-//                                         </Stack>
-
-//                                         <Stack className='text-field'>
-//                                             <TextField />
-//                                             <Typography>Confirm Email</Typography>
-//                                         </Stack>
-//                                     </Stack>
-//                                 </Stack>
-//                             </Stack>
-
-//                             {/* Address Stack */}
-//                             <Stack>
-//                                 <Typography className='form-questions'>Address</Typography>
-//                                 <Stack>
-//                                     <Stack className='text-field-container'>
-//                                         <Stack className='text-field'>
-//                                             <TextField />
-//                                             <Typography>Address Line1</Typography>
-//                                         </Stack>
-
-//                                         <Stack className='text-field'>
-//                                             <TextField />
-//                                             <Typography>Address Line2</Typography>
-//                                         </Stack>
-//                                     </Stack>
-
-//                                     <Stack flexDirection={'row'} className='text-field-container'>
-//                                         <Stack className='text-field'>
-//                                             <TextField />
-//                                             <Typography>City</Typography>
-//                                         </Stack>
-
-//                                         <Stack className='text-field'>
-//                                             <TextField />
-//                                             <Typography>State</Typography>
-//                                         </Stack>
-//                                     </Stack>
-
-//                                     <Stack className='text-field-container'>
-//                                         <Stack className='text-field'>
-//                                             <TextField />
-//                                             <Typography>Zip Code</Typography>
-//                                         </Stack>
-//                                     </Stack>
-
-
-//                                 </Stack>
-//                             </Stack>
-
-//                             {/* Active Licensed Stack  */}
-//                             <Stack >
-//                                 <Typography className='form-questions'>Do Agent have an Active License?</Typography>
-//                                 <Stack>
-//                                     <FormGroup>
-//                                         <Stack flexDirection={'row'}>
-//                                             <FormControlLabel control={<Checkbox />} label="Yes" />
-//                                             <FormControlLabel control={<Checkbox />} label="No" />
-//                                         </Stack>
-//                                     </FormGroup>
-//                                 </Stack>
-//                             </Stack>
-
-//                             {/* Recruiting Stack */}
-//                             <Stack className='text-field-container'>
-//                                 <Typography className='form-questions'>Who is Recruiting Agent?</Typography>
-//                                 <Stack className='text-field'>
-//                                     <TextField/>
-//                                 </Stack>
-//                             </Stack>
-
-//                             <Stack className='text-field-container'>
-//                                 <Typography className='form-questions'>Agent's Contract Level</Typography>
-//                                 <Stack className='text-field'>
-//                                     <TextField/>
-//                                 </Stack>
-//                             </Stack>
-
-
-//                             <Stack className='text-field-container'>
-//                                 <Typography className='form-questions'>Agent's Role</Typography>
-//                                 <Stack className='text-field'>
-//                                     <TextField/>
-//                                 </Stack>
-//                             </Stack>
-
-
-//                             <Stack className='text-field-container'>
-//                                 <Typography className='form-questions'>Agent's Title</Typography>
-//                                 <Stack className='text-field'>
-//                                     <TextField/>
-//                                 </Stack>
-//                             </Stack>
-
-//                         </Stack>
-
-//                     </Stack>
-//                 </div>
-//             </div>
-//         </>
-//     )
-// }
-
-// export default AddNewRecruit

@@ -52,7 +52,7 @@ const Administration = () => {
       title: "Home Office",
       ...(isAdmin ? {
         isLink: true,
-        url: "https://drive.google.com/file/d/11bFvkJWG6mzC_hUIRuDXIEGdT3-9P96K/view?usp=drive_link"
+        url: "https://drive.google.com/file/d/1tEOfJATDMpMVZZtmt_JQAvSYru14R8qT/view?usp=drive_link"
       }
         :
         {
@@ -69,11 +69,11 @@ const Administration = () => {
         },
         {
           name: "SureLC Joptiman",
-          url: "https://accounts.surancebay.com/oauth/authorize?redirect_uri=https:%2F%2Fsurelc.surancebay.com%2Fproducer%2Foauth%3FreturnUrl%3D%252Fprofile%252Fcontact-info%253FgaId%253D1034%2526gaId%253D1034%2526branch%253DJOptiman%252520LOA%2526branchVisible%253Dtrue%2526branchEditable%253Dfalse%2526branchRequired%253Dtrue%2526dba%253DS%2526autoAdd%253Dfalse%2526requestMethod%253DGET&amp;gaId=1034&amp;client_id=surecrmweb&amp;response_type=code"
+          url:"https://accounts.surancebay.com/oauth/authorize?redirect_uri=https:%2F%2Fsurelc.surancebay.com%2Fproducer%2Foauth%3FreturnUrl%3D%252Fprofile%252Fcontact-info%253FgaId%253D1034%2526gaId%253D1034%2526branch%253DJOptiman%252520LOA%2526branchVisible%253Dtrue%2526branchEditable%253Dfalse%2526branchRequired%253Dtrue%2526dba%253DS%2526autoAdd%253Dfalse%2526requestMethod%253DGET&gaId=1034&client_id=surecrmweb&response_type=code"
         },
         {
           name: "3Mark Appointment",
-          url: "https://surelc.surancebay.com/sbweb/login.jsp?bcc=alexandra.galla%403mark.com&amp;branch=JOptiman%20Consultancy%2CLLC&amp;branchEditable=off&amp;branchRequired=on&amp;branchVisible=on&amp;cc=admin%40joptimanconsultancy.com&amp;gaId=41&amp;gaName=3%20Mark%20Financial%2C%20Inc."
+          url:"https://surelc.surancebay.com/sbweb/login.jsp?bcc=alexandra.galla%403mark.com&branch=JOptiman%20Consultancy%2CLLC&branchEditable=off&branchRequired=on&branchVisible=on&cc=admin%40joptimanconsultancy.com&gaId=41&gaName=3%20Mark%20Financial%2C%20Inc."
         }
 
       ]
@@ -103,8 +103,19 @@ const Administration = () => {
     },
     {
       title: "Producing Agent Standards Operating",
-      isLink: true,
-      url: "https://docs.google.com/presentation/d/1J1pIHWkPCmyn-5PVXxACHsz5Zvgh3Na4/edit?usp=drive_link&ouid=109044533597939584194&rtpof=true&sd=true"
+      // isLink: true,
+      options:[
+        {
+          name:"Producing Agent Trainee",
+          url: "https://docs.google.com/presentation/d/1J1pIHWkPCmyn-5PVXxACHsz5Zvgh3Na4/edit?usp=drive_link&ouid=109044533597939584194&rtpof=true&sd=true"
+
+        },
+        {
+          name:"Joptiman Process",
+          url:"https://drive.google.com/file/d/1n_32WlHcIr7QDqPOD5JRUt4Yexj0GzG3/view?usp=drive_link"
+
+        },
+      ]
     },
     {
       title: "Compliance",
@@ -133,7 +144,11 @@ const Administration = () => {
         {
           name: "JOptiman Status Change Form",
           url: "https://drive.google.com/file/d/1EeEThs13V3lJxlaoX2jIx3O7akUX0dKM/view?usp=drive_link"
-        }
+        },
+        {
+          name: "Direct Deposit Authorization Form",
+          url:"https://drive.google.com/file/d/1RuKLWYO_qK9ew38bGYS7_B7JVJnR9cf5/view?usp=drive_link"
+        },
 
       ]
     },
@@ -142,34 +157,18 @@ const Administration = () => {
       options: [
         {
           name: "Advancement Guidlines",
-          url: ""
+          url:"https://drive.google.com/file/d/19A9t8R90d9Otud4Xwd6k1kHK7pEydjON/view?usp=drive_link"
         },
         {
-          name: "Advancement Announcements",
-          url: ""
-        },
-
-
-      ]
-    },
-    {
-      title: "Events",
-      options: [
-        {
-          name: "Announcements",
-          url: ""
-        },
-        {
-          name: "Calendars",
-          url: ""
-        },
-
+          name:"Commission Grid",
+          url: "https://drive.google.com/file/d/11bFvkJWG6mzC_hUIRuDXIEGdT3-9P96K/view?usp=drive_link"
+        }
       ]
     },
     {
       title: "Direct Deposit",
       isLink: true,
-      url: "https://drive.google.com/file/d/1RuKLWYO_qK9ew38bGYS7_B7JVJnR9cf5/view?usp=drive_link",
+      url:"https://portal.asurehcm.com "
     },
   ]
 

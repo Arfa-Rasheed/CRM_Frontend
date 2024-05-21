@@ -516,7 +516,7 @@ const Dashboard = () => {
                                                 highestRecruitsAgentData.profilePic ?
                                                 (
                                                     // <img src={highestRecruitsAgentData.profilePic} style={{ width: '56px', height: '56px',borderRadius:'40px' }}/>
-                                                    <img src={highestCommissionedAgentData.profilePic} style={{ width: '103px', height: '103px',borderRadius:'17px' }}/>
+                                                    <img src={highestRecruitsAgentData.profilePic} style={{ width: '103px', height: '103px',borderRadius:'17px' }}/>
 
                                                 )
                                                 :

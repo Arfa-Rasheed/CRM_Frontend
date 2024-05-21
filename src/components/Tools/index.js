@@ -76,12 +76,6 @@ const Tools = () => {
       isDropdown: true
     },
     {
-      title: "Heirarchy Chart",
-      isDropdown: false,
-      isLink:true,
-      url:"https://drive.google.com/file/d/19A9t8R90d9Otud4Xwd6k1kHK7pEydjON/view?usp=drive_link"
-    },
-    {
       title: "Sales Illustration",
       options: [
         {
