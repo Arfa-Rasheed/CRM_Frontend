@@ -238,12 +238,25 @@ const Dashboard = () => {
                         spacing={3}
                         sx={{
                             marginTop: '0px',
-                            marginLeft: '277px'
+                            marginLeft: '277px',
+                           
+
+                            '@media (max-width:1366px)': {
+                                marginLeft: '240px',
+                                // border: '2px solid red', // Example of changing styles within the media query
+                              }
                         }}>
 
                         {/* 1st Container */}
-                        <Grid container style={{ backgroundColor: "#EDEDED", height: '19vh', width: '95%', justifyContent: 'space-around', alignItems: 'center', margin: '0 auto', borderRadius: '15px' }}>
-                            <Grid item md='3.5'>
+                        <Grid container 
+                        sx={{ 
+                            backgroundColor: "#EDEDED", height: '19vh', width: '95%', justifyContent: 'space-around', alignItems: 'center', margin: '0 auto', borderRadius: '15px' ,
+                            '@media (max-width:1366px)': {
+                                width: '98%',
+                                border:'2px solid green'
+                              }
+                            }}>
+                            <Grid item md='3.5' >
                                 <CRMDropdown title={selectedOption} options={DropdownOptions1} onOptionChange={handleDropdownChange} />
                                 <Grid container sx={{ justifyContent: 'center', marginBottom: '5px' }} className='grid-inner-container'>
                                     <Grid items md='10' >

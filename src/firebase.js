@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getDatabase, ref, child, get,onValue } from "firebase/database";
+import { getDatabase, ref, child, get, onValue } from "firebase/database";
 import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -24,7 +24,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 export const db = getDatabase(app);
 export const storage = getStorage();
-export const fdb=getFirestore();
+export const fdb = getFirestore();
 
 export function GetDatabaseVal(con) {
   console.log("In DB FUNCTION")
@@ -32,6 +32,6 @@ export function GetDatabaseVal(con) {
   const starCountRef = ref(db, 'messages/' + con);
   onValue(starCountRef, (snapshot) => {
     const data = snapshot.val();
-    console.log(data,"dtaa")
+    console.log(data, "dtaa")
   })
 }

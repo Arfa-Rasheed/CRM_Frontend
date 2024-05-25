@@ -143,11 +143,15 @@ const Administration = () => {
         },
         {
           name: "JOptiman Status Change Form",
-          url: "https://drive.google.com/file/d/1EeEThs13V3lJxlaoX2jIx3O7akUX0dKM/view?usp=drive_link"
+          url: "https://us.services.docusign.net/webforms-ux/v1.0/forms/c3b64a9e61e4256215319b9425a220a8"
         },
         {
           name: "Direct Deposit Authorization Form",
-          url:"https://drive.google.com/file/d/1RuKLWYO_qK9ew38bGYS7_B7JVJnR9cf5/view?usp=drive_link"
+          url:"https://us.services.docusign.net/webforms-ux/v1.0/forms/27eb3c85edf0e2d7bb742efb5419535a"
+        },
+        {
+          name: "Independent Agent Contract",
+          url:"https://us.services.docusign.net/webforms-ux/v1.0/forms/a634749e616b0e1327dedfbd33b1a277"
         },
 
       ]

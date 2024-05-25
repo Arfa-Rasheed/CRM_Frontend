@@ -114,7 +114,7 @@ const ApprovePolicy = () => {
         'Mutual Of Omaha'
     ]
 
-    const policyTypes =[
+    const policyTypes = [
         'Life',
         'Health',
         'Annuities'
@@ -167,6 +167,23 @@ const ApprovePolicy = () => {
             }
         }
     }
+
+    const rejectHandler = async() =>{
+         dispatch(showLoader())
+         const res = await httpClient.post(`/policies/rejectPolicy/${id}`)
+         .catch((error) => {
+             dispatch(hideLoader())
+             snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+         })
+
+     if (res?.status === 200) {
+         dispatch(hideLoader())
+         snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
+         setTimeout(() => {
+             navigate('/policies')
+         }, 6000);
+     }
+     }
 
     const chargedBackHandler = async () => {
         dispatch(showLoader())
@@ -710,6 +727,28 @@ const ApprovePolicy = () => {
                                                     onClick={approveHandler}
                                                 >
                                                     {policyData.isApproved ? 'Update' : 'Approve'}
+                                                </Button>
+
+                                                <Button
+                                                    variant="contained"
+                                                    sx={{
+                                                        display:policyData.isApproved ? 'none' : 'flex',
+                                                        backgroundColor: "#003478",
+                                                        color: 'white',
+                                                        width: '186px',
+                                                        height: "5vh",
+                                                        fontSize: '12px',
+                                                        "&:hover": {
+                                                            backgroundColor: '#003478',
+                                                        },
+                                                        "&:disabled": {
+                                                            backgroundColor: '#406391',
+                                                            color: 'white',
+                                                        }
+                                                    }}
+                                                    onClick={rejectHandler}
+                                                >
+                                                    Reject
                                                 </Button>
                                             </Stack>
                                         </Stack>
