@@ -18,6 +18,7 @@ const CommissionDetail = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [policyData, setPolicyData] = useState({
+        paidOutDate:"",
         isPaid: false,
         policySubmissionDate: "",
         policyCarrier: "",
@@ -153,6 +154,13 @@ const CommissionDetail = () => {
 
                                 <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '100%', marginTop: '20px' }}>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '100%' }}>
+                                        <TextField
+                                            label="Paid Out Date:"
+                                            variant="filled"
+                                            value={policyData.paidOutDate}
+                                            sx={{ width: '30%' }}
+                                            onChange={(e) => { handleInputChange(e.target.value, "paidOutDate") }}
+                                        />
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="Date:"
@@ -294,14 +302,6 @@ const CommissionDetail = () => {
                                             value={policyData.advPayment}
                                             onChange={(e) => { handleInputChange(e.target.value, "advPayment") }}
                                         />
-                                        {/* <TextField
-                                            disabled={_id ? true : false}
-                                            label="Remaning Payment %:"
-                                            variant="filled"
-                                            sx={{ width: '30%' }}
-                                            value={policyData.remainingPaymentPercentage}
-                                            onChange={(e) => { handleInputChange(e.target.value, "remainingPaymentPercentage") }}
-                                        /> */}
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="OW1 Contract Level:"
