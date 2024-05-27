@@ -101,43 +101,15 @@ const Recruits = () => {
           <Stack sx={{ width: '81.7%', marginLeft: '20%' }}>
             <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
               <Box sx={{ width: '60%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-                {/* <Box sx={{ height: '12vh' }}>
-                  <Button
-                    variant="contained"
-                    sx={{
-                      backgroundColor: '#F08613',
-                      color: 'white',
-                      width: '245px',
-                      height: "5vh",
-                      fontSize: '12px',
-                      "&:hover": {
-                        backgroundColor: '#F08613',
-                      },
-                    }}
-                  // onClick={() => setNewPolicyClicked(true)}
-                  >
-                    <Grid container
-                      alignItems={'center'}
-                      sx={{ width: '100%' }}
-                    >
-                      <Grid item md="3"><img src={AllAgentsIcon} /></Grid>
-                      <Grid item md="9"> All Agents</Grid>
-
-                    </Grid>
-                  </Button>
-                </Box> */}
-
                 <Box sx={{ height: '12vh' }}>
                   <h2 style={{ color: 'black', textAlign: 'center' }}>All Recruits</h2>
                 </Box>
-
                 <Box sx={{ width: '56%', height: '12vh', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
                           <MagnifyingGlass size={16} weight="light" />
-
                         </InputAdornment>
                       ),
                     }} />
@@ -173,7 +145,6 @@ const Recruits = () => {
                 gridHeader={gridHeader}
                 gridData={gridData}
                 baseURL={'/addNewRecruit/'}
-
               />
             </div>
 

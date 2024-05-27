@@ -748,7 +748,7 @@ const ApprovePolicy = () => {
                                                     }}
                                                     onClick={rejectHandler}
                                                 >
-                                                    Reject
+                                                    Decline
                                                 </Button>
                                             </Stack>
                                         </Stack>
