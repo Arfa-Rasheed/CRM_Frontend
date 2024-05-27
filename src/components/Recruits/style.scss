@@ -2,7 +2,7 @@
    .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
       border-radius: 0px !important;
       width: 97% !important;
-      height:64vh;
+      height: 64vh;
 
       .css-15wwp11-MuiTableHead-root {
          height: 0px !important;
@@ -30,7 +30,7 @@
    .css-13xy2my {
       border-radius: 0px !important;
       width: 97% !important;
-      height:64vh;
+      height: 64vh;
 
       .css-1wbz3t9 {
          height: 0px !important;
@@ -59,6 +59,14 @@
    justify-content: space-between;
    width: 65%;
 
+   .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+      height: 10px !important;
+   }
+
+   .css-1x5jdmq {
+      height: 10px !important;
+   }
+
    .text-field {
 
       .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
@@ -70,25 +78,37 @@
          height: 44px;
       }
 
-      .css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root{
+      .css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root {
          height: 6vh;
       }
 
       //For deployment
-      .css-1v4ccyo{
+      .css-1v4ccyo {
          height: 45px;
          width: 345px;
       }
-      .css-segi59{
+
+      .css-segi59 {
          height: 6vh;
       }
    }
 }
 
+
+.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input {
+   height: 0px !important;
+}
+
+
 //For deployment search field
 .css-1ufn0jl {
    height: 5vh;
 }
+
+.css-1x5jdmq {
+   height: 0px !important;
+}
+
 
 
 
