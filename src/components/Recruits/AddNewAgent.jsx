@@ -171,7 +171,6 @@ const AddNewAgent = () => {
                                                 value={agentData.lastName}
                                                 onChange={(e) => { handleInputChange(e.target.value, "lastName") }}
                                             />
-
                                             <TextField label="Level:" variant="filled"
                                                 disabled={true}
                                                 sx={{ width: '30%', marginLeft: '23px' }}
@@ -179,20 +178,9 @@ const AddNewAgent = () => {
                                                 onChange={(e) => { handleInputChange(e.target.value, "level") }}
                                             />
 
-                                            {/* <TextField label="Agent Carrier Number:" variant="filled"
-                                                sx={{ width: '30%', marginLeft: '23px' }}
-                                                value={agentData.agentCarrierNumber}
-                                                onChange={(e) => { handleInputChange(e.target.value, "agentCarrierNumber") }}
-                                            /> */}
-
-                                            {/* <TextField label="Agent Title:" variant="filled"
-                                                sx={{ width: '30%', marginLeft: '23px' }}
-                                                value={agentData.agentTitle}
-                                                onChange={(e) => { handleInputChange(e.target.value, "agentTitle") }}
-                                            /> */}
                                             <PoliciesDropdown value={agentData.agentTitle} options={agentTitle} label='Agent Title:' origin="addAgent" onSelectValue={(data) => handleAutocompleteValue(data, 'agentTitle')} />
 
-                                          
+
                                             <TextField label="Recruitment Date:" variant="filled"
                                                 sx={{ width: '30%', marginLeft: '23px' }}
                                                 value={agentData.recruitmentDate}

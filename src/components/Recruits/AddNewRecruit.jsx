@@ -93,6 +93,9 @@ const AddNewRecruit = () => {
         state: "",
         zipCode: 0,
         activeLicense: "",
+        agentCode:"",
+        recruitmentDate:""
+
     })
 
 
@@ -375,6 +378,17 @@ const AddNewRecruit = () => {
                                 </Stack>
                             </Stack>
 
+                            <Stack className='text-field-container'>
+                                            <Typography className='form-questions'>Recruitment Date
+                                                <Asterisk color='red' size={12} weight="bold" /></Typography>
+                                            <Stack className='text-field'>
+                                                <TextField 
+                                                  value={agentData.recruitmentDate}
+                                                  onChange={(e) => { handleInputChange(e.target.value, "recruitmentDate") }}
+                                                />
+                                            </Stack>
+                                        </Stack>
+
                             {/* Recruiting Stack */}
                             {agentData.recruitingAgentCode ?
                                 (
@@ -421,6 +435,19 @@ const AddNewRecruit = () => {
                                                 />
                                             </Stack>
                                         </Stack>
+
+                                        <Stack className='text-field-container'>
+                                            <Typography className='form-questions'>Agent Code
+                                                <Asterisk color='red' size={12} weight="bold" /></Typography>
+                                            <Stack className='text-field'>
+                                                <TextField 
+                                                  value={agentData.agentTitle}
+                                                  onChange={(e) => { handleInputChange(e.target.value, "agentCode") }}
+                                                />
+                                            </Stack>
+                                        </Stack>
+
+                                       
 
 
                                     </>
