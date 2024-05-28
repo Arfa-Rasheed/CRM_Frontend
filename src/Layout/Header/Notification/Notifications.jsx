@@ -18,6 +18,7 @@ const Notifications = (props) => {
       status: 0,
       policyNumber: "",
       unRead: true,
+      newAgentId: "`"
     }
   ]);
   const [noOfUnReadNotifications, setNoOfUnReadNotifications] = useState(0)
@@ -33,11 +34,17 @@ const Notifications = (props) => {
     setAnchorEl(null);
   };
 
-  const handleOptionChange = (policyNumber, unRead, id) => {
+  const handleOptionChange = (policyNumber, newAgentId, id) => {
     const res = httpClient.post(`/notifications/updateNotification/${id}`).catch((error) => {
       console.log(error);
     })
-    navigate(`/policyDetail/${policyNumber}`)
+    if(newAgentId){
+      navigate(`/addNewRecruit/${newAgentId}`)
+    }
+    else{
+      navigate(`/policyDetail/${policyNumber}`)
+    }
+    
   };
 
   const getNotifications = async () => {
@@ -52,6 +59,7 @@ const Notifications = (props) => {
           policyNumber: notifications.policyNumber,
           status: notifications.status,
           unRead: notifications.unRead,
+          newAgentId: notifications.newAgentId,
         })))
         setNoOfUnReadNotifications(res.data.noOfUnReadNotification)
       }
@@ -64,7 +72,8 @@ const Notifications = (props) => {
           message: notifications.message,
           policyNumber: notifications.policyNumber,
           status: notifications.status,
-          unRead: notifications.unRead
+          unRead: notifications.unRead,
+          newAgentId: notifications.newAgentId
         })))
       }
     }

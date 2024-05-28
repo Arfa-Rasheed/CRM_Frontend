@@ -74,7 +74,7 @@ const AddNewRecruit = () => {
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
     const recruitingAgentCode = localStorage.getItem("agentCode")
     const [agentData, setAgentData] = useState({
-        isApproved:false,
+        isApproved: false,
         residentState: "",
         age: "",
         firstName: "",
@@ -83,7 +83,7 @@ const AddNewRecruit = () => {
         agentCarrierNumber: "",
         agentTitle: "",
         agentRole: "",
-        agentCode:"",
+        agentCode: "",
         email: "",
         confirmEmail: "",
         addressLine1: "",
@@ -92,9 +92,6 @@ const AddNewRecruit = () => {
         state: "",
         zipCode: 0,
         activeLicense: "",
-        agentCode:"",
-        recruitmentDate:""
-
     })
 
 
@@ -377,16 +374,6 @@ const AddNewRecruit = () => {
                                 </Stack>
                             </Stack>
 
-                            <Stack className='text-field-container'>
-                                            <Typography className='form-questions'>Recruitment Date
-                                                <Asterisk color='red' size={12} weight="bold" /></Typography>
-                                            <Stack className='text-field'>
-                                                <TextField 
-                                                  value={agentData.recruitmentDate}
-                                                  onChange={(e) => { handleInputChange(e.target.value, "recruitmentDate") }}
-                                                />
-                                            </Stack>
-                                        </Stack>
 
                             {/* Recruiting Stack */}
                             {agentData.recruitingAgentCode ?
@@ -410,52 +397,42 @@ const AddNewRecruit = () => {
 
                             {
                                 _id ?
-                                isAdmin && (
-                                    <>
-                                        <Stack className='text-field-container'>
-                                            <Typography className='form-questions'>Agent's Contract Level
-                                                <Asterisk color='red' size={12} weight="bold" /></Typography>
-                                            <Stack className='text-field'>
-                                                <TextField 
-                                                value={agentData.level}
-                                                onChange={(e) => { handleInputChange(e.target.value, "level") }}
-                                                />
+                                    isAdmin && (
+                                        <>
+                                            <Stack className='text-field-container'>
+                                                <Typography className='form-questions'>Agent's Contract Level
+                                                    <Asterisk color='red' size={12} weight="bold" /></Typography>
+                                                <Stack className='text-field'>
+                                                    <TextField
+                                                        value={agentData.level}
+                                                        onChange={(e) => { handleInputChange(e.target.value, "level") }}
+                                                    />
+                                                </Stack>
                                             </Stack>
-                                        </Stack>
 
 
-                                        <Stack className='text-field-container'>
-                                            <Typography className='form-questions'>Agent's Title
-                                                <Asterisk color='red' size={12} weight="bold" /></Typography>
-                                            <Stack className='text-field'>
-                                                <TextField 
-                                                  value={agentData.agentTitle}
-                                                  onChange={(e) => { handleInputChange(e.target.value, "agentTitle") }}
-                                                />
+                                            <Stack className='text-field-container'>
+                                                <Typography className='form-questions'>Agent's Title
+                                                    <Asterisk color='red' size={12} weight="bold" /></Typography>
+                                                <Stack className='text-field'>
+                                                    <TextField
+                                                        value={agentData.agentTitle}
+                                                        onChange={(e) => { handleInputChange(e.target.value, "agentTitle") }}
+                                                    />
+                                                </Stack>
                                             </Stack>
-                                        </Stack>
-
-                                        <Stack className='text-field-container'>
-                                            <Typography className='form-questions'>Agent Code
-                                                <Asterisk color='red' size={12} weight="bold" /></Typography>
-                                            <Stack className='text-field'>
-                                                <TextField 
-                                                  value={agentData.agentCode}
-                                                  onChange={(e) => { handleInputChange(e.target.value, "agentCode") }}
-                                                />
-                                            </Stack>
-                                        </Stack>
-
-                                       
 
 
-                                    </>
-                                )
-                                : (
-                                    <></>
-                                )
+
+
+
+                                        </>
+                                    )
+                                    : (
+                                        <></>
+                                    )
                             }
-                            <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{display:agentData.isApproved===true ? 'none' : 'flex'}}>
+                            <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{ display: agentData.isApproved === true ? 'none' : 'flex' }}>
                                 <Button
                                     variant="contained"
                                     disabled=""
