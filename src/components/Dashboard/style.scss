@@ -1,15 +1,20 @@
-.grid-inner-container{
+.grid-inner-container {
     display: 'flex';
     align-items: center;
-    background-color:white;
-    height:80%;
+    background-color: white;
+    height: 80%;
     border-radius: 10px;
     height: 10vh;
     margin-top: 10px;
-    .list-items{
+
+    .list-items {
         padding-top: 0px;
+        .list-items-text{
+            color:#003478
+        }
     }
 }
+
 // .BarChart{
 //     width:833px;
 //     height:100px;
@@ -23,17 +28,46 @@
 
 
 // .CRM_dropdown{
-    .MuiAutocomplete-hasPopupIcon.css-1wuilmg-MuiAutocomplete-root .MuiOutlinedInput-root{
-        height:36px;
-        // margin:-10px;
-        margin-left: 1px;
-        background-color: #003478;
-        color: white;
-        text-align: center;
-        margin-bottom: 5px;
-      }
+.MuiAutocomplete-hasPopupIcon.css-1wuilmg-MuiAutocomplete-root .MuiOutlinedInput-root {
+    height: 36px;
+    // margin:-10px;
+    margin-left: 1px;
+    background-color: #003478;
+    color: white;
+    text-align: center;
+    margin-bottom: 5px;
+}
 
-      .css-1glvl0p-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-clearIndicator {
-         display: none;
-      }
+.css-1glvl0p-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-clearIndicator {
+    display: none;
+}
+
 // }
+.first-grid {
+    background-color: #EDEDED;
+    height: 19vh;
+    width: 95%;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto; 
+    border-radius: 15px;
+    @media (max-width:1366px) and (min-width: 1200px) {
+        width: 98%;
+        border:2px solid green
+      }
+}
+.second-grid {
+    height: 47vh;
+    width: 95%;
+    direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    border-radius: 15px;
+
+    @media (max-width:1366px) and (min-width: 1200px) {
+        width: 98%;
+        height: 43vh;
+        border: 2px solid green;
+    }
+}

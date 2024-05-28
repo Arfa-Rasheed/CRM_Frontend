@@ -49,7 +49,7 @@ const Dashboard = () => {
         agentRole: "",
         totalSales: "",
     })
-    const [highestRecruitsAgentData,setHighestRecruitsAgentData] = useState({})
+    const [highestRecruitsAgentData, setHighestRecruitsAgentData] = useState({})
 
 
     const DropdownOptions1 = [
@@ -218,9 +218,6 @@ const Dashboard = () => {
         getTotalNoOfRecruits()
     }, [month1])
 
-    // useEffect(()=>{
-    //     getDetailsOfHighestRecruitsAgent()
-    // },[])
     return (
 
         <div>
@@ -239,22 +236,21 @@ const Dashboard = () => {
                         sx={{
                             marginTop: '0px',
                             marginLeft: '277px',
-                           
+
 
                             '@media (max-width:1366px)': {
-                                marginLeft: '240px',
-                                // border: '2px solid red', // Example of changing styles within the media query
-                              }
+                                marginLeft: '228px',
+                                border: '2px solid red', 
+                            }
                         }}>
 
                         {/* 1st Container */}
-                        <Grid container 
-                        sx={{ 
-                            backgroundColor: "#EDEDED", height: '19vh', width: '95%', justifyContent: 'space-around', alignItems: 'center', margin: '0 auto', borderRadius: '15px' ,
-                            '@media (max-width:1366px)': {
-                                width: '98%',
-                                border:'2px solid green'
-                              }
+                        <Grid container className='first-grid'
+                            sx={{
+                                width: '95%',
+                                '@media (max-width:1366px) and (min-width: 1200px)': {
+                                    width: '98%',
+                                }
                             }}>
                             <Grid item md='3.5' >
                                 <CRMDropdown title={selectedOption} options={DropdownOptions1} onOptionChange={handleDropdownChange} />
@@ -262,7 +258,7 @@ const Dashboard = () => {
                                     <Grid items md='10' >
                                         <List>
                                             <ListItem className='list-items'>
-                                                <ListItemText sx={{ color: '#003478' }}><b>Health Insurance</b></ListItemText>
+                                                <ListItemText sx={{ color: '#003478' }} className='list-items-text'><b>Health Insurance</b></ListItemText>
                                             </ListItem>
                                             <ListItem className='list-items' >
                                                 {
@@ -362,7 +358,13 @@ const Dashboard = () => {
                         </Grid>
 
                         {/* 2nd Container */}
-                        <Grid container style={{ height: '47vh', width: '95%', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', margin: '0 auto', borderRadius: '15px' }}>
+                        <Grid container className='second-grid' sx={{
+                            width: '95%',
+                            '@media (max-width:1366px) and (min-width: 1200px)': {
+                                width: '98%',
+                            }
+                        }}
+                        >
                             <Grid container style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
                                 <Grid item md="3.5">
                                     <CRMDropdown type='YearlyPolicyType' title={yearlyPolicySelectedOption} options={DropdownOptions2} onOptionChange={handleYearlyPolicyDropdownChange} />
@@ -484,7 +486,7 @@ const Dashboard = () => {
                         <Grid container style={{ backgroundColor: "#EDEDED", height: '23vh', width: '95%', justifyContent: 'space-around', alignItems: 'center', margin: '0 auto', borderRadius: '15px' }}>
                             <Grid item md='3.5'>
                                 {/* <CRMButtons title='Agents Matrix' /> */}
-                                
+
                                 <Grid container sx={{ justifyContent: 'center', marginTop: '9px', height: '19vh' }} className='grid-inner-container'>
                                     <Grid items md='4'>
                                         <Typography sx={{ fontSize: '15px', fontWeight: 'bold', color: '#003478' }}>Highest Sales</Typography>
@@ -495,13 +497,13 @@ const Dashboard = () => {
 
                                             {
                                                 highestCommissionedAgentData.profilePic ?
-                                                (
-                                                    <img src={highestCommissionedAgentData.profilePic} style={{ width: '103px', height: '103px',borderRadius:'17px' }}/>
-                                                )
-                                                :
-                                                (
-                                                    <Avatar sx={{ width: '103px', height: '103px' }} />
-                                                )
+                                                    (
+                                                        <img src={highestCommissionedAgentData.profilePic} style={{ width: '103px', height: '103px', borderRadius: '17px' }} />
+                                                    )
+                                                    :
+                                                    (
+                                                        <Avatar sx={{ width: '103px', height: '103px' }} />
+                                                    )
                                             }
                                         </Grid>
                                         <Grid items md='7'>
@@ -527,17 +529,17 @@ const Dashboard = () => {
                                         <Grid items md='4'>
                                             {
                                                 highestRecruitsAgentData.profilePic ?
-                                                (
-                                                    // <img src={highestRecruitsAgentData.profilePic} style={{ width: '56px', height: '56px',borderRadius:'40px' }}/>
-                                                    <img src={highestRecruitsAgentData.profilePic} style={{ width: '103px', height: '103px',borderRadius:'17px' }}/>
+                                                    (
+                                                        // <img src={highestRecruitsAgentData.profilePic} style={{ width: '56px', height: '56px',borderRadius:'40px' }}/>
+                                                        <img src={highestRecruitsAgentData.profilePic} style={{ width: '103px', height: '103px', borderRadius: '17px' }} />
 
-                                                )
-                                                :
-                                                (
-                                                    <Avatar sx={{ width: '103px', height: '103px' }} />
-                                                )
+                                                    )
+                                                    :
+                                                    (
+                                                        <Avatar sx={{ width: '103px', height: '103px' }} />
+                                                    )
                                             }
-                                           
+
                                         </Grid>
                                         <Grid items md='7'>
                                             <Stack flexDirection='row'>
@@ -552,7 +554,7 @@ const Dashboard = () => {
 
                             </Grid>
                             <Grid item md='3.5'>
-                            <CRMDropdown title='Previous Months' dropdownNo='5'  options={previousMonths} onOptionChange={handleMonthChange1} />
+                                <CRMDropdown title='Previous Months' dropdownNo='5' options={previousMonths} onOptionChange={handleMonthChange1} />
                                 <Grid container sx={{ justifyContent: 'center', height: '14vh' }} className='grid-inner-container'>
                                     <Grid items md='6'>
                                         <Typography sx={{ fontSize: '14px', fontWeight: 'bold', color: '#003478' }}>Number Of Recruits</Typography>

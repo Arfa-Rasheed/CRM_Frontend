@@ -145,7 +145,12 @@ const Login = () => {
                                 </Stack>
                                 <Stack className='Login-container' style={{ width: '68%', height: '69vh' }}>
                                     <Stack alignItems={'center'} justifyContent={'space-around'} sx={{ width: '100%', height: isForgetPassword ? '41%' : '72%' }}>
-                                        <Stack justifyContent={'space-between'} sx={{ width: '70%', height: '80%' }}>
+                                        <Stack justifyContent={'space-between'} sx={{ 
+                                            width: '70%', height: '80%',
+                                            '@media (max-width:1366px)': {
+                                                width: '82%',
+                                              }
+                                         }}>
                                             <Typography variant='h5' sx={{ fontWeight: 'bold' }}>
                                                 {isForgetPassword ?
                                                     "Forgot Password" :

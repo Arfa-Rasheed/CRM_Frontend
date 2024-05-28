@@ -84,7 +84,6 @@ const AddNewRecruit = () => {
         agentTitle: "",
         agentRole: "",
         agentCode:"",
-        recruitmentDate: "",
         email: "",
         confirmEmail: "",
         addressLine1: "",
@@ -441,7 +440,7 @@ const AddNewRecruit = () => {
                                                 <Asterisk color='red' size={12} weight="bold" /></Typography>
                                             <Stack className='text-field'>
                                                 <TextField 
-                                                  value={agentData.agentTitle}
+                                                  value={agentData.agentCode}
                                                   onChange={(e) => { handleInputChange(e.target.value, "agentCode") }}
                                                 />
                                             </Stack>

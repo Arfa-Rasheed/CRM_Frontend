@@ -47,6 +47,12 @@ const CRMDropdown = (props) => {
           borderTopLeftRadius: "0",
           borderBottomLeftRadius: "0",
           border: props.title === 'Previous Years' ? "2px solid #EDEDED" : "",
+          "@media screen and (max-width:1366px)": {
+            width: "99%",
+            height:'27px',
+            fontSize: "10px",
+            // border: "2px solid red",
+          },
           "@media screen and (max-width:899px)": {
             width: "168px",
             // border: "2px solid red",
