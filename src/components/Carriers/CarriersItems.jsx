@@ -21,15 +21,15 @@ const CarriersItems = (props) => {
     };
     return (
         <Stack sx={{ width: '27%', height: '24vh' }}>
-            <img src={props.carrierPic} />
+            <img src={props.carrierPic} style={{height:'15vh'}}/>
             <div className='CarrierItemDropdown'>
                 {/* <CRMDropdown /> */}
                 <Button
                     aria-controls="dropdown-menu"
                     aria-haspopup="true"
-                    // onClick={handleClick}
                     endIcon={<ArrowDropDownIcon />}
                     sx={{
+                        display:props.url ? 'flex' : 'none',
                         backgroundColor:'#003478',
                         color:"white",
                         height: "39px",

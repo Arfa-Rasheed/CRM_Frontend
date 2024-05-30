@@ -22,6 +22,7 @@ const Recruits = () => {
   const navigate = useNavigate()
   const snackbar_Ref = useRef()
   const dispatch = useDispatch()
+  const [searchString,setSearchString] = useState('')
   const [gridData, setGridData] = useState([])
   const gridHeader = [
     {
@@ -69,7 +70,7 @@ const Recruits = () => {
 
   const LoadgridData = async () => {
     dispatch(showLoader())
-    const res = await httpClient.get(isAdmin ? '/agents/getAllAgents' : '/agents/getAllAgentsAgentView')
+    const res = await httpClient.get(isAdmin ? `/agents/getAllAgents?search=${searchString}` : '/agents/getAllAgentsAgentView')
       .catch((error) => {
         dispatch(hideLoader())
         snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
@@ -85,7 +86,7 @@ const Recruits = () => {
 
   useEffect(() => {
     LoadgridData()
-  }, [])
+  }, [searchString])
 
   return (
     <>
@@ -105,7 +106,11 @@ const Recruits = () => {
                   <h2 style={{ color: 'black', textAlign: 'center' }}>All Recruits</h2>
                 </Box>
                 <Box sx={{ width: '56%', height: '12vh', display: 'flex', alignItems: 'flex-end', flexDirection: 'column', justifyContent: 'space-between' }}>
-                  <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
+                  <TextField id="outlined-basic" 
+                  placeholder="Search" 
+                  variant="outlined" 
+                  onChange={(e)=>{setSearchString(e.target.value)}}
+                  sx={{ width: '245px', height: '5vh' }}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">

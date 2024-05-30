@@ -23,6 +23,8 @@ const ApprovePolicy = () => {
     // const [isChecked, setIsChecked] = useState(false)
     const isAdmin = localStorage.getItem("isAdmin")
     const { id } = useParams()
+    const {policyNumber} = useParams()
+
     const [policyData, setPolicyData] = useState({
         isSplit: false,
         id: "",
@@ -121,9 +123,22 @@ const ApprovePolicy = () => {
     ]
 
 
-    const getPolicyDetail = async () => {
+    const getPolicyDetailById = async () => {
         dispatch(showLoader())
         const res = await httpClient.get(`/policies/getPolicyByID/${id}`).catch((error) => {
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+        })
+
+        if (res.status === 200) {
+            dispatch(hideLoader())
+            setPolicyData(res?.data)
+        }
+    }
+
+    const getPolicyDetailByPolicyNumber = async () => {
+        dispatch(showLoader())
+        const res = await httpClient.get(`/policies/getPolicyByPolicyNumber/${policyNumber}`).catch((error) => {
             dispatch(hideLoader())
             snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
         })
@@ -185,20 +200,6 @@ const ApprovePolicy = () => {
      }
      }
 
-    const chargedBackHandler = async () => {
-        dispatch(showLoader())
-        const res = await httpClient.post(`/policies/chargedBack/${id}`, policyData).catch((error) => {
-            dispatch(hideLoader())
-            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
-        })
-        if (res.status === 200) {
-            dispatch(hideLoader())
-            snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
-            setTimeout(() => {
-                // navigate('/statements');
-            }, 4000);
-        }
-    }
 
     const handleToggle = () => {
         setPolicyData(prevState => ({
@@ -209,7 +210,10 @@ const ApprovePolicy = () => {
 
     useEffect(() => {
         if (id) {
-            getPolicyDetail()
+            getPolicyDetailById()
+        }
+        else if (policyNumber){
+            getPolicyDetailByPolicyNumber()
         }
 
     }, [])

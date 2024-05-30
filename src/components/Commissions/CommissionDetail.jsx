@@ -10,6 +10,9 @@ import LinearProgressWithLabel from '../../shared-component/ProgressBar'
 import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar'
 import { useDispatch } from 'react-redux'
 import { hideLoader, showLoader } from '../../Store/mainSlice.js'
+import Calendar from '../../shared-component/Calender/Calender.jsx'
+import dayjs from 'dayjs'
+import '../Policies/style.scss'
 
 const CommissionDetail = () => {
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
@@ -18,7 +21,7 @@ const CommissionDetail = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [policyData, setPolicyData] = useState({
-        paidOutDate:"",
+        paidOutDate: "",
         isPaid: false,
         policySubmissionDate: "",
         policyCarrier: "",
@@ -43,19 +46,19 @@ const CommissionDetail = () => {
         overwrittingAgentCode2: "",
         overwrittingAgentContractLevel2: 0,
         overwrittingAgentCommission2: 0,
-        split1_ContractLevel:0,
-        split1_agentCode:"",
-        split1_agentCommission:0,
-        split1_splitRatio:0,
-        
-        split_1_OWAgent1_ContractLevel:0,
-        split_1_OWAgent1_Commission:0,
-        split_1_OWAgent2_ContractLevel:0,
-        split_1_OWAgent2_Commission:0,
+        split1_ContractLevel: 0,
+        split1_agentCode: "",
+        split1_agentCommission: 0,
+        split1_splitRatio: 0,
+
+        split_1_OWAgent1_ContractLevel: 0,
+        split_1_OWAgent1_Commission: 0,
+        split_1_OWAgent2_ContractLevel: 0,
+        split_1_OWAgent2_Commission: 0,
 
         split2_AgentCode: "",
         split2_agentCommission: 0,
-        split2_ContractLevel:0,
+        split2_ContractLevel: 0,
         split2_splitRatio: 0,
         split_2_OWAgent1_ContractLevel: 0,
         split_2_OWAgent1_Commission: 0,
@@ -69,6 +72,11 @@ const CommissionDetail = () => {
 
     const handleInputChange = (data, field) => {
         setPolicyData((prevFormData) => ({ ...prevFormData, [field]: data }));
+    };
+
+    const handleDateChange = (date, field) => {
+        const formattedDate = dayjs(date).format('M/D/YYYY');
+        setPolicyData((prevFormData) => ({ ...prevFormData, [field]: formattedDate }));
     };
 
 
@@ -134,7 +142,7 @@ const CommissionDetail = () => {
                 }}>
                     <SideBar />
                     <CustomizedSnackbars ref={snackbar_Ref} />
-                    <Stack sx={{ width: '81.8%', height:isAdmin ? '140vh' : '90vh', marginLeft: '18%' }}>
+                    <Stack sx={{ width: '81.8%', height: isAdmin ? '140vh' : '90vh', marginLeft: '18%' }}>
                         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "140vh", marginTop: '10px' }}>
                             <Stack alignItems={'center'} sx={{ width: '96%', height: '98%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
                                 {
@@ -154,13 +162,17 @@ const CommissionDetail = () => {
 
                                 <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '100%', marginTop: '20px' }}>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: '100%' }}>
-                                        <TextField
+                                        {/* <TextField
                                             label="Paid Out Date:"
                                             variant="filled"
                                             value={policyData.paidOutDate}
                                             sx={{ width: '30%' }}
                                             onChange={(e) => { handleInputChange(e.target.value, "paidOutDate") }}
-                                        />
+                                        /> */}
+                                        <Stack className='addNewPolicyTextField'>
+                                            <Calendar value={policyData.paidOutDate} onDateChange={(date) => handleDateChange(date, 'paidOutDate')} />
+                                        </Stack>
+
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="Date:"
@@ -367,7 +379,7 @@ const CommissionDetail = () => {
                                             sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.split_1_OWAgent1_Commission}
                                             onChange={(e) => { handleInputChange(e.target.value, "split_1_OWAgent1_Commission") }} />
-                                         <TextField
+                                        <TextField
                                             disabled={_id ? true : false}
                                             label="Split_1_OWAgent2_Contract Level"
                                             variant="filled"
@@ -418,7 +430,7 @@ const CommissionDetail = () => {
                                             sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.split_2_OWAgent1_Commission}
                                             onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent1_Commission") }} />
-                                         <TextField
+                                        <TextField
                                             disabled={_id ? true : false}
                                             label="Split_2_OWAgent2_Contract Level"
                                             variant="filled"
@@ -431,7 +443,7 @@ const CommissionDetail = () => {
                                             variant="filled"
                                             sx={{ width: '30%', display: isAdmin ? 'flex' : 'none' }}
                                             value={policyData.split_2_OWAgent2_Commission}
-                                            onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent2_Commission") }} />    
+                                            onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent2_Commission") }} />
                                         <TextField
                                             disabled={_id ? true : false}
                                             label="Insured First Name"

@@ -105,8 +105,6 @@ const AddNewPolicy_Agent = () => {
     }
 
     const carriers = [
-        'Crump',
-        'SuranceBay',
         'TransAmerica',
         'Athene',
         'NationWide',
@@ -116,11 +114,7 @@ const AddNewPolicy_Agent = () => {
         'BlueCross BlueShield',
         'United Healthcare',
         'LSPN',
-        'United American',
         'Cigna',
-        'Debtmerica',
-        'Prudential',
-        'Mutual Of Omaha'
     ]
 
     const policyTypes =[

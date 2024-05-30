@@ -17,7 +17,7 @@ export default function Calendar(props) {
     if (props?.value) {
       const parsedDate = dayjs(props?.value , 'M/D/YYYY');
       console.log("parsedDate",parsedDate);
-      setValue(parsedDate.isValid() ? parsedDate : parsedDate );
+      setValue(parsedDate.isValid() ?   parsedDate : parsedDate );
     } else {
       setValue(null); 
     }

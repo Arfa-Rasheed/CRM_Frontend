@@ -18,7 +18,7 @@ const Notifications = (props) => {
       status: 0,
       policyNumber: "",
       unRead: true,
-      newAgentId: "`"
+      newAgentId: ""
     }
   ]);
   const [noOfUnReadNotifications, setNoOfUnReadNotifications] = useState(0)
@@ -34,7 +34,7 @@ const Notifications = (props) => {
     setAnchorEl(null);
   };
 
-  const handleOptionChange = (policyNumber, newAgentId, id) => {
+  const handleOptionChange = (policyNumber, id,newAgentId) => {
     const res = httpClient.post(`/notifications/updateNotification/${id}`).catch((error) => {
       console.log(error);
     })
@@ -42,7 +42,8 @@ const Notifications = (props) => {
       navigate(`/addNewRecruit/${newAgentId}`)
     }
     else{
-      navigate(`/policyDetail/${policyNumber}`)
+      // navigate(`/policyDetail/${policyNumber}`)
+      navigate(`/approvePolicyByPolicyNumber/${policyNumber}`)
     }
     
   };
@@ -134,7 +135,7 @@ const Notifications = (props) => {
                     }
                   }}
                   key={index}
-                  onClick={() => handleOptionChange(item.policyNumber, item.unRead, item.id)}
+                  onClick={() => handleOptionChange(item.policyNumber, item.id, item.newAgentId)}
                 >
                   <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: "85%" }}>
                     <Typography sx={{ fontSize: '14px' }}>{item.message}</Typography>

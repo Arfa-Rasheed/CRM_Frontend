@@ -83,8 +83,6 @@ const Header = () => {
                             <Notifications />
                         </Stack>
 
-
-
                         <Profile />
                     </Stack>
 

@@ -52,6 +52,7 @@ const AppRouter = () => {
           <Route path='/approvePolicy' element={<ApprovePolicy/>}></Route>
           <Route path='/addNewPolicy_agent/:id' element={<AddNewPolicy_Agent/>}></Route>
           <Route path='/approvePolicy/:id' element={<ApprovePolicy/>}></Route>
+          <Route path='/approvePolicyByPolicyNumber/:policyNumber' element={<ApprovePolicy/>}></Route>
           <Route path='/progress' element={<LinearProgressWithLabel/>}></Route>
         </Routes>
       </Router>
