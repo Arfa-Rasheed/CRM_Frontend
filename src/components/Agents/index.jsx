@@ -110,9 +110,6 @@ const Agents = () => {
   }
 
   const handleDeleteAgent = async (id) => {
-    alert('')
-    console.log("SelectedAgentIds",id);
-    console.log("uygiu");
     setSelectedAgentIds(id)
   }
 
