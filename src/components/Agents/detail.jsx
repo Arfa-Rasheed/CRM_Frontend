@@ -273,11 +273,11 @@ const AgentDetail = () => {
 
                                     <Stack sx={{ width: '30%', height: '30%', backgroundColor: '#2F5597' }}>
                                         <Typography className='agentDetail-text'>Health Insurance Sales:</Typography>
-                                        <Typography className='agentDetail-text'>{salesData.Life.sales }</Typography>
+                                        <Typography className='agentDetail-text'>{salesData.Health.sales }</Typography>
                                     </Stack>
                                     <Stack sx={{ width: '30%', height: '30%', backgroundColor: '#2F5597' }}>
                                         <Typography className='agentDetail-text'>Life Insurance Sales:</Typography>
-                                        <Typography className='agentDetail-text'>{salesData.Health.sales }</Typography>
+                                        <Typography className='agentDetail-text'>{salesData.Life.sales }</Typography>
                                     </Stack>
                                     <Stack sx={{ width: '30%', height: '30%', backgroundColor: '#2F5597' }}>
                                         <Typography className='agentDetail-text'>Annuities Sales:</Typography>

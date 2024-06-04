@@ -49,6 +49,7 @@ export default httpClient;
 
 // server {
 //     listen 80;
+//     server_name portal.joptimanconsultancy.com. www.portal.joptimanconsultancy.com.
 //     root /root/CRM_Frontend/build; 
 
 //     location / {
@@ -62,3 +63,5 @@ export default httpClient;
 //     }
 
 // }
+
+
