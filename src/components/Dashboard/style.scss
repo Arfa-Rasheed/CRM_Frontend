@@ -9,9 +9,19 @@
 
     .list-items {
         padding-top: 0px;
-        .list-items-text{
-            color:#003478
+
+        .list-items-text {
+            color: #003478
         }
+    }
+
+    .css-1p823my-MuiListItem-root {
+        height: 31px;
+
+        @media (max-width:1366px) and (min-width: 1200px) {
+            height: 24px;
+        }
+
     }
 }
 
@@ -49,13 +59,15 @@
     width: 95%;
     justify-content: space-around;
     align-items: center;
-    margin: 0 auto; 
+    margin: 0 auto;
     border-radius: 15px;
+
     @media (max-width:1366px) and (min-width: 1200px) {
         width: 98%;
-        border:2px solid green
-      }
+        // border: 2px solid green
+    }
 }
+
 .second-grid {
     height: 47vh;
     width: 95%;
@@ -68,6 +80,44 @@
     @media (max-width:1366px) and (min-width: 1200px) {
         width: 98%;
         height: 43vh;
-        border: 2px solid green;
+        // border: 2px solid green;
+    }
+}
+
+.third-grid {
+    background-color: #EDEDED;
+    height: 23vh;
+    width: 95%;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    border-radius: 15px;
+
+
+    @media (max-width:1366px) and (min-width: 1200px) {
+        width: 98%;
+        // border: 2px solid green
+    }
+}
+
+.profilePic-dashboard {
+    width: 103px;
+    height: 103px;
+    border-radius: 17px;
+
+    @media (max-width:1366px) and (min-width: 1200px) {
+        width: 81px;
+        height: 74px;
+    }
+}
+
+.avatar-dashboard{
+    width: 103px;
+    height: 103px;
+    border-radius: 17px;
+
+    @media (max-width:1366px) and (min-width: 1200px) {
+        width: 81px;
+        height: 74px;
     }
 }

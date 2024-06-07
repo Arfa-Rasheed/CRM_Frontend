@@ -483,30 +483,39 @@ const Dashboard = () => {
                         </Grid>
 
                         {/* 3rd container */}
-                        <Grid container style={{ backgroundColor: "#EDEDED", height: '23vh', width: '95%', justifyContent: 'space-around', alignItems: 'center', margin: '0 auto', borderRadius: '15px' }}>
+                        <Grid container 
+                        className='third-grid'  
+                        sx={{
+                            width: '95%',
+                            '@media (max-width:1366px) and (min-width: 1200px)': {
+                                width: '98%',
+                            }
+                        }}                        >
                             <Grid item md='3.5'>
-                                {/* <CRMButtons title='Agents Matrix' /> */}
-
                                 <Grid container sx={{ justifyContent: 'center', marginTop: '9px', height: '19vh' }} className='grid-inner-container'>
-                                    <Grid items md='4'>
+                                    <Grid items md='5'>
                                         <Typography sx={{ fontSize: '15px', fontWeight: 'bold', color: '#003478' }}>Highest Sales</Typography>
                                     </Grid>
                                     <Grid container style={{ justifyContent: 'center' }}>
-                                        <Grid items md='4'>
-                                            {/* <Avatar sx={{ width: '56px', height: '56px' }} /> */}
-
+                                        <Grid items md='3.5'>
                                             {
                                                 highestCommissionedAgentData.profilePic ?
                                                     (
-                                                        <img src={highestCommissionedAgentData.profilePic} style={{ width: '103px', height: '103px', borderRadius: '17px' }} />
+                                                        <img src={highestCommissionedAgentData.profilePic} className='profilePic-dashboard'
+                                                    //      style={{ width: '103px', height: '103px', borderRadius: '17px',
+                                                    //     '@media (max-width:1366px) and (min-width: 1200px)': {
+                                                    //         width: '98%',
+                                                    //     }
+                                                    //  }} 
+                                                     />
                                                     )
                                                     :
                                                     (
-                                                        <Avatar sx={{ width: '103px', height: '103px' }} />
+                                                        <Avatar className='avatar-dashboard'/>
                                                     )
                                             }
                                         </Grid>
-                                        <Grid items md='7'>
+                                        <Grid items md='8'>
                                             <Stack flexDirection='row'>
                                                 <Typography sx={{ fontSize: '13px', fontWeight: 'bold' }}>Agent Name:</Typography><Typography sx={{ fontSize: '12px' }}>{highestCommissionedAgentData.firstName} {highestCommissionedAgentData.lastName}</Typography>
                                             </Stack>

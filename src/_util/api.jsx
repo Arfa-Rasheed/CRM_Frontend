@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const httpClient = axios.create({
     // baseURL: "http://localhost:5000/api/",
-    baseURL: "http://api.projecttesting.pro/api/"
+    baseURL: "https://api.portal.joptimanconsultancy.com./api/"
 });
 
 httpClient.interceptors.request.use(function (config) {
@@ -17,7 +17,7 @@ export default httpClient;
 
 // server {
 //     listen 80;
-//     server_name api.alkauseradmissions.net www.api.alkauseradmissions.net;
+//     server_name api.portal.joptimanconsultancy.com. www.api.portal.joptimanconsultancy.com.;
 
 //     location / {
 //         proxy_pass http://localhost:5000;
