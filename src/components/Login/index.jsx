@@ -137,7 +137,6 @@ const Login = () => {
                             <Stack alignItems={'center'} justifyContent={'space-around'} sx={{ width: '100%', height: '100%', backgroundColor: 'white', borderBottomRightRadius: "200px" }}>
                                 <Stack alignItems={'flex-end'} sx={{ width: '86%' }}>
                                     <Stack flexDirection={'row'} sx={{ width: '23%' }}>
-                                        {/* <img sx={{ width: '100%' }} src={joptimanLogo} /> */}
                                         <img src={svglogo} />
                                         <img src={joptimenConsultancyLogo} style={{ width: '102px', height: '5vh' }} />
                                     </Stack>
@@ -269,10 +268,6 @@ const Login = () => {
                                                 )
                                             }
                                         </Stack>
-                                        {/* <Stack flexDirection={'row'}>
-                                                    <Typography style={{ fontSize: '14px' }}>Don't have an account? </Typography>
-                                                    <Typography style={{ fontSize: '14px', color: "#F08613" }}>Sign Up</Typography>
-                                                </Stack> */}
                                     </Stack>
 
 
