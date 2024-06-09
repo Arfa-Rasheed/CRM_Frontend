@@ -593,7 +593,7 @@ const Dashboard = () => {
                                         </Grid>
                                         <Grid items md='7.5' >
                                             <Stack flexDirection='row'>
-                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold',width:'46%' }}>Agent Name:</Typography><Typography sx={{ fontSize: '12px' }}>{highestCommissionedAgentData.firstName} {highestCommissionedAgentData.lastName}</Typography>
+                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold',width:'46%'}}>Agent Name:</Typography><Typography sx={{ fontSize: '12px' , width:'auto'}}>{highestCommissionedAgentData.firstName} {highestCommissionedAgentData.lastName}</Typography>
                                             </Stack>
                                             <Stack flexDirection='row'>
                                                 <Typography sx={{ fontSize: '13px', fontWeight: 'bold' ,width:'36%'}}>Agent Title: </Typography><Typography sx={{ fontSize: '12px' }}>{highestCommissionedAgentData.agentTitle} </Typography>
@@ -631,7 +631,7 @@ const Dashboard = () => {
                                         </Grid>
                                         <Grid items md='7.5'>
                                             <Stack flexDirection='row'>
-                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold',width:'46%' }}>Agent Name:</Typography><Typography sx={{ fontSize: '12px' }}>{highestRecruitsAgentData.firstName} {highestRecruitsAgentData.lastName}</Typography>
+                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold',width:'40%' }}>Agent Name:</Typography><Typography sx={{ fontSize: '12px' }}>{highestRecruitsAgentData.firstName} {highestRecruitsAgentData.lastName}</Typography>
                                             </Stack>
                                             <Stack flexDirection='row'>
                                                 <Typography sx={{ fontSize: '13px', fontWeight: 'bold',width:'36%' }}>Agent Title:</Typography><Typography sx={{ fontSize: '12px' }}> {highestRecruitsAgentData.agentTitle}</Typography>

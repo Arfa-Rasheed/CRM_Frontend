@@ -83,9 +83,10 @@ const Administration = () => {
       options: [
         {
           name: "Emails",
-          url: ""
+          // url: ""
         }
-      ]
+      ],
+      isEmail:true
     },
     {
       title: "Guidlines and Policies",
@@ -103,7 +104,6 @@ const Administration = () => {
     },
     {
       title: "Producing Agent Standards Operating",
-      // isLink: true,
       options:[
         {
           name:"Producing Agent Trainee",
@@ -245,6 +245,9 @@ const Administration = () => {
                             </Button>
 
                           )
+                          // :menu.isEmail ? (
+                            
+                          // )
                           : menu.isGrid ? (
                             <>
                               <Button
@@ -286,7 +289,7 @@ const Administration = () => {
 
                           )
                             : (
-                              <Dropdown title={menu.title} options={menu.options} />
+                              <Dropdown title={menu.title} options={menu.options} isEmail={menu.isEmail}/>
                             )
                       )
                     })

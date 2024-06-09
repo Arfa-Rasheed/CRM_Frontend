@@ -6,7 +6,7 @@ const Dropdown = (props) => {
     const [menuOpen, setMenuOpen] = useState(false)
     const options = props.options
     const handleClick = () => {
-        console.log("options",options);
+        console.log("options", options);
         setMenuOpen(!menuOpen)
     }
 
@@ -19,16 +19,16 @@ const Dropdown = (props) => {
         link.target = '_blank';
         // Trigger a click event on the link
         link.click();
-      }
-      
-      // Example usage:
+    }
+
+    // Example usage:
     //   const pdfUrl = 'https://example.com/path/to/your/pdf.pdf';
     //   openPDFInNewTab(pdfUrl);
-      
 
-    useEffect(()=>{
-        console.log("options",options);
-    },[])
+
+    useEffect(() => {
+        console.log("options", options);
+    }, [])
     return (
         <>
             <Button
@@ -43,7 +43,7 @@ const Dropdown = (props) => {
                     width: "267px",
                     fontSize: "12px",
                     padding: "3px",
-                    marginTop:'4px',
+                    marginTop: '4px',
                     borderTopLeftRadius: "0",
                     borderBottomLeftRadius: "0",
                     border: props.title === 'Previous Years' ? "2px solid #EDEDED" : "",
@@ -60,18 +60,41 @@ const Dropdown = (props) => {
             </Button>
             {
                 menuOpen && (
-                    <Stack flexWrap={'wrap'} flexDirection={'row'} sx={{brder:"2px solid red" ,width:'52%'}}>
+                    <Stack flexWrap={'wrap'} flexDirection={'row'} sx={{ brder: "2px solid red", width: '52%' }}>
                         {
                             options?.map((option) => {
                                 return (
-                                    <Stack  sx={{width:'81%',borderRadius:"4px",border:'2px solid black'}}>
-                                        <Typography sx={{textAlign:'center',fontSize:'14px',cursor:"pointer"}} 
-                                         onClick={(e) => {
-                                            if (option.url) { // Check if URL is not empty
-                                            openPDFInNewTab(option.url); 
-                                            e.stopPropagation(); 
-                                        } }}
-                                       >{option.name}</Typography>
+                                    <Stack sx={{ width: '81%', borderRadius: "4px", border: '2px solid black' }}>
+                                        {/* <Typography sx={{ textAlign: 'center', fontSize: '14px', cursor: "pointer" }}
+                                            onClick={(e) => {
+                                                if (option.url) { // Check if URL is not empty
+                                                    openPDFInNewTab(option.url);
+                                                    e.stopPropagation();
+                                                }
+                                            }}
+                                        >{option.name}
+                                        </Typography> */}
+                                        {
+                                            props.isEmail ? (
+                                                <a href="mailto:admin@joptimanconsultancy.com" style={{textDecoration:'none',color:'black'}}>
+                                                    <Typography sx={{ textAlign: 'center', fontSize: '14px', cursor: "pointer" }}>
+                                                        {option.name}
+                                                    </Typography>
+                                                </a>
+                                            )
+                                                : (
+                                                    <Typography sx={{ textAlign: 'center', fontSize: '14px', cursor: "pointer" }}
+                                                        onClick={(e) => {
+                                                            if (option.url) { // Check if URL is not empty
+                                                                openPDFInNewTab(option.url);
+                                                                e.stopPropagation();
+                                                            }
+                                                        }}
+                                                    >
+                                                        {option.name}
+                                                    </Typography>
+                                                )
+                                        }
                                     </Stack>
                                 )
                             })
