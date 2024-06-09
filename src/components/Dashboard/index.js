@@ -16,9 +16,63 @@ const Dashboard = () => {
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
     const snackbar_Ref = useRef(null)
     const dispatch = useDispatch()
-    const [year, setYear] = useState('2024')
-    const [month, setMonth] = useState('May')
-    const [month1, setMonth1] = useState('May')
+    const monthNames = [
+        {
+          name: "Jan",
+          index: 1,
+        },
+        {
+          name: "February",
+          index: 2,
+        },
+        {
+          name: "March",
+          index: 3,
+        },
+        {
+          name: "April",
+          index: 4,
+        },
+        {
+          name: "May",
+          index: 5,
+        },
+        {
+          name: "June",
+          index: 6,
+        },
+        {
+          name: "July",
+          index: 7,
+        },
+        {
+          name: "August",
+          index: 8
+        },
+        {
+          name: "September",
+          index: 9
+        },
+        {
+          name: "October",
+          index: 10
+        },
+        {
+          name: "November",
+          index: 11
+        },
+        {
+          name: "December",
+          index: 12
+        },
+      ];
+    const currentDate = new Date()
+    const currentYear = currentDate.getFullYear()
+    const CurrentMonth = currentDate.getMonth()+1
+    const currentMonthName = monthNames.find(m => m.index === CurrentMonth).name;
+    const [year, setYear] = useState(currentYear)
+    const [month, setMonth] = useState(currentMonthName)
+    const [month1, setMonth1] = useState(currentMonthName)
     const [currentMonth, setCurrentMonth] = useState('')
     const [totalSoldPolicies, setTotalSoldPolicies] = useState(0)
     const [totalHealthInsurance, setTotalHealthInsurance] = useState(0)
@@ -42,6 +96,8 @@ const Dashboard = () => {
     const [selectedOption, setSelectedOption] = useState('Productivity Matrix')
     const [yearlyPolicySelectedOption, setYearlyPolicySelectedOption] = useState('Productivity Matrix')
     const [totalNoOfRecruits, setTotalNoOfRecruits] = useState()
+    const [previousYears,setPreviousYears] = useState([])
+    const [previousMonths,setPreviousMonths] = useState(["","",""])
     const [highestCommissionedAgentData, setHighestCommissionedAgentData] = useState({
         agentFirstName: "",
         agentLastName: "",
@@ -50,8 +106,6 @@ const Dashboard = () => {
         totalSales: "",
     })
     const [highestRecruitsAgentData, setHighestRecruitsAgentData] = useState({})
-
-
     const DropdownOptions1 = [
         "Productivity Matrix",
         "Policy Matrix",
@@ -65,20 +119,20 @@ const Dashboard = () => {
         "CashFlow Matrix"
     ];
 
-    const previousMonths = [
-        "February",
-        "March",
-        "April"
-    ]
+    // const previousMonths = [
+    //     "February",
+    //     "March",
+    //     "April"
+    // ]
 
-    const previousYears = [
-        2024,
-        2023,
-        2022,
-        2021,
-        2020,
+    // const previousYears = [
+    //     2024,
+    //     2023,
+    //     2022,
+    //     2021,
+    //     2020,
 
-    ]
+    // ]
 
 
     const handleDropdownChange = (selectedOption) => {
@@ -99,6 +153,30 @@ const Dashboard = () => {
 
     const handleYearChange = (selectedOption) => {
         setYear(selectedOption)
+    }
+
+    const getPreviousYears = async()=>{
+        dispatch(showLoader())
+        const res =await httpClient.get('/dashboard/getPreviousYears').catch((error)=>{
+            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+        })
+
+        if(res?.status === 200){
+            // console.log("getPreviousYears",res)
+            dispatch(hideLoader())
+            setPreviousYears(res?.data)
+        }
+    }
+    const getPreviousMonths = async()=>{
+        dispatch(showLoader())
+        const res =await httpClient.get('/dashboard/getPreviousMonths').catch((error)=>{
+            snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
+        })
+
+        if(res?.status === 200){
+            dispatch(hideLoader())
+            setPreviousMonths(res?.data)
+        }
     }
 
     const LoadMonthlyPolicyData = async () => {
@@ -172,7 +250,6 @@ const Dashboard = () => {
         }
     }
 
-
     const getDetailsOfHighestRecruitsAgent = async () => {
         dispatch(showLoader())
         const res = await httpClient.get(`/dashboard/highestRecruitsAgent/${month1}`)
@@ -186,8 +263,6 @@ const Dashboard = () => {
             setHighestRecruitsAgentData(res.data)
         }
     }
-
-
 
     const getTotalNoOfRecruits = async () => {
         dispatch(showLoader())
@@ -203,8 +278,12 @@ const Dashboard = () => {
         }
     }
 
+    useEffect(()=>{
+        getPreviousYears()
+        getPreviousMonths()
+    },[])
+
     useEffect(() => {
-        // LoadMonthlyPolicyData()
         yearlyPolicyData()
     }, [year])
 
@@ -240,7 +319,7 @@ const Dashboard = () => {
 
                             '@media (max-width:1366px)': {
                                 marginLeft: '228px',
-                                border: '2px solid red', 
+                                // border: '2px solid red',
                             }
                         }}>
 
@@ -483,44 +562,41 @@ const Dashboard = () => {
                         </Grid>
 
                         {/* 3rd container */}
-                        <Grid container 
-                        className='third-grid'  
-                        sx={{
-                            width: '95%',
-                            '@media (max-width:1366px) and (min-width: 1200px)': {
-                                width: '98%',
-                            }
-                        }}                        >
+                        <Grid container
+                            className='third-grid'
+                            sx={{
+                                width: '95%',
+                                '@media (max-width:1366px) and (min-width: 1200px)': {
+                                    width: '98%',
+                                }
+                            }}                        >
                             <Grid item md='3.5'>
                                 <Grid container sx={{ justifyContent: 'center', marginTop: '9px', height: '19vh' }} className='grid-inner-container'>
                                     <Grid items md='5'>
                                         <Typography sx={{ fontSize: '15px', fontWeight: 'bold', color: '#003478' }}>Highest Sales</Typography>
                                     </Grid>
                                     <Grid container style={{ justifyContent: 'center' }}>
-                                        <Grid items md='3.5'>
+                                        <Grid items md='3.7'>
                                             {
                                                 highestCommissionedAgentData.profilePic ?
                                                     (
                                                         <img src={highestCommissionedAgentData.profilePic} className='profilePic-dashboard'
-                                                    //      style={{ width: '103px', height: '103px', borderRadius: '17px',
-                                                    //     '@media (max-width:1366px) and (min-width: 1200px)': {
-                                                    //         width: '98%',
-                                                    //     }
-                                                    //  }} 
-                                                     />
+                                                        />
                                                     )
                                                     :
                                                     (
-                                                        <Avatar className='avatar-dashboard'/>
+                                                        <Box className='avatar-dashboard' >
+                                                            <Avatar />
+                                                        </Box>
                                                     )
                                             }
                                         </Grid>
-                                        <Grid items md='8'>
+                                        <Grid items md='7.5' >
                                             <Stack flexDirection='row'>
-                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold' }}>Agent Name:</Typography><Typography sx={{ fontSize: '12px' }}>{highestCommissionedAgentData.firstName} {highestCommissionedAgentData.lastName}</Typography>
+                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold',width:'46%' }}>Agent Name:</Typography><Typography sx={{ fontSize: '12px' }}>{highestCommissionedAgentData.firstName} {highestCommissionedAgentData.lastName}</Typography>
                                             </Stack>
                                             <Stack flexDirection='row'>
-                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold' }}>Agent Title:</Typography><Typography sx={{ fontSize: '12px' }}>{highestCommissionedAgentData.agentTitle} </Typography>
+                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold' ,width:'36%'}}>Agent Title: </Typography><Typography sx={{ fontSize: '12px' }}>{highestCommissionedAgentData.agentTitle} </Typography>
                                             </Stack>
                                         </Grid>
                                     </Grid>
@@ -535,32 +611,34 @@ const Dashboard = () => {
                                         <Typography sx={{ fontSize: '14px', fontWeight: 'bold', color: '#003478' }}>Highest Recruits</Typography>
                                     </Grid>
                                     <Grid container style={{ justifyContent: 'center' }}>
-                                        <Grid items md='4'>
+                                        <Grid items md='3.7'>
                                             {
                                                 highestRecruitsAgentData.profilePic ?
                                                     (
                                                         // <img src={highestRecruitsAgentData.profilePic} style={{ width: '56px', height: '56px',borderRadius:'40px' }}/>
-                                                        <img src={highestRecruitsAgentData.profilePic} style={{ width: '103px', height: '103px', borderRadius: '17px' }} />
+                                                        <img src={highestRecruitsAgentData.profilePic} className='profilePic-dashboard' />
 
                                                     )
                                                     :
                                                     (
-                                                        <Avatar sx={{ width: '103px', height: '103px' }} />
+                                                        <Box className='avatar-dashboard' >
+                                                            <Avatar />
+                                                        </Box>
+
                                                     )
                                             }
 
                                         </Grid>
-                                        <Grid items md='7'>
+                                        <Grid items md='7.5'>
                                             <Stack flexDirection='row'>
-                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold' }}>Agent Name:</Typography><Typography sx={{ fontSize: '12px' }}>{highestRecruitsAgentData.firstName} {highestRecruitsAgentData.lastName}</Typography>
+                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold',width:'46%' }}>Agent Name:</Typography><Typography sx={{ fontSize: '12px' }}>{highestRecruitsAgentData.firstName} {highestRecruitsAgentData.lastName}</Typography>
                                             </Stack>
                                             <Stack flexDirection='row'>
-                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold' }}>Agent Title:</Typography><Typography sx={{ fontSize: '12px' }}> {highestRecruitsAgentData.agentTitle}</Typography>
+                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold',width:'36%' }}>Agent Title:</Typography><Typography sx={{ fontSize: '12px' }}> {highestRecruitsAgentData.agentTitle}</Typography>
                                             </Stack>
                                         </Grid>
                                     </Grid>
                                 </Grid>
-
                             </Grid>
                             <Grid item md='3.5'>
                                 <CRMDropdown title='Previous Months' dropdownNo='5' options={previousMonths} onOptionChange={handleMonthChange1} />
