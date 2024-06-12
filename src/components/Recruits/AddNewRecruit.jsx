@@ -87,7 +87,6 @@ const AddNewRecruit = () => {
         email: "",
         confirmEmail: "",
         addressLine1: "",
-        addressLine2: "",
         city: "",
         state: "",
         zipCode: 0,
@@ -305,15 +304,6 @@ const AddNewRecruit = () => {
                                                 onChange={(e) => { handleInputChange(e.target.value, "addressLine1") }}
                                             />
                                             <Typography>Address Line1</Typography>
-                                        </Stack>
-
-                                        <Stack className='text-field'>
-                                            <TextField
-                                                value={agentData.addressLine2}
-                                                onChange={(e) => { handleInputChange(e.target.value, "addressLine2") }}
-
-                                            />
-                                            <Typography>Address Line2</Typography>
                                         </Stack>
                                     </Stack>
 

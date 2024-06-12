@@ -190,23 +190,25 @@ const Dashboard = () => {
         if (res?.status === 200) {
             dispatch(hideLoader())
             console.log("dash res", res);
-            console.log("dash res", res?.data[month]);
-            if (res?.data[month]) {
-                setTotalHealthInsurance(res?.data[month].Health.count)
-                setTotalLifeInsurance(res?.data[month].Life.count)
-                setTotalAnnuities(res?.data[month].Annuities.count)
+            console.log("dash res", res?.data.Life.count);
+            if (res?.data) {
+                setTotalHealthInsurance(res?.data.Health.count)
+                setTotalLifeInsurance(res?.data.Life.count)
+                setTotalAnnuities(res?.data.Annuities.count)
 
                 // Sales Matrix
-                setTotalHealthInsuranceCost(res?.data[month].Health.totalSale)
-                setTotalLifeInsuranceCost(res?.data[month].Life.totalSale)
-                setTotalAnnuitiesCost(res?.data[month].Annuities.totalSale)
+                setTotalHealthInsuranceCost(res?.data.Health.totalSale)
+                setTotalLifeInsuranceCost(res?.data.Life.totalSale)
+                setTotalAnnuitiesCost(res?.data.Annuities.totalSale)
 
                 // CashFlow Matrix
-                setTotalHealthRevenue(res?.data[month].Health.totalRevenue)
-                setTotalLifeRevenue(res?.data[month].Life.totalRevenue)
-                setTotalAnnuitiesRevenue(res?.data[month].Annuities.totalRevenue)
+                setTotalHealthRevenue(res?.data.Health.totalRevenue)
+                setTotalLifeRevenue(res?.data.Life.totalRevenue)
+                setTotalAnnuitiesRevenue(res?.data.Annuities.totalRevenue)
             }
         }
+        // console.log("totalLifeInsurance",totalLifeInsurance);
+        
     }
 
     const yearlyPolicyData = async () => {
@@ -277,6 +279,11 @@ const Dashboard = () => {
             setTotalNoOfRecruits(res.data.noOfRecruits)
         }
     }
+
+    useEffect(()=>{
+        console.log("totalLifeInsurance",totalLifeInsurance);
+    },[totalLifeInsurance])
+
 
     useEffect(()=>{
         getPreviousYears()

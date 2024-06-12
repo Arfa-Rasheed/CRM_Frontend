@@ -34,18 +34,18 @@ const Notifications = (props) => {
     setAnchorEl(null);
   };
 
-  const handleOptionChange = (policyNumber, id,newAgentId) => {
+  const handleOptionChange = (policyNumber, id, newAgentId) => {
     const res = httpClient.post(`/notifications/updateNotification/${id}`).catch((error) => {
       console.log(error);
     })
-    if(newAgentId){
+    if (newAgentId) {
       navigate(`/addNewRecruit/${newAgentId}`)
     }
-    else{
+    else {
       // navigate(`/policyDetail/${policyNumber}`)
       navigate(`/approvePolicyByPolicyNumber/${policyNumber}`)
     }
-    
+
   };
 
   const getNotifications = async () => {
@@ -76,6 +76,7 @@ const Notifications = (props) => {
           unRead: notifications.unRead,
           newAgentId: notifications.newAgentId
         })))
+        setNoOfUnReadNotifications(res.data.noOfUnReadNotification)
       }
     }
   }
@@ -144,15 +145,15 @@ const Notifications = (props) => {
               );
             })
           }
-
         </Popover>
       </div>
       <Stack alignItems={'center'} justifyContent={'center'} sx={{
-        display:noOfUnReadNotifications > 0 ? 'flex' : 'none',
-        color: 'white', backgroundColor: "#F08613", marginTop: '-3px', marginLeft: '-16px', height: '18px', width: '21px', borderRadius: '26px', }}>
+        display: noOfUnReadNotifications > 0 ? 'flex' : 'none',
+        color: 'white', backgroundColor: "#F08613", marginTop: '-3px', marginLeft: '-16px', height: '18px', width: '21px', borderRadius: '26px',
+      }}>
         <Typography fontSize={'9px'}>
           {noOfUnReadNotifications}
-          </Typography>
+        </Typography>
       </Stack>
     </Stack>
 
