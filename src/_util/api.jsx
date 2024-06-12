@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const httpClient = axios.create({
     // baseURL: "http://localhost:5000/api/",
-    baseURL: "http://api.portal.joptimanconsultancy.com./api/"
+    // baseURL: "http://api.portal.joptimanconsultancy.com./api/",
+    baseURL: "https://api.portal.joptimanconsultancy.com./api/"
 });
 
 httpClient.interceptors.request.use(function (config) {
