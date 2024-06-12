@@ -19,33 +19,6 @@ const Profile = () => {
     const snackbar_Ref = useRef()
     const isLoggedIn = useSelector((state) => state.mainSlice.isLoggedIn)
 
-    // const [userData, setuserData] = useState({
-    //     firstName: "",
-    //     agentTitle: "",
-    // })
-
-    // const getAccountDetail = async () => {
-    //     // dispatch(showLoader())
-    //     if (isLoggedIn) {
-    //         if (isAdmin === false) {
-    //             const res = await httpClient.get(`/agents/getAgentByID/${id}`).catch((error) => {
-    //                 // dispatch(hideLoader())
-    //                 snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
-    //             })
-
-    //             if (res?.status === 200) {
-    //                 // dispatch(hideLoader())
-    //                 console.log("Detail res", res?.data)
-    //                 // setuserData(res?.data.agentDetails)
-    //                 // setPolicyData(res?.data.policyDetailsArray)
-    //             }
-    //         }
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     getAccountDetail()
-    // }, [userData])
     useEffect(() => {
         console.log("profilePic", profilePic)
     }, [])

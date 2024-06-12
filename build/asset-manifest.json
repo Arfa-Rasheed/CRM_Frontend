@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.00437fa7.css",
-    "main.js": "/static/js/main.94bb648a.js",
+    "main.js": "/static/js/main.dd25ca69.js",
     "static/js/787.980d3cc0.chunk.js": "/static/js/787.980d3cc0.chunk.js",
     "static/media/landingPageImg.svg": "/static/media/landingPageImg.12c03f989a501ee21c8735d6c1f211b1.svg",
     "static/media/Carrier2.png": "/static/media/Carrier2.5f7aca8f1cc0faea52be.png",
@@ -9,6 +9,7 @@
     "static/media/carrier9.png": "/static/media/carrier9.81daa1621031e4223de6.png",
     "static/media/Carrier 6.png": "/static/media/Carrier 6.5cb4046981bb97d29e5c.png",
     "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/HealthSherpa.png": "/static/media/HealthSherpa.99c032d723b596ef1dd0.png",
     "static/media/Carrier1.png": "/static/media/Carrier1.e46aa32eb2db8c0fbd39.png",
     "static/media/UnitedAmericanPic.png": "/static/media/UnitedAmericanPic.f3aa1e1c565fe28651cb.png",
     "static/media/LSPNPic.png": "/static/media/LSPNPic.47562a690cf75e68147b.png",
@@ -21,11 +22,11 @@
     "static/media/Carrier 7.png": "/static/media/Carrier 7.166d0698e9957f6b43cc.png",
     "index.html": "/index.html",
     "main.00437fa7.css.map": "/static/css/main.00437fa7.css.map",
-    "main.94bb648a.js.map": "/static/js/main.94bb648a.js.map",
+    "main.dd25ca69.js.map": "/static/js/main.dd25ca69.js.map",
     "787.980d3cc0.chunk.js.map": "/static/js/787.980d3cc0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.00437fa7.css",
-    "static/js/main.94bb648a.js"
+    "static/js/main.dd25ca69.js"
   ]
 }

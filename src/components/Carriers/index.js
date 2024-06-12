@@ -19,6 +19,7 @@ import Cigna from '../../assets/CignaPic.png'
 import Debtmerica from '../../assets/DeptmericaPic.png'
 import Prudential from '../../assets/PrudentialPic.png'
 import MutualOfUmaha from '../../assets/MutualOfUmahaPic.png'
+import HealthSherpa from '../../assets/HealthSherpa.png'
 
 const Carriers = () => {
   return (
@@ -41,11 +42,12 @@ const Carriers = () => {
                 <CarriersItems carrierPic={Carrier7} url={'https://accounts.hioscar.com/account/login/?client_context=business'}/>
                 <CarriersItems carrierPic={Carrier8} url={'https://www.aetna.com/insurance-producer.html'}/>
                 <CarriersItems carrierPic={Carrier9} url={'https://www.bcbstx.com/producer'}/>
-                <CarriersItems carrierPic={UnitedHealthCare}  url={'https://shop.uhcexchange.com/sessions/new'}/>
+                <CarriersItems carrierPic={HealthSherpa}  url={'https://shop.uhcexchange.com/sessions/new'}/>
+                <CarriersItems carrierPic={UnitedHealthCare} url={'https://www.uhc.com/agents-brokers'}/>
                 <CarriersItems carrierPic={LSPN} url={'https://impowerednetwork.com/joptiman-consultancy'}/>
                 <CarriersItems carrierPic={Cigna} url={'https://cignaforbrokers.com/public/login'}/>
                 <CarriersItems carrierPic={'https://www.cms.gov/themes/custom/cms_evo/logo.svg'} url={'https://portal.cms.gov/portal/'}/>
-                <CarriersItems carrierPic={''}/>
+               
               </Stack>
             {/* </Stack> */}
           </Stack>
