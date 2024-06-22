@@ -10,6 +10,7 @@ import CustomizedSnackbars from '../../shared-component/Snackbar/SnackBar'
 import { useDispatch } from 'react-redux'
 import { hideLoader, showLoader } from '../../Store/mainSlice'
 import './style.scss'
+import PoliciesDropdown from '../../shared-component/PoliciesDropdown'
 
 const StatementDetail = () => {
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
@@ -33,27 +34,47 @@ const StatementDetail = () => {
         agentCommission: 0,
         advPaymentPercentage: 0,
         advPayment: 0,
+        status: "",
         overwrittingAgentCode1: "",
         overwrittingAgentContractLevel1: 0,
         overwrittingAgentCommission1: 0,
         overwrittingAgentCode2: "",
         overwrittingAgentContractLevel2: 0,
         overwrittingAgentCommission2: 0,
-        split2_AgentCode: "",
+        split1_ContractLevel: 0,
+        split1_agentCommission: 0,
+
+        split2_ContractLevel: 0,
         split2_agentCommission: 0,
-        split2_splitRatio: 0,
-        split_2_OWAgent1_AgentCode: "",
+
+        split_1_OWAgent1_Commission: 0,
+        split_1_OWAgent1_ContractLevel: 0,
+
+        split_1_OWAgent2_ContractLevel: 0,
+        split_1_OWAgent2_Commission: 0,
+
+        split_2_OWAgent1_ContractLevel: 0,
         split_2_OWAgent1_Commission: 0,
-        split_2_OWAgent2_AgentCode: "",
+
+        split_2_OWAgent2_ContractLevel: 0,
         split_2_OWAgent2_Commission: 0,
     })
 
     const policyNumber = policyData.policyNumber
 
+    const statusOptions = [
+        "Paid",
+        "UnPaid"
+    ]
+
     const handleInputChange = (data, field) => {
         setPolicyData((prevFormData) => ({ ...prevFormData, [field]: data }));
     };
 
+    const handleAutocompleteValue = (data, field) => {
+        console.log("dropdata", data)
+        setPolicyData((prevValue) => ({ ...prevValue, [field]: data }))
+    }
 
     const getStatementDetail = async () => {
         dispatch(showLoader())
@@ -68,7 +89,23 @@ const StatementDetail = () => {
         }
     }
 
+    const updateStatementHandler = async () => {
+        const res = await httpClient.post(`/policies/updateStatement/${_id}`, policyData).catch((error) => {
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("error", error?.response.data, "", "i-chk-circle");
+        })
 
+        console.log("res", res)
+
+        if (res.status === 200) {
+            dispatch(hideLoader())
+            snackbar_Ref.current.showMessage("success", res.data.message, "", "i-chk-circle");
+            setTimeout(() => {
+                navigate('/statements')
+            }, 3000)
+        }
+
+    }
     useEffect(() => {
         if (_id) {
             getStatementDetail()
@@ -82,18 +119,11 @@ const StatementDetail = () => {
                 <div style={{
                     display: 'flex',
                     height: '91.6vh',
-                    // overflowY: 'hidden'
                 }}>
                     <SideBar />
                     <CustomizedSnackbars ref={snackbar_Ref} />
                     <Stack sx={{ width: '81.8%', marginLeft: '18%' }}>
                         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: "105vh", marginTop: '10px' }}>
-                            {/* <Stack alignItems={'flex-end'} sx={{ width: '95%' }} >
-                                <Stack justifyContent='flex-end' sx={{ width: '18%' }}>
-                                    Paid Agency Commision:
-                                    <LinearProgressWithLabel value={50} />
-                                </Stack>
-                            </Stack> */}
                             <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '96%', height: '96%', backgroundColor: '#F2F2F2', borderRadius: '20px' }}>
                                 <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '81%', height: '70%' }}>
                                     <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '100%', height: isAdmin ? '100%' : '100%' }}>
@@ -231,116 +261,116 @@ const StatementDetail = () => {
 
                                                             </>
                                                         )
-                                                        : policyData.overwrittingAgentCommission2 ? (
-                                                            <>
-                                                                <TextField
-                                                                    disabled={_id ? true : false}
-                                                                    label="OW2 Agent Contract Level:"
-                                                                    variant="filled"
-                                                                    sx={{ width: '30%' }}
-                                                                    value={policyData.overwrittingAgentContractLevel2}
-                                                                    onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentContractLevel2") }}
-                                                                />
+                                                            : policyData.overwrittingAgentCommission2 ? (
+                                                                <>
+                                                                    <TextField
+                                                                        disabled={_id ? true : false}
+                                                                        label="OW2 Agent Contract Level:"
+                                                                        variant="filled"
+                                                                        sx={{ width: '30%' }}
+                                                                        value={policyData.overwrittingAgentContractLevel2}
+                                                                        onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentContractLevel2") }}
+                                                                    />
 
-                                                                <TextField
-                                                                    disabled={_id ? true : false}
-                                                                    sx={{ width: '30%' }}
-                                                                    label="OW2 Agent Commission:"
-                                                                    variant="filled"
-                                                                    value={policyData.overwrittingAgentCommission2}
-                                                                    onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentCommission2") }}
-                                                                />
+                                                                    <TextField
+                                                                        disabled={_id ? true : false}
+                                                                        sx={{ width: '30%' }}
+                                                                        label="OW2 Agent Commission:"
+                                                                        variant="filled"
+                                                                        value={policyData.overwrittingAgentCommission2}
+                                                                        onChange={(e) => { handleInputChange(e.target.value, "overwrittingAgentCommission2") }}
+                                                                    />
 
-                                                            </>
-                                                        )
-                                                        :policyData.split_1_OWAgent1_Commission ? (
-                                                            <>
-                                                             <TextField
-                                                                    disabled={_id ? true : false}
-                                                                    label="Split1 OW1 Agent Contract Level:"
-                                                                    variant="filled"
-                                                                    sx={{ width: '30%' }}
-                                                                    value={policyData.split_1_OWAgent1_ContractLevel}
-                                                                    onChange={(e) => { handleInputChange(e.target.value, "split_1_OWAgent1_ContractLevel") }}
-                                                                />
+                                                                </>
+                                                            )
+                                                                : policyData.split_1_OWAgent1_Commission ? (
+                                                                    <>
+                                                                        <TextField
+                                                                            disabled={_id ? true : false}
+                                                                            label="Split1 OW1 Agent Contract Level:"
+                                                                            variant="filled"
+                                                                            sx={{ width: '30%' }}
+                                                                            value={policyData.split_1_OWAgent1_ContractLevel}
+                                                                            onChange={(e) => { handleInputChange(e.target.value, "split_1_OWAgent1_ContractLevel") }}
+                                                                        />
 
-                                                                <TextField
-                                                                    disabled={_id ? true : false}
-                                                                    sx={{ width: '30%' }}
-                                                                    label="Split1 OW1 Agent Commission:"
-                                                                    variant="filled"
-                                                                    value={policyData.split_1_OWAgent1_Commission}
-                                                                    onChange={(e) => { handleInputChange(e.target.value, "split_1_OWAgent1_Commission") }}
-                                                                />
+                                                                        <TextField
+                                                                            disabled={_id ? true : false}
+                                                                            sx={{ width: '30%' }}
+                                                                            label="Split1 OW1 Agent Commission:"
+                                                                            variant="filled"
+                                                                            value={policyData.split_1_OWAgent1_Commission}
+                                                                            onChange={(e) => { handleInputChange(e.target.value, "split_1_OWAgent1_Commission") }}
+                                                                        />
 
 
-                                                            </>
-                                                        )
-                                                        :policyData.split_1_OWAgent2_Commission ? (
-                                                            <>
-                                                             <TextField
-                                                                    disabled={_id ? true : false}
-                                                                    label="Split1 OW2 Agent Contract Level:"
-                                                                    variant="filled"
-                                                                    sx={{ width: '30%' }}
-                                                                    value={policyData.split_1_OWAgent2_ContractLevel}
-                                                                    onChange={(e) => { handleInputChange(e.target.value, "split_1_OWAgent2_ContractLevel") }}
-                                                                />
+                                                                    </>
+                                                                )
+                                                                    : policyData.split_1_OWAgent2_Commission ? (
+                                                                        <>
+                                                                            <TextField
+                                                                                disabled={_id ? true : false}
+                                                                                label="Split1 OW2 Agent Contract Level:"
+                                                                                variant="filled"
+                                                                                sx={{ width: '30%' }}
+                                                                                value={policyData.split_1_OWAgent2_ContractLevel}
+                                                                                onChange={(e) => { handleInputChange(e.target.value, "split_1_OWAgent2_ContractLevel") }}
+                                                                            />
 
-                                                                <TextField
-                                                                    disabled={_id ? true : false}
-                                                                    sx={{ width: '30%' }}
-                                                                    label="Split1 OW2 Agent Commission:"
-                                                                    variant="filled"
-                                                                    value={policyData.split_1_OWAgent2_Commission}
-                                                                    onChange={(e) => { handleInputChange(e.target.value, "split_1_OWAgent2_Commission") }}
-                                                                />
-                                                            </>
-                                                        )
-                                                        :policyData.split_2_OWAgent1_Commission ? (
-                                                            <>
-                                                             <TextField
-                                                                    disabled={_id ? true : false}
-                                                                    label="Split2 OW1 Agent Contract Level:"
-                                                                    variant="filled"
-                                                                    sx={{ width: '30%' }}
-                                                                    value={policyData.split_2_OWAgent1_ContractLevel}
-                                                                    onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent1_ContractLevel") }}
-                                                                />
+                                                                            <TextField
+                                                                                disabled={_id ? true : false}
+                                                                                sx={{ width: '30%' }}
+                                                                                label="Split1 OW2 Agent Commission:"
+                                                                                variant="filled"
+                                                                                value={policyData.split_1_OWAgent2_Commission}
+                                                                                onChange={(e) => { handleInputChange(e.target.value, "split_1_OWAgent2_Commission") }}
+                                                                            />
+                                                                        </>
+                                                                    )
+                                                                        : policyData.split_2_OWAgent1_Commission ? (
+                                                                            <>
+                                                                                <TextField
+                                                                                    disabled={_id ? true : false}
+                                                                                    label="Split2 OW1 Agent Contract Level:"
+                                                                                    variant="filled"
+                                                                                    sx={{ width: '30%' }}
+                                                                                    value={policyData.split_2_OWAgent1_ContractLevel}
+                                                                                    onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent1_ContractLevel") }}
+                                                                                />
 
-                                                                <TextField
-                                                                    disabled={_id ? true : false}
-                                                                    sx={{ width: '30%' }}
-                                                                    label="Split2 OW1 Agent Commission:"
-                                                                    variant="filled"
-                                                                    value={policyData.split_2_OWAgent1_Commission}
-                                                                    onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent1_Commission") }}
-                                                                />
-                                                            </>
-                                                        )
-                                                        :policyData.split_2_OWAgent2_Commission ? (
-                                                            <>
-                                                             <TextField
-                                                                    disabled={_id ? true : false}
-                                                                    label="Split2 OW2 Agent Contract Level:"
-                                                                    variant="filled"
-                                                                    sx={{ width: '30%' }}
-                                                                    value={policyData.split_2_OWAgent2_ContractLevel}
-                                                                    onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent2_ContractLevel") }}
-                                                                />
+                                                                                <TextField
+                                                                                    disabled={_id ? true : false}
+                                                                                    sx={{ width: '30%' }}
+                                                                                    label="Split2 OW1 Agent Commission:"
+                                                                                    variant="filled"
+                                                                                    value={policyData.split_2_OWAgent1_Commission}
+                                                                                    onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent1_Commission") }}
+                                                                                />
+                                                                            </>
+                                                                        )
+                                                                            : policyData.split_2_OWAgent2_Commission ? (
+                                                                                <>
+                                                                                    <TextField
+                                                                                        disabled={_id ? true : false}
+                                                                                        label="Split2 OW2 Agent Contract Level:"
+                                                                                        variant="filled"
+                                                                                        sx={{ width: '30%' }}
+                                                                                        value={policyData.split_2_OWAgent2_ContractLevel}
+                                                                                        onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent2_ContractLevel") }}
+                                                                                    />
 
-                                                                <TextField
-                                                                    disabled={_id ? true : false}
-                                                                    sx={{ width: '30%' }}
-                                                                    label="Split2 OW2 Agent Commission:"
-                                                                    variant="filled"
-                                                                    value={policyData.split_2_OWAgent2_Commission}
-                                                                    onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent2_Commission") }}
-                                                                />
-                                                            </>
-                                                        )
+                                                                                    <TextField
+                                                                                        disabled={_id ? true : false}
+                                                                                        sx={{ width: '30%' }}
+                                                                                        label="Split2 OW2 Agent Commission:"
+                                                                                        variant="filled"
+                                                                                        value={policyData.split_2_OWAgent2_Commission}
+                                                                                        onChange={(e) => { handleInputChange(e.target.value, "split_2_OWAgent2_Commission") }}
+                                                                                    />
+                                                                                </>
+                                                                            )
 
-                                                            : (<></>)
+                                                                                : (<></>)
 
                                         }
 
@@ -381,6 +411,7 @@ const StatementDetail = () => {
                                                 onChange={(e) => { handleInputChange(e.target.value, "advPaymentPercentage") }}
                                             />
 
+                                            <PoliciesDropdown value={policyData.status} options={statusOptions} label='Status' origin="addPolicy" onSelectValue={(data) => handleAutocompleteValue(data, 'status')} />
                                         </Stack>
 
 
@@ -404,6 +435,25 @@ const StatementDetail = () => {
                                         >
                                             Close
                                         </Button>
+
+                                        <Button
+                                            variant="contained"
+                                            sx={{
+                                                backgroundColor: "#003478",
+                                                color: 'white',
+                                                width: '186px',
+                                                height: "5vh",
+                                                fontSize: '12px',
+                                                "&:hover": {
+                                                    backgroundColor: '#003478',
+                                                },
+                                            }}
+                                            // onClick={() => navigate('/statements')}
+                                            onClick={updateStatementHandler}
+                                        >
+                                            Update
+                                        </Button>
+
                                     </Stack>
                                 </Stack>
                             </Stack>

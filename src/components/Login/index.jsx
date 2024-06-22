@@ -86,17 +86,25 @@ const Login = () => {
         if (res?.status === 200) {
             dispatch(hideLoader())
             const authToken = res.data.token
-            const isAdmin = res.data.isAdmin
+            const isAdmin = res.data.isAdmin ? res.data.isAdmin : false
+            const isFinanceUser = res.data.isFinanceUser ? res.data.isFinanceUser : false
             const userId = res.data.userId
             const firstName = res.data.firstName
-            const lastName = res.data.isAdmin ? res.data.lastName : ""
-            const adminCode = res.data.isAdmin ? res.data.adminCode : ""
-            const agentTitle = res.data.isAdmin ? "" : res.data.agentTitle
-            const agentCode = res.data.isAdmin ? "" : res.data.agentCode
-            const contractLevel = res.data.isAdmin ? "" : res.data.contractLevel
-            const profilePic = res.data.profilePic ? res.data.profilePic : ""
+            const lastName = res.data.isAdmin ? res.data.lastName : res.data.isFinanceUser ? res.data.lastName : ""
+            const adminCode = res.data.isAdmin ? res.data.adminCode  :  ""
+            const agentTitle = res.data.isAdmin ? "" : res.data.isFinanceUser ? "" : res.data.agentTitle
+            const agentCode = res.data.isAdmin ? "" : res.data.isFinanceUser ? "" : res.data.agentCode
+            const contractLevel = res.data.isAdmin ? "" : res.data.isFinanceUser ? "" : res.data.contractLevel
+
+            // const lastName = res.data.lastName 
+            // const adminCode = res.data.adminCode
+            // const agentTitle = res.data.agentTitle
+            // const agentCode = res.data.agentCode
+            // const contractLevel = res.data.contract
+            const profilePic = res.data.profilePic
             localStorage.setItem('authToken', authToken);
             localStorage.setItem('isAdmin', isAdmin);
+            localStorage.setItem('isFinanceUser',isFinanceUser);
             localStorage.setItem("userId", userId)
             localStorage.setItem("firstName", firstName)
             localStorage.setItem("lastName", lastName)

@@ -14,6 +14,7 @@ import { MagnifyingGlass } from 'phosphor-react'
 
 const Statements = () => {
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
+  const isFinanceUser = JSON.parse(localStorage.getItem("isFinanceUser"))
   const agentCode = localStorage.getItem("agentCode")
   const [gridData, setGridData] = useState([]);
   const [searchString, setSearchString] = useState("")
@@ -181,6 +182,11 @@ const Statements = () => {
       headerName: "Split2 OWAgent2 Commission",
       isLink: true,
     },
+    {
+      field:'status',
+      headerName:"Status",
+      isLink:true
+    }
   ]
 
   const gridHeader = [
@@ -341,6 +347,11 @@ const Statements = () => {
       headerName: "Split2 OWAgent2 Commission",
       isLink: true,
     },
+    {
+      field:'status',
+      headerName:"Status",
+      isLink:true
+    }
 
   ]
 
@@ -358,7 +369,7 @@ const Statements = () => {
 
   const LoadGridData = async () => {
     dispatch(showLoader())
-    const res = await httpClient.post(isAdmin ? `/policies/statement/?search=${searchString}` : `/policies/statementAgentView/${agentCode}/?search=${searchString}`, dates).catch((error) => {
+    const res = await httpClient.post(isAdmin ? `/policies/statement/?search=${searchString}` : isFinanceUser ? `/policies/statement/?search=${searchString}` : `/policies/statementAgentView/${agentCode}/?search=${searchString}`, dates).catch((error) => {
       dispatch(hideLoader())
       snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle")
     })
@@ -412,21 +423,7 @@ const Statements = () => {
             </Stack>
             <Stack sx={{ height: '81vh' }}>
               <Stack sx={{ width: '99.9%', height: isAdmin ? '23vh' : '31vh', marginLeft: '10px', marginTop: isAdmin ? '0' : '-27px', marginBottom: '-118px', backgroundColor: '#DBDBDB', borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}>
-                {/* <h3 style={{ color: '#003478', marginLeft: '40px' }}>September 2023</h3> */}
-                {/* <Stack alignItems={'center'} sx={{ width: '100%', height: '64px', marginTop: '20px' }}>
-                  <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} sx={{ width: '10%', }}>
-                    <h2 style={{ color: 'black' }}>Statement</h2>
-
-                  </Stack>
-                </Stack> */}
                 <Stack flexDirection={'row'} justifyContent={'center'} sx={{ width: '100%' }}>
-                  {/* <Stack>
-                    <h3 style={{ color: '#003478', lineHeight: '1px' }}>{currentMonth}</h3>
-                    <p style={{ lineHeight: '0px' }}><b>Date:{currentDate}</b></p>
-                  </Stack> */}
-
-                  {/* <Stack flexDirection={'row'}> */}
-                    {/* <Typography sx={{ marginTop: '20px' }}>Period:</Typography> */}
                     <Stack flexDirection={'row'}>
                       <Stack>
                         <Typography>Start Date:</Typography>
@@ -441,7 +438,6 @@ const Statements = () => {
                         <Calendar value={dates.endDate} onDateChange={(date) => handleDateChange(date, 'endDate')} />
                       </Stack>
                     </Stack>
-                  {/* </Stack> */}
 
                 </Stack>
               </Stack>
@@ -449,7 +445,7 @@ const Statements = () => {
                 <CRMGrid
                   sx={{ borderTopLeftRadius: '64px', borderTopRightRadius: '64px' }}
                   gridName='comissionGrid'
-                  gridHeader={isAdmin === true ? adminGridHeader : gridHeader}
+                  gridHeader={isAdmin === true ? adminGridHeader : isFinanceUser ? adminGridHeader : gridHeader}
                   gridData={gridData}
                   baseURL={'/statementDetail/'}
                 />

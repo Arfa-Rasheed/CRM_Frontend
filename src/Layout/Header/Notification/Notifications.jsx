@@ -24,6 +24,7 @@ const Notifications = (props) => {
   const [noOfUnReadNotifications, setNoOfUnReadNotifications] = useState(0)
 
   const isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
+  const isFinanceUser = JSON.parse(localStorage.getItem('isFinanceUser'))
 
   const handleClick = () => {
     getNotifications()
@@ -51,6 +52,22 @@ const Notifications = (props) => {
   const getNotifications = async () => {
     if (isAdmin) {
       const res = await httpClient.get('/notifications/getAllNotifications_AdminView').catch((error) => { console.log(error) })
+      console.log("res", res);
+      if (res?.status === 200) {
+        console.log("res", res.data);
+        setNotifications(res.data.notifications.map(notifications => ({
+          id: notifications._id,
+          message: notifications.message,
+          policyNumber: notifications.policyNumber,
+          status: notifications.status,
+          unRead: notifications.unRead,
+          newAgentId: notifications.newAgentId,
+        })))
+        setNoOfUnReadNotifications(res.data.noOfUnReadNotification)
+      }
+    }
+    else if (isFinanceUser) {
+      const res = await httpClient.get('/notifications/getAllNotifications_FinanceView').catch((error) => { console.log(error) })
       console.log("res", res);
       if (res?.status === 200) {
         console.log("res", res.data);

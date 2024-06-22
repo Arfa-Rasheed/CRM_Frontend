@@ -22,7 +22,7 @@ export default function PoliciesDropdown(props) {
   
 
   return (
-    <Stack spacing={1} sx={{ width:props.label === 'Agent Title:' ? 225 : 300, marginLeft: '22px' }} className="Policy-textfield">
+    <Stack spacing={1} sx={{ width:props.label === 'Agent Title:' ? 225 : 293, marginLeft: '22px' }} className="Policy-textfield">
       <Autocomplete
       // className="Policy-textfield"
         // {...defaultProps}

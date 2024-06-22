@@ -13,6 +13,7 @@ const Profile = () => {
     const id = localStorage.getItem("userId")
     const firstName = localStorage.getItem("firstName")
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
+    const isFinanceUser = JSON.parse(localStorage.getItem("isFinanceUser"))
     const agentTitle = localStorage.getItem("agentTitle")
     const profilePic = localStorage.getItem("profilePic")
     const dispatch = useDispatch()
@@ -21,6 +22,8 @@ const Profile = () => {
 
     useEffect(() => {
         console.log("profilePic", profilePic)
+        console.log("agentTitle",agentTitle)
+        console.log("isAdmin",isAdmin)
     }, [])
 
 
@@ -52,7 +55,7 @@ const Profile = () => {
 
                         <Typography sx={{ marginRight: '4px' }}>{firstName}</Typography>
                         <Divider orientation="vertical" flexItem sx={{ backgroundColor: 'white', width: '1px', marginRight: '4px' }} />
-                        <Typography sx={{ marginRight: '4px' }}>{isAdmin ? "Admin" : agentTitle}</Typography>
+                        <Typography sx={{ marginRight: '4px' }}>{isAdmin ? "Admin" : isFinanceUser ? "Finance" : agentTitle}</Typography>
                     </Stack>
 
                 </Stack>

@@ -13,6 +13,7 @@ import { MagnifyingGlass, Minus } from 'phosphor-react'
 
 const Commissions = () => {
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
+  const isFinanceUser = JSON.parse(localStorage.getItem("isFinanceUser"))
   const agentCode = localStorage.getItem("agentCode")
   const snackbar_Ref = useRef(null);
   const dispatch = useDispatch()
@@ -282,7 +283,7 @@ const Commissions = () => {
 
   const LoadGridData = async () => {
     dispatch(showLoader())
-    const res = await httpClient.get(isAdmin ? `policies/getAllCommissions/?search=${searchString}` : `policies/getAllCommissions_AgentView/${agentCode}/?search=${searchString}`)
+    const res = await httpClient.get(isAdmin ? `policies/getAllCommissions/?search=${searchString}` : isFinanceUser ? `policies/getAllCommissions/?search=${searchString}` : `policies/getAllCommissions_AgentView/${agentCode}/?search=${searchString}`)
       .catch((error) => {
         dispatch(hideLoader())
         snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");

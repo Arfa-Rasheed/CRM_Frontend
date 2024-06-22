@@ -14,61 +14,62 @@ import { useDispatch } from 'react-redux'
 
 const Dashboard = () => {
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
+    const isFinanceUser = JSON.parse(localStorage.getItem("isFinanceUser"))
     const snackbar_Ref = useRef(null)
     const dispatch = useDispatch()
     const monthNames = [
         {
-          name: "Jan",
-          index: 1,
+            name: "Jan",
+            index: 1,
         },
         {
-          name: "February",
-          index: 2,
+            name: "February",
+            index: 2,
         },
         {
-          name: "March",
-          index: 3,
+            name: "March",
+            index: 3,
         },
         {
-          name: "April",
-          index: 4,
+            name: "April",
+            index: 4,
         },
         {
-          name: "May",
-          index: 5,
+            name: "May",
+            index: 5,
         },
         {
-          name: "June",
-          index: 6,
+            name: "June",
+            index: 6,
         },
         {
-          name: "July",
-          index: 7,
+            name: "July",
+            index: 7,
         },
         {
-          name: "August",
-          index: 8
+            name: "August",
+            index: 8
         },
         {
-          name: "September",
-          index: 9
+            name: "September",
+            index: 9
         },
         {
-          name: "October",
-          index: 10
+            name: "October",
+            index: 10
         },
         {
-          name: "November",
-          index: 11
+            name: "November",
+            index: 11
         },
         {
-          name: "December",
-          index: 12
+            name: "December",
+            index: 12
         },
-      ];
+    ];
     const currentDate = new Date()
     const currentYear = currentDate.getFullYear()
-    const CurrentMonth = currentDate.getMonth()+1
+    const CurrentMonth = currentDate.getMonth() + 1
     const currentMonthName = monthNames.find(m => m.index === CurrentMonth).name;
     const [year, setYear] = useState(currentYear)
     const [month, setMonth] = useState(currentMonthName)
@@ -96,8 +97,8 @@ const Dashboard = () => {
     const [selectedOption, setSelectedOption] = useState('Productivity Matrix')
     const [yearlyPolicySelectedOption, setYearlyPolicySelectedOption] = useState('Productivity Matrix')
     const [totalNoOfRecruits, setTotalNoOfRecruits] = useState()
-    const [previousYears,setPreviousYears] = useState([])
-    const [previousMonths,setPreviousMonths] = useState(["","",""])
+    const [previousYears, setPreviousYears] = useState([])
+    const [previousMonths, setPreviousMonths] = useState(["", "", ""])
     const [highestCommissionedAgentData, setHighestCommissionedAgentData] = useState({
         agentFirstName: "",
         agentLastName: "",
@@ -155,25 +156,25 @@ const Dashboard = () => {
         setYear(selectedOption)
     }
 
-    const getPreviousYears = async()=>{
+    const getPreviousYears = async () => {
         dispatch(showLoader())
-        const res =await httpClient.get('/dashboard/getPreviousYears').catch((error)=>{
+        const res = await httpClient.get('/dashboard/getPreviousYears').catch((error) => {
             snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
         })
 
-        if(res?.status === 200){
+        if (res?.status === 200) {
             // console.log("getPreviousYears",res)
             dispatch(hideLoader())
             setPreviousYears(res?.data)
         }
     }
-    const getPreviousMonths = async()=>{
+    const getPreviousMonths = async () => {
         dispatch(showLoader())
-        const res =await httpClient.get('/dashboard/getPreviousMonths').catch((error)=>{
+        const res = await httpClient.get('/dashboard/getPreviousMonths').catch((error) => {
             snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
         })
 
-        if(res?.status === 200){
+        if (res?.status === 200) {
             dispatch(hideLoader())
             setPreviousMonths(res?.data)
         }
@@ -181,7 +182,7 @@ const Dashboard = () => {
 
     const LoadMonthlyPolicyData = async () => {
         dispatch(showLoader())
-        const res = await httpClient.get(isAdmin ? `/dashboard/getMonthlyPolicyData/${month}` : `/dashboard/getMonthlyPolicyDataAgentView/${month}`)
+        const res = await httpClient.get(isAdmin ? `/dashboard/getMonthlyPolicyData/${month}`: isFinanceUser ? `/dashboard/getMonthlyPolicyData/${month}` : `/dashboard/getMonthlyPolicyDataAgentView/${month}`)
             .catch((error) => {
                 dispatch(hideLoader())
                 snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
@@ -207,13 +208,11 @@ const Dashboard = () => {
                 setTotalAnnuitiesRevenue(res?.data.Annuities.totalRevenue)
             }
         }
-        // console.log("totalLifeInsurance",totalLifeInsurance);
-        
     }
 
     const yearlyPolicyData = async () => {
         dispatch(showLoader())
-        const res = await httpClient.get(isAdmin ? `/dashboard/getMatrixData/${year}` : `/dashboard/getMatrixDataAgentView/${year}`)
+        const res = await httpClient.get(isAdmin ? `/dashboard/getMatrixData/${year}` : isFinanceUser ? `/dashboard/getMatrixData/${year}` : `/dashboard/getMatrixDataAgentView/${year}`)
             .catch((error) => {
                 dispatch(hideLoader())
                 snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
@@ -280,15 +279,16 @@ const Dashboard = () => {
         }
     }
 
-    useEffect(()=>{
-        console.log("totalLifeInsurance",totalLifeInsurance);
-    },[totalLifeInsurance])
+    useEffect(() => {
+        console.log("totalLifeInsurance", totalLifeInsurance);
+    }, [totalLifeInsurance])
 
 
-    useEffect(()=>{
+    useEffect(() => {
+        console.log("isFinanceUser", isFinanceUser);
         getPreviousYears()
         getPreviousMonths()
-    },[])
+    }, [])
 
     useEffect(() => {
         yearlyPolicyData()
@@ -600,10 +600,10 @@ const Dashboard = () => {
                                         </Grid>
                                         <Grid items md='7.5' >
                                             <Stack flexDirection='row'>
-                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold',width:'46%'}}>Agent Name:</Typography><Typography sx={{ fontSize: '12px' , width:'auto'}}>{highestCommissionedAgentData.firstName} {highestCommissionedAgentData.lastName}</Typography>
+                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold', width: '46%' }}>Agent Name:</Typography><Typography sx={{ fontSize: '12px', width: 'auto' }}>{highestCommissionedAgentData.firstName} {highestCommissionedAgentData.lastName}</Typography>
                                             </Stack>
                                             <Stack flexDirection='row'>
-                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold' ,width:'36%'}}>Agent Title: </Typography><Typography sx={{ fontSize: '12px' }}>{highestCommissionedAgentData.agentTitle} </Typography>
+                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold', width: '36%' }}>Agent Title: </Typography><Typography sx={{ fontSize: '12px' }}>{highestCommissionedAgentData.agentTitle} </Typography>
                                             </Stack>
                                         </Grid>
                                     </Grid>
@@ -638,10 +638,10 @@ const Dashboard = () => {
                                         </Grid>
                                         <Grid items md='7.5'>
                                             <Stack flexDirection='row'>
-                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold',width:'40%' }}>Agent Name:</Typography><Typography sx={{ fontSize: '12px' }}>{highestRecruitsAgentData.firstName} {highestRecruitsAgentData.lastName}</Typography>
+                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold', width: '40%' }}>Agent Name:</Typography><Typography sx={{ fontSize: '12px' }}>{highestRecruitsAgentData.firstName} {highestRecruitsAgentData.lastName}</Typography>
                                             </Stack>
                                             <Stack flexDirection='row'>
-                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold',width:'36%' }}>Agent Title:</Typography><Typography sx={{ fontSize: '12px' }}> {highestRecruitsAgentData.agentTitle}</Typography>
+                                                <Typography sx={{ fontSize: '13px', fontWeight: 'bold', width: '36%' }}>Agent Title:</Typography><Typography sx={{ fontSize: '12px' }}> {highestRecruitsAgentData.agentTitle}</Typography>
                                             </Stack>
                                         </Grid>
                                     </Grid>

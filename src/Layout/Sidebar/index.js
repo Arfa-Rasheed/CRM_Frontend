@@ -20,6 +20,7 @@ const SideBar = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
+    const isFinanceUser = JSON.parse(localStorage.getItem("isFinanceUser"))
 
     const sideBarMenu = [
         {
@@ -109,8 +110,16 @@ const SideBar = () => {
                         return (
                             <ListItem className='listItem' disablePadding
                                 style={{
-                                    display: isAdmin ? (
+                                    display: 
+                                    isAdmin ? (
                                         'block'
+                                    )
+                                    : isFinanceUser ? (
+                                        menu.name === 'Agents'
+                                        ? 'none'
+                                        : menu.name === 'Recruits'
+                                        ? 'none'
+                                        : 'block'
                                     )
                                     : (
                                         menu.name === 'Agents'
@@ -146,156 +155,6 @@ const SideBar = () => {
                             </ListItem>
                         )
                     })}
-                    {/* <ListItem className='listItem' disablePadding>
-                        <ListItemButton href="/dashboard" sx={{
-                            backgroundColor: '#DADADA' ,
-                    '&:hover': {
-                            backgroundColor: '#F08613'
-                    }
-                    }}>
-                            <ListItemIcon>
-                                <img src={DasboardIcon} />
-                            </ListItemIcon>
-                            <ListItemText>
-                                Dashboard
-                            </ListItemText>
-                            <ListItemIcon className='listIcon'>
-                                <img src={rightArrow}
-                                />
-                            </ListItemIcon>
-                        </ListItemButton>
-                    </ListItem> */}
-
-                    {/* <ListItem className='listItem' disablePadding style={{ display: isAdmin ? 'block' : 'none' }}>
-                        <ListItemButton href="/administration" sx={{ backgroundColor: '#DADADA' }}>
-                            <ListItemIcon>
-                                <img src={AdminstrationIcon} />
-                            </ListItemIcon>
-                            <ListItemText>
-                                Administrations
-                            </ListItemText>
-                            <ListItemIcon className='listIcon'>
-                                <img src={rightArrow} />
-                            </ListItemIcon>
-                        </ListItemButton>
-
-                    </ListItem>
-
-                    <ListItem className='listItem' disablePadding>
-                        <ListItemButton href="/carriers" sx={{ backgroundColor: '#DADADA' }}>
-                            <ListItemIcon>
-                                <img src={CarriersIcons} />
-                            </ListItemIcon>
-                            <ListItemText>
-                                Carriers
-                            </ListItemText>
-                            <ListItemIcon className='listIcon'>
-                                <img src={rightArrow} />
-                            </ListItemIcon>
-                        </ListItemButton>
-                    </ListItem>
-
-                    <ListItem className='listItem' disablePadding>
-                        <ListItemButton href='/tools' sx={{ backgroundColor: '#DADADA' }}>
-                            <ListItemIcon >
-                                <img src={ToolsIcon} />
-                            </ListItemIcon>
-                            <ListItemText>
-                                Tools
-                            </ListItemText>
-                            <ListItemIcon className='listIcon'>
-                                <img src={rightArrow} />
-                            </ListItemIcon>
-
-                        </ListItemButton>
-                    </ListItem>
-
-                    <ListItem className='listItem' disablePadding>
-                        <ListItemButton href="/policies" sx={{ backgroundColor: '#DADADA' }}>
-                            <ListItemIcon>
-                                <img src={PoliciesIcon} />
-                            </ListItemIcon>
-                            <ListItemText>
-                                Policies
-                            </ListItemText>
-                            <ListItemIcon className='listIcon'>
-                                <img src={rightArrow} />
-                            </ListItemIcon>
-                        </ListItemButton>
-                    </ListItem>
-
-                    <ListItem className='listItem' disablePadding>
-                        <ListItemButton href="/statements" sx={{ backgroundColor: '#DADADA' }}>
-                            <ListItemIcon>
-                                <img src={StatementsIcon} />
-                            </ListItemIcon>
-                            <ListItemText>
-                                Statements
-                            </ListItemText>
-                            <ListItemIcon className='listIcon'>
-                                <img src={rightArrow} />
-                            </ListItemIcon>
-                        </ListItemButton>
-
-                    </ListItem>
-
-                    <ListItem className='listItem' disablePadding>
-                        <ListItemButton href="/commissions" sx={{ backgroundColor: '#DADADA' }}>
-                            <ListItemIcon>
-                                <img src={CommssionsIcon} />
-                            </ListItemIcon>
-                            <ListItemText>
-                                Commisions
-                            </ListItemText>
-                            <ListItemIcon className='listIcon'>
-                                <img src={rightArrow} />
-                            </ListItemIcon>
-                        </ListItemButton>
-
-                    </ListItem>
-                    <ListItem className='listItem' disablePadding>
-                        <ListItemButton href='/recruits' sx={{ backgroundColor: '#DADADA' }}>
-                            <ListItemIcon>
-                                <img src={RecruitsIcon} />
-                            </ListItemIcon>
-                            <ListItemText>
-                                Recruits
-                            </ListItemText>
-                            <ListItemIcon className='listIcon'>
-                                <img src={rightArrow} />
-                            </ListItemIcon>
-                        </ListItemButton>
-
-                    </ListItem>
-
-                    <ListItem className='listItem' disablePadding style={{ display: isAdmin ? 'block' : 'none' }}>
-                        <ListItemButton href="/agent" sx={{ backgroundColor: '#DADADA' }}>
-                            <ListItemIcon>
-                                <img src={agentIcon} />
-                            </ListItemIcon>
-                            <ListItemText>
-                                Agents
-                            </ListItemText>
-                            <ListItemIcon className='listIcon'>
-                                <img src={rightArrow} />
-                            </ListItemIcon>
-                        </ListItemButton>
-
-                    </ListItem>
-
-                    <ListItem className='listItem' disablePadding>
-                        <ListItemButton sx={{ backgroundColor: '#DADADA' }} onClick={logoutHandler}>
-                            <ListItemIcon>
-                                <img src={LogoutIcon} />
-                            </ListItemIcon>
-                            <ListItemText>
-                                Logout
-                            </ListItemText>
-                            <ListItemIcon className='listIcon'>
-                                <img src={rightArrow} />
-                            </ListItemIcon>
-                        </ListItemButton>
-                    </ListItem> */}
                 </List>
 
             </Stack>

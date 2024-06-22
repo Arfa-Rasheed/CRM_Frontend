@@ -1,9 +1,8 @@
 import axios from 'axios';
 
 const httpClient = axios.create({
-    // baseURL: "http://localhost:5000/api/",
-    // baseURL: "http://api.portal.joptimanconsultancy.com./api/",
-    baseURL: "https://api.portal.joptimanconsultancy.com./api/"
+    baseURL: "http://localhost:5000/api/",
+    // baseURL: "https://api.portal.joptimanconsultancy.com./api/"
 });
 
 httpClient.interceptors.request.use(function (config) {
@@ -15,7 +14,6 @@ httpClient.interceptors.request.use(function (config) {
 
 
 export default httpClient;
-
 // server {
 //     listen 80;
 //     server_name api.portal.joptimanconsultancy.com. www.api.portal.joptimanconsultancy.com.;

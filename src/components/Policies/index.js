@@ -19,6 +19,7 @@ import { hideLoader, showLoader } from '../../Store/mainSlice.js'
 const Policies = () => {
   const [newPolicyClicked, setNewPolicyClicked] = useState(false);
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
+  const isFinanceUser = JSON.parse(localStorage.getItem("isFinanceUser"))
   const [searchString, setSearchString] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -214,7 +215,7 @@ const Policies = () => {
 
   const LoadGridData = async () => {
     dispatch(showLoader())
-    const res = await httpClient.get(isAdmin ? `policies/getAllPolicies?search=${searchString}` : `policies/getAllPoliciesAgentView?search=${searchString}`)
+    const res = await httpClient.get(isAdmin ? `policies/getAllPolicies?search=${searchString}` : isFinanceUser ? `policies/getAllPolicies?search=${searchString}` : `policies/getAllPoliciesAgentView?search=${searchString}`)
       .catch((error) => {
         dispatch(hideLoader())
         snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
@@ -264,7 +265,7 @@ const Policies = () => {
                   <Button
                     variant="contained"
                     sx={{
-                      display: isAdmin ? "none" : "flex",
+                      display: isAdmin ? "none" : isFinanceUser ? 'none' : "flex",
                       backgroundColor: newPolicyClicked ? '#F08613' : "#003478",
                       color: 'white',
                       width: '245px',
