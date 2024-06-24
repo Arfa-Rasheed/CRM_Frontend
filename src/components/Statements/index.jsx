@@ -86,9 +86,24 @@ const Statements = () => {
       width: '20%',
     },
     {
+      field: 'agentCode',
+      headerName: "Agent Code",
+      width: '20%',
+    },
+    {
+      field: 'contractLevel',
+      headerName: "Agent Contract Level",
+      width: '20%',
+    },
+    {
       field: 'agentCommission',
       headerName: "Agent Commission:",
       width: '20%',
+      isLink: true,
+    },
+    {
+      field: 'overwrittingAgentCode1',
+      headerName: "OW Agent1 Code",
       isLink: true,
     },
     {
@@ -102,6 +117,11 @@ const Statements = () => {
       isLink: true,
     },
     {
+      field: 'overwrittingAgentCode2',
+      headerName: "OW Agent2 Code",
+      isLink: true,
+    },
+    {
       field: 'overwrittingAgentContractLevel2',
       headerName: "OW Agent2 Contract Level",
       isLink: true,
@@ -109,6 +129,11 @@ const Statements = () => {
     {
       field: 'overwrittingAgentCommission2',
       headerName: "OW Agent2 Commission",
+      isLink: true,
+    },
+    {
+      field: 'split1_AgentCode',
+      headerName: " Split1 Agent Code",
       isLink: true,
     },
     {
@@ -127,6 +152,11 @@ const Statements = () => {
       isLink: true,
     },
     {
+      field: 'split_1_OWAgent1_AgentCode',
+      headerName: " Split1 OWAgent1 Code",
+      isLink: true,
+    },
+    {
       field: 'split_1_OWAgent1_ContractLevel',
       headerName: "split1 OWAgent1 Contract Level",
       isLink: true,
@@ -134,6 +164,11 @@ const Statements = () => {
     {
       field: 'split_1_OWAgent1_Commission',
       headerName: "split1 OWAgent1 Commission",
+      isLink: true,
+    },
+    {
+      field: 'split_1_OWAgent2_AgentCode',
+      headerName: " Split1 OWAgent2 Code",
       isLink: true,
     },
     {
@@ -145,6 +180,11 @@ const Statements = () => {
       field: 'split_1_OWAgent2_Commission',
       headerName: "split1 OWAgent2 Commission",
       isLink: true,
+    },
+    {
+      field:'split2_AgentCode',
+      headerName:"Split2 Agent Code",
+      isLink:true,
     },
     {
       field: 'split2_ContractLevel',
@@ -163,6 +203,11 @@ const Statements = () => {
     },
 
     {
+      field:'split_2_OWAgent1_AgentCode',
+      headerName:"Split2 OWAgent1 Code",
+      isLink:true,
+    },
+    {
       field: 'split_2_OWAgent1_ContractLevel',
       headerName: "Split2 OWAgent1 Contract Level",
       isLink: true,
@@ -171,6 +216,11 @@ const Statements = () => {
       field: 'split_2_OWAgent1_Commission',
       headerName: "Split2 OWAgent1 Commission",
       isLink: true,
+    },
+    {
+      field:'split_2_OWAgent2_AgentCode',
+      headerName:"Split2 OWAgent2 Code",
+      isLink:true,
     },
     {
       field: 'split_2_OWAgent2_ContractLevel',
