@@ -64,7 +64,8 @@ const StatementDetail = () => {
 
     const statusOptions = [
         "Paid",
-        "UnPaid"
+        "ChargedBack",
+        "Withholding",
     ]
 
     const handleInputChange = (data, field) => {
