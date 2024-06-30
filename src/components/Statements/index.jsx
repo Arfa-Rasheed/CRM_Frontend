@@ -11,6 +11,7 @@ import { hideLoader, showLoader } from '../../Store/mainSlice.js'
 import Calendar from '../../shared-component/Calender/Calender.jsx'
 import dayjs from 'dayjs';
 import { MagnifyingGlass } from 'phosphor-react'
+import DownloadExcel from './DownloadExcel.js'
 
 const Statements = () => {
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
@@ -467,6 +468,7 @@ const Statements = () => {
                     }}
                     onChange={(e) => { handleInputChange(e.target.value) }}
                   />
+                  <DownloadExcel isAdmin={isAdmin} agentCode={agentCode} searchString={searchString} isFinanceUser={isFinanceUser} dates={dates}/>
                 </Box>
               </Stack>
 
