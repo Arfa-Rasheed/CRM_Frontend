@@ -88,16 +88,8 @@ const SideBar = () => {
 
 
     return (
-        <div style={{
-            position: 'fixed', // Set position to fixed
-            top: 33, // Set top position to 0
-            left: 0, // Set left position to 0
-            display: 'flex',
-            justifyContent: 'center',
-            width: '18%',
-            height: '124%',
-            backgroundColor: '#003478'
-        }}>
+        <div className='side-bar-container'
+        >
             <Stack
                 // justifyContent={'center'}
                 sx={{
@@ -110,25 +102,25 @@ const SideBar = () => {
                         return (
                             <ListItem className='listItem' disablePadding
                                 style={{
-                                    display: 
-                                    isAdmin ? (
-                                        'block'
-                                    )
-                                    : isFinanceUser ? (
-                                        menu.name === 'Agents'
-                                        ? 'none'
-                                        : menu.name === 'Recruits'
-                                        ? 'none'
-                                        : 'block'
-                                    )
-                                    : (
-                                        menu.name === 'Agents'
-                                        ? 'none'
-                                        : menu.name === 'Commissions'
-                                        ? 'none'
-                                        : 'block'
-                                    )
-                        }}
+                                    display:
+                                        isAdmin ? (
+                                            'block'
+                                        )
+                                            : isFinanceUser ? (
+                                                menu.name === 'Agents'
+                                                    ? 'none'
+                                                    : menu.name === 'Recruits'
+                                                        ? 'none'
+                                                        : 'block'
+                                            )
+                                                : (
+                                                    menu.name === 'Agents'
+                                                        ? 'none'
+                                                        : menu.name === 'Commissions'
+                                                            ? 'none'
+                                                            : 'block'
+                                                )
+                                }}
                             >
                                 <ListItemButton href={menu.path} sx={{
                                     backgroundColor: 'white',
@@ -141,13 +133,13 @@ const SideBar = () => {
                                 }}
                                     onClick={menu.name === "Logout" ? logoutHandler : undefined}
                                 >
-                                    <ListItemIcon>
+                                    <ListItemIcon className='list-item-icon1'>
                                         <img src={menu.icon} />
                                     </ListItemIcon>
-                                    <ListItemText>
+                                    <ListItemText className='list-item-text'>
                                         {menu.name}
                                     </ListItemText>
-                                    <ListItemIcon className='listIcon'>
+                                    <ListItemIcon className='list-item-icon'>
                                         <img src={rightArrow}
                                         />
                                     </ListItemIcon>

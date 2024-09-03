@@ -4,6 +4,7 @@ import Profile from './Profile'
 import Notifications from './Notification/Notifications'
 import Logo from './Logo'
 import httpClient from '../../_util/api'
+import ToggleSidebar from './ToogleSidebar'
 
 const Header = () => {
 
@@ -79,7 +80,11 @@ const Header = () => {
                                 width: '85%'
                             }}
                         >
-                            <Logo />
+                            <Stack flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'} sx={{ width: '9%' }}>
+                                <ToggleSidebar  />
+                                <Logo />
+                            </Stack>
+
                             <Notifications />
                         </Stack>
 

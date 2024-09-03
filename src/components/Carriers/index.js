@@ -20,6 +20,8 @@ import Debtmerica from '../../assets/DeptmericaPic.png'
 import Prudential from '../../assets/PrudentialPic.png'
 import MutualOfUmaha from '../../assets/MutualOfUmahaPic.png'
 import HealthSherpa from '../../assets/HealthSherpa.png'
+import Symetra from '../../assets/Symetra.png'
+import './style.scss'
 
 const Carriers = () => {
   return (
@@ -32,9 +34,8 @@ const Carriers = () => {
           // overflowY:'hidden'
         }}>
           <SideBar />
-          <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: '200vh',marginLeft:'18%'  }}>
-            {/* <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '98%', height: '95%', backgroundColor: '#F2F2F2', borderRadius: '15px' }}> */}
-              <Stack flexDirection={'row'} justifyContent={'space-between'} flexWrap={'wrap'} sx={{ width: '90%', height: '90%'}}>
+          <Stack className='carriers-container'>
+              <Stack className='carriers-inner-container'>
                 <CarriersItems carrierPic={Carrier3} url={'https://secure.transamerica.com/login/sign-in/login.html?_ga=2.49544806.1513904153.1708785280-2023475507.1686661885'}/>
                 <CarriersItems carrierPic={Carrier4} url={'	https://www.athene.com/'}/>
                 <CarriersItems carrierPic={Carrier5} url={'	https://nationwidefinancial.com/'}/>
@@ -47,7 +48,7 @@ const Carriers = () => {
                 <CarriersItems carrierPic={LSPN} url={'https://impowerednetwork.com/joptiman-consultancy'}/>
                 <CarriersItems carrierPic={Cigna} url={'https://cignaforbrokers.com/public/login'}/>
                 <CarriersItems carrierPic={'https://www.cms.gov/themes/custom/cms_evo/logo.svg'} url={'https://portal.cms.gov/portal/'}/>
-               
+                <CarriersItems carrierPic={Symetra} url={'https://sso.symetra.com/nidp/idff/sso?id=commonlogin&sid=0&option=credential&sid=0&target=https%3A%2F%2Fprofile.symetra.com%2Fwebcontent%2Fcommon%2FGenericSignon%2FGenericSignon.aspx'}/>
               </Stack>
             {/* </Stack> */}
           </Stack>

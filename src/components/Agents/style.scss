@@ -1,9 +1,18 @@
-.recruitsGrid {
+.agents-container {
+   width: 81.7% !important;
+   margin-left: 18% !important;
+
+   @media (max-width: 1024px) {
+      width:100% !important;
+      margin-left:0px !important;
+   }
+
    .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
       border-radius: 0px !important;
       width: 97% !important;
-      height:64vh;
+      height: 64vh;
       scroll-behavior: none;
+      // border: 2px solid red;
 
       .css-15wwp11-MuiTableHead-root {
          height: 0px !important;
@@ -11,7 +20,7 @@
 
       .css-y8ay40-MuiTableCell-root {
          background-color: white !important;
-         border:0px !important;
+         border: 0px !important;
       }
 
       .css-1ex1afd-MuiTableCell-root {
@@ -28,14 +37,14 @@
    }
 
    .css-apqrd9-MuiTableBody-root {
-       border:2px solid red !important;
+      border: 2px solid red !important;
    }
 
    //For deployment
    .css-13xy2my {
       border-radius: 0px !important;
       width: 97% !important;
-      height:64vh;
+      height: 64vh;
 
       .css-1wbz3t9 {
          height: 0px !important;
@@ -57,7 +66,7 @@
    .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
       border-radius: 0px !important;
       width: 97% !important;
-      height:24vh;
+      height: 24vh;
       scroll-behavior: none;
 
       .css-15wwp11-MuiTableHead-root {
@@ -66,7 +75,7 @@
 
       .css-y8ay40-MuiTableCell-root {
          background-color: white !important;
-         border:0px !important;
+         border: 0px !important;
       }
 
       .css-1ex1afd-MuiTableCell-root {
@@ -83,10 +92,10 @@
    }
 
    .css-apqrd9-MuiTableBody-root {
-       border:2px solid red !important;
+      border: 2px solid red !important;
    }
 }
 
-.agentDetail-text{
-   color:white;
+.agentDetail-text {
+   color: white;
 }

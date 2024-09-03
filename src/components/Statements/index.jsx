@@ -449,7 +449,7 @@ const Statements = () => {
           <CustomizedSnackbars ref={snackbar_Ref} />
           <Stack sx={{ width: '80.8%', marginLeft: '18%' }}>
             <Stack alignItems={'flex-end'}  >
-              <Stack flexDirection={'row'}  justifyContent={'space-between'} sx={{ width: '95%' }}>
+              <Stack flexDirection={'row'}  justifyContent={'space-between'} sx={{ width: '95%', }}>
               <Stack>
                     <h3 style={{ color: '#003478', lineHeight: '1px' }}>{currentMonth}</h3>
                     <p style={{ lineHeight: '0px' }}><b>Date:{currentDate}</b></p>
@@ -462,7 +462,6 @@ const Statements = () => {
                       startAdornment: (
                         <InputAdornment position="start">
                           <MagnifyingGlass size={16} weight="light" />
-
                         </InputAdornment>
                       ),
                     }}

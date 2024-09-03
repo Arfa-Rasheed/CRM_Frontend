@@ -43,7 +43,6 @@ const Notifications = (props) => {
       navigate(`/addNewRecruit/${newAgentId}`)
     }
     else {
-      // navigate(`/policyDetail/${policyNumber}`)
       navigate(`/approvePolicyByPolicyNumber/${policyNumber}`)
     }
 
@@ -103,16 +102,16 @@ const Notifications = (props) => {
   }, [])
 
   return (
-    <Stack flexDirection={'row'} sx={{
+    <Stack
+    className='notification-container'
+    flexDirection={'row'} sx={{
       width: '49px'
     }}>
 
-      <div style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '6vh', backgroundColor: anchorEl ? '#F08613' : 'white', borderRadius: '30px',
-        '&:hover': {
-          backgroundColor: "#F08613",
-          cursor: 'pointer'
-        }
+      <div 
+      className='notification-inner-container'
+      style={{
+         backgroundColor: anchorEl ? '#F08613' : 'white',
       }}
       >
         {
@@ -143,8 +142,6 @@ const Notifications = (props) => {
                     margin: '2px',
                     width: '100%',
                     height: '8vh',
-                    // paddingTop: '12px',
-                    // paddingBottom: '12px',
                     backgroundColor: item.unRead ? "#F08613" : "#DADADA",
                     borderRadius: '13px',
                     '&:hover': {

@@ -95,12 +95,6 @@ const Login = () => {
             const agentTitle = res.data.isAdmin ? "" : res.data.isFinanceUser ? "" : res.data.agentTitle
             const agentCode = res.data.isAdmin ? "" : res.data.isFinanceUser ? "" : res.data.agentCode
             const contractLevel = res.data.isAdmin ? "" : res.data.isFinanceUser ? "" : res.data.contractLevel
-
-            // const lastName = res.data.lastName 
-            // const adminCode = res.data.adminCode
-            // const agentTitle = res.data.agentTitle
-            // const agentCode = res.data.agentCode
-            // const contractLevel = res.data.contract
             const profilePic = res.data.profilePic
             localStorage.setItem('authToken', authToken);
             localStorage.setItem('isAdmin', isAdmin);

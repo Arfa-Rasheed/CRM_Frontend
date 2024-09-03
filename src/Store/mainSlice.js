@@ -3,11 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 export const mainSlice = createSlice({
   name: "mainSlice",
   initialState: {
+    showSideBar:false,
     isLoggedIn:false,
     showLoader: false,
     userdetail: {},
   },
   reducers: {
+    showSideBar: (state) => {
+      state.showSideBar = true;
+    },
     showLoader: (state) => {
       state.showLoader = true;
     },
@@ -29,7 +33,7 @@ export const {
   hideLoader,
   setUserDetail,
   setIsLoggedIn,
-  
+  showSideBar, 
 } = mainSlice.actions;
 
 export default mainSlice.reducer;

@@ -204,14 +204,12 @@ const Administration = () => {
         }}>
           <SideBar />
 
-          <Stack sx={{ width: '81.7%', height: '90vh', marginLeft: '19%' }}>
+          <Stack className='administration-container'>
             <h2 style={{ color: 'black', textAlign: 'center' }}>Administration</h2>
             <Stack flexDirection={'row'}>
               <Stack alignItems={'center'} sx={{ width: '60%' }}>
                 <Stack justifyContent={'space-between'} sx={{
                   width: '85%',
-
-                  // height:'75%',
                 }}>
                   {
                     AdministrationMenu.map((menu) => {
@@ -245,9 +243,6 @@ const Administration = () => {
                             </Button>
 
                           )
-                          // :menu.isEmail ? (
-                            
-                          // )
                           : menu.isGrid ? (
                             <>
                               <Button

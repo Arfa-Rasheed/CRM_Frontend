@@ -16,7 +16,7 @@ export default function PoliciesDropdown(props) {
   }
 
   useEffect(() => {
-    console.log("props",props); 
+    console.log("props.value",props.value); 
    
   }, [])
   
@@ -31,7 +31,7 @@ export default function PoliciesDropdown(props) {
         onChange={handleAutocompleteChange}
         id="select-on-focus"
         renderInput={(params) => (
-          <TextField {...params} value={props.value ? props.value : ""} label={props.label} variant={props.origin === "approvePolicy" ? "outlined" : "filled"} />
+          <TextField {...params} value={props.value} label={props.label} variant={props.origin === "approvePolicy" ? "outlined" : "filled"} />
         )}
       />
     </Stack>

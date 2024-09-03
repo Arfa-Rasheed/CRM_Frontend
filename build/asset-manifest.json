@@ -1,11 +1,12 @@
 {
   "files": {
-    "main.css": "/static/css/main.00437fa7.css",
-    "main.js": "/static/js/main.e3cee3d0.js",
+    "main.css": "/static/css/main.e557eaac.css",
+    "main.js": "/static/js/main.9f7cec7c.js",
     "static/js/787.980d3cc0.chunk.js": "/static/js/787.980d3cc0.chunk.js",
     "static/media/landingPageImg.svg": "/static/media/landingPageImg.12c03f989a501ee21c8735d6c1f211b1.svg",
     "static/media/Carrier2.png": "/static/media/Carrier2.5f7aca8f1cc0faea52be.png",
     "static/media/JOptimanLogo-Large.png": "/static/media/JOptimanLogo-Large.be7f891172b69bf84438.png",
+    "static/media/Symetra.png": "/static/media/Symetra.80d8245fb1abcd134e09.png",
     "static/media/carrier9.png": "/static/media/carrier9.81daa1621031e4223de6.png",
     "static/media/Carrier 6.png": "/static/media/Carrier 6.5cb4046981bb97d29e5c.png",
     "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
@@ -21,12 +22,12 @@
     "static/media/PrudentialPic.png": "/static/media/PrudentialPic.02b1dbe943d8931b77e3.png",
     "static/media/Carrier 7.png": "/static/media/Carrier 7.166d0698e9957f6b43cc.png",
     "index.html": "/index.html",
-    "main.00437fa7.css.map": "/static/css/main.00437fa7.css.map",
-    "main.e3cee3d0.js.map": "/static/js/main.e3cee3d0.js.map",
+    "main.e557eaac.css.map": "/static/css/main.e557eaac.css.map",
+    "main.9f7cec7c.js.map": "/static/js/main.9f7cec7c.js.map",
     "787.980d3cc0.chunk.js.map": "/static/js/787.980d3cc0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.00437fa7.css",
-    "static/js/main.e3cee3d0.js"
+    "static/css/main.e557eaac.css",
+    "static/js/main.9f7cec7c.js"
   ]
 }

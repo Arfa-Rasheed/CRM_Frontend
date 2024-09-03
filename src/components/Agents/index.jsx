@@ -12,7 +12,7 @@ import "./style.scss"
 import profilePhoto from '../../assets/profilePhotoCRM.png'
 import { useNavigate } from 'react-router-dom'
 import httpClient from '../../_util/api.jsx'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { hideLoader, showLoader } from '../../Store/mainSlice.js'
 import PageLoader from '../../Layout/FullPageLoader/FullPageLoader.jsx'
 import CustomSnackbar from '../../shared-component/Snackbar/SnackBar.jsx'
@@ -23,6 +23,7 @@ const Agents = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
+  const showSidebar = useSelector((state)=>state.mainSlice.showSideBar)
   const snackbar_Ref = useRef(null);
   const [gridData, setGridData] = useState([])
   const [searchString, setSearchString] = useState("")
@@ -137,12 +138,13 @@ const Agents = () => {
   }
 
   useEffect(() => {
+    console.log('showSidebar',showSidebar)
     LoadgridData()
-  }, [searchString])
+  }, [searchString,showSidebar])
 
   return (
     <>
-      <PageLoader />
+      <PageLoader/>
       <Header />
       {openDeletePopup && <DeletePopup open={true} onClose={closeDeletePopup} selectedAgentIds={selectedAgentIds} message={"Do You Want To permanently delete the agent or temporarily deactivate the agent"} buttons={[{ title: 'Deactivate', color: "#F08613" }, { title: 'Delete', color: "#003478" }]} onDelete={(value)=>handleDeleteAgent(value)} />}
       <div style={{ marginTop: '56px' }}>
@@ -151,9 +153,13 @@ const Agents = () => {
           height: '92vh',
           overflowY: 'hidden'
         }}>
-          <SideBar />
+          {/* {
+            showSidebar && ( */}
+              <SideBar />
+          {/* //   )
+          // } */}
           <CustomSnackbar ref={snackbar_Ref} />
-          <Stack sx={{ width: '81.7%', marginLeft: '18%' }}>
+          <Stack className='agents-container'>
             <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
               <Box sx={{ width: '60%', height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                 <Box sx={{ height: '12vh' }}>
