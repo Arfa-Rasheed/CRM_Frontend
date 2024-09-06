@@ -19,8 +19,14 @@
 }
 
 .policies-container{
-    width: 68.8%;
-    margin-left: 29.5% 
+
+    width: 80.5%;
+    margin-left: 18.5% ;
+    @media (max-width:1024px) {
+        width: 68.8%;
+        margin-left: 29.5% 
+    }
+
 }
 
 // .input-label{
