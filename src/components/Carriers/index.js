@@ -31,7 +31,7 @@ const Carriers = () => {
         <div style={{
           display: 'flex',
           height: '92vh',
-          // overflowY:'hidden'
+        
         }}>
           <SideBar />
           <Stack className='carriers-container'>

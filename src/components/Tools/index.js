@@ -19,6 +19,7 @@ import CustomSnackbar from '../../shared-component/Snackbar/SnackBar.jsx'
 import Dropdown from '../../shared-component/AdministrationDropdown/Dropdown.jsx'
 import AdministrationButton from '../../shared-component/AdministrationButton/Button.jsx'
 import JOptimanLogo from '../../assets/JOptimanLogo-Large.png'
+import './style.scss'
 
 const Tools = () => {
   const navigate = useNavigate()
@@ -146,7 +147,7 @@ const Tools = () => {
         }}>
           <SideBar />
 
-          <Stack sx={{ width: '81.7%', height: '90vh', marginLeft: '19%' }}>
+          <Stack className="tools-container" >
             <h2 style={{ color: 'black', textAlign: 'center' }}>Tools</h2>
             <Stack flexDirection={'row'}>
               <Stack alignItems={'center'} sx={{width:'60%', height: '100%' }}>

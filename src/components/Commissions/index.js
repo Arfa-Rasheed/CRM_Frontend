@@ -310,7 +310,7 @@ const Commissions = () => {
           height: '91.6vh',
           overflowY: 'hidden'
         }}>
-          <SideBar />
+          <SideBar/>
           <CustomizedSnackbars ref={snackbar_Ref} />
           <Stack sx={{ width: '80.8%', marginLeft: '18%' }}>
             <Stack alignItems={'flex-end'}  >

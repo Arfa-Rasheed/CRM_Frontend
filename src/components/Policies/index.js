@@ -244,7 +244,7 @@ const Policies = () => {
         }}>
           <SideBar />
           <CustomizedSnackbars ref={snackbar_Ref} />
-          <Stack sx={{ width: '81.8%', marginLeft: '17.5%' }}>
+          <Stack className='policies-container'>
             <Stack alignItems={'flex-end'}  >
               <Stack flexDirection={'row'}  justifyContent={'space-between'} sx={{ width: '58%' }}>
                 <h2 style={{ color: 'black', textAlign: 'center' }}>Policies</h2>

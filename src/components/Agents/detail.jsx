@@ -138,6 +138,7 @@ const AgentDetail = () => {
     const activityHandler = async(title)=>{
         console.log("lwejfi");
       if(title === 'DeActivate Agent'){
+        dispatch(showLoader())
         const res = await httpClient.post(`/agents/deactivateAgent/${_id}`).catch((error) => {
         dispatch(hideLoader())
         console.log("error: ", error)
@@ -153,6 +154,7 @@ const AgentDetail = () => {
         }
      }
      else{
+        dispatch(showLoader())
         const res = await httpClient.post(`/agents/activateAgent/${_id}`).catch((error) => {
             dispatch(hideLoader())
             console.log("error: ", error)

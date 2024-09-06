@@ -32,6 +32,7 @@ export default function DeletePopup(props) {
     const actionHandler = async (title) => {
         const agentIdsString = props.selectedAgentIds.join(',');
         if (title == 'Delete') {
+            dispatch(showLoader())
             const res = await httpClient.delete(`/agents/deleteAgent/${agentIdsString}`).catch((error) => {
                 dispatch(hideLoader())
                 console.log("error: ", error)
@@ -48,6 +49,7 @@ export default function DeletePopup(props) {
             }
         }
         else{
+            dispatch(showLoader())
             const res = await httpClient.post(`/agents/deactivateAgent/${agentIdsString}`).catch((error) => {
                 dispatch(hideLoader())
                 console.log("error: ", error)
@@ -59,7 +61,6 @@ export default function DeletePopup(props) {
                 snackbar_Ref.current.showMessage("success", res?.message, "", "i-chk-circle")
                 setSelectedAgentIds([])
                 handleClose()
-
             }
 
         }

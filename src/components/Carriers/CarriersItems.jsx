@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const CarriersItems = (props) => {
     return (
-        <Stack sx={{ width: '27%', height: '24vh' }}>
+        <Stack className='carrier-items' sx={{ width: '27%', height: '24vh' }}>
             <img src={props.carrierPic} style={{ height: '15vh' }} />
             <div className='CarrierItemDropdown'>
                 <Button

@@ -127,9 +127,9 @@ const AddNewRecruit = () => {
             if (res?.status === 200) {
                 dispatch(hideLoader())
                 snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
-                // setTimeout(() => {
-                //     navigate('/recruits')
-                // }, 3000);
+                setTimeout(() => {
+                    navigate('/recruits')
+                }, 3000);
             }
         }
         else if (isAdmin === true) {

@@ -26,34 +26,60 @@
     }
 }
 
-.carrier-button {
-    display: flex;
-    background-color: #003478;
-        color: white;
-        height:39px;
-        width: 266px;
-        font-size: 12px;
-        padding: 3px;
-        border-top-left-radius:"0";
-        border-bottom-left-radius:"0";
+.carrier-item {
+    // .carrier-button {
+    //     display: flex;
+    //     background-color: #003478;
+    //     color: white;
+    //     height: 39px;
+    //     width: 266px;
+    //     font-size: 12px;
+    //     padding: 3px;
+    //     border-top-left-radius: "0";
+    //     border-bottom-left-radius: "0";
 
-    &:hover {
-        background-color: '#003478'
+    //     &:hover {
+    //         background-color: '#003478'
+    //     }
+    // }
+
+    .CarrierItemDropdown {
+        .carrier-button {
+            display: flex;
+            background-color: #003478;
+            background-color: black;
+            color: white;
+            height: 39px;
+            width: 266px;
+            font-size: 12px;
+            padding: 3px;
+            border-top-left-radius: "0";
+            border-bottom-left-radius: "0";
+    
+            &:hover {
+                background-color: '#003478'
+            }
+
+            .carrier-link {
+                text-decoration: none;
+                color: white !important;
+            }
+        }
+
+        // .carrier-link {
+        //     text-decoration: none;
+        //     color: white
+        // }
+
+        // width: 226px !important;
+        .css-lpyore-MuiButtonBase-root-MuiButton-root {
+            width: 311px !important;
+        }
+
     }
-}
 
-
-
-.CarrierItemDropdown {
-
-    // width: 226px !important;
-    .css-lpyore-MuiButtonBase-root-MuiButton-root {
-        width: 311px !important;
-    }
-
-}
-
-.carrier-link {
-    text-decoration: none;
-    color: white
+    // .carrier-link {
+    //     text-decoration: none;
+    //     color: white
+    // }
 }
