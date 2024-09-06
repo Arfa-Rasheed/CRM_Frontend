@@ -128,7 +128,6 @@ const AddNewRecruit = () => {
                 dispatch(hideLoader())
                 snackbar_Ref.current.showMessage("success", res?.data.message, "", "i-chk-circle");
                 setTimeout(() => {
-                    alert('')
                     navigate('/recruits')
                 }, 3000);
             }
