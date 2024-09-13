@@ -124,13 +124,9 @@ const Tools = () => {
   ]
 
   function openPDFInNewTab(pdfUrl) {
-    // Create a new <a> element
     const link = document.createElement('a');
-    // Set the href attribute to the PDF file URL
     link.href = pdfUrl;
-    // Set the target attribute to '_blank' to open in a new tab
     link.target = '_blank';
-    // Trigger a click event on the link
     link.click();
   }
 
@@ -153,12 +149,10 @@ const Tools = () => {
               <Stack alignItems={'center'} sx={{width:'60%', height: '100%' }}>
                 <Stack justifyContent={'space-between'} sx={{
                   width: '85%',
-                  // height:'75%',
                 }}>
                   {
                     ToolsMenu.map((menu) => {
                       return (
-                        // <Typography>{menu}</Typography>
                         <>
                           {
                             menu.isDropdown
@@ -205,7 +199,7 @@ const Tools = () => {
                 </Stack>
               </Stack>
 
-              <Stack justifyContent={'flex-end'} sx={{ width: '44%', height: "81.7vh",position: 'fixed',right:'0px' }}>
+              <Stack className='image-container' >
                 <img src={JOptimanLogo} width={'100%'} height={'85%'} />
               </Stack>
             </Stack>

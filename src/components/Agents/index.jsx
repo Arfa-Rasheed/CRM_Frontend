@@ -23,7 +23,7 @@ const Agents = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))
-  const showSidebar = useSelector((state)=>state.mainSlice.showSideBar)
+  const showSidebar = useSelector((state) => state.mainSlice.showSideBar)
   const snackbar_Ref = useRef(null);
   const [gridData, setGridData] = useState([])
   const [searchString, setSearchString] = useState("")
@@ -138,26 +138,22 @@ const Agents = () => {
   }
 
   useEffect(() => {
-    console.log('showSidebar',showSidebar)
+    console.log('showSidebar', showSidebar)
     LoadgridData()
-  }, [searchString,showSidebar])
+  }, [searchString, showSidebar])
 
   return (
     <>
-      <PageLoader/>
+      <PageLoader />
       <Header />
-      {openDeletePopup && <DeletePopup open={true} onClose={closeDeletePopup} selectedAgentIds={selectedAgentIds} message={"Do You Want To permanently delete the agent or temporarily deactivate the agent"} buttons={[{ title: 'Deactivate', color: "#F08613" }, { title: 'Delete', color: "#003478" }]} onDelete={(value)=>handleDeleteAgent(value)} />}
+      {openDeletePopup && <DeletePopup open={true} onClose={closeDeletePopup} selectedAgentIds={selectedAgentIds} message={"Do You Want To permanently delete the agent or temporarily deactivate the agent"} buttons={[{ title: 'Deactivate', color: "#F08613" }, { title: 'Delete', color: "#003478" }]} onDelete={(value) => handleDeleteAgent(value)} />}
       <div style={{ marginTop: '56px' }}>
         <div style={{
           display: 'flex',
           height: '92vh',
           overflowY: 'hidden'
         }}>
-          {/* {
-            showSidebar && ( */}
-              <SideBar />
-          {/* //   )
-          // } */}
+          <SideBar />
           <CustomSnackbar ref={snackbar_Ref} />
           <Stack className='agents-container'>
             <Box sx={{ width: '100%', height: '19vh', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
@@ -172,7 +168,6 @@ const Agents = () => {
                       startAdornment: (
                         <InputAdornment position="start">
                           <MagnifyingGlass size={16} weight="light" />
-
                         </InputAdornment>
                       ),
                     }}

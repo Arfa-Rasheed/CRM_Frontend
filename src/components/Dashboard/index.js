@@ -296,7 +296,7 @@ const Dashboard = () => {
             <div style={{ marginTop: '65px' }}>
                 <div style={{
                     display: 'flex',
-                    height: '91.6vh',
+                    height: '90.6vh',
                     overflowY: 'hidden'
                 }}>
                     <SideBar />

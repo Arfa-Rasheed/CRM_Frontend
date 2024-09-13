@@ -69,6 +69,11 @@ const SideBar = () => {
             path: "/agent"
         },
         {
+            icon: agentIcon,
+            name: "Tutorials",
+            path: "/tutorials"
+        },
+        {
             icon: LogoutIcon,
             name: "Logout",
             path: ""

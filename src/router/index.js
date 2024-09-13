@@ -20,6 +20,7 @@ import StatementDetail from '../components/Statements/detail'
 import LinearProgressWithLabel from '../shared-component/ProgressBar'
 import AddNewRecruit from '../components/Recruits/AddNewRecruit'
 import AdminAccount from '../components/Account/AdminAccount'
+import Tutorial from '../components/Tutorial'
 
 
 const AppRouter = () => {
@@ -43,6 +44,7 @@ const AppRouter = () => {
           <Route path='/commissionDetail/:_id' element={<CommissionDetail/>}></Route>
           <Route path='/recruits' element={<Recruits />}></Route>
           <Route path='/agent' element={<Agents/>}></Route>
+          <Route path='/tutorials' element={<Tutorial/>}></Route>
           <Route path='/addNewRecruit' element={<AddNewRecruit/>}></Route>
           <Route path='/addNewRecruit/:_id' element={<AddNewRecruit/>}></Route>
           <Route path='/addAgent' element={<AddNewAgent/>}></Route>

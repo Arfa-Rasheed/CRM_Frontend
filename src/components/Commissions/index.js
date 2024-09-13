@@ -189,7 +189,7 @@ const Commissions = () => {
 
  
 
-  const gridHeaderAgent = [
+  const gridHeaderAgent =[
     {
       field: 'policyApprovalDate',
       headerName: "Policy Approval Date:",

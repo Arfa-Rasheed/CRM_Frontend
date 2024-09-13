@@ -4,6 +4,7 @@ import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import httpClient from '../../_util/api';
 import { Button } from '@mui/material';
+import './style.scss';
 
 const DownloadExcel = (props) => {
     const [downloadExcelClicked,setDownloadexcelClicked] = useState(false)
@@ -49,16 +50,18 @@ const DownloadExcel = (props) => {
         <div>
             <Button
             variant="contained"
+            className='button'
             sx={{
               display: props.isAdmin ? "flex" : props.isFinanceUser ? 'flex' : "none",
               backgroundColor: downloadExcelClicked ? '#F08613' : "#003478",
-              color: 'white',
-              width: '245px',
-              height: "5vh",
-              fontSize: '12px',
-              "&:hover": {
-                backgroundColor: '#F08613',
-              },
+            //   backgroundColor: downloadExcelClicked ? '#F08613' : "#003478",
+            //   color: 'white',
+            //   width: '245px',
+            //   height: "5vh";
+            //   fontSize: '12px',
+            //   "&:hover": {
+            //     backgroundColor: '#F08613',
+            //   },
             }}
             onClick={handleDownload}>Download Excel</Button>
         </div>

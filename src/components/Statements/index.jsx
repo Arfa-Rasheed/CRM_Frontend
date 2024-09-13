@@ -447,17 +447,17 @@ const Statements = () => {
         }}>
           <SideBar />
           <CustomizedSnackbars ref={snackbar_Ref} />
-          <Stack sx={{ width: '80.8%', marginLeft: '18%' }}>
+          <Stack className="statement-container" sx={{ width: '80.8%', marginLeft: '18%' }}>
             <Stack alignItems={'flex-end'}  >
-              <Stack flexDirection={'row'}  justifyContent={'space-between'} sx={{ width: '95%', }}>
-              <Stack>
+              <Stack className='statement-top-bar'>
+              <Stack >
                     <h3 style={{ color: '#003478', lineHeight: '1px' }}>{currentMonth}</h3>
                     <p style={{ lineHeight: '0px' }}><b>Date:{currentDate}</b></p>
                   </Stack>
                 <h2 style={{ color: 'black', textAlign: 'center' }}>Statement</h2>
 
-                <Box sx={{width:'21%', height: '12vh', marginTop: '20px', display: 'flex',  flexDirection: 'column', justifyContent: 'space-between' }}>
-                  <TextField id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
+                <Box className='searchbox-button-container' >
+                  <TextField classsName='textfield' id="outlined-basic" placeholder="Search" variant="outlined" sx={{ width: '245px', height: '5vh' }}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -467,7 +467,7 @@ const Statements = () => {
                     }}
                     onChange={(e) => { handleInputChange(e.target.value) }}
                   />
-                  <DownloadExcel isAdmin={isAdmin} agentCode={agentCode} searchString={searchString} isFinanceUser={isFinanceUser} dates={dates}/>
+                  <DownloadExcel  isAdmin={isAdmin} agentCode={agentCode} searchString={searchString} isFinanceUser={isFinanceUser} dates={dates}/>
                 </Box>
               </Stack>
 

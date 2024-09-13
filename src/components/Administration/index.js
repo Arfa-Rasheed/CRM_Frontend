@@ -207,7 +207,7 @@ const Administration = () => {
           <Stack className='administration-container'>
             <h2 style={{ color: 'black', textAlign: 'center' }}>Administration</h2>
             <Stack flexDirection={'row'}>
-              <Stack alignItems={'center'} sx={{ width: '60%' }}>
+              <Stack className="administration-inner-container" >
                 <Stack justifyContent={'space-between'} sx={{
                   width: '85%',
                 }}>
@@ -292,7 +292,7 @@ const Administration = () => {
                 </Stack>
               </Stack>
 
-              <Stack justifyContent={'flex-end'} sx={{ width: '44%', height: "81.7vh", position: 'fixed', right: '0px' }}>
+              <Stack className="image-inner-container" >
                 <img src={JOptimanLogo} width={'100%'} height={'85%'} />
               </Stack>
             </Stack>
