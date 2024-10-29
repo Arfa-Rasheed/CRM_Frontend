@@ -89,7 +89,6 @@ const Tutorial = () => {
                         <Stack className="tutorials-inner-container" direction="row" gap={4}>
                             <Stack className='video-container'>
                                 <Typography className="video-title">Understanding the Recruitment Process:</Typography>
-
                                 <div style={{ position: 'relative', paddingBottom: '30%', height: '100%', width: '100%' }}>
                                     <iframe
                                         src="https://www.loom.com/embed/98a43d1c8a524b3ca966d84e0b80f892?sid=c7fbdf33-2cfc-455a-ad87-63b8dd9cb3d2"

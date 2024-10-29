@@ -12,7 +12,6 @@ httpClient.interceptors.request.use(function (config) {
 }, function (error) { return Promise.reject(error); });
 
 
-
 export default httpClient;
 // server {
 //     listen 80;

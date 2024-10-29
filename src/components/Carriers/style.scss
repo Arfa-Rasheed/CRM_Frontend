@@ -26,7 +26,7 @@
     }
 }
 
-.carrier-item {
+.carrier-items{
     // .carrier-button {
     //     display: flex;
     //     background-color: #003478;
@@ -47,10 +47,9 @@
         .carrier-button {
             display: flex;
             background-color: #003478;
-            background-color: black;
-            color: white;
+            color: white !important;
             height: 39px;
-            width: 266px;
+            width: 300px;
             font-size: 12px;
             padding: 3px;
             border-top-left-radius: "0";

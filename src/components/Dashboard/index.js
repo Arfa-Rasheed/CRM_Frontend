@@ -656,7 +656,6 @@ const Dashboard = () => {
                                         <Grid items md='1'>
                                             <Typography sx={{ fontSize: '24px', fontWeight: 'bold' }}>{totalNoOfRecruits}</Typography>
                                         </Grid>
-
                                     </Grid>
                                 </Grid>
                             </Grid>

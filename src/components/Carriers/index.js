@@ -22,7 +22,6 @@ import MutualOfUmaha from '../../assets/MutualOfUmahaPic.png'
 import HealthSherpa from '../../assets/HealthSherpa.png'
 import Symetra from '../../assets/Symetra.png'
 import './style.scss'
-
 const Carriers = () => {
   return (
     <>
@@ -49,6 +48,13 @@ const Carriers = () => {
                 <CarriersItems carrierPic={Cigna} url={'https://cignaforbrokers.com/public/login'}/>
                 <CarriersItems carrierPic={'https://www.cms.gov/themes/custom/cms_evo/logo.svg'} url={'https://portal.cms.gov/portal/'}/>
                 <CarriersItems carrierPic={Symetra} url={'https://sso.symetra.com/nidp/idff/sso?id=commonlogin&sid=0&option=credential&sid=0&target=https%3A%2F%2Fprofile.symetra.com%2Fwebcontent%2Fcommon%2FGenericSignon%2FGenericSignon.aspx'}/>
+                <CarriersItems carrierPic={Symetra} url={'https://www.nationallife.com/Financial-Professionals'}/>
+                <CarriersItems carrierPic={Symetra} url={'https://www.corebridgefinancial.com/home#'}/>
+                <CarriersItems carrierPic={Symetra} url={'https://www.lincolnfinancial.com/public/professionals'}/>
+                <CarriersItems carrierPic={Symetra} url={'https://www.prudential.com/advisor-login'}/>
+                <CarriersItems carrierPic={Symetra} url={'https://www.allianzlife.com/for-financial-professionals'}/>
+                <CarriersItems carrierPic={Symetra} url={'https://www.fglife.com/'}/>
+                <CarriersItems carrierPic={Symetra} url={'https://loginportal.pacificlife.com/centrallogin'}/>
               </Stack>
             {/* </Stack> */}
           </Stack>
