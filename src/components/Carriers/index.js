@@ -21,6 +21,15 @@ import Prudential from '../../assets/PrudentialPic.png'
 import MutualOfUmaha from '../../assets/MutualOfUmahaPic.png'
 import HealthSherpa from '../../assets/HealthSherpa.png'
 import Symetra from '../../assets/Symetra.png'
+import NationalLife from '../../assets/NationalLifePic.png'
+import AmericanGeneral from '../../assets/AmericanGeneralLife.png'
+import LicolnNational from '../../assets/Lincoln National.png'
+import PrucoLife from '../../assets/Pruco Life.png'
+import Allianzlife from '../../assets/Allianz.png'
+import FidelityGuarantyLife from '../../assets/Fidelity & Guaranty Life.png'
+import PacificLife from '../../assets/Pacific Life.png'
+
+
 import './style.scss'
 const Carriers = () => {
   return (
@@ -48,15 +57,17 @@ const Carriers = () => {
                 <CarriersItems carrierPic={Cigna} url={'https://cignaforbrokers.com/public/login'}/>
                 <CarriersItems carrierPic={'https://www.cms.gov/themes/custom/cms_evo/logo.svg'} url={'https://portal.cms.gov/portal/'}/>
                 <CarriersItems carrierPic={Symetra} url={'https://sso.symetra.com/nidp/idff/sso?id=commonlogin&sid=0&option=credential&sid=0&target=https%3A%2F%2Fprofile.symetra.com%2Fwebcontent%2Fcommon%2FGenericSignon%2FGenericSignon.aspx'}/>
-                <CarriersItems carrierPic={Symetra} url={'https://www.nationallife.com/Financial-Professionals'}/>
-                <CarriersItems carrierPic={Symetra} url={'https://www.corebridgefinancial.com/home#'}/>
-                <CarriersItems carrierPic={Symetra} url={'https://www.lincolnfinancial.com/public/professionals'}/>
-                <CarriersItems carrierPic={Symetra} url={'https://www.prudential.com/advisor-login'}/>
-                <CarriersItems carrierPic={Symetra} url={'https://www.allianzlife.com/for-financial-professionals'}/>
-                <CarriersItems carrierPic={Symetra} url={'https://www.fglife.com/'}/>
-                <CarriersItems carrierPic={Symetra} url={'https://loginportal.pacificlife.com/centrallogin'}/>
+                <CarriersItems carrierPic={NationalLife} url={'https://www.nationallife.com/Financial-Professionals'}/>
+                <CarriersItems carrierPic={AmericanGeneral} url={'https://www.corebridgefinancial.com/home#'}/>
+                <CarriersItems carrierPic={LicolnNational} url={'https://www.lincolnfinancial.com/public/professionals'}/>
+                <CarriersItems carrierPic={PrucoLife} url={'https://www.prudential.com/advisor-login'}/>
+                <CarriersItems carrierPic={Allianzlife} url={'https://www.allianzlife.com/for-financial-professionals'}/>
+                
+                <Stack flexDirection={'row'} justifyContent={'space-between'} sx={{width:"50%"}}>
+                <CarriersItems carrierPic={FidelityGuarantyLife} url={'https://www.fglife.com/'}/>
+                <CarriersItems carrierPic={PacificLife} url={'https://loginportal.pacificlife.com/centrallogin'}/>
               </Stack>
-            {/* </Stack> */}
+            </Stack>
           </Stack>
         </div>
       </div>

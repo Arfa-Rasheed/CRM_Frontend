@@ -115,6 +115,14 @@ const AddNewPolicy_Agent = () => {
         'United Healthcare',
         'LSPN',
         'Cigna',
+        'National Life',
+        'American General Life',
+        'Lincoln National',
+        'Pruco Life',
+        'Allianz life',
+        'Fidelity & Guaranty Life',
+        'Pacific Life',
+        'Symetra Life'
     ]
 
     const policyTypes =[
