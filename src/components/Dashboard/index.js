@@ -246,7 +246,7 @@ const Dashboard = () => {
         if (res?.status === 200) {
             dispatch(hideLoader())
             console.log("highestRecruitsAgent", res);
-            setHighestRecruitsAgentData(res.data)
+            setHighestRecruitsAgentData(res.data.highestRecruitAgentDetail)
         }
     }
 
