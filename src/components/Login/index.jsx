@@ -37,6 +37,7 @@ const Login = () => {
     };
 
     const forgotPasswordHandler = () => {
+        setUserCredentials((prev)=>({...prev,email:""}))
         setIsForgetPassword(true)
     }
 

@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.762486d9.css",
-    "main.js": "/static/js/main.7bba0a91.js",
+    "main.js": "/static/js/main.62176c26.js",
     "static/js/787.980d3cc0.chunk.js": "/static/js/787.980d3cc0.chunk.js",
     "static/media/landingPageImg.svg": "/static/media/landingPageImg.12c03f989a501ee21c8735d6c1f211b1.svg",
     "static/media/Carrier2.png": "/static/media/Carrier2.5f7aca8f1cc0faea52be.png",
@@ -27,11 +27,11 @@
     "static/media/Carrier 7.png": "/static/media/Carrier 7.166d0698e9957f6b43cc.png",
     "index.html": "/index.html",
     "main.762486d9.css.map": "/static/css/main.762486d9.css.map",
-    "main.7bba0a91.js.map": "/static/js/main.7bba0a91.js.map",
+    "main.62176c26.js.map": "/static/js/main.62176c26.js.map",
     "787.980d3cc0.chunk.js.map": "/static/js/787.980d3cc0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.762486d9.css",
-    "static/js/main.7bba0a91.js"
+    "static/js/main.62176c26.js"
   ]
 }

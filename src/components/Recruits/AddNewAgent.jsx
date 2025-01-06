@@ -204,7 +204,6 @@ const AddNewAgent = () => {
                                                 value={agentData.email}
                                                 onChange={(e) => { handleInputChange(e.target.value, "email") }}
                                             />
-
                                         </Stack>
                                     </Stack>
                                 </Stack>

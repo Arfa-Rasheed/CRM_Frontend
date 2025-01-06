@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import Header from '../../Layout/Header'
 import SideBar from '../../Layout/Sidebar'
 import { Box, Stack } from '@mui/system'
-// import { Button } from '@mui/base'
 import { Grid, InputAdornment, TextField, Typography } from '@mui/material'
 import AllAgentsIcon from '../../assets/AllAgentsIcon.png'
 import { Button } from '@mui/material'
@@ -83,7 +82,7 @@ const Administration = () => {
       options: [
         {
           name: "Emails",
-          // url: ""
+
         }
       ],
       isEmail:true
