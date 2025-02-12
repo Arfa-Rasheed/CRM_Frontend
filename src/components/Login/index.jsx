@@ -124,6 +124,9 @@ const Login = () => {
         setIsSignUpModalOpen(true)
     }
 
+    const onClose=()=>{
+        setIsSignUpModalOpen(false)
+    }
     return (
         <div>
             <div>
@@ -136,7 +139,7 @@ const Login = () => {
                         height: '100vh',
                     }}>
                         <CustomizedSnackbars ref={snackbar_Ref}/>
-                        <SignUp isSignupModalOpen={isSignupModalOpen}/>
+                        <SignUp isSignupModalOpen={isSignupModalOpen} onClose={onClose}/>
                         <Stack sx={{ width: '57%', height: '100%' }}>
                             <img src={landingPageImg} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         </Stack>

@@ -131,7 +131,7 @@ const SignUp = (props) => {
     };
 
     const handleClose = () => {
-        // setOpen(false);
+        props.onClose()
     };
 
     const handleInputChange = (data, field) => {
