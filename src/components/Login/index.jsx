@@ -13,6 +13,7 @@ import joptimanLogo from '../../assets/joptimanLogo.png'
 import svglogo from '../../assets/logo.svg'
 import joptimenConsultancyLogo from '../../assets/JoptimanConsultancyLogo.png'
 import LoadingButton from '@mui/lab/LoadingButton';
+import SignUp from '../AgentSignUp'
 
 
 const Login = () => {
@@ -24,6 +25,7 @@ const Login = () => {
     const isAdmin = useSelector((state) => state.user.isAdmin)
     const [isForgetPassword, setIsForgetPassword] = useState(false)
     const [isVerifyOTP, setIsVerifyOTP] = useState(false)
+    const [isSignupModalOpen,setIsSignUpModalOpen] = useState(false)
     const [userCredentials, setUserCredentials] = useState(
         {
             email: '',
@@ -56,8 +58,6 @@ const Login = () => {
             setIsVerifyOTP(true)
         }
 
-        // setIsForgetPassword(false)
-        // setIsVerifyOTP(true)
     }
 
     const verifyOTPHandler = async ()=>{
@@ -120,6 +120,10 @@ const Login = () => {
         }
     }
 
+    const signUpHandler = ()=>{
+        setIsSignUpModalOpen(true)
+    }
+
     return (
         <div>
             <div>
@@ -131,7 +135,8 @@ const Login = () => {
                         // justifyContent: 'center',
                         height: '100vh',
                     }}>
-                        <CustomizedSnackbars ref={snackbar_Ref} />
+                        <CustomizedSnackbars ref={snackbar_Ref}/>
+                        <SignUp isSignupModalOpen={isSignupModalOpen}/>
                         <Stack sx={{ width: '57%', height: '100%' }}>
                             <img src={landingPageImg} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         </Stack>
@@ -195,6 +200,9 @@ const Login = () => {
                                                 >
                                                     Sign In
                                                 </Button>
+
+                                                <Typography textAlign={'center'} style={{ fontSize: '14px', color: "#F08613" ,cursor:"pointer"}} onClick={signUpHandler}>Don't have an account?Register now</Typography>
+
 
 
                                             </Stack>
