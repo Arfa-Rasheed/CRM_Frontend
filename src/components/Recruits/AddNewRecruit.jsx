@@ -133,7 +133,7 @@ const AddNewRecruit = () => {
             }
         }
         else if (isAdmin === true) {
-            const res = await httpClient.post('/agents/addNewAgent', agentData)
+            const res = await httpClient.post('/agents/recruitAgent_CRM', agentData)
                 .catch((error) => {
                     dispatch(hideLoader())
                     snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");
@@ -148,7 +148,7 @@ const AddNewRecruit = () => {
             }
         }
         else {
-            const res = await httpClient.post(`/agents/addNewAgent/${recruitingAgentCode}`, agentData)
+            const res = await httpClient.post(`/agents/recruitAgent_CRM/${recruitingAgentCode}`, agentData)
                 .catch((error) => {
                     dispatch(hideLoader())
                     snackbar_Ref.current.showMessage("error", error?.response.data.message, "", "i-chk-circle");

@@ -135,7 +135,6 @@ const Login = () => {
                     <div style={{
                         width: '99.8%',
                         display: 'flex',
-                        // justifyContent: 'center',
                         height: '100vh',
                     }}>
                         <CustomizedSnackbars ref={snackbar_Ref}/>
